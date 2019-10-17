@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,9 +104,76 @@ public class Connector {
         queue.add(postRequest);
     }
 
+    /**
+     * This method will communicate with the server and attempt to register (add to
+     * the database) the user based on the parameters provided. After calling this method, this
+     * method will call the method <code>onRegisterResponse</code> with <code>ServerStatus</code>
+     * parameter that is based on the server's response. There are three possible scenarios
+     * <li>
+     *     <ul>SUCCESS - The user has managed to successfully register. User was added to the database.</ul>
+     *     <ul>USERNAME_EXISTS - The user has failed to register. Username already exists in the database, username has to be unique. </ul>
+     *     <ul>SERVER_DOWN - The user has failed to register. Server is down.</ul>
+     * </li>
+     *
+     * @param userName username
+     * @param password password
+     * @param firstName firstname
+     * @param lastName lastname
+     * @param picture picture
+     * @param phone phone
+     * @param email email
+     * @param context context
+     */
     public static void register(final String userName, final String password, final String firstName, final String lastName,
                                 final byte[] picture, final String phone, final String email, final Context context) {
 
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String registerUrl = url + "register";
+        final int[] unsignedPictureBytes = convertSignedByteToUnsignedByte(picture);
+
+        if(userName.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() ||
+                picture.length == 0 || phone.isEmpty() || email.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, registerUrl,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        ((ServerListener)context).onRegisterResponse(getStatus(response));
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", error.toString());
+                        ((ServerListener)context).onRegisterResponse(getStatus("server_down"));
+                    }
+                }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<>();
+                params.put("username", userName);
+                params.put("password", password);
+                params.put("firstname", firstName);
+                params.put("lastname", lastName);
+                params.put("picture", Arrays.toString(unsignedPictureBytes));
+                params.put("phone", phone);
+                params.put("email", email);
+                params.put("permission", "guest");
+                return params;
+            }
+        };
+        queue.add(postRequest);
     }
 
     /**
