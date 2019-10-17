@@ -121,4 +121,18 @@ public class Connector {
         if(string.equals("username_exists")) return ServerStatus.USERNAME_EXISTS;
         return ServerStatus.UNKNOWN;
     }
+
+    /**
+     * This method will convert signed byte array to unsigned int array.
+     * @param signedBytes signed bytes
+     * @return unsigned bytes
+     */
+    private static int[] convertSignedByteToUnsignedByte(byte[] signedBytes) {
+        int[] unsignedBytes = new int[signedBytes.length];
+
+        for(int i = 0; i < signedBytes.length; i++) {
+            unsignedBytes[i] = signedBytes[i] & 0xff;
+        }
+        return unsignedBytes;
+    }
 }
