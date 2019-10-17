@@ -1,2 +1,7 @@
 #ignore all LaTex files
 *.tex
+vcs.xml
+Project.xml
+modules.xml
+misc.xml
+organization_of_the_festival.iml
