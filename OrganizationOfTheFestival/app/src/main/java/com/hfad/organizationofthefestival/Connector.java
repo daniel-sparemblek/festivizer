@@ -1,6 +1,15 @@
 package com.hfad.organizationofthefestival;
 
 import android.content.Context;
+import android.util.Log;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class represents connector between Android application and
@@ -40,8 +49,58 @@ public class Connector {
         void onRegisterResponse(ServerStatus status);
     }
 
+    /**
+     * This method will communicate with the server and attempt to log in the user based on the
+     * parameters provided. After calling this method, this method will call the method
+     * <code>onLogInResponse</code> with <code>ServerStatus</code> parameter that is
+     * based on the server's response, There are four possible scenarios:
+     * <li>
+     * <ul>SUCCESS - The user has managed to successfully log in. Username and password match.</ul>
+     * <ul>NO_USERNAME - Log in has failed. Username does not exist in the database</ul>
+     * <ul>WRONG_PASSWORD - Log in has failed. Username does exist in the database but password does not match.</ul>
+     * <ul>SERVER_DOWN - Log in has failed. Server is down.</ul>
+     * </li>
+     * @param userName username
+     * @param password password
+     * @param context context
+     */
     public static void logIn(final String userName, final String password, final Context context) {
 
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String logInUrl = url + "login";
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, logInUrl,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        ((ServerListener)context).onLogInResponse(getStatus(response));
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", error.toString());
+                        ((ServerListener)context).onLogInResponse(getStatus("server_down"));
+                    }
+                }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<>();
+                params.put("username", userName);
+                params.put("password", password);
+                return params;
+            }
+        };
+        queue.add(postRequest);
     }
 
     public static void register(final String userName, final String password, final String firstName, final String lastName,
