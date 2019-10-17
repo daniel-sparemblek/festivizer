@@ -48,6 +48,21 @@ def handle_request_one():
         except:
             session.rollback()
             return "username_exists"
-        return "success"    
+        return "success"
+
+@app.route('/login', methods=['POST'])
+def handle_request_two():
+    if request.method == 'POST':
+        user_name = request.values.get('username')
+        userPassword = request.values.get('password')
+        try:
+            requestedUser = session.query(User).filter_by(username = user_name).one()
+            if(requestedUser.password == userPassword):
+                session.commit()
+                return "success"
+        except exc2.NoResultFound as e:
+            return "no_username"
+            
+        return "wrong_password"
 
 app.run(host="0.0.0.0", port=5000, debug=True)
