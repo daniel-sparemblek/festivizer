@@ -13,7 +13,7 @@ public class Connector {
      * This variable represents ipv4 address of your PC.
      * Change this variable depending on the ipv4 address of your PC.
      */
-    private static final String ipv4 = "192.168.1.109";
+    private static final String ipv4 = "ENTER_IPV4";
 
     /**
      * This variable represents url address of server.
@@ -47,5 +47,19 @@ public class Connector {
     public static void register(final String userName, final String password, final String firstName, final String lastName,
                                 final byte[] picture, final String phone, final String email, final Context context) {
 
+    }
+
+    /**
+     * This method is used to match server's String response with the correct <code>ServerStatus</code>.
+     * @param string server's String response
+     * @return <code>ServerStatus</code> status based on Server's String response.
+     */
+    private static ServerStatus getStatus(String string) {
+        if(string.equals("no_username")) return ServerStatus.NO_USERNAME;
+        if(string.equals("wrong_password")) return ServerStatus.WRONG_PASSWORD;
+        if(string.equals("server_down")) return ServerStatus.SERVER_DOWN;
+        if(string.equals("success")) return ServerStatus.SUCCESS;
+        if(string.equals("username_exists")) return ServerStatus.USERNAME_EXISTS;
+        return ServerStatus.UNKNOWN;
     }
 }
