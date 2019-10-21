@@ -26,7 +26,17 @@ public enum ServerStatus {
      */
     USERNAME_EXISTS,
     /**
+     * Server will return this status when user tries to register with an email
+     * that already exists.
+     */
+    EMAIL_EXISTS,
+    /**
+     * Server will return this status when user tries to register with a phone that
+     * already exists.
+     */
+    PHONE_EXISTS,
+    /**
      * Server will return this status if none of the other statuses above is returned.
      */
-    UNKNOWN;
+    UNKNOWN
 }

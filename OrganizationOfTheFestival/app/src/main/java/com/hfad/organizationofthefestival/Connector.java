@@ -186,6 +186,8 @@ public class Connector {
         if(string.equals("server_down")) return ServerStatus.SERVER_DOWN;
         if(string.equals("success")) return ServerStatus.SUCCESS;
         if(string.equals("username_exists")) return ServerStatus.USERNAME_EXISTS;
+        if(string.equals("email_exists")) return ServerStatus.EMAIL_EXISTS;
+        if(string.equals("phone_exists")) return ServerStatus.PHONE_EXISTS;
         return ServerStatus.UNKNOWN;
     }
 
