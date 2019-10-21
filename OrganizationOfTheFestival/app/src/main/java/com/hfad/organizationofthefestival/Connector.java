@@ -2,6 +2,7 @@ package com.hfad.organizationofthefestival;
 
 import android.content.Context;
 import android.util.Log;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,15 +21,9 @@ import java.util.Map;
 public class Connector {
 
     /**
-     * This variable represents ipv4 address of your PC.
-     * Change this variable depending on the ipv4 address of your PC.
-     */
-    private static final String ipv4 = "ENTER_IPV4";
-
-    /**
      * This variable represents url address of server.
      */
-    private static final String url = "http://" + ipv4 + ":5000/";
+    private static final String url = "http://barbil.pythonanywhere.com/";
 
     /**
      * This is interface which every Activity that wants to call
@@ -174,6 +169,10 @@ public class Connector {
             }
         };
         queue.add(postRequest);
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(
+                120000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
     /**
