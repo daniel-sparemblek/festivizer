@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 import flask
-import sqlite3
-import io
-from PIL import Image
 from flask import request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import exc
-from sqlalchemy.orm import exc as exc2
 from database_setup import User, Base
 
 engine = create_engine('sqlite:///organizacijafestivala.db')
@@ -15,7 +10,7 @@ Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
-    
+
 app = flask.Flask(__name__)
 
 @app.route('/register', methods=['POST'])
@@ -33,7 +28,7 @@ def handle_request_one():
         same_username = session.query(User).filter_by(username = new_user_username).all()
         same_email = session.query(User).filter_by(email = new_user_email).all()
         same_phone = session.query(User).filter_by(phone = new_user_phone).all()
-        
+
         if len(same_username) != 0:
             return "username_exists"
         elif len(same_email) != 0:
@@ -45,15 +40,15 @@ def handle_request_one():
         picture_array_int = []
         for num in picture_array_unicode:
             picture_array_int.append(int(num))
-        
-        picture_path = './images/' + new_user_username + '.jpeg'
+
+        picture_path = '/home/barbil/mysite/images/' + new_user_username + '.jpeg'
         f = open(picture_path, 'w+b')
         f.write(bytearray(picture_array_int))
         f.close()
-                
 
-        new_user = User(username = new_user_username, password = new_user_password, 
-                        firstname = new_user_firstname, lastname = new_user_lastname, 
+
+        new_user = User(username = new_user_username, password = new_user_password,
+                        firstname = new_user_firstname, lastname = new_user_lastname,
                         picture = picture_path, phone = new_user_phone, email = new_user_email,
                         permission = new_user_permission)
         session.add(new_user)
@@ -67,14 +62,12 @@ def handle_request_two():
         user_password = request.values.get('password')
 
         requested_user = session.query(User).filter_by(username = user_name).all()
-        
+
         if len(requested_user) == 0:
             return "no_username"
         else:
             if(requested_user[0].password == user_password):
                 session.commit()
                 return "success"
-            
-        return "wrong_password"
 
-app.run(host="0.0.0.0", port=5000, debug=True)
+        return "wrong_password"
