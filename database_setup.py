@@ -64,7 +64,27 @@ class Auction(Base):
     start_time = Column(DateTime)
     end_time = Column(DateTime)
 
+class Festival(Base):
+    __tablename__ = 'festival'
+
+    festival_id = Column(Integer, primary_key=True)
+    creator_id = Column(DateTime)
+    name = Column(String(100))
+    desc = Column(String(250))
+    logo = Column(String(250))
+    duration = Column(Integer)
+    active = Column(Boolean)
+
+class Application(Base):
+    __tablename__ = 'application'
+
+    auction_id = Column(Integer, primary_key=True)
+    worker_id = Column(Integer, primary_key=True)
+    price = Column(Float)
+    comment = Column(String(500))
+    approximate_time = Column(Integer) #Time will be defined in days; hence Integer instead of DateTime
+    number_of_people = Column(Integer)
+
 engine = create_engine('sqlite:///organizacijafestivala.db')
 Base.metadata.create_all(engine)
-
 
