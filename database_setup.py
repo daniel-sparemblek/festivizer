@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 
@@ -22,11 +22,11 @@ class Specialization(Base):
     __tablename__ = 'specialization'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(50), unique=True)
-    
-class Event(Base)
+    name = Column(String(100), unique=True)
+
+class Event(Base):
     __tablename__ = 'event'
-    
+
     festival_id = Column(Integer, primary_key=True)
     organizer_id = Column(Integer, primary_key=True)
     name = Column(String(50), primary_key=True)
@@ -34,6 +34,18 @@ class Event(Base)
     location = Column(Integer, primary_key=True)
     start_time = Column(DateTime, primary_key=True)
     end_time = Column(DateTime)
+
+class WorkerSpec(Base):
+    __tablename__ = 'workerspec'
+
+    worker_id = Column(Integer, primary_key=True)
+    specialization = Column(String(100), primary_key=True)
+
+class JobSpec(Base):
+    __tablename__ = 'jobspec'
+
+    job_id = Column(Integer, primary_key=True)
+    specialization = Column(String(100), primary_key=True)
 
 
 
