@@ -47,7 +47,22 @@ class JobSpec(Base):
     job_id = Column(Integer, primary_key=True)
     specialization = Column(String(100), primary_key=True)
 
+class Job(Base):
+    __tablename__ = 'job'
 
+    job_id = Column(Integer, primary_key=True)
+    event_id = Column(Integer)
+    worker_id = Column(Integer)
+    auction_id = Column(Integer, unique=True)
+    start_time = Column(DateTime)
+    is_completed = Column(Boolean)
+
+class Auction(Base):
+    __tablename__ = 'auction'
+
+    auction_id = Column(Integer, primary_key=True)
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
 
 engine = create_engine('sqlite:///organizacijafestivala.db')
 Base.metadata.create_all(engine)
