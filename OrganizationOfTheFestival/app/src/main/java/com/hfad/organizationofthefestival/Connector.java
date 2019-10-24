@@ -56,11 +56,11 @@ public class Connector {
      * <ul>WRONG_PASSWORD - Log in has failed. Username does exist in the database but password does not match.</ul>
      * <ul>SERVER_DOWN - Log in has failed. Server is down.</ul>
      * </li>
-     * @param userName username
+     * @param userIdentifier username or email
      * @param password password
      * @param context context
      */
-    public static void logIn(final String userName, final String password, final Context context) {
+    public static void logIn(final String userIdentifier, final String password, final Context context) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String logInUrl = url + "login";
@@ -91,7 +91,7 @@ public class Connector {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<>();
-                params.put("username", userName);
+                params.put("user_identifier", userIdentifier);
                 params.put("password", password);
                 return params;
             }
