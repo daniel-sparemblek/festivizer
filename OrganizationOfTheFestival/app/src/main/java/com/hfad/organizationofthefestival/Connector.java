@@ -56,11 +56,11 @@ public class Connector {
      * <ul>WRONG_PASSWORD - Log in has failed. Username does exist in the database but password does not match.</ul>
      * <ul>SERVER_DOWN - Log in has failed. Server is down.</ul>
      * </li>
-     * @param userName username
+     * @param userIdentifier username or email
      * @param password password
      * @param context context
      */
-    public static void logIn(final String userName, final String password, final Context context) {
+    public static void logIn(final String userIdentifier, final String password, final Context context) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String logInUrl = url + "login";
@@ -91,7 +91,7 @@ public class Connector {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<>();
-                params.put("username", userName);
+                params.put("user_identifier", userIdentifier);
                 params.put("password", password);
                 return params;
             }
@@ -120,11 +120,12 @@ public class Connector {
      * @param context context
      */
     public static void register(final String userName, final String password, final String firstName, final String lastName,
-                                final byte[] picture, final String phone, final String email, final Context context) {
+                                byte[] picture, final String phone, final String email, Role role, final Context context) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String registerUrl = url + "register";
         final int[] unsignedPictureBytes = convertSignedByteToUnsignedByte(picture);
+        final String roleAsString = convertRoleToString(role);
 
         if(userName.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() ||
                 picture.length == 0 || phone.isEmpty() || email.isEmpty()) {
@@ -164,7 +165,7 @@ public class Connector {
                 params.put("picture", Arrays.toString(unsignedPictureBytes));
                 params.put("phone", phone);
                 params.put("email", email);
-                params.put("permission", "guest");
+                params.put("role", roleAsString);
                 return params;
             }
         };
@@ -189,6 +190,16 @@ public class Connector {
         if(string.equals("email_exists")) return ServerStatus.EMAIL_EXISTS;
         if(string.equals("phone_exists")) return ServerStatus.PHONE_EXISTS;
         return ServerStatus.UNKNOWN;
+    }
+
+    private static String convertRoleToString(Role role) {
+        if(role == Role.LEADER) {
+            return "leader";
+        }
+        if(role == Role.ORGANIZER) {
+            return "organizer";
+        }
+        return "worker";
     }
 
     /**
