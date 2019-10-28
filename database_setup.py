@@ -39,7 +39,7 @@ class WorkerSpec(Base):
     __tablename__ = 'workerspec'
 
     worker_id = Column(Integer, primary_key=True)
-    specialization = Column(String(100), primary_key=True)
+    specialization_id = Column(Integer, primary_key=True)
 
 class JobSpec(Base):
     __tablename__ = 'jobspec'
