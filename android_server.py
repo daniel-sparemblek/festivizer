@@ -56,6 +56,7 @@ def handle_request_one():
         f.close()
 
 
+		
         new_user = User(username = new_user_username, password = new_user_password,
                         firstname = new_user_firstname, lastname = new_user_lastname,
                         picture = picture_path, phone = new_user_phone, email = new_user_email,
