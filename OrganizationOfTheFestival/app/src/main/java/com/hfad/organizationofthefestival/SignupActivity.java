@@ -134,7 +134,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
             Context context;
             Toast toast;
             context = getApplicationContext();
-            CharSequence message = "Well done! Please register";
+            CharSequence message = "Well done! Please login";
             int duration = Toast.LENGTH_SHORT;
             toast = Toast.makeText(context, message, duration);
             toast.show();
