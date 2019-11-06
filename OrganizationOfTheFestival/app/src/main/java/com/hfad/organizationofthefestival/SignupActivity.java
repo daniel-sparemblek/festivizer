@@ -29,28 +29,28 @@ import java.io.IOException;
 
 public class SignupActivity extends AppCompatActivity implements Connector.ServerListener {
 
-    ImageView profile_picture;
-    EditText username;
-    EditText email;
-    EditText password1;
-    EditText lastName;
-    EditText name;
-    EditText phone;
-    AppCompatButton register;
-    TextView login;
-    EditText password2;
+    private ImageView profile_picture;
+    private EditText username;
+    private EditText email;
+    private EditText password1;
+    private EditText lastName;
+    private EditText name;
+    private EditText phone;
+    private AppCompatButton register;
+    private TextView login;
+    private EditText password2;
 
-    String usernameString;
-    String nameString;
-    String lastNameString;
-    String phoneString;
-    String emailString;
-    String pwd1String;
-    String pwd2String;
+    private String usernameString;
+    private String nameString;
+    private String lastNameString;
+    private String phoneString;
+    private String emailString;
+    private String pwd1String;
+    private String pwd2String;
 
-    Bitmap bitmap;
-    ByteArrayOutputStream baos;
-    byte[] profilePictureInByte;
+    private Bitmap bitmap;
+    private ByteArrayOutputStream baos;
+    private byte[] profilePictureInByte;
 
     private static int PICK_IMAGE_REQUEST = 1;
 
@@ -153,7 +153,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         return password1.equals(password2);
     }
 
-    private static String securePassword(String password){
+    private String securePassword(String password){
         String generatedPassword = null;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

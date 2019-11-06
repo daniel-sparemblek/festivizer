@@ -10,14 +10,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class LoginActivity extends AppCompatActivity implements Connector.ServerListener {
 
-    EditText email;
-    EditText password;
-    TextView register;
-    Button login;
-    String user_email;
-    String user_pwd;
+    private EditText email;
+    private EditText password;
+    private TextView register;
+    private Button login;
+    private String user_email;
+    private String user_pwd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +45,26 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             public void onClick(View v) {
                 user_email = email.getText().toString();
                 user_pwd = password.getText().toString();
-                Connector.logIn(user_email, user_pwd, LoginActivity.this);
+                Connector.logIn(user_email, securePassword(user_pwd), LoginActivity.this);
             }
         });
+    }
+
+    private String securePassword(String password){
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (int i=0; i<bytes.length; i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 
     @Override
