@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -81,8 +83,13 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                 emailString = email.getText().toString();
                 pwdString = password.getText().toString();
 
-                //Calling the method register from class Connector
-                Connector.register(usernameString, pwdString, nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
+                //Calling the method register from class Connector if email is valid
+                if (emailIsInvalid(emailString)){
+                    //throw exception
+                } else {
+                    Connector.register(usernameString, pwdString, nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
+                }
+
             }
         });
 
@@ -186,4 +193,14 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
             toast.show();
         }
     }
+
+    private static boolean emailIsInvalid(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+        Pattern pat = Pattern.compile(emailRegex);
+        return !pat.matcher(email).matches();
+    }
 }
+
