@@ -3,9 +3,16 @@ import flask
 from flask import request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import User, Base
+from database_setup import User, WorkerSpec, Base
 
 engine = create_engine('sqlite:///organizacijafestivala.db')
+
+def _fk_pragma_on_connect(dbapi_con, con_record):
+    dbapi_con.execute('pragma foreign_keys=ON')
+
+from sqlalchemy import event
+event.listen(engine, 'connect', _fk_pragma_on_connect)
+
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -56,7 +63,6 @@ def handle_request_one():
         f.close()
 
 
-		
         new_user = User(username = new_user_username, password = new_user_password,
                         firstname = new_user_firstname, lastname = new_user_lastname,
                         picture = picture_path, phone = new_user_phone, email = new_user_email,
@@ -82,3 +88,14 @@ def handle_request_two():
             return "success"
 
         return "wrong_password"
+
+@app.route('/check', methods=['GET'])
+def handle_request_three():
+    new_worker_spec = WorkerSpec(worker_id=1, specialization_id=1)
+    try:
+        session.add(new_worker_spec)
+        session.commit()
+        return "Success"
+    except Exception as e:
+        session.rollback();
+        return "Failed. " + str(e)
