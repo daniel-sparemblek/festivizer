@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WorkerActivity"></activity>
+        <activity android:name=".LeaderActivity"></activity>
+        <activity android:name=".WorkerActivity" />
         <activity android:name=".OrganizerActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".SignupActivity" />

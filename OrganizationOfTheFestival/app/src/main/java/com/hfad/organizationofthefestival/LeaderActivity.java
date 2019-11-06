@@ -1,0 +1,39 @@
+package com.hfad.organizationofthefestival;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+public class LeaderActivity extends AppCompatActivity implements LeaderConnector.LeaderListener{
+
+    private ArrayList<String> data = new ArrayList<>();
+    private ListView approvalList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_leader);
+
+        approvalList = findViewById(R.id.leaderList);
+
+        LeaderConnector.getPendingOrganizers("Hobbit", "hobbit", this);
+    }
+
+    public void onClickGetPendingOrganizers(View view) {
+        LeaderConnector.getPendingOrganizers("Hobbit", "hobbit", this);
+    }
+
+    @Override
+    public void onLeaderResponse(ArrayList<String> pendingLeaders) {
+        data = pendingLeaders;
+        System.out.println(pendingLeaders);
+        ArrayAdapter<String> approvalListAdapter = new ArrayAdapter<>(this, R.layout.skroznovi, data);
+        approvalList.setAdapter(approvalListAdapter);
+    }
+
+
+}

@@ -191,6 +191,7 @@ public class Connector {
         if(string.equals("phone_exists")) return ServerStatus.PHONE_EXISTS;
         if(string.equals("admin")) return ServerStatus.ADMIN;
         if(string.equals("organizer")) return ServerStatus.ORGANIZER;
+        if(string.equals("leader")) return ServerStatus.LEADER;
         return ServerStatus.UNKNOWN;
     }
 

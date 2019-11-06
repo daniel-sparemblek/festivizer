@@ -24,6 +24,10 @@ public enum ServerStatus {
      */
     ORGANIZER,
     /**
+     * Server will return this status when Leader has successfully logged in.
+     */
+    LEADER,
+    /**
      * Server will return this status when user tries to connect with server but
      * server is not running.
      */

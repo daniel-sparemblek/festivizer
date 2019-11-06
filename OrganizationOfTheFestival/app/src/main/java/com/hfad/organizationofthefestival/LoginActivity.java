@@ -78,6 +78,12 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
 
         if(status == ServerStatus.ORGANIZER) {
             startActivity(new Intent(this, OrganizerActivity.class));
+
+        }
+
+        if(status == ServerStatus.LEADER) {
+            startActivity(new Intent(this, LeaderActivity.class));
+            System.out.println("TU SAM!");
         }
 
         if(status == ServerStatus.SERVER_DOWN) {
