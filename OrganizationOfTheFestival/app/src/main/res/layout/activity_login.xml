@@ -9,25 +9,27 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
+        android:paddingTop="55dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
+        <!-- Our Logo -->
         <ImageView android:src="@drawable/logo"
             android:layout_width="wrap_content"
             android:layout_height="128dp"
             android:layout_marginBottom="24dp"
             android:layout_gravity="center_horizontal" />
 
-        <!-- Email Label -->
-        <EditText android:id="@+id/input_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Email"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="@color/colorAccent"
-                android:textCursorDrawable="@null"/>
+        <!-- E-mail (or Username) Label -->
+        <EditText
+            android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:hint="E-mail or Username"
+            android:inputType="textEmailAddress"
+            android:textColor="#FFFFFF"
+            android:textCursorDrawable="@null" />
 
         <!-- Password Label -->
         <EditText android:id="@+id/input_password"
@@ -39,6 +41,7 @@
                 android:backgroundTint="@color/colorAccent"
                 android:textCursorDrawable="@null"/>
 
+        <!-- Login Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
@@ -50,6 +53,7 @@
             android:textColor="#FFFFFF"
             android:background="@drawable/login_button" />
 
+        <!-- Signup Button -->
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
