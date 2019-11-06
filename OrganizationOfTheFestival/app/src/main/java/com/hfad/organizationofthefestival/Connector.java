@@ -23,7 +23,7 @@ public class Connector {
     /**
      * This variable represents url address of server.
      */
-    private static final String url = "http://barbil.pythonanywhere.com/";
+    protected static final String url = "http://barbil.pythonanywhere.com/";
 
     /**
      * This is interface which every Activity that wants to call
@@ -181,7 +181,7 @@ public class Connector {
      * @param string server's String response
      * @return <code>ServerStatus</code> status based on Server's String response.
      */
-    private static ServerStatus getStatus(String string) {
+    protected static ServerStatus getStatus(String string) {
         if(string.equals("no_username")) return ServerStatus.NO_USERNAME;
         if(string.equals("wrong_password")) return ServerStatus.WRONG_PASSWORD;
         if(string.equals("server_down")) return ServerStatus.SERVER_DOWN;
@@ -209,7 +209,7 @@ public class Connector {
      * @param signedBytes signed bytes
      * @return unsigned bytes
      */
-    private static int[] convertSignedByteToUnsignedByte(byte[] signedBytes) {
+    protected static int[] convertSignedByteToUnsignedByte(byte[] signedBytes) {
         int[] unsignedBytes = new int[signedBytes.length];
 
         for(int i = 0; i < signedBytes.length; i++) {
