@@ -8,6 +8,7 @@
     android:background="@drawable/background_gradient">
 
     <ListView
+        android:id="@+id/approvalList"
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:layout_marginStart="1dp"
