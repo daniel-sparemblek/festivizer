@@ -75,7 +75,6 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register.setEnabled(false);
 
                 //Converting profile_picture to byte array
                 bitmap = ((BitmapDrawable) profile_picture.getDrawable()).getBitmap();
@@ -116,10 +115,9 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                     toast = Toast.makeText(context, message, duration);
                     toast.show();
                 } else {
+                    register.setClickable(false);
                     Connector.register(usernameString, securePassword(pwd1String), nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
                 }
-
-                register.setEnabled(true);
             }
         });
 
@@ -188,6 +186,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
 
     @Override
     public void onRegisterResponse(ServerStatus status) {
+        register.setClickable(true);
 
         if(status == ServerStatus.SUCCESS){
             Context context;
