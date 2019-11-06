@@ -30,19 +30,21 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
     ImageView profile_picture;
     EditText username;
     EditText email;
-    EditText password;
+    EditText password1;
     EditText lastName;
     EditText name;
     EditText phone;
     AppCompatButton register;
     TextView login;
+    EditText password2;
 
     String usernameString;
     String nameString;
     String lastNameString;
     String phoneString;
     String emailString;
-    String pwdString;
+    String pwd1String;
+    String pwd2String;
 
     Bitmap bitmap;
     ByteArrayOutputStream baos;
@@ -58,12 +60,13 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         profile_picture = findViewById(R.id.profile_picture);
         username = findViewById(R.id.input_username);
         email = findViewById(R.id.input_email);
-        password = findViewById(R.id.input_password);
+        password1 = findViewById(R.id.input_password);
         lastName = findViewById(R.id.input_surname);
         name = findViewById(R.id.input_name);
         phone = findViewById(R.id.input_phone);
         register = findViewById(R.id.btn_signup);
         login = findViewById(R.id.link_login);
+        password2 = findViewById(R.id.verify_password);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +84,13 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                 lastNameString = lastName.getText().toString();
                 phoneString = phone.getText().toString();
                 emailString = email.getText().toString();
-                pwdString = password.getText().toString();
+                pwd1String = password1.getText().toString();
+                pwd2String = password2.getText().toString();
 
+<<<<<<< HEAD
+                //Calling the method register from class Connector
+                Connector.register(usernameString, pwd1String, nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
+=======
                 //Calling the method register from class Connector if email is valid
                 if (emailIsInvalid(emailString)){
                     Context context;
@@ -96,6 +104,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                     Connector.register(usernameString, pwdString, nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
                 }
 
+>>>>>>> bfdfa4e57c29cedfb9e5679fdaca49b693709788
             }
         });
 
@@ -133,6 +142,10 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                 e.printStackTrace();
             }
         }
+    }
+
+    private static boolean verifyPassword(String password1, String password2){
+        return password1.equals(password2);
     }
 
     @Override
