@@ -88,14 +88,3 @@ def handle_request_two():
             return "success"
 
         return "wrong_password"
-
-@app.route('/check', methods=['GET'])
-def handle_request_three():
-    new_worker_spec = WorkerSpec(worker_id=1, specialization_id=1)
-    try:
-        session.add(new_worker_spec)
-        session.commit()
-        return "Success"
-    except Exception as e:
-        session.rollback();
-        return "Failed. " + str(e)
