@@ -20,6 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -28,19 +32,21 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
     ImageView profile_picture;
     EditText username;
     EditText email;
-    EditText password;
+    EditText password1;
     EditText lastName;
     EditText name;
     EditText phone;
     AppCompatButton register;
     TextView login;
+    EditText password2;
 
     String usernameString;
     String nameString;
     String lastNameString;
     String phoneString;
     String emailString;
-    String pwdString;
+    String pwd1String;
+    String pwd2String;
 
     Bitmap bitmap;
     ByteArrayOutputStream baos;
@@ -56,12 +62,13 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         profile_picture = findViewById(R.id.profile_picture);
         username = findViewById(R.id.input_username);
         email = findViewById(R.id.input_email);
-        password = findViewById(R.id.input_password);
+        password1 = findViewById(R.id.input_password);
         lastName = findViewById(R.id.input_surname);
         name = findViewById(R.id.input_name);
         phone = findViewById(R.id.input_phone);
         register = findViewById(R.id.btn_signup);
         login = findViewById(R.id.link_login);
+        password2 = findViewById(R.id.verify_password);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,10 +86,31 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                 lastNameString = lastName.getText().toString();
                 phoneString = phone.getText().toString();
                 emailString = email.getText().toString();
-                pwdString = password.getText().toString();
+                pwd1String = password1.getText().toString();
+                pwd2String = password2.getText().toString();
 
-                //Calling the method register from class Connector
-                Connector.register(usernameString, pwdString, nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
+
+                //Calling the method register from class Connector if email is valid
+                if (emailIsInvalid(emailString)){
+                    Context context;
+                    Toast toast;
+                    context = getApplicationContext();
+                    CharSequence message = "Email format is invalid.";
+                    int duration = Toast.LENGTH_SHORT;
+                    toast = Toast.makeText(context, message, duration);
+                    toast.show();
+                } else if (!verifyPassword(pwd1String, pwd2String)) {
+                    Context context;
+                    Toast toast;
+                    context = getApplicationContext();
+                    CharSequence message = "Passwords do not match!";
+                    int duration = Toast.LENGTH_SHORT;
+                    toast = Toast.makeText(context, message, duration);
+                    toast.show();
+                } else {
+                    Connector.register(usernameString, securePassword(pwd1String), nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
+                }
+
             }
         });
 
@@ -113,13 +141,33 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-
                 ImageView imageView = findViewById(R.id.profile_picture);
                 imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static boolean verifyPassword(String password1, String password2){
+        return password1.equals(password2);
+    }
+
+    private static String securePassword(String password){
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (int i=0; i<bytes.length; i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 
     @Override
@@ -185,5 +233,14 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
             toast = Toast.makeText(context, message, duration);
             toast.show();
         }
+    }
+
+    private static boolean emailIsInvalid(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+        Pattern pat = Pattern.compile(emailRegex);
+        return !pat.matcher(email).matches();
     }
 }
