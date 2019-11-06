@@ -16,6 +16,10 @@ public enum ServerStatus {
      */
     SUCCESS,
     /**
+     * Server will return this status when Administrator has successfully logged in.
+     */
+    ADMIN,
+    /**
      * Server will return this status when user tries to connect with server but
      * server is not running.
      */
