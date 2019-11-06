@@ -244,4 +244,3 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         return !pat.matcher(email).matches();
     }
 }
-
