@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +49,15 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
     @Override
     public void onLogInResponse(ServerStatus status) {
         if(status == ServerStatus.SUCCESS)
-            //startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, WorkerActivity.class));
+
+        if(status == ServerStatus.ADMIN) {
+            startActivity(new Intent(this, AdminActivity.class));
+        }
+
+        if(status == ServerStatus.ORGANIZER) {
+            startActivity(new Intent(this, OrganizerActivity.class));
+        }
 
         if(status == ServerStatus.SERVER_DOWN) {
             Context context;
