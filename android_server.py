@@ -3,7 +3,7 @@ import flask
 from flask import request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import User, WorkerSpec, Base
+from database_setup import User, Base
 
 engine = create_engine('sqlite:///organizacijafestivala.db')
 
@@ -84,7 +84,14 @@ def handle_request_two():
                 return "no_username"
 
         if(requested_user[0].password == user_password):
+
             session.commit()
+            if(requested_user[0].role == "administrator"):
+                return "admin"
+
+            if(requested_user[0].role == "organizer"):
+                return "organizer"
+
             return "success"
 
         return "wrong_password"
