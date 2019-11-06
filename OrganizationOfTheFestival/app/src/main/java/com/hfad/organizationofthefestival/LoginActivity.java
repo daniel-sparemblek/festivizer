@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register.setEnabled(false);
+                register.setEnabled(false); //
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
                 register.setEnabled(true);
             }
@@ -80,7 +80,10 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             startActivity(new Intent(this, WorkerActivity.class));
 
         if(status == ServerStatus.ADMIN) {
-            startActivity(new Intent(this, AdminActivity.class));
+            Intent intent = new Intent(this, AdminActivity.class);
+            intent.putExtra("USERNAME", user_email);
+            intent.putExtra("PASSWORD", securePassword(user_pwd));
+            startActivity(intent);
         }
 
         if(status == ServerStatus.ORGANIZER) {
@@ -89,8 +92,10 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
         }
 
         if(status == ServerStatus.LEADER) {
-            startActivity(new Intent(this, LeaderActivity.class));
-            System.out.println("TU SAM!");
+            Intent intent = new Intent(this, LeaderActivity.class);
+            intent.putExtra("USERNAME", user_email);
+            intent.putExtra("PASSWORD", securePassword(user_pwd));
+            startActivity(intent);
         }
 
         if(status == ServerStatus.SERVER_DOWN) {
