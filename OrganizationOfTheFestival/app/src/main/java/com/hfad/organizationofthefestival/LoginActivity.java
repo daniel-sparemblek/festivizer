@@ -50,7 +50,8 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
     @Override
     public void onLogInResponse(ServerStatus status) {
         if(status == ServerStatus.SUCCESS)
-            startActivity(new Intent(this, MainActivity.class));
+            //startActivity(new Intent(this, MainActivity.class));
+
         if(status == ServerStatus.SERVER_DOWN) {
             Context context;
             Toast toast;
