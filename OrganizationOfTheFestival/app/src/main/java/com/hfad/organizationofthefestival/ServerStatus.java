@@ -20,6 +20,10 @@ public enum ServerStatus {
      */
     ADMIN,
     /**
+     * Server will return this status when Organizer has successfully logged in.
+     */
+    ORGANIZER,
+    /**
      * Server will return this status when user tries to connect with server but
      * server is not running.
      */
