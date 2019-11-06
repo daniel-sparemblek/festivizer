@@ -70,9 +70,12 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         login = findViewById(R.id.link_login);
         password2 = findViewById(R.id.verify_password);
 
+        username.requestFocus();
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                register.setEnabled(false);
 
                 //Converting profile_picture to byte array
                 bitmap = ((BitmapDrawable) profile_picture.getDrawable()).getBitmap();
@@ -92,6 +95,9 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
 
                 //Calling the method register from class Connector if email is valid
                 if (emailIsInvalid(emailString)){
+                    email.setText("");
+                    email.requestFocus();
+
                     Context context;
                     Toast toast;
                     context = getApplicationContext();
@@ -100,6 +106,8 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                     toast = Toast.makeText(context, message, duration);
                     toast.show();
                 } else if (!verifyPassword(pwd1String, pwd2String)) {
+                    password1.requestFocus();
+
                     Context context;
                     Toast toast;
                     context = getApplicationContext();
@@ -111,13 +119,16 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                     Connector.register(usernameString, securePassword(pwd1String), nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
                 }
 
+                register.setEnabled(true);
             }
         });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                login.setEnabled(false);
                 startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                login.setEnabled(true);
             }
         });
 
