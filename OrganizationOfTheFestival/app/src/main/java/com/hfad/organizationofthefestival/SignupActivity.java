@@ -93,7 +93,13 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
 =======
                 //Calling the method register from class Connector if email is valid
                 if (emailIsInvalid(emailString)){
-                    //throw exception
+                    Context context;
+                    Toast toast;
+                    context = getApplicationContext();
+                    CharSequence message = "Email format is invalid.";
+                    int duration = Toast.LENGTH_SHORT;
+                    toast = Toast.makeText(context, message, duration);
+                    toast.show();
                 } else {
                     Connector.register(usernameString, pwdString, nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
                 }
