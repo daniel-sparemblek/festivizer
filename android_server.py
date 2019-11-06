@@ -6,6 +6,13 @@ from sqlalchemy.orm import sessionmaker
 from database_setup import User, Base
 
 engine = create_engine('sqlite:///organizacijafestivala.db')
+
+def _fk_pragma_on_connect(dbapi_con, con_record):
+    dbapi_con.execute('pragma foreign_keys=ON')
+
+from sqlalchemy import event
+event.listen(engine, 'connect', _fk_pragma_on_connect)
+
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -56,7 +63,6 @@ def handle_request_one():
         f.close()
 
 
-		
         new_user = User(username = new_user_username, password = new_user_password,
                         firstname = new_user_firstname, lastname = new_user_lastname,
                         picture = picture_path, phone = new_user_phone, email = new_user_email,
@@ -78,7 +84,14 @@ def handle_request_two():
                 return "no_username"
 
         if(requested_user[0].password == user_password):
+
             session.commit()
+            if(requested_user[0].role == "administrator"):
+                return "admin"
+
+            if(requested_user[0].role == "organizer"):
+                return "organizer"
+
             return "success"
 
         return "wrong_password"
