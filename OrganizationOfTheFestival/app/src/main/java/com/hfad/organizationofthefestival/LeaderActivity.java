@@ -13,18 +13,19 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
     private ArrayList<String> data = new ArrayList<>();
     private ListView approvalList;
 
+    private String username;
+    private String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leader);
 
         approvalList = findViewById(R.id.leaderList);
+        username = getIntent().getStringExtra("USERNAME");
+        password = getIntent().getStringExtra("PASSWORD");
 
-        LeaderConnector.getPendingOrganizers("Hobbit", "hobbit", this);
-    }
-
-    public void onClickGetPendingOrganizers(View view) {
-        LeaderConnector.getPendingOrganizers("Hobbit", "hobbit", this);
+        LeaderConnector.getPendingOrganizers(username, password, this);
     }
 
     @Override

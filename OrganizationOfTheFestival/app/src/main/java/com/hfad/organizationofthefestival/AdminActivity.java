@@ -13,6 +13,9 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
     private ArrayList<String> data = new ArrayList<>();
     private ListView approvalList;
 
+    private String username;
+    private String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +23,10 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
 
         approvalList = findViewById(R.id.approvalList);
 
-        AdminConnector.getPendingLeaders("Bartz", "134", this);
+        username = getIntent().getStringExtra("USERNAME");
+        password = getIntent().getStringExtra("PASSWORD");
 
-
-    }
-
-    public void onClickGetPendingLeaders(View view) {
-        AdminConnector.getPendingLeaders("Bartz", "134", this);
+        AdminConnector.getPendingLeaders(username, password, this);
     }
 
     @Override
