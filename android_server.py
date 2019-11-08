@@ -7,17 +7,6 @@ from sqlalchemy.orm import sessionmaker
 from database_setup import User, Base
 
 engine = create_engine('sqlite:///organizacijafestivala.db')
-<<<<<<< HEAD
-=======
-
-def _fk_pragma_on_connect(dbapi_con, con_record):
-    dbapi_con.execute('pragma foreign_keys=ON')
-
-from sqlalchemy import event
-event.listen(engine, 'connect', _fk_pragma_on_connect)
-
-Base.metadata.bind = engine
->>>>>>> b386eaf52d3506d4e5cac6aacd04b683a86b35d7
 
 def _fk_pragma_on_connect(dbapi_con, con_record):
     dbapi_con.execute('pragma foreign_keys=ON')
@@ -107,7 +96,6 @@ def handle_request_two():
             if(requested_user[0].role == "organizer"):
                 return "organizer"
 
-<<<<<<< HEAD
             if(requested_user[0].role == "leader"):
                 return "leader"
 
@@ -173,15 +161,3 @@ def handle_request_four(username):
                 print >> sys.stderr, "Uspio3"
                 return "permission_denied"
         return "wrong_password"
-
-
-
-
-
-
-
-=======
-            return "success"
-
-        return "wrong_password"
->>>>>>> b386eaf52d3506d4e5cac6aacd04b683a86b35d7
