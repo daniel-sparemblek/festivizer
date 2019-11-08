@@ -18,6 +18,23 @@ class User(Base):
     role = Column(String(50), nullable=False)
     isPending = Column(Boolean, nullable=False)
 
+
+    @property
+    def serialize(self):
+        """Return object data in serializeable format"""
+        return {
+            'user_id': self.user_id,
+            'username' : self.username,
+            'password' : self.password,
+            'firstname' : self.firstname,
+            'lastname' : self.lastname,
+            'picture' : self.picture,
+            'phone' : self.phone,
+            'email' : self.email,
+            'role' : self.role,
+            'isPending' : self.isPending
+        }
+
 class Specialization(Base):
     __tablename__ = 'specialization'
 
@@ -29,7 +46,7 @@ class Event(Base):
 
     event_id = Column(Integer, primary_key=True)
     festival_id = Column(Integer, ForeignKey('festival.festival_id'))
-    organizer_id = Column(Integer, ForeignKey('user.user_id'))
+    organizer_id = Column(Integer, ForeignKey('user.user_id'), ForeignKey('festivalorganizers.organizer_id'))
     name = Column(String(50), nullable=False)
     desc = Column(String(250))
     location = Column(Integer, nullable=False)
@@ -88,6 +105,12 @@ class Application(Base):
     approximate_time = Column(Integer, nullable=False) #Time will be defined in days; hence Integer instead of DateTime
     number_of_people = Column(Integer, nullable=False)
     __table_args__ = (UniqueConstraint('auction_id', 'worker_id'), )
+
+class FestivalOrganizers(Base):
+    __tablename__ = 'festivalorganizers'
+
+    festival_id = Column(Integer, ForeignKey('festival.festival_id'), primary_key=True)
+    organizer_id = Column(Integer, ForeignKey('user.user_id'), primary_key=True)
 
 
 engine = create_engine('sqlite:///organizacijafestivala.db')
