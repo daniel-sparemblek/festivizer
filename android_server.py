@@ -138,10 +138,6 @@ def handle_request_four(username):
         leader_identifier = request.values.get('user_identifier')
         leader_password = request.values.get('password')
 
-        print >> sys.stderr, leader_identifier
-        print >> sys.stderr, leader_password
-        print >> sys.stderr, "Uspio0"
-
         requested_leader = session.query(User).filter_by(username = leader_identifier).all()
 
         if len(requested_leader) == 0:
@@ -151,13 +147,10 @@ def handle_request_four(username):
 
         if(requested_leader[0].password == leader_password):
             session.commit()
-            print >> sys.stderr, "Uspio1"
             if(requested_leader[0].role == "leader"):
                 res = session.query(User).filter_by(isPending = True, role = "organizer").all()
-                print >> sys.stderr, "Uspio2"
 
                 return jsonify({'pending_organizers': [r.serialize for r in res]})
             else:
-                print >> sys.stderr, "Uspio3"
                 return "permission_denied"
         return "wrong_password"
