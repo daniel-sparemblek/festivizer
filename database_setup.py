@@ -45,14 +45,15 @@ class Event(Base):
     __tablename__ = 'event'
 
     event_id = Column(Integer, primary_key=True)
-    festival_id = Column(Integer, ForeignKey('festival.festival_id'))
-    organizer_id = Column(Integer, ForeignKey('user.user_id'), ForeignKey('festivalorganizers.organizer_id'))
+    festival_id = Column(Integer)
+    organizer_id = Column(Integer)
     name = Column(String(50), nullable=False)
     desc = Column(String(250))
     location = Column(Integer, nullable=False)
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime, nullable=False)
     __table_args__ = (UniqueConstraint('festival_id', 'organizer_id', 'name', 'location', 'start_time'), )
+    ForeignKeyConstraint(['festival_id', 'organiser_id'], ['festivalorganizers.festival_id', 'festivalorganizers.organiser_id'])
 
 class WorkerSpec(Base):
     __tablename__ = 'workerspec'
