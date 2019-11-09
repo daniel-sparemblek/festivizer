@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.hfad.organizationofthefestival.adapters.LeaderAdapter;
+
 import java.util.ArrayList;
 
 public class LeaderActivity extends AppCompatActivity implements LeaderConnector.LeaderListener{
@@ -29,10 +31,18 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
 
     @Override
     public void onGetPendingOrganizersResponse(ArrayList<String> pendingLeaders) {
-        data = pendingLeaders;
-        System.out.println(pendingLeaders);
-        ArrayAdapter<String> approvalListAdapter = new ArrayAdapter<>(this, R.layout.skroznovi, data);
-        approvalList.setAdapter(approvalListAdapter);
+
+        ArrayList<PendingOrganizer> pendingOrganizers = new ArrayList<>();
+
+        for(String s : pendingLeaders) {
+            String[] fragments = s.split("\\s");
+
+            pendingOrganizers.add(new PendingOrganizer(fragments[0], fragments[2], Integer.parseInt(fragments[1])));
+        }
+
+
+        LeaderAdapter adapter = new LeaderAdapter(this, R.layout.skroznovi, pendingOrganizers);
+        approvalList.setAdapter(adapter);
     }
 
     @Override

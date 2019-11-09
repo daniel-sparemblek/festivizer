@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.View;
+
+import com.hfad.organizationofthefestival.adapters.AdminAdapter;
+
 import java.util.ArrayList;
 
 
@@ -32,7 +35,7 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
     @Override
     public void onAdminResponse(ArrayList<String> pendingLeaders) {
         data = pendingLeaders;
-        ArrayAdapter<String> approvalListAdapter = new ArrayAdapter<>(this, R.layout.skroznovi, data);
-        approvalList.setAdapter(approvalListAdapter);
+        AdminAdapter adapter = new AdminAdapter(this, R.layout.skroznovi, data);
+        approvalList.setAdapter(adapter);
     }
 }
