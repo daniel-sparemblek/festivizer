@@ -33,6 +33,10 @@ public enum ServerStatus {
      */
     SERVER_DOWN,
     /**
+     * Server will return this status when user tries to call methods without required permission.
+     */
+    PERMISSION_DENIED,
+    /**
      * Server will return this status when user tries to register with the username
      * that already exists.
      */
