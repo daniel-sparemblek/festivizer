@@ -12,16 +12,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:text="Default Leader"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
     <Button
         android:id="@+id/btnAccept"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="Accept" />
     <Button
         android:id="@+id/btnDecline"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="Decline" />
