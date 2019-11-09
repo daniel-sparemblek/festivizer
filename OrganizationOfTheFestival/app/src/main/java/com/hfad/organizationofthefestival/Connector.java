@@ -192,6 +192,7 @@ public class Connector {
         if(string.equals("admin")) return ServerStatus.ADMIN;
         if(string.equals("organizer")) return ServerStatus.ORGANIZER;
         if(string.equals("leader")) return ServerStatus.LEADER;
+        if(string.equals("permission_denied")) return ServerStatus.PERMISSION_DENIED;
         return ServerStatus.UNKNOWN;
     }
 
@@ -217,5 +218,15 @@ public class Connector {
             unsignedBytes[i] = signedBytes[i] & 0xff;
         }
         return unsignedBytes;
+    }
+
+    protected static String convertDecisionToString(Decision decision) {
+        if(decision == Decision.ACCEPT) {
+            return "accept";
+        }
+        if(decision == Decision.DECLINE) {
+            return "decline";
+        }
+        return null;
     }
 }
