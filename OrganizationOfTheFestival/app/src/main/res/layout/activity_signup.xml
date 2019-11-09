@@ -74,6 +74,12 @@
             android:inputType="textEmailAddress"
             android:hint="Surname" />
 
+        <!-- Role dropdown list -->
+        <Spinner
+            android:id="@+id/roleChooser"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
         <!-- Signup Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_signup"
@@ -95,6 +101,7 @@
             android:gravity="center"
             android:textSize="16dip"
             android:textColor="#FFFFFF"/>
+
 
     </LinearLayout>
 </ScrollView>

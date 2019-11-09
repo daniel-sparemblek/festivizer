@@ -14,9 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
     private AppCompatButton register;
     private TextView login;
     private EditText password2;
+    private Spinner roleChooserDropDown;
 
     private String usernameString;
     private String nameString;
@@ -47,6 +50,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
     private String emailString;
     private String pwd1String;
     private String pwd2String;
+    private Role userRole;
 
     private Bitmap bitmap;
     private ByteArrayOutputStream baos;
@@ -69,8 +73,16 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         register = findViewById(R.id.btn_signup);
         login = findViewById(R.id.link_login);
         password2 = findViewById(R.id.verify_password);
+        roleChooserDropDown = findViewById(R.id.roleChooser);
 
         username.requestFocus();
+
+
+        //SetUp roleChoser dropdown list
+        String[] items = new String[]{Role.LEADER.toString(), Role.ORGANIZER.toString(), Role.WORKER.toString()}; //Leader, Organizer, Worker
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        roleChooserDropDown.setAdapter(adapter);
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +102,14 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                 emailString = email.getText().toString();
                 pwd1String = password1.getText().toString();
                 pwd2String = password2.getText().toString();
+
+                if(roleChooserDropDown.getSelectedItem().toString().equals("LEADER")) {
+                    userRole = Role.LEADER;
+                } else if(roleChooserDropDown.getSelectedItem().toString().equals("ORGANIZER")) {
+                    userRole = Role.ORGANIZER;
+                } else if(roleChooserDropDown.getSelectedItem().toString().equals("WORKER")) {
+                    userRole = Role.WORKER;
+                }
 
 
                 //Calling the method register from class Connector if email is valid
@@ -116,7 +136,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                     toast.show();
                 } else {
                     register.setClickable(false);
-                    Connector.register(usernameString, securePassword(pwd1String), nameString, lastNameString, profilePictureInByte, phoneString, emailString, Role.WORKER, SignupActivity.this);
+                    Connector.register(usernameString, securePassword(pwd1String), nameString, lastNameString, profilePictureInByte, phoneString, emailString, userRole, SignupActivity.this);
                 }
             }
         });
