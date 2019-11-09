@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class LeaderConnector extends Connector {
     public static void getPendingOrganizers(final String username, final String password, final Context context) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String leaderUrl = url + "leader/"+username;
+        String leaderUrl = url + "leader/"+username+"/get_organizers";
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, leaderUrl,
                 new Response.Listener<String>()
@@ -36,20 +37,11 @@ public class LeaderConnector extends Connector {
                     public void onResponse(String response) {
                         ArrayList<String> pendingOrganizers = new ArrayList<>();
 
-                        try {
-                            JSONArray jsonArray = new JSONObject(response).getJSONArray("pending_organizers");
-                            int i = 0;
+                        String[] organizerList = response.split(";");
 
-                            while(true) {
+                        pendingOrganizers.addAll(Arrays.asList(organizerList));
 
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                pendingOrganizers.add((String)jsonObject.get("username"));
-                                i++;
-                            }
-
-                        } catch (JSONException e) {
-                            ((LeaderListener)context).onLeaderResponse(pendingOrganizers);
-                        }
+                        ((LeaderListener)context).onLeaderResponse(pendingOrganizers);
                     }
                 },
                 new Response.ErrorListener()
@@ -76,4 +68,6 @@ public class LeaderConnector extends Connector {
         };
         queue.add(postRequest);
     }
+
+
 }
