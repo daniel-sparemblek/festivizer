@@ -3,8 +3,8 @@ import flask
 import sys
 from flask import request, jsonify
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from database_setup import User, Base
+from sqlalchemy.orm import sessionmaker, aliased
+from database_setup import User, Base, FestivalOrganizers, Festival
 
 engine = create_engine('sqlite:///organizacijafestivala.db')
 
@@ -129,7 +129,7 @@ def handle_request_three():
                 return "permission_denied"
         return "wrong_password"
 
-@app.route('/leader/<username>', methods=['POST'])
+@app.route('/leader/<username>/get_organizers', methods=['POST'])
 def handle_request_four(username):
     if request.method == 'POST':
         DBSession = sessionmaker(bind=engine)
@@ -148,9 +148,51 @@ def handle_request_four(username):
         if(requested_leader[0].password == leader_password):
             session.commit()
             if(requested_leader[0].role == "leader"):
-                res = session.query(User).filter_by(isPending = True, role = "organizer").all()
+                org = aliased(User)
+                query_res = session.query(org.username, Festival.name).join(FestivalOrganizers, FestivalOrganizers.organizer_id == org.user_id).join(Festival, Festival.festival_id == FestivalOrganizers.festival_id).filter(org.role == "organizer", org.isPending == True, Festival.creator_id == requested_leader[0].user_id).all()
 
-                return jsonify({'pending_organizers': [r.serialize for r in res]})
+                str_res = ""
+                for row in query_res:
+                    str_res = str_res + row[0] + " " + row[1]+";"
+
+                return str_res
+            else:
+                return "permission_denied"
+        return "wrong_password"
+
+@app.route('/leader/<username>/send_decision', methods=['POST'])
+def handle_request_five(username):
+    if request.method == 'POST':
+        DBSession = sessionmaker(bind=engine)
+        session = DBSession()
+
+        leader_identifier = request.values.get('user_identifier')
+        leader_password = request.values.get('password')
+        organizer_username = request.values.get('organizer_username')
+        festival = request.values.get('festival_id')
+        decision = request.values.get('decision')
+
+        requested_leader = session.query(User).filter_by(username = leader_identifier).all()
+
+        if len(requested_leader) == 0:
+            requested_leader = session.query(User).filter_by(email = leader_identifier).all()
+            if len(requested_leader) == 0:
+                return "no_user"
+
+        if(requested_leader[0].password == leader_password):
+            session.commit()
+            if(requested_leader[0].role == "leader"):
+                query_res = session.query(FestivalOrganizers).join(User, User.user_id == FestivalOrganizers.organizer_id).filter(User.username == organizer_username, User.isPending == True, FestivalOrganizers.festival_id == festival).all()
+                query_user = session.query(User).filter(User.username == organizer_username)
+
+                if decision == 'accept':
+                    query_user.isPending = False
+                    session.commit()
+
+                if decision == 'decline':
+                    query_res.delete()
+                    session.commit()
+
             else:
                 return "permission_denied"
         return "wrong_password"
