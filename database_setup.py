@@ -88,12 +88,25 @@ class Festival(Base):
     __tablename__ = 'festival'
 
     festival_id = Column(Integer, primary_key=True)
-    creator_id = Column(DateTime, ForeignKey('user.user_id'))
+    creator_id = Column(Integer, ForeignKey('user.user_id'))
     name = Column(String(100), nullable=False)
     desc = Column(String(250))
     logo = Column(String(250))
     duration = Column(Integer, nullable=False)
     active = Column(Boolean, nullable=False)
+
+    @property
+    def serialize(self):
+        """Return object data in serializeable format"""
+        return {
+            'festival_id': self.festival_id,
+            'creator_id' : self.creator_id,
+            'name' : self.name,
+            'desc' : self.desc,
+            'logo' : self.logo,
+            'duration' : self.duration,
+            'active' : self.active
+        }
 
 class Application(Base):
     __tablename__ = 'application'
