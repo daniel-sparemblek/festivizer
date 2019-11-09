@@ -2,7 +2,6 @@ package com.hfad.organizationofthefestival;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -29,12 +28,16 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
     }
 
     @Override
-    public void onLeaderResponse(ArrayList<String> pendingLeaders) {
+    public void onGetPendingOrganizersResponse(ArrayList<String> pendingLeaders) {
         data = pendingLeaders;
         System.out.println(pendingLeaders);
         ArrayAdapter<String> approvalListAdapter = new ArrayAdapter<>(this, R.layout.skroznovi, data);
         approvalList.setAdapter(approvalListAdapter);
     }
 
+    @Override
+    public void onSendDecisionResponse(ServerStatus serverStatus) {
+
+    }
 
 }
