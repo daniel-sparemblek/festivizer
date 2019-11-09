@@ -6,13 +6,29 @@
     android:paddingRight="16dp"
     android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/organizerUsername"
+    <LinearLayout
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Default Organizer"
-        android:textSize="18sp" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/organizerUsername"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Default Organizer"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/organizerFestival"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Default Organizer"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnAcceptOrganizer"
         android:layout_width="100dp"
