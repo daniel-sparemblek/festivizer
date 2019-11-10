@@ -40,6 +40,13 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
         approvalList.setAdapter(adapter);
     }
 
+    @Override
+    public void onSendDecisionResponse(ServerStatus serverStatus) {
+        System.out.println("RESPONSE: POZVANO");
+        AdminConnector.getPendingLeaders(username, password, this);
+
+    }
+
     public void adminOnClickAccept(View view) {
         final int position = approvalList.getPositionForView((LinearLayout)view.getParent());
 
