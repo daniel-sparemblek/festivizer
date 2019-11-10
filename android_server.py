@@ -129,8 +129,45 @@ def handle_request_three():
                 return "permission_denied"
         return "wrong_password"
 
+@app.route('/admin/send_decision', methods=['POST'])
+def handle_request_four():
+    if request.method == 'POST':
+        DBSession = sessionmaker(bind=engine)
+        session = DBSession()
+
+        admin_identifier = request.values.get('user_identifier')
+        admin_password = request.values.get('password')
+        leader_username = request.values.get('leader_username')
+        decision = request.values.get('decision')
+
+        requested_admin = session.query(User).filter_by(username = admin_identifier).all()
+
+        if len(requested_admin) == 0:
+            requested_admin = session.query(User).filter_by(email = admin_identifier).all()
+            if len(requested_admin) == 0:
+                return "no_user"
+
+        if(requested_admin[0].password == admin_password):
+            session.commit()
+            if(requested_admin[0].role == "administrator"):
+                res = session.query(User).filter_by(isPending = True, role = "leader", user_id = leader_username).all()
+
+                if(decision == 'accept'):
+                    res[0].isPending = False
+                    session.commit()
+                    return "success"
+
+                if(decision == 'decline'):
+                    res[0].isPending = False
+                    res[0].role = 'worker'
+                    session.commit()
+                    return "success"
+            else:
+                return "permission_denied"
+        return "wrong_password"
+
 @app.route('/leader/<username>/get_organizers', methods=['POST'])
-def handle_request_four(username):
+def handle_request_five(username):
     if request.method == 'POST':
         DBSession = sessionmaker(bind=engine)
         session = DBSession()
@@ -149,11 +186,11 @@ def handle_request_four(username):
             session.commit()
             if(requested_leader[0].role == "leader"):
                 org = aliased(User)
-                query_res = session.query(org.username, Festival.name).join(FestivalOrganizers, FestivalOrganizers.organizer_id == org.user_id).join(Festival, Festival.festival_id == FestivalOrganizers.festival_id).filter(org.role == "organizer", org.isPending == True, Festival.creator_id == requested_leader[0].user_id).all()
+                query_res = session.query(org.username, Festival.festival_id, Festival.name).join(FestivalOrganizers, FestivalOrganizers.organizer_id == org.user_id).join(Festival, Festival.festival_id == FestivalOrganizers.festival_id).filter(org.role == "organizer", org.isPending == True, Festival.creator_id == requested_leader[0].user_id).all()
 
                 str_res = ""
                 for row in query_res:
-                    str_res = str_res + row[0] + " " + row[1]+";"
+                    str_res = str_res + row[0] + " " + str(row[1]) + " " + row[2] + ";"
 
                 return str_res
             else:
@@ -161,7 +198,7 @@ def handle_request_four(username):
         return "wrong_password"
 
 @app.route('/leader/<username>/send_decision', methods=['POST'])
-def handle_request_five(username):
+def handle_request_six(username):
     if request.method == 'POST':
         DBSession = sessionmaker(bind=engine)
         session = DBSession()
@@ -180,18 +217,28 @@ def handle_request_five(username):
                 return "no_user"
 
         if(requested_leader[0].password == leader_password):
-            session.commit()
+
             if(requested_leader[0].role == "leader"):
-                query_res = session.query(FestivalOrganizers).join(User, User.user_id == FestivalOrganizers.organizer_id).filter(User.username == organizer_username, User.isPending == True, FestivalOrganizers.festival_id == festival).all()
-                query_user = session.query(User).filter(User.username == organizer_username)
+                query_res = session.query(FestivalOrganizers).join(User, User.user_id == FestivalOrganizers.organizer_id).filter(User.username == organizer_username, User.isPending == True, FestivalOrganizers.festival_id == int(festival)).all()
+                query_user = session.query(User).filter(User.username == organizer_username).all()
+
+                print >> sys.stderr, leader_identifier
+                print >> sys.stderr, leader_password
+                print >> sys.stderr, organizer_username
+                print >> sys.stderr, festival
+                print >> sys.stderr, decision
 
                 if decision == 'accept':
-                    query_user.isPending = False
+                    query_user[0].isPending = False
                     session.commit()
+                    return "success"
 
                 if decision == 'decline':
-                    query_res.delete()
+                    req_festival_id = query_res[0].festival_id
+                    req_organizer_id = query_res[0].organizer_id
+                    session.query(FestivalOrganizers).filter(FestivalOrganizers.festival_id == req_festival_id, FestivalOrganizers.organizer_id == req_organizer_id).delete()
                     session.commit()
+                    return "success"
 
             else:
                 return "permission_denied"
