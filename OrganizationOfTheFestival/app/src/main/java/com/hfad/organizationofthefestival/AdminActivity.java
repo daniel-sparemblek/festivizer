@@ -53,7 +53,7 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
 
         String leaderUsername = data.get(position);
 
-        AdminConnector.sendAdminDecision(username, password, leaderUsername, Decision.ACCEPT, this);
+        AdminConnector.sendAdminDecision(username, password, leaderUsername, Decision.DECLINE, this);
     }
 
 }
