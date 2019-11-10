@@ -17,7 +17,7 @@ public class LeaderAdapter extends ArrayAdapter<PendingOrganizer> {
 
     private Context context;
     private int resource;
-    private List<PendingOrganizer> organizerList = new ArrayList<>();
+    private List<PendingOrganizer> organizerList;
 
     public LeaderAdapter(Context context, int resource,  ArrayList<PendingOrganizer> organizerList) {
         super(context, resource, organizerList);

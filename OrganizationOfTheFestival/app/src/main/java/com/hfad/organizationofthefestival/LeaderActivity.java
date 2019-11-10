@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.adapters.LeaderAdapter;
 
@@ -13,14 +15,11 @@ import java.util.ArrayList;
 
 public class LeaderActivity extends AppCompatActivity implements LeaderConnector.LeaderListener{
 
-    private ArrayList<String> data = new ArrayList<>();
+    ArrayList<PendingOrganizer> pendingOrganizers = new ArrayList<>();
     private ListView approvalList;
 
     private String username;
     private String password;
-
-    private Button btnAcceptOrganizer = findViewById(R.id.btnAcceptOrganizer);
-    private Button btnDeclineOrganizer = findViewById(R.id.btnDeclineOrganizer);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,29 +31,19 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
         password = getIntent().getStringExtra("PASSWORD");
 
         LeaderConnector.getPendingOrganizers(username, password, this);
-
-
-
-        btnAcceptOrganizer.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //LeaderConnector.sendDecision();
-            }
-        });
-
-        btnDeclineOrganizer.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //LeaderConnector.sendDecision();
-            }
-        });
     }
 
 
     @Override
     public void onGetPendingOrganizersResponse(ArrayList<String> pendingLeaders) {
 
-        ArrayList<PendingOrganizer> pendingOrganizers = new ArrayList<>();
-
+        pendingOrganizers = new ArrayList<>();
         for(String s : pendingLeaders) {
+
+            if(s.isEmpty()) {
+                break;
+            }
+
             String[] fragments = s.split("\\s");
 
             pendingOrganizers.add(new PendingOrganizer(fragments[0], fragments[2], Integer.parseInt(fragments[1])));
@@ -67,11 +56,28 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
 
     @Override
     public void onSendDecisionResponse(ServerStatus serverStatus) {
+        System.out.println("RESPONSE: POZVANO");
+        LeaderConnector.getPendingOrganizers(username, password, this);
 
     }
 
+    public void onClickAccept(View view) {
+        System.out.println("ACCEPT: POZVANO");
+        final int position = approvalList.getPositionForView((LinearLayout)view.getParent());
 
-    public void onChoice(View v) {
-        
+        String organizerUsername = pendingOrganizers.get(position).getUsername();
+        int festivalId = pendingOrganizers.get(position).getFestivalId();
+
+        LeaderConnector.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.ACCEPT, this);
+    }
+
+    public void onClickDecline(View view) {
+        final int position = approvalList.getPositionForView((LinearLayout)view.getParent());
+
+        String organizerUsername = pendingOrganizers.get(position).getUsername();
+        int festivalId = pendingOrganizers.get(position).getFestivalId();
+
+        LeaderConnector.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.ACCEPT, this);
+
     }
 }
