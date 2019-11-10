@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/organizerUsername"
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:text="Default Organizer"
@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/organizerFestival"
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:text="Default Festival"

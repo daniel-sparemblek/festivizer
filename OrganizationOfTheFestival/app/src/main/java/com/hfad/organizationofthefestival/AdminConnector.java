@@ -77,4 +77,10 @@ public class AdminConnector extends Connector {
         };
         queue.add(postRequest);
     }
+
+
+    public static void sendAdminDecision(final String adminUsername, final String adminPassword, final String leaderUsername, final Decision decision, final Context context) {
+        //to do
+    }
+
 }
