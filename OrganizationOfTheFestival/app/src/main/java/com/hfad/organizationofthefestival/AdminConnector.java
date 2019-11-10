@@ -21,6 +21,7 @@ public class AdminConnector extends Connector {
 
     public interface AdminListener {
         void onAdminResponse(ArrayList<String> pendingLeaders);
+        void onSendDecisionResponse(ServerStatus serverStatus);
     }
 
     public static void getPendingLeaders(final String userIdentifier, final String password, final Context context) {
