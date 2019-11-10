@@ -38,20 +38,18 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register.setEnabled(false); //
+                register.setClickable(false);
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
-                register.setEnabled(true);
             }
         });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login.setEnabled(false);
+                login.setClickable(false);
                 user_email = email.getText().toString();
                 user_pwd = password.getText().toString();
                 Connector.logIn(user_email, securePassword(user_pwd), LoginActivity.this);
-                login.setEnabled(true);
             }
         });
     }
@@ -75,7 +73,6 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
 
     @Override
     public void onLogInResponse(ServerStatus status) {
-        login.setEnabled(false);
         if(status == ServerStatus.SUCCESS)
             startActivity(new Intent(this, WorkerActivity.class));
 
@@ -108,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             toast.show();
         }
         if(status == ServerStatus.NO_USERNAME) {
+            email.requestFocus();
             Context context;
             Toast toast;
             context = getApplicationContext();
@@ -117,6 +115,7 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             toast.show();
         }
         if(status == ServerStatus.WRONG_PASSWORD){
+            password.requestFocus();
             Context context;
             Toast toast;
             context = getApplicationContext();
@@ -125,7 +124,7 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             toast = Toast.makeText(context, message, duration);
             toast.show();
         }
-        login.setEnabled(true);
+        login.setClickable(true);
     }
 
     @Override

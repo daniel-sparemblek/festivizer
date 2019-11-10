@@ -144,9 +144,8 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login.setEnabled(false);
+                login.setClickable(false);
                 startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                login.setEnabled(true);
             }
         });
 
@@ -206,8 +205,6 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
 
     @Override
     public void onRegisterResponse(ServerStatus status) {
-        register.setClickable(true);
-
         if(status == ServerStatus.SUCCESS){
             Context context;
             Toast toast;
@@ -263,6 +260,8 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
             toast = Toast.makeText(context, message, duration);
             toast.show();
         }
+
+        register.setClickable(false);
     }
 
     private static boolean emailIsInvalid(String email){
