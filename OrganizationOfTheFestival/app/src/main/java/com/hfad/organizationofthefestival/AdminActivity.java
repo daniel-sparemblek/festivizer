@@ -42,7 +42,6 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
 
     @Override
     public void onSendDecisionResponse(ServerStatus serverStatus) {
-        System.out.println("RESPONSE: POZVANO");
         AdminConnector.getPendingLeaders(username, password, this);
 
     }
