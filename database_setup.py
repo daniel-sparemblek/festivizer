@@ -53,7 +53,7 @@ class Event(Base):
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime, nullable=False)
     __table_args__ = (UniqueConstraint('festival_id', 'organizer_id', 'name', 'location', 'start_time'), )
-    ForeignKeyConstraint(['festival_id', 'organiser_id'], ['festivalorganizers.festival_id', 'festivalorganizers.organiser_id'])
+    ForeignKeyConstraint(['festival_id', 'organizer_id'], ['festivalorganizers.festival_id', 'festivalorganizers.organizer_id'])
 
 class WorkerSpec(Base):
     __tablename__ = 'workerspec'
