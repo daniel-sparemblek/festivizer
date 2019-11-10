@@ -56,13 +56,11 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
 
     @Override
     public void onSendDecisionResponse(ServerStatus serverStatus) {
-        System.out.println("RESPONSE: POZVANO");
         LeaderConnector.getPendingOrganizers(username, password, this);
 
     }
 
     public void onClickAccept(View view) {
-        System.out.println("ACCEPT: POZVANO");
         final int position = approvalList.getPositionForView((LinearLayout)view.getParent());
 
         String organizerUsername = pendingOrganizers.get(position).getUsername();
@@ -77,7 +75,7 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
         String organizerUsername = pendingOrganizers.get(position).getUsername();
         int festivalId = pendingOrganizers.get(position).getFestivalId();
 
-        LeaderConnector.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.ACCEPT, this);
+        LeaderConnector.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.DECLINE, this);
 
     }
 }
