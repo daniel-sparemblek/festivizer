@@ -34,11 +34,13 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="Accept" />
+        android:text="Accept"
+        android:onClick="onChoice" />
     <Button
         android:id="@+id/btnDeclineOrganizer"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="Decline" />
+        android:text="Decline"
+        android:onClick="onChoice" />
 </LinearLayout>

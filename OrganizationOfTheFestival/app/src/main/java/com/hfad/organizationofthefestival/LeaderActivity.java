@@ -2,7 +2,9 @@ package com.hfad.organizationofthefestival;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.adapters.LeaderAdapter;
@@ -17,6 +19,9 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
     private String username;
     private String password;
 
+    private Button btnAcceptOrganizer = findViewById(R.id.btnAcceptOrganizer);
+    private Button btnDeclineOrganizer = findViewById(R.id.btnDeclineOrganizer);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +32,22 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
         password = getIntent().getStringExtra("PASSWORD");
 
         LeaderConnector.getPendingOrganizers(username, password, this);
+
+
+
+        btnAcceptOrganizer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //LeaderConnector.sendDecision();
+            }
+        });
+
+        btnDeclineOrganizer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //LeaderConnector.sendDecision();
+            }
+        });
     }
+
 
     @Override
     public void onGetPendingOrganizersResponse(ArrayList<String> pendingLeaders) {
@@ -50,4 +70,8 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
 
     }
 
+
+    public void onChoice(View v) {
+        
+    }
 }

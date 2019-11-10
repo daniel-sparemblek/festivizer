@@ -63,7 +63,7 @@ public class LeaderConnector extends Connector {
         queue.add(postRequest);
     }
 
-    public void sendDecision(final String leaderUsername, final String password, final String organizerUsername,
+    public static void sendDecision(final String leaderUsername, final String password, final String organizerUsername,
                              final String festivalID, final Decision decision, final Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String leaderUrl = url + "leader/"+leaderUsername+"/send_decision";
