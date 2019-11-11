@@ -16,6 +16,7 @@ public class OrganizerConnector extends Connector {
 
     public static interface OrganizerListener {
         void onGetFestivalsResponse(ArrayList<String> festivals);
+        void onApplyForFestivalResponse(ServerStatus status);
     }
 
     public static void getFestivals(final Context context) {
@@ -53,4 +54,32 @@ public class OrganizerConnector extends Connector {
         queue.add(getRequest);
     }
 
+    public static void applyForFestival(final String festivalName, final String organizerUsername, final Context context) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String festivalApply = url + "festival/apply";
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, festivalApply,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        ((OrganizerConnector.OrganizerListener)context).onApplyForFestivalResponse(getStatus(response));
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        ((OrganizerConnector.OrganizerListener)context).onApplyForFestivalResponse(getStatus("server_down"));
+                    }
+                }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+        };
+        queue.add(postRequest);
+    }
+    
 }

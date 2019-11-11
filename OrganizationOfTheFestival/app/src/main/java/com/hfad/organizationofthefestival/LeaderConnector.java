@@ -103,6 +103,4 @@ public class LeaderConnector extends Connector {
         };
         queue.add(postRequest);
     }
-
-
 }
