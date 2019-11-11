@@ -46,8 +46,13 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 login.setEnabled(false);
                 user_email = email.getText().toString();
+=======
+                login.setClickable(false);
+                user_email = email.getText().toString().trim();
+>>>>>>> 666ad60b1959ea6d6f16e09c8af8f62e9c922fd3
                 user_pwd = password.getText().toString();
                 Connector.logIn(user_email, securePassword(user_pwd), LoginActivity.this);
             }

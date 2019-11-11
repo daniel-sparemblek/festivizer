@@ -36,10 +36,20 @@ public class OrganizerActivity extends AppCompatActivity {
     }
 
     public void onClickApply(View view) {
+        Button button = findViewById(R.id.btnApply);
+        if(button.getText().toString().equals("Apply")) {
+            button.setText("Cancel");
+            toast("Your request is being processed.");
+        } else {
+            button.setText("Apply");
+            toast("You canceled your request.");
+        }
+    }
+
+    private void toast(CharSequence message) {
         Context context;
         Toast toast;
         context = getApplicationContext();
-        CharSequence message = "Bravo glupa pedercino, prijavio si se na jebanje";
         int duration = Toast.LENGTH_SHORT;
         toast = Toast.makeText(context, message, duration);
         toast.show();
