@@ -19,24 +19,25 @@ public class OrganizerActivity extends AppCompatActivity implements OrganizerCon
     private ListView festivalList;
     private static OrganizerAdapter adapter;
     private ArrayList<String> festivals;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organizer);
-
+        username = getIntent().getStringExtra("USERNAME");
         festivalList = findViewById(R.id.festivalList);
         OrganizerConnector.getFestivals(OrganizerActivity.this);
     }
 
     public void onClickApply(View view) {
         final int position = festivalList.getPositionForView((LinearLayout)view.getParent());
-        String name = festivals.get(position);
+        String festivalName = festivals.get(position);
         LinearLayout l1 = (LinearLayout)view.getParent();
         Button applyBtn = l1.findViewById(R.id.btnApply);
         if(applyBtn.getText().toString().equals("Apply")) {
             applyBtn.setText("Cancel");
-            OrganizerConnector.applyForFestival(name, getIntent().getStringExtra("USERNAME"), OrganizerActivity.this);
+            OrganizerConnector.applyForFestival(festivalName, username, OrganizerActivity.this);
         } else {
             applyBtn.setText("Apply");
             toast("You canceled your request.");

@@ -34,7 +34,6 @@ public class OrganizerAdapter extends ArrayAdapter<String> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         String festival = festivals.get(position);
-        final View result;
         ViewHolder viewHolder;
 
         if(convertView == null) {
@@ -44,11 +43,8 @@ public class OrganizerAdapter extends ArrayAdapter<String> {
 
             viewHolder.festivalName = convertView.findViewById(R.id.festivalName);
             viewHolder.appButton = convertView.findViewById(R.id.btnApply);
-
-            result = convertView;
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            result = convertView;
         }
 
         viewHolder.festivalName.setText(festival);

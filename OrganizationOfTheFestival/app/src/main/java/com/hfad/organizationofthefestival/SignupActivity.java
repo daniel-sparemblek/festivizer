@@ -86,7 +86,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                register.setEnabled(false);
                 //Converting profile_picture to byte array
                 bitmap = ((BitmapDrawable) profile_picture.getDrawable()).getBitmap();
                 baos = new ByteArrayOutputStream();
@@ -109,32 +109,17 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                 } else if(roleChooserDropDown.getSelectedItem().toString().equals("WORKER")) {
                     userRole = Role.WORKER;
                 }
-
-
                 //Calling the method register from class Connector if email is valid
                 if (emailIsInvalid(emailString)){
                     email.setText("");
                     email.requestFocus();
-
-                    Context context;
-                    Toast toast;
-                    context = getApplicationContext();
-                    CharSequence message = "Email format is invalid.";
-                    int duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, message, duration);
-                    toast.show();
+                    toast("Email format is invalid.");
+                    register.setEnabled(true);
                 } else if (!verifyPassword(pwd1String, pwd2String)) {
                     password1.requestFocus();
-
-                    Context context;
-                    Toast toast;
-                    context = getApplicationContext();
-                    CharSequence message = "Passwords do not match!";
-                    int duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, message, duration);
-                    toast.show();
+                    toast("Passwords do not match!");
+                    register.setEnabled(true);
                 } else {
-                    register.setClickable(false);
                     Connector.register(usernameString, securePassword(pwd1String), nameString, lastNameString, profilePictureInByte, phoneString, emailString, userRole, SignupActivity.this);
                 }
             }
@@ -143,7 +128,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login.setClickable(false);
+                login.setEnabled(false);
                 startActivity(new Intent(SignupActivity.this, LoginActivity.class));
             }
         });
@@ -202,64 +187,37 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
 
     }
 
+    private void toast(CharSequence message) {
+        Context context;
+        Toast toast;
+        context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        toast = Toast.makeText(context, message, duration);
+        toast.show();
+    }
+
     @Override
     public void onRegisterResponse(ServerStatus status) {
         if(status == ServerStatus.SUCCESS){
-            Context context;
-            Toast toast;
-            context = getApplicationContext();
-            CharSequence message = "Well done! Please login";
-            int duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, message, duration);
-            toast.show();
+            toast("Well done! Please login");
             startActivity(new Intent(SignupActivity.this, LoginActivity.class));
         }
         if(status == ServerStatus.SERVER_DOWN){
-            Context context;
-            Toast toast;
-            context = getApplicationContext();
-            CharSequence message = "Server is currently down. Please try again later";
-            int duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, message, duration);
-            toast.show();
+            toast("Server is currently down. Please try again later");
         }
         if(status == ServerStatus.EMAIL_EXISTS){
-            Context context;
-            Toast toast;
-            context = getApplicationContext();
-            CharSequence message = "This email is already in use";
-            int duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, message, duration);
-            toast.show();
+            toast("This email is already in use");
         }
         if(status == ServerStatus.USERNAME_EXISTS){
-            Context context;
-            Toast toast;
-            context = getApplicationContext();
-            CharSequence message = "Username is already taken";
-            int duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, message, duration);
-            toast.show();
+            toast("Username is already taken");
         }
         if(status == ServerStatus.PHONE_EXISTS){
-            Context context;
-            Toast toast;
-            context = getApplicationContext();
-            CharSequence message = "This phone is already linked to another account";
-            int duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, message, duration);
-            toast.show();
+            toast("This phone is already linked to another account");
         }
         if(status == ServerStatus.UNKNOWN){
-            Context context;
-            Toast toast;
-            context = getApplicationContext();
-            CharSequence message = "Something terrible happened. Please try again later";
-            int duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, message, duration);
-            toast.show();
+            toast("Something terrible happened. Please try again later");
         }
-        register.setClickable(false);
+        register.setEnabled(true);
     }
 
     private static boolean emailIsInvalid(String email){
@@ -269,5 +227,12 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
                 "A-Z]{2,7}$";
         Pattern pat = Pattern.compile(emailRegex);
         return !pat.matcher(email).matches();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        register.setEnabled(true);
+        login.setEnabled(true);
     }
 }
