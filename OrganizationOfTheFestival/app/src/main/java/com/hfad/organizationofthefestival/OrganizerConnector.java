@@ -65,7 +65,17 @@ public class OrganizerConnector extends Connector {
                 {
                     @Override
                     public void onResponse(String response) {
-                        ((OrganizerConnector.OrganizerListener)context).onApplyForFestivalResponse(getStatus(response));
+
+                        HashMap<String, Integer> festivalStatusPair = new HashMap<>();
+                        String[] keyValue = response.split(";");
+
+                        for (String s : keyValue) {
+                            String[] seperated = s.split(",");
+                            int value = Integer.parseInt(seperated[1]);
+                            festivalStatusPair.put(seperated[0], value);
+                        }
+
+                        ((OrganizerConnector.OrganizerListener)context).onApplyForFestivalResponse(festivalStatusPair);
                     }
                 },
                 new Response.ErrorListener()
