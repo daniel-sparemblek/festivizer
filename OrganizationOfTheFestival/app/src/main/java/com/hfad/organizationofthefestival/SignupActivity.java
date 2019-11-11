@@ -77,7 +77,6 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
 
         username.requestFocus();
 
-
         //SetUp roleChoser dropdown list
         String[] items = new String[]{Role.LEADER.toString(), Role.ORGANIZER.toString(), Role.WORKER.toString()}; //Leader, Organizer, Worker
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -260,7 +259,6 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
             toast = Toast.makeText(context, message, duration);
             toast.show();
         }
-
         register.setClickable(false);
     }
 

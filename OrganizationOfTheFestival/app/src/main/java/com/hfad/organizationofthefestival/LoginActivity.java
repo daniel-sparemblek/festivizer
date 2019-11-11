@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login.setClickable(false);
+                login.setEnabled(false);
                 user_email = email.getText().toString();
                 user_pwd = password.getText().toString();
                 Connector.logIn(user_email, securePassword(user_pwd), LoginActivity.this);
@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             toast = Toast.makeText(context, message, duration);
             toast.show();
         }
-        if(status == ServerStatus.WRONG_PASSWORD){
+        if(status == ServerStatus.WRONG_PASSWORD) {
             password.requestFocus();
             Context context;
             Toast toast;
@@ -124,11 +124,18 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             toast = Toast.makeText(context, message, duration);
             toast.show();
         }
-        login.setClickable(true);
+        login.setEnabled(true);
     }
 
     @Override
     public void onRegisterResponse(ServerStatus status) {
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        //register.setEnabled(true);
+        register.setClickable(true);
     }
 }
