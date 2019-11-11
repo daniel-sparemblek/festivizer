@@ -18,7 +18,7 @@ public class OrganizerConnector extends Connector {
 
     public interface OrganizerListener {
         void onGetFestivalsResponse(ArrayList<String> festivals);
-        void onApplyForFestivalResponse(ServerStatus status);
+        void onApplyForFestivalResponse(HashMap<String, Integer> festivals);
     }
 
     public static void getFestivals(final String username, final Context context) {
@@ -82,7 +82,7 @@ public class OrganizerConnector extends Connector {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        ((OrganizerConnector.OrganizerListener)context).onApplyForFestivalResponse(getStatus("server_down"));
+                        ((OrganizerConnector.OrganizerListener)context).onApplyForFestivalResponse(null);
                     }
                 }
         ) {
