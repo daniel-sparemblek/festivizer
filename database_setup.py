@@ -16,7 +16,7 @@ class User(Base):
     phone = Column(String(50), unique=True)
     email = Column(String(50), unique=True)
     role = Column(String(50), nullable=False)
-    isPending = Column(Boolean, nullable=False)
+    isPending = Column(Integer)
 
 
     @property
@@ -125,6 +125,7 @@ class FestivalOrganizers(Base):
 
     festival_id = Column(Integer, ForeignKey('festival.festival_id'), primary_key=True)
     organizer_id = Column(Integer, ForeignKey('user.user_id'), primary_key=True)
+    status = Column(Integer) #-1 when waiting on Leader, 0 when rejected and 1 when accepted
 
 
 engine = create_engine('sqlite:///organizacijafestivala.db')
