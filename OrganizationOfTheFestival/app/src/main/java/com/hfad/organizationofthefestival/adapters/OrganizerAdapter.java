@@ -15,9 +15,9 @@ import com.hfad.organizationofthefestival.R;
 
 import java.util.ArrayList;
 
-public class OrganizerAdapter extends ArrayAdapter<Festival> {
+public class OrganizerAdapter extends ArrayAdapter<String> {
 
-    private ArrayList<Festival> festivals;
+    private ArrayList<String> festivals;
     Context context;
 
     private static class ViewHolder {
@@ -26,14 +26,14 @@ public class OrganizerAdapter extends ArrayAdapter<Festival> {
     }
 
 
-    public OrganizerAdapter(ArrayList<Festival> festivals, Context context) {
+    public OrganizerAdapter(ArrayList<String> festivals, Context context) {
         super(context, R.layout.organizer_row_layout, festivals);
         this.festivals = festivals;
         this.context = context;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        Festival festival = festivals.get(position);
+        String festival = festivals.get(position);
         final View result;
         ViewHolder viewHolder;
 
@@ -51,7 +51,7 @@ public class OrganizerAdapter extends ArrayAdapter<Festival> {
             result = convertView;
         }
 
-        viewHolder.festivalName.setText(festival.getName());
+        viewHolder.festivalName.setText(festival);
         return convertView;
     }
 
