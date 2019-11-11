@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             public void onClick(View v) {
 
                 login.setEnabled(false);
-                user_email = email.getText().toString();
                 user_email = email.getText().toString().trim();
                 user_pwd = password.getText().toString();
                 Connector.logIn(user_email, securePassword(user_pwd), LoginActivity.this);
@@ -75,8 +74,13 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
 
     @Override
     public void onLogInResponse(ServerStatus status) {
-        if(status == ServerStatus.SUCCESS)
-            startActivity(new Intent(this, WorkerActivity.class));
+
+        if(status == ServerStatus.SUCCESS) {
+            Intent intent = new Intent(this, WorkerActivity.class);
+            intent.putExtra("USERNAME", user_email);
+            intent.putExtra("PASSWORD", securePassword(user_pwd));
+            startActivity(intent);
+        }
 
         if(status == ServerStatus.ADMIN) {
             Intent intent = new Intent(this, AdminActivity.class);
@@ -86,8 +90,10 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
         }
 
         if(status == ServerStatus.ORGANIZER) {
-            startActivity(new Intent(this, OrganizerActivity.class));
-
+            Intent intent = new Intent(this, OrganizerActivity.class);
+            intent.putExtra("USERNAME", user_email);
+            intent.putExtra("PASSWORD", securePassword(user_pwd));
+            startActivity(intent);
         }
 
         if(status == ServerStatus.LEADER) {

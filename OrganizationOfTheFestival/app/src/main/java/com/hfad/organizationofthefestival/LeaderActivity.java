@@ -66,7 +66,7 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
         String organizerUsername = pendingOrganizers.get(position).getUsername();
         int festivalId = pendingOrganizers.get(position).getFestivalId();
 
-        LeaderConnector.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.ACCEPT, this);
+        LeaderConnector.sendDecision(username, password, organizerUsername, Integer.toString(festivalId), Decision.ACCEPT, this);
     }
 
     public void onClickDecline(View view) {

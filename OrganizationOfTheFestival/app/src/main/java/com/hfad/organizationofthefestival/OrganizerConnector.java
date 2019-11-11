@@ -84,6 +84,7 @@ public class OrganizerConnector extends Connector {
             @Override
             protected Map<String, String> getParams()
             {
+                System.out.println(festivalName  + " " + organizerUsername);
                 Map<String, String>  params = new HashMap<>();
                 params.put("festivalName", festivalName);
                 params.put("username", organizerUsername);
