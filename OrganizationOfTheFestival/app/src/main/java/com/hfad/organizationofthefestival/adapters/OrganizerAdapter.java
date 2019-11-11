@@ -33,7 +33,7 @@ public class OrganizerAdapter extends ArrayAdapter<Festival> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        Festival festival = getItem(position);
+        Festival festival = festivals.get(position);
         final View result;
         ViewHolder viewHolder;
 
@@ -54,4 +54,5 @@ public class OrganizerAdapter extends ArrayAdapter<Festival> {
         viewHolder.festivalName.setText(festival.getName());
         return convertView;
     }
+
 }

@@ -17,14 +17,12 @@ public class OrganizerActivity extends AppCompatActivity {
     private ArrayList<Festival> festivals;
     private ListView listView;
     private static OrganizerAdapter adapter;
-    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organizer);
 
-        button = findViewById(R.id.btnApply);
         listView = findViewById(R.id.festivalList);
 
         festivals = new ArrayList<>();
@@ -32,7 +30,7 @@ public class OrganizerActivity extends AppCompatActivity {
         festivals.add(festival);
         // get festivals from database
 
-        adapter = new OrganizerAdapter(festivals, getApplicationContext());
+        adapter = new OrganizerAdapter(festivals, this);
 
         listView.setAdapter((adapter));
     }
@@ -41,7 +39,7 @@ public class OrganizerActivity extends AppCompatActivity {
         Context context;
         Toast toast;
         context = getApplicationContext();
-        CharSequence message = "Bravo pedercino";
+        CharSequence message = "Bravo glupa pedercino, prijavio si se na jebanje";
         int duration = Toast.LENGTH_SHORT;
         toast = Toast.makeText(context, message, duration);
         toast.show();
