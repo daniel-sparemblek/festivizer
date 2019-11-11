@@ -11,10 +11,12 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OrganizerConnector extends Connector {
 
-    public static interface OrganizerListener {
+    public interface OrganizerListener {
         void onGetFestivalsResponse(ArrayList<String> festivals);
         void onApplyForFestivalResponse(ServerStatus status);
     }
@@ -77,6 +79,15 @@ public class OrganizerConnector extends Connector {
             @Override
             public String getBodyContentType() {
                 return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<>();
+                params.put("festivalName", festivalName);
+                params.put("username", organizerUsername);
+                return params;
             }
         };
         queue.add(postRequest);
