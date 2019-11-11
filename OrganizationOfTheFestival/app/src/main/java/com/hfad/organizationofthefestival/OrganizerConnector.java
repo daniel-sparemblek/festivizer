@@ -17,8 +17,8 @@ import java.util.Map;
 public class OrganizerConnector extends Connector {
 
     public interface OrganizerListener {
-        void onGetFestivalsResponse(ArrayList<String> festivals);
-        void onApplyForFestivalResponse(HashMap<String, Integer> festivals);
+        void onGetFestivalsResponse(HashMap<String, Integer> festivals);
+        void onApplyForFestivalResponse(ServerStatus status);
     }
 
     public static void getFestivals(final String username, final Context context) {
@@ -31,13 +31,16 @@ public class OrganizerConnector extends Connector {
                 {
                     @Override
                     public void onResponse(String response) {
-                        ArrayList<String> festivals = new ArrayList<>();
+                        HashMap<String, Integer> festivalStatusPair = new HashMap<>();
+                        String[] keyValue = response.split(";");
 
-                        String[] festivalList = response.split(";");
+                        for (String s : keyValue) {
+                            String[] seperated = s.split(",");
+                            int value = Integer.parseInt(seperated[1]);
+                            festivalStatusPair.put(seperated[0], value);
+                        }
 
-                        festivals.addAll(Arrays.asList(festivalList));
-
-                        ((OrganizerConnector.OrganizerListener)context).onGetFestivalsResponse(festivals);
+                        ((OrganizerConnector.OrganizerListener)context).onGetFestivalsResponse(festivalStatusPair);
                     }
                 },
                 new Response.ErrorListener()
@@ -65,17 +68,7 @@ public class OrganizerConnector extends Connector {
                 {
                     @Override
                     public void onResponse(String response) {
-
-                        HashMap<String, Integer> festivalStatusPair = new HashMap<>();
-                        String[] keyValue = response.split(";");
-
-                        for (String s : keyValue) {
-                            String[] seperated = s.split(",");
-                            int value = Integer.parseInt(seperated[1]);
-                            festivalStatusPair.put(seperated[0], value);
-                        }
-
-                        ((OrganizerConnector.OrganizerListener)context).onApplyForFestivalResponse(festivalStatusPair);
+                        ((OrganizerConnector.OrganizerListener)context).onApplyForFestivalResponse(getStatus(response));
                     }
                 },
                 new Response.ErrorListener()
