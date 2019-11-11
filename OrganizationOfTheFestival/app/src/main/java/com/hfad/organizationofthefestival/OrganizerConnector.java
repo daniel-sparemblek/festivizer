@@ -21,10 +21,10 @@ public class OrganizerConnector extends Connector {
         void onApplyForFestivalResponse(ServerStatus status);
     }
 
-    public static void getFestivals(final Context context) {
+    public static void getFestivals(final String username, final Context context) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String festival = url + "festival";
+        String festival = url + "festival/" + username;
 
         StringRequest getRequest = new StringRequest(Request.Method.GET, festival,
                 new Response.Listener<String>()
@@ -56,7 +56,7 @@ public class OrganizerConnector extends Connector {
         queue.add(getRequest);
     }
 
-    public static void applyForFestival(final String festivalName, final String organizerUsername, final Context context) {
+    public static void applyForFestival(final String festivalName, final String organizerUsername, final String status, final Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String festivalApply = url + "festival/apply";
 
@@ -84,10 +84,10 @@ public class OrganizerConnector extends Connector {
             @Override
             protected Map<String, String> getParams()
             {
-                System.out.println(festivalName  + " " + organizerUsername);
                 Map<String, String>  params = new HashMap<>();
                 params.put("festivalName", festivalName);
                 params.put("username", organizerUsername);
+                params.put("status", status);
                 return params;
             }
         };

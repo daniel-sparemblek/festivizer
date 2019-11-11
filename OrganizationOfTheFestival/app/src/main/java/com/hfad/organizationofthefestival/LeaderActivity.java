@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.adapters.LeaderAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LeaderActivity extends AppCompatActivity implements LeaderConnector.LeaderListener{
 
@@ -35,10 +36,10 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
 
 
     @Override
-    public void onGetPendingOrganizersResponse(ArrayList<String> pendingLeaders) {
+    public void onGetPendingOrganizersResponse(ArrayList<String> pendingOrganizer) {
 
         pendingOrganizers = new ArrayList<>();
-        for(String s : pendingLeaders) {
+        for(String s : pendingOrganizer) {
 
             if(s.isEmpty()) {
                 break;

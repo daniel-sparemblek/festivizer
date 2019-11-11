@@ -193,6 +193,9 @@ public class Connector {
         if(string.equals("organizer")) return ServerStatus.ORGANIZER;
         if(string.equals("leader")) return ServerStatus.LEADER;
         if(string.equals("permission_denied")) return ServerStatus.PERMISSION_DENIED;
+        if(string.equals("accepted")) return ServerStatus.ACCEPTED;
+        if(string.equals("denied")) return ServerStatus.DENIED;
+        if(string.equals("pending")) return ServerStatus.PENDING;
         return ServerStatus.UNKNOWN;
     }
 

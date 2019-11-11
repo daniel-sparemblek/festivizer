@@ -51,6 +51,12 @@ public enum ServerStatus {
      * already exists.
      */
     PHONE_EXISTS,
+
+    ACCEPTED,
+
+    DENIED,
+
+    PENDING,
     /**
      * Server will return this status if none of the other statuses above is returned.
      */
