@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             @Override
             public void onClick(View v) {
                 login.setClickable(false);
-                user_email = email.getText().toString();
+                user_email = email.getText().toString().trim();
                 user_pwd = password.getText().toString();
                 Connector.logIn(user_email, securePassword(user_pwd), LoginActivity.this);
             }
