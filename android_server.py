@@ -2,7 +2,7 @@
 import flask
 import sys
 from flask import request, jsonify
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, or_
 from sqlalchemy.orm import sessionmaker, aliased
 from database_setup import User, Base, FestivalOrganizers, Festival
 
@@ -32,6 +32,7 @@ def handle_request_one():
         new_user_phone = request.values.get('phone')
         new_user_email = request.values.get('email')
         new_user_role = request.values.get('role')
+        new_user_isPending = request.values.get('isPending')
 
         same_username = session.query(User).filter_by(username = new_user_username).all()
         same_email = session.query(User).filter_by(email = new_user_email).all()
@@ -44,14 +45,9 @@ def handle_request_one():
         elif len(same_phone) != 0:
             return "phone_exists"
 
-        is_new_user_pending = False
-
         if new_user_role == "leader":
-            is_new_user_pending = True
-        elif new_user_role == "organizer":
-            is_new_user_pending = True
-        else:
-            is_new_user_pending = False
+            new_user_isPending = 1
+        else: new_user_isPending = 0
 
         picture_array_unicode = (new_user_picture[1:-1]).split(", ")
         picture_array_int = []
@@ -67,8 +63,16 @@ def handle_request_one():
         new_user = User(username = new_user_username, password = new_user_password,
                         firstname = new_user_firstname, lastname = new_user_lastname,
                         picture = picture_path, phone = new_user_phone, email = new_user_email,
-                        role = new_user_role, isPending = is_new_user_pending)
+                        role = new_user_role, isPending = new_user_isPending)
         session.add(new_user)
+
+        if new_user_role == "organizer":
+            all_festivals = session.query(Festival).all()
+            new_organizer = session.query(User).filter_by(username = new_user_username).all()
+
+            for festival in all_festivals:
+                new_org_fest = FestivalOrganizers(festival_id = festival.festival_id, organizer_id = new_organizer[0].user_id, status = -2 )
+                session.add(new_org_fest)
         session.commit()
         return "success"
 
@@ -150,7 +154,7 @@ def handle_request_four():
         if(requested_admin[0].password == admin_password):
             session.commit()
             if(requested_admin[0].role == "administrator"):
-                res = session.query(User).filter_by(isPending = True, role = "leader", user_id = leader_username).all()
+                res = session.query(User).filter_by(isPending = True, role = "leader", username = leader_username).all()
 
                 if(decision == 'accept'):
                     res[0].isPending = False
@@ -159,7 +163,6 @@ def handle_request_four():
 
                 if(decision == 'decline'):
                     res[0].isPending = False
-                    res[0].role = 'worker'
                     session.commit()
                     return "success"
             else:
@@ -186,8 +189,9 @@ def handle_request_five(username):
             session.commit()
             if(requested_leader[0].role == "leader"):
                 org = aliased(User)
-                query_res = session.query(org.username, Festival.festival_id, Festival.name).join(FestivalOrganizers, FestivalOrganizers.organizer_id == org.user_id).join(Festival, Festival.festival_id == FestivalOrganizers.festival_id).filter(org.role == "organizer", org.isPending == True, Festival.creator_id == requested_leader[0].user_id).all()
+                query_res = session.query(org.username, Festival.festival_id, Festival.name).join(FestivalOrganizers, FestivalOrganizers.organizer_id == org.user_id).join(Festival, Festival.festival_id == FestivalOrganizers.festival_id).filter(org.role == "organizer", Festival.creator_id == requested_leader[0].user_id).filter(or_(FestivalOrganizers.status == -1, FestivalOrganizers.status == -2)).all()
 
+                print >> sys.stderr, "PROBA"
                 str_res = ""
                 for row in query_res:
                     str_res = str_res + row[0] + " " + str(row[1]) + " " + row[2] + ";"
@@ -227,19 +231,69 @@ def handle_request_six(username):
                 print >> sys.stderr, organizer_username
                 print >> sys.stderr, festival
                 print >> sys.stderr, decision
+                print >> sys.stderr, "test"
 
-                if decision == 'accept':
-                    query_user[0].isPending = False
+                if decision == 'accept': #1
+                    org_fest = session.query(FestivalOrganizers).filter_by(organizer_id = query_user.user_id, festival_id = int(festival)).all()
+                    org_fest[0].status = 1
                     session.commit()
                     return "success"
 
-                if decision == 'decline':
-                    req_festival_id = query_res[0].festival_id
-                    req_organizer_id = query_res[0].organizer_id
-                    session.query(FestivalOrganizers).filter(FestivalOrganizers.festival_id == req_festival_id, FestivalOrganizers.organizer_id == req_organizer_id).delete()
+                if decision == 'decline': #0
+                    org_fest = session.query(FestivalOrganizers).filter_by(organizer_id = query_user.user_id, festival_id = int(festival)).all()
+                    org_fest[0].status = 0
                     session.commit()
                     return "success"
 
             else:
                 return "permission_denied"
         return "wrong_password"
+
+@app.route('/festival/<org_username>', methods=['GET'])
+def handle_request_seven(org_username):
+    if request.method == 'GET':
+        DBSession = sessionmaker(bind=engine)
+        session = DBSession()
+
+        requested_organizer = session.query(User).filter_by(username = org_username).all()
+        requested_festivals = session.query(Festival, FestivalOrganizers.status).join(FestivalOrganizers, FestivalOrganizers.festival_id == Festival.festival_id).filter(or_(FestivalOrganizers.status == -2, FestivalOrganizers.status == -1)).filter_by(organizer_id = requested_organizer[0].user_id)
+
+        all_festivals = ""
+        for festival in requested_festivals:
+            all_festivals = all_festivals + festival[0].name + "," + str(festival[1]) + ";"
+
+        return all_festivals
+
+@app.route('/festival/apply', methods=['POST'])
+def handle_request_eight():
+    if request.method == 'POST':
+        DBSession = sessionmaker(bind=engine)
+        session = DBSession()
+
+        festival_name = request.values.get('festivalName')
+        organizer_username = request.values.get('username')
+        decision = request.values.get('decision')
+
+        requested_organizer = session.query(User).filter_by(username = organizer_username).all()
+        festival = session.query(Festival).filter_by(name = festival_name).all()
+
+        requested_fest_org = session.query(FestivalOrganizers).filter_by(festival_id = festival[0].festival_id, organizer_id = requested_organizer[0].user_id).all()
+
+        if decision == 'Apply':
+            requested_fest_org[0].status = -1
+
+        if decision == 'Cancel':
+            requested_fest_org[0].status = -2
+
+        #print >> sys.stderr, festival_name
+        #print >> sys.stderr, organizer_username
+
+        #festival = session.query(Festival).filter(Festival.name == festival_name).all()
+        #organizer = session.query(User).filter(User.username == organizer_username).all()
+
+        #new_row = FestivalOrganizers(festival_id = festival[0].festival_id, organizer_id = organizer[0].user_id)
+        #session.add(new_row)
+
+        session.commit()
+        return "success"
+
