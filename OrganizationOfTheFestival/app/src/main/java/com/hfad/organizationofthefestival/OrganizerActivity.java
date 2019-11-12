@@ -58,7 +58,7 @@ public class OrganizerActivity extends AppCompatActivity implements OrganizerCon
     }
 
     @Override
-    public void onGetFestivalsResponse(HashMap<String, Integer> festivals){
+    public void onGetFestivalsResponse(Arr){
         adapter = new OrganizerAdapter(festivals, this);
         this.festivals = festivals;
         festivalList.setAdapter((adapter));
