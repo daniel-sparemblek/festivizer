@@ -189,7 +189,11 @@ def handle_request_five(username):
             session.commit()
             if(requested_leader[0].role == "leader"):
                 org = aliased(User)
+<<<<<<< HEAD
                 query_res = session.query(org.username, Festival.festival_id, Festival.name).join(FestivalOrganizers, FestivalOrganizers.organizer_id == org.user_id).join(Festival, Festival.festival_id == FestivalOrganizers.festival_id).filter(org.role == "organizer", Festival.creator_id == requested_leader[0].user_id).filter(FestivalOrganizers.status == -1).all()
+=======
+                query_res = session.query(org.username, Festival.festival_id, Festival.name).join(FestivalOrganizers, FestivalOrganizers.organizer_id == org.user_id).join(Festival, Festival.festival_id == FestivalOrganizers.festival_id).filter(org.role == "organizer", Festival.creator_id == requested_leader[0].user_id).filter(or_(FestivalOrganizers.status == -1, FestivalOrganizers.status == -2)).all()
+>>>>>>> da2cc8d8cc776c5c5217c883969a601c9e6803a3
 
                 print >> sys.stderr, "PROBA"
                 str_res = ""
@@ -234,13 +238,21 @@ def handle_request_six(username):
                 print >> sys.stderr, "test"
 
                 if decision == 'accept': #1
+<<<<<<< HEAD
                     org_fest = session.query(FestivalOrganizers).filter_by(organizer_id = query_user[0].user_id, festival_id = int(festival)).all()
+=======
+                    org_fest = session.query(FestivalOrganizers).filter_by(organizer_id = query_user.user_id, festival_id = int(festival)).all()
+>>>>>>> da2cc8d8cc776c5c5217c883969a601c9e6803a3
                     org_fest[0].status = 1
                     session.commit()
                     return "success"
 
                 if decision == 'decline': #0
+<<<<<<< HEAD
                     org_fest = session.query(FestivalOrganizers).filter_by(organizer_id = query_user[0].user_id, festival_id = int(festival)).all()
+=======
+                    org_fest = session.query(FestivalOrganizers).filter_by(organizer_id = query_user.user_id, festival_id = int(festival)).all()
+>>>>>>> da2cc8d8cc776c5c5217c883969a601c9e6803a3
                     org_fest[0].status = 0
                     session.commit()
                     return "success"
@@ -272,12 +284,16 @@ def handle_request_eight():
 
         festival_name = request.values.get('festivalName')
         organizer_username = request.values.get('username')
+<<<<<<< HEAD
         decision = request.values.get('status')
 
         print >> sys.stderr, organizer_username
         print >> sys.stderr, festival_name
         print >> sys.stderr, decision
 
+=======
+        decision = request.values.get('decision')
+>>>>>>> da2cc8d8cc776c5c5217c883969a601c9e6803a3
 
         requested_organizer = session.query(User).filter_by(username = organizer_username).all()
         festival = session.query(Festival).filter_by(name = festival_name).all()
