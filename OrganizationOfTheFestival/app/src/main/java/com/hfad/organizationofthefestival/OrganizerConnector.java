@@ -8,9 +8,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +32,7 @@ public class OrganizerConnector extends Connector {
                         String[] keyValue = response.split(";");
 
                         for (String s : keyValue) {
+                            if(s.isEmpty()) break;
                             String[] seperated = s.split(",");
                             int value = Integer.parseInt(seperated[1]);
                             festivalStatusPair.put(seperated[0], value);
