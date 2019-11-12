@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -96,10 +97,15 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             startActivity(intent);
         }
 
-        if(status == ServerStatus.LEADER) {
+        if(status == ServerStatus.LEADER_CONFIRMED) {
             Intent intent = new Intent(this, LeaderActivity.class);
             intent.putExtra("USERNAME", user_email);
             intent.putExtra("PASSWORD", securePassword(user_pwd));
+            startActivity(intent);
+        }
+
+        if(status == ServerStatus.LEADER_PENDING) {
+            Intent intent = new Intent(this, UnconfirmedActivity.class);
             startActivity(intent);
         }
 

@@ -27,6 +27,8 @@ public enum ServerStatus {
      * Server will return this status when Leader has successfully logged in.
      */
     LEADER,
+    LEADER_CONFIRMED,
+    LEADER_PENDING,
     /**
      * Server will return this status when user tries to connect with server but
      * server is not running.

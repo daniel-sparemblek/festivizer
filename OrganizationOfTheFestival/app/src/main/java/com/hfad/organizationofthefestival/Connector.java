@@ -196,6 +196,8 @@ public class Connector {
         if(string.equals("accepted")) return ServerStatus.ACCEPTED;
         if(string.equals("denied")) return ServerStatus.DENIED;
         if(string.equals("pending")) return ServerStatus.PENDING;
+        if(string.equals("leaderc")) return ServerStatus.LEADER_CONFIRMED;
+        if(string.equals("leaderp")) return ServerStatus.LEADER_PENDING;
         return ServerStatus.UNKNOWN;
     }
 
