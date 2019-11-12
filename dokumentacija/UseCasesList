@@ -1,0 +1,30 @@
+UC1 - Festivals Overview and Detail inspection
+UC2 - Registration
+UC3 - Log-In
+UC4 - Account Data Overview
+UC5 - Changing Account Data
+UC6 - Account Deletion
+UC7 - Verifying a Leader
+UC8 - Create a Festival
+UC9 - Appoint an Organiser to the selected Festival
+UC10 - Update Festival info
+UC11 - Create a Job
+UC12 - View the list of all the Jobs
+UC13 - View Job details(Worker view)
+UC14 - Apply to the Job(Worker)
+UC15 - Moderate the Job
+UC16 - View the list of this Festival Jobs
+UC17 - View Job details(Organiser view)
+UC18 - Modify Job details
+UC19 - View the list of all the Festivals
+UC20 - Moderate the Festival
+UC21 - View the list of own Festivals(Leader, Organiser)
+UC22 - View the Festival details(Leader/Organiser)
+UC23 - Remove the Festival(Leader)
+UC24 - View Festival Job Timeline
+UC25 - Remove a Job from Festival Jobs
+UC26 - Managing Festival Job Timeline
+UC27 - Add a Job to the Festival Timeline(Screen)
+UC28 - View Job Worker Application Entries
+UC29 - Verify Worker Job Application Entry
+UC30
