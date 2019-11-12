@@ -63,6 +63,7 @@ public class OrganizerAdapter extends BaseAdapter {
 
             viewHolder.festivalName = convertView.findViewById(R.id.festivalName);
             viewHolder.appButton = convertView.findViewById(R.id.btnApply);
+            convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }

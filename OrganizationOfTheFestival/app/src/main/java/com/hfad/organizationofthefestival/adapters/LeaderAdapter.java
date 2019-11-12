@@ -18,8 +18,8 @@ public class LeaderAdapter extends ArrayAdapter<PendingOrganizer> {
     private Context context;
     private List<PendingOrganizer> organizerList;
 
-    public LeaderAdapter(Context context, int resource,  ArrayList<PendingOrganizer> organizerList) {
-        super(context, resource, organizerList);
+    public LeaderAdapter(Context context, ArrayList<PendingOrganizer> organizerList) {
+        super(context, 0, organizerList);
         this.context = context;
         this.organizerList = organizerList;
     }

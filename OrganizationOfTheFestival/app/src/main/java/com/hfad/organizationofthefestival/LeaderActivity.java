@@ -51,7 +51,7 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
         }
 
 
-        LeaderAdapter adapter = new LeaderAdapter(this, R.layout.skroznovi, pendingOrganizers);
+        LeaderAdapter adapter = new LeaderAdapter(this, pendingOrganizers);
         approvalList.setAdapter(adapter);
     }
 
