@@ -29,13 +29,14 @@ UC28 - View Job Worker Application Entries - (Leader, Organiser)
 UC29 - Inspect Job Worker Application Entry
 UC30 - Verify Worker Job Application Entry
 UC31 - Manage Job Activities(Worker - Job)
-UC32 - Create Job Activity
-UC33 - Remove Job Activity(Worker)
-UC34 - Manage Job Activities Timeline(Worker)
-UC35 - Add Job Activity to Timeline(Worker)
-UC36 - Print Festival Card
-UC37 - Job Entries Auction
-UC38 - Job awarded to Worker
-UC39 - Extend Job Auction by 1 day
-UC40 - View List of Job Auctions
-
+UC32 - Inspect Job Activity details
+UC33 - Modify Job Activity
+UC34 - Create Job Activity
+UC35 - Remove Job Activity
+UC36 - Manage Job Activities Timeline(Worker)
+UC37 - Add Job Activity to Timeline(Worker)
+UC38 - Print Festival Card
+UC39 - Job Entries Auction
+UC40 - Job awarded to Worker
+UC41 - Extend Job Auction by 1 day
+UC42 - View List of Job Auctions

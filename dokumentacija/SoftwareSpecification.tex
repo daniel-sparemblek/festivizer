@@ -480,7 +480,7 @@
 					\end{packed_item}
 				\end{packed_item}
 			
-				\noindent \underbar{\textbf{UC12 - View the list of all the Jobs}}
+				\noindent \underbar{\textbf{UC12 - View the list of all the Jobs(Worker View)}}
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Worker, Administrator
 					\item \textbf{Goal:} View the list of Jobs. Includes the ability to filter the Jobs by Categories.
@@ -848,20 +848,368 @@
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival and then its Festival Job Timeline
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
+					\item Data is retrieved from the Server
 					\item The User can add a Job to the Timeline by clicking the 'Add a Job to the Timeline' taking them to a new Screen
 					\item The User can remove a Job from the Timeline by selecting it on the Timeline and then dragging it out of the Screen - a confirmation dialogue will appear
 					\item The User can create a new Timeline Branch by double tapping anywhere on the Timeline
 					\item The User can remove a Branch long pressing anywhere on it, and then on the pop-up menu selecting the 'Remove Branch' option
 					\item The User can change the Time of a Job or a Branch by either dragging them relative to the Time Axis, or by long pressing and selecting 'Change Time' option
-					\item By 
+					\item The User can change the duration by changing the dimensions of the Job on the graph - elongating or shortening it relative to the time axis
+					\item Data is sent to the Server, and changes there are saved
 				\end{packed_enum}
 				
 				\begin{packed_item}
-					\item[5.a] Data not successfully sent to the Server
+					\item[1.a] Data not successfully retrieved due to connection timeout(can be caused by various network problems)
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+					\end{packed_enum}
+					
+					\item[7.a] Illegal input(Time format!)
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the Leader that he has enter an illegal input
+						\item The notification asks the Leader to re-format and re-enter the input. The expected format and rules are displayed
+						\item The steps above are repeated if new input isn't accepted either
+					\end{packed_enum}
+					
+					\item[8.a] Data not successfully sent to the Server
 					\item[] \begin{packed_enum}
 						\item An error message is displayed informing the User data wasn't successfully sent to the Server
 						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
 						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC27 - Add a Job to the Festival Timeline(Screen)}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Leader, Organiser
+				\item \textbf{Goal:} Add a Job onto the Festival Timeline Screen - so that it can be furtherly managed, organised and/or deleted
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected a Festival, its Festival Job Timeline and then selected the button 'Add a Job to the Timeline'
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The Job is added to the Festival Job Timeline
+					\item The User is notified of the success
+					\item Changes are sent to the Server
+					\item The User is taken back
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[3.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC28 - View Job Worker Application Entries of the current Festival}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Leader, Organiser
+				\item \textbf{Goal:} View the list of all the Job Worker Application Entries, so that they can be verified in order for Workers to be selected to work on the given Jobs.
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected a Festival
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item Tap the button to 'View the Worker Job Application Entries'
+					\item The list is fetched from the Server
+					\item The User is taken to a new Screen where all the entries are displayed
+					\item Each Entry has an 'Inspect entry' button - upon pressing it the User it taken to a new Screen
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[2.a] Data not successfully retrieved due to connection timeout(can be caused by various network problems)
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC29 - Inspect Job Worker Application Entry}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Leader, Organiser
+				\item \textbf{Goal:} Inspect the Job Entry more closely as to be able to make a more quality decision on whether to verify this Entry or not
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected a Festival and a Job Entry
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item Data is fetched from the Server
+					\item The User inspects the data
+					\item If deemed fit, the User can verify the Entry
+					\item The changes are sent to the Server
+					\item By tapping the button 'Back' the User can go back to the Job Application Entries List
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[1.a] Data not successfully retrieved
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+					\end{packed_enum}
+				
+					\item[4.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC30 - Verify Worker Job Application entry}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Leader, Organiser, Administrator
+				\item \textbf{Goal:} Upon inspection, if the Job Entry is deemed quality, verify this Entry so that it can compete with other Entries for the final approval
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected a Job to verify
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item Upon clicking the 'Verify this Job Application Entry' this Worker's Entry is verified
+					\item It enters the Job Auction process
+					\item Data is sent to the Server
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[3.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+
+			\noindent \underbar{\textbf{UC31 - Manage Job Activities}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Goal:} Manage and modify the list of all the Activities that make up a Job
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected a Job of which the Activities will be viewed and must have tapped the `Manage Job Activities` button of the selected Job
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item Data(the list) is fetched from the Server and displayed to the User
+					\item The User can select a Specific Activity to inspect its Details
+					\item The User can add or remove Activities
+					\item The User can tap the `View Job Activities Timeline` in order to manage the time-dimension of the aforementioned Activities
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[1.a] Data not successfully retrieved
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC32 - Inspect Job Activity details}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Goal:} Further inspect and view the details of a specific Job Activity
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected a Job and one of its Activities
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item Data(Job details) is fetched from the Server
+					\item The details are displayed to the User
+					\item The User can remove or modify this Activity
+					\item If any changes are made, they are sent to the Server
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[1.a] Data not successfully retrieved
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+					\end{packed_enum}
+				
+					\item[3.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+
+			\noindent \underbar{\textbf{UC33 - Modify Job Activity}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Goal:} Modify Job Activity details
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected a Job and one of its Activities
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item Data(Job details) is fetched from the Server
+					\item The details are displayed to the User -- editable
+					\item The User arbitrarily modifies the data
+					\item If any changes are made, they are sent to the Server
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[1.a] Data not successfully retrieved
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+					\end{packed_enum}
+					
+					\item[3.a] Illegal input
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the Leader that he has enter an illegal input
+						\item The notification asks the Leader to re-format and re-enter the input. The expected format and rules are displayed
+						\item The steps above are repeated if new input isn't accepted either
+					\end{packed_enum}
+					
+					\item[4.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC34 - Create Job Activity}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Goal:} Create a new Job Activity
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have tapped the button to create a new Job Activity for a specific Job
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The User fills the form out arbitrarily
+					\item Upon completion, they tap the `Create Job Activity`
+					\item The updated data is sent to the Server and saved
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[1.a] Illegal input
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the Leader that he has enter an illegal input
+						\item The notification asks the Leader to re-format and re-enter the input. The expected format and rules are displayed
+						\item The steps above are repeated if new input isn't accepted either
+					\end{packed_enum}
+					
+					\item[3.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC35 - Remove Job Activity}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Goal:} Remove the selected Job Activity
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected a Job and the Activity to be deleted
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The User is prompted whether they are sure of the deletion
+					\item They are again prompted, just in case
+					\item The Activity is removed, and changes sent to the Server
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[3.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC36 - Manage Job Activities Timeline(Worker View)}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Goal:} Inspect and modify(in Administrator's case moderate) the list of Activities of the given Job
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected the option to go to Job Activity Timeline Management Screen
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item Data is fetched from the Server
+					\item The time-relative graph is displayed to the User
+					\item Job Activity Management offers the same functionalities as the Festival Job Management interface
+					\item The User can add a Job to the Timeline by tapping the 'Add a Job to the Timeline' button taking them to a new Screen
+					\item The User can remove a Job from the Timeline by selecting it on the Timeline and then dragging it out of the Screen - a confirmation dialogue will appear
+					\item The User can create a new Timeline Branch by double tapping anywhere on the Timeline
+					\item The User can remove a Branch long pressing anywhere on it, and then on the pop-up menu selecting the 'Remove Branch' option
+					\item The User can change the Time of a Job or a Branch by either dragging them relative to the Time Axis, or by long pressing and selecting 'Change Time' option
+					\item The User can change the duration by changing the dimensions of the Job on the graph - elongating or shortening it relative to the time axis
+					\item When done with changing the diagram, the User can tap the 'Save changes' button - data is sent to the Server and saved there
+					\item 
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[1.a] Data not successfully retrieved
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+					\end{packed_enum}
+					
+					\item[4.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC37 - Add Job Activity to Timeline}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Goal:} Add the selected Job Activity to the Timeline so that its Time parameters can be set and manipulated
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, must have selected a Job and the Activity to be added to the Job Activity Timeline
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The User is prompted whether they are sure of the addition
+					\item Upon confirmation, the Activity is added to the Timeline and can be manipulated there
+					\item The confirmation is sent to the Server in order to be parsed and saved
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[3.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+		
+			\noindent \underbar{\textbf{UC38 - Print Festival Card}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Leader, Organiser, and Worker
+				\item \textbf{Goal:} Festival Stakeholder can print Cards granting them an entrance to the Festival itself
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The User selects one of the Festivals or Jobs that they're responsible for
+					\item They download the .pdf of the Card from the Server
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[2.a] Data not successfully retrieved
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 					\end{packed_enum}
 				\end{packed_item}
 			\end{packed_item}
