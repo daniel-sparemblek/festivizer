@@ -65,7 +65,7 @@
 							\item Access the list of corresponding Activities
 							\item Access the list of Workers
 						\end{packed_enum}
-						\item Moderate Festivals and/or veto them as to alleviate abuse/misuse
+						\item Moderate Festivals, Jobs and Activities and/or veto/delete them as to alleviate abuse/misuse
 					\end{packed_enum}
 					
 				\end{packed_enum}
@@ -74,7 +74,7 @@
 				\begin{packed_enum}
 					\item Create [multiple] Festivals
 					\item Modify or delete their Festivals	
-					\item \textbf{Inherit Organiser functionalities for their Festivals}
+					\item \textbf{Inherit Organiser functionalities for their own Festivals}
 					\item Appoint Organisers to their Festivals(check if the selected Organiser is organising any possibly concurrent Festivals)
 					\item Access the Jobs, Activities, Workers and other details of their Festival
 				\end{packed_enum}
@@ -84,7 +84,7 @@
 					\item Job management
 					\begin{packed_enum}
 						\item Select which Jobs need to be done - open their corresponding Job Auctions
-						\item Job Sequence - order and parallelise Jobs
+						\item Job Sequence - order and parallelise Jobs -> Festival Job Timeline
 						\item Ability to extend Job Auction lifetime by 1 day
 						\item View and modify Jobs
 						\begin{packed_enum}
@@ -161,13 +161,23 @@
 					\item \textbf{Main Stakeholders:} Administrators
 					\item \textbf{Goal:} View the list of all the Festivals, ability to click on a specific Festival and view its details in a new Screen
 					\item \textbf{Stakeholders:} Database
-					\item \textbf{Conditions:} -
+					\item \textbf{Conditions:} must be logged in
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
 						\item A list of Festivals is displayed(retrieved from the Database)
 						\item Administrator selects a Festival of which he wants to inspect further details
 						\item A new Screen appears depicting a detailed view of the Festival's information
 					\end{packed_enum}
+				
+					\begin{packed_item}
+						\item[1.a] Data not successfully retrieved
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User data couldn't be retrieved
+							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+							\item Upon successful data retrieval(if ever) the button and error message are removed and then the data is displayed
+						\end{packed_enum}
+					\end{packed_item}
+					
 				\end{packed_item}
 					
 				\noindent \underbar{\textbf{UC2 - Registration}}
@@ -178,10 +188,28 @@
 					\item \textbf{Conditions:} Must not be logged in, and must be located at the Login screen.
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
-						\item User is located at the login screen, and taps 'Create one'(located next to 'No account yet?')
+						\item The User is located at the login screen, and taps the 'Create one' button, located next to the 'No account yet?' label
 						\item A new Screen pops up - Guest fills the Registration Form
 						\item Upon tapping 'Create Account' a new account is created and stored in the Database
 					\end{packed_enum}
+				
+					\begin{packed_item}
+						\item[2.a] Illegal input
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
+							\item The steps above are repeated if new input isn't accepted either
+						\end{packed_enum}
+						
+						\item[3.a] Data not successfully sent and parsed on the Server
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User that an error has occurred
+							\item A 'Retry' button is displayed on the screen - upon clicking it the form is resent and parsing tried again
+							\item The User is notified upon success
+						\end{packed_enum}
+						
+					\end{packed_item}
+					
 				\end{packed_item}
 			
 				\noindent \underbar{\textbf{UC3 - Log-In}}
@@ -193,16 +221,23 @@
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
 						\item User enter the email or username and their password
-						\item User taps the LOGIN button
+						\item User taps the `Log-in` button
 						\item Database checks the data and if login is successful the user is logged in
 					\end{packed_enum}
 				
 					\begin{packed_item}
-						\item[3.a] Email/Username and Password combination is wrong and the user isn't logged in.
+						\item[3.a] Email/Username and Password combination is wrong and the User isn't logged in.
 						\item[] \begin{packed_enum}
 							\item The fields Email/Username and Password are reset
 							\item An error message is displayed
-							\item User needs to login again
+							\item User needs to enter the log-in data again
+						\end{packed_enum}
+					
+						\item[3.a] Data not successfully sent and parsed on the Server
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User that an error has occurred
+							\item A 'Retry' button is displayed on the screen - upon clicking it the form is resent and parsing tried again
+							\item The User is notified upon success
 						\end{packed_enum}
 					\end{packed_item}
 				\end{packed_item}
@@ -221,7 +256,7 @@
 					\end{packed_enum}
 					
 					\begin{packed_item}
-						\item[2.a] Data not successfully retrieved due to connection timeout(can be caused by various network problems)
+						\item[2.a] Data not successfully retrieved
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User data couldn't be retrieved
 							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
@@ -242,48 +277,33 @@
 						\item Data is retrieved from the Database
 						\item A screen depicting Account data appears
 						\item User clicks the 'Change info' button and is taken to a new Screen
-						\item User enters the new data desired
+						\item User enters the desired new data
 						\item User clicks the 'OK' button and the data is sent to the Database
-						\item Upon receiving a confirmation from the Server that change has taken place the notification is displayed to the User
+						\item Upon receiving a confirmation from the Server that change has taken place the success notification is displayed to the User
 					\end{packed_enum}
 					
 					\begin{packed_item}
-						\item[2.a] Data not successfully retrieved due to connection timeout(can be caused by various network problems)
+						\item[2.a] Data not successfully retrieved
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User data couldn't be retrieved
 							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
 							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 						\end{packed_enum}
 
-						\item[6.a] Data not successfully sent due to connection timeout(can be caused by various network problems)
+						\item[2.a] Illegal input
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
+							\item The steps above are repeated if new input isn't accepted either
+						\end{packed_enum}
+
+						\item[6.a, 7.a] Data not successfully sent or parsed on the Server
 						\item[] \begin{packed_enum}
 							\item Field values are saved, and kept the same
 							\item An error is displayed to the User stating that data wasn't successfully sent and that User needs to resend the form
 							\item User resends the form. If still not successful, the same steps above apply.
 						\end{packed_enum}
-						
-						\item[7.a] An error on the Server occurs and account data isn't updated properly.
-						\item[] \begin{packed_enum}
-							\item Field values are saved, and kept the same
-							\item An error is displayed to the User stating that an error has occurred and that User needs to resend the form
-							\item User resends the form. If still not successful, the same steps above apply.
-						\end{packed_enum}
-							
-						\item[7.b] User enters disallowed/illegal/rubbish data and the Server doesn't accept such an attempt
-						\item[] \begin{packed_enum}
-							\item The wrong field values are reset
-							\item The User is notified that they have entered improper input. The notification mentions the limits and asks the User to change the invalid fields
-							\item The User enters the data again. If the input is illegal the same steps above apply.
-							\item Data is accepted and saved this time
-						\end{packed_enum}
-					
-						\item[7.c] No confirmation from the Server(probably a network error)
-						\item[] \begin{packed_enum}
-							\item Field values are saved, and kept the same
-							\item An error is displayed to the User stating that a confirmation wasn't received and that User needs to resend the form
-							\item User resends the form. If still not successful, the same steps above apply.
-						\end{packed_enum}								
-							
+														
 					\end{packed_item}
 							
 				\end{packed_item}
@@ -291,7 +311,7 @@
 				\noindent \underbar{\textbf{UC6 - Account Deletion}}
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} User
-					\item \textbf{Goal:} Delete his Account
+					\item \textbf{Goal:} Delete their Account
 					\item \textbf{Stakeholders:} Database, Back-End(Server)
 					\item \textbf{Conditions:} Must be logged in
 					\item \textbf{Event flow description: }
@@ -306,23 +326,17 @@
 					\end{packed_enum}
 					
 					\begin{packed_item}
-						\item[2.a] Data not successfully retrieved due to connection timeout(can be caused by various network problems)
+						\item[2.a] Data not successfully retrieved
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User data couldn't be retrieved
 							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
 							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 						\end{packed_enum}
 						
-						\item[5.a] Request not successfully sent due to connection timeout(can be caused by various network problems)
+						\item[5.a] Data not successfully sent or parsed on the Server
 						\item[] \begin{packed_enum}
-							\item An error is displayed to the User stating that the request wasn't successfully sent and that User needs to resend it
-							\item User resends the request. If still not successful, the same steps above apply.
-						\end{packed_enum}
-						
-						\item[7.a] An error on the Server occurs and account isn't deleted.
-						\item[] \begin{packed_enum}
-							\item Field values are saved, and kept the same.
-							\item An error is displayed to the User stating an error has occurred and that User needs to resend the form
+							\item Field values are saved, and kept the same
+							\item An error is displayed to the User stating that data wasn't successfully sent and that User needs to resend the form
 							\item User resends the form. If still not successful, the same steps above apply.
 						\end{packed_enum}
 						
@@ -332,7 +346,7 @@
 			
 				\noindent \underbar{\textbf{UC7 - Verifying a Leader}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrator
+					\item \textbf{Main Stakeholders:} Administrators
 					\item \textbf{Goal:} Check, and if all is in order, verify a Leader
 					\item \textbf{Stakeholders:} Database, Leader
 					\item \textbf{Conditions:} Must be logged in. There is a Leader awaiting confirmation.
@@ -370,8 +384,8 @@
 					\begin{packed_item}
 						\item[2.a] Illegal input
 						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the Leader that he has enter an illegal input
-							\item The notification asks the Leader to re-format and re-enter the input. The expected format and rules are displayed
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
 							\item The steps above are repeated if new input isn't accepted either
 						\end{packed_enum}
 						
@@ -379,7 +393,7 @@
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User that an error has occurred
 							\item A 'Retry' button is displayed on the screen - upon clicking it the form is resent and parsing tried again
-							\item The Leader is notified upon success
+							\item The User is notified upon success
 						\end{packed_enum}
 					
 					\end{packed_item}
@@ -389,13 +403,13 @@
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Leader
 					\item \textbf{Goal:} The Organiser is appointed and begins carefully managing and organising the Festival
-					\item \textbf{Stakeholders:} Database, Back-End(Server), Organiser, Festival
+					\item \textbf{Stakeholders:} Database, Back-End(Server), Organiser
 					\item \textbf{Conditions:} Must be logged in, a Festival requires an Organiser
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
 						\item The Leader opens the Screen featuring their festivals
 						\item The Leader selects one of the Festivals
-						\item The Leader selects one of the Organisers, and appoints him to the selected Festival
+						\item The Leader selects one of the Organisers, and appoints them to the selected Festival
 						\item This data is sent to the Server, which updates the Database
 						\item A notification is sent to the Organiser, who can either accept or reject the said Festival
 					\end{packed_enum}
@@ -421,7 +435,7 @@
 				\noindent \underbar{\textbf{UC10 - Update Festival info}}
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Leader
-					\item \textbf{Goal:} Create a Festival, and open it up to Workers so that they can start working
+					\item \textbf{Goal:} Update/modify Festival details
 					\item \textbf{Stakeholders: } Database, Back-End(Server)
 					\item \textbf{Conditions: } Must be logged in
 					\item \textbf{Event flow description: }
@@ -434,12 +448,12 @@
 					\begin{packed_item}
 						\item[2.a] Illegal input
 						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the Leader that he has enter an illegal input
-							\item The notification asks the Leader to re-format and re-enter the input. The expected format and rules are displayed
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
 							\item The steps above are repeated if new input isn't accepted either
 						\end{packed_enum}
 						
-						\item[3.a] Data not successfully sent and parsed on the Server
+						\item[3.a] Data not successfully sent and/or parsed on the Server
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User that an error has occurred
 							\item A 'Retry' button is displayed on the screen - upon clicking it the form is resent and parsing tried again
@@ -451,9 +465,9 @@
 			
 				\noindent \underbar{\textbf{UC11 - Create a Job}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Organiser
-					\item \textbf{Goal:} Create a Job entry that would be visible to Workers who would apply to this Job
-					\item \textbf{Stakeholders: } Database, Back-End(Server)
+					\item \textbf{Main Stakeholders:} Organiser, Leader
+					\item \textbf{Goal:} Create a Job entry that would be visible to Workers who would apply to this Job via Job Auctions
+					\item \textbf{Stakeholders: } Database, Back-End(Server), Worker
 					\item \textbf{Conditions: } Must be logged in
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
@@ -465,12 +479,12 @@
 					\begin{packed_item}
 						\item[2.a] Illegal input
 						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the Organiser that they have entered an illegal input
-							\item The notification asks the Organiser to re-format and re-enter the input. The expected format and rules are displayed
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
 							\item The steps above are repeated if new input isn't accepted either
 						\end{packed_enum}
 						
-						\item[3.a] Data not successfully sent and parsed on the Server
+						\item[3.a] Data not successfully sent and/or parsed on the Server
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User that an error has occurred
 							\item A 'Retry' button is displayed on the screen - upon clicking it the form is resent and parsing tried again
@@ -482,9 +496,9 @@
 			
 				\noindent \underbar{\textbf{UC12 - View the list of all the Jobs(Worker View)}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Worker, Administrator
+					\item \textbf{Main Stakeholders:} Worker, Administrators
 					\item \textbf{Goal:} View the list of Jobs. Includes the ability to filter the Jobs by Categories.
-					\item \textbf{Stakeholders: } Database
+					\item \textbf{Stakeholders: } Database, Leaders, Organisers
 					\item \textbf{Conditions: } Must be logged in
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
@@ -497,8 +511,8 @@
 					\begin{packed_item}
 						\item[2.a] Illegal input
 						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the Organiser that they have entered an illegal input
-							\item The notification asks the Organiser to re-format and re-enter the input. The expected format and rules are displayed
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
 							\item The steps above are repeated if new input isn't accepted either
 						\end{packed_enum}
 					\end{packed_item}
@@ -507,10 +521,10 @@
 			
 				\noindent \underbar{\textbf{UC13 - View Job details(Worker view)}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Worker, Administrator
+					\item \textbf{Main Stakeholders:} Worker, Administrators
 					\item \textbf{Goal:} View Job details and specifics - such as Time, Location, Duration, Description, ...
 					\item \textbf{Stakeholders: } Database
-					\item \textbf{Conditions: } Must be logged in
+					\item \textbf{Conditions: } Must be logged in, must have selected a Job, Leader, Organiser
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
 						\item The User can read Job specifics
@@ -531,8 +545,8 @@
 				\noindent \underbar{\textbf{UC14 - Apply to the Job(Worker)}}
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Worker
-					\item \textbf{Goal:} Send his application to the Job's supervising Organiser
-					\item \textbf{Stakeholders: } Database, Back-End(Server), Organiser
+					\item \textbf{Goal:} Send his application to the Job's supervising Organiser/Leader
+					\item \textbf{Stakeholders: } Database, Back-End(Server), Organiser, Leader
 					\item \textbf{Conditions: } Must be logged in, the Job details Screen is opened
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
@@ -542,6 +556,13 @@
 					\end{packed_enum}
 					
 					\begin{packed_item}
+						\item[1.a] Illegal input
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
+							\item The steps above are repeated if new input isn't accepted either
+						\end{packed_enum}
+						
 						\item[3.a] Data not successfully sent to the Server
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User data wasn't successfully sent to the Server
@@ -553,10 +574,10 @@
 			
 				\noindent \underbar{\textbf{UC15 - Moderate the Job}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrator
+					\item \textbf{Main Stakeholders:} Administrators
 					\item \textbf{Goal:} Moderating the selected Job - in case certain part of it violates the Rules
-					\item \textbf{Stakeholders: } Database, Back-End(Server)
-					\item \textbf{Conditions: } Must be logged in
+					\item \textbf{Stakeholders: } Database, Back-End(Server), Worker, Organiser
+					\item \textbf{Conditions: } Must be logged in, and must have selected a Job to moderate
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
 						\item The Administrator alters certain part of the Job, or deletes it(by pressing the 'Delete Job' button)
@@ -565,6 +586,13 @@
 					\end{packed_enum}
 					
 					\begin{packed_item}
+						\item[1.a] Illegal input
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
+							\item The steps above are repeated if new input isn't accepted either
+						\end{packed_enum}
+						
 						\item[3.a] Data not successfully sent to the Server
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User data wasn't successfully sent to the Server
@@ -576,9 +604,9 @@
 			
 				\noindent \underbar{\textbf{UC16 - View the list of this Festival Jobs}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrator, Organiser, Leader
+					\item \textbf{Main Stakeholders:} Administrators, Organiser, Leader
 					\item \textbf{Goal:} View the list of Jobs for the currently selected Festival
-					\item \textbf{Stakeholders: } Database
+					\item \textbf{Stakeholders: } Database, Worker
 					\item \textbf{Conditions: } Must be logged in
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
@@ -599,7 +627,7 @@
 			
 				\noindent \underbar{\textbf{UC17 - View Job details(Organiser view)}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrator, Leader, Organiser
+					\item \textbf{Main Stakeholders:} Administrators, Leader, Organiser
 					\item \textbf{Goal:} View the details and specifics of the selected Job. Can also proceed to the Screen for modifying or deleting the Job
 					\item \textbf{Stakeholders: } Database
 					\item \textbf{Conditions: } Must be logged in and must have selected this Job by clicking on it on the list of Jobs
@@ -608,7 +636,7 @@
 						\item The data is fetched from the Database
 						\item The Job details and specifics are displayed to the User
 						\item Leaders and Organisers can click the 'Modify this Job details' or the 'Delete this Job' button in order to remove it, taking them to a new Screen
-						\item Leaders and Organisers can click the 'see Worker Applications' button taking them to a new Screen
+						\item Leaders and Organisers can click the 'See Worker Applications' button taking them to a new Screen
 						\item The Administrator can click the 'Moderate this Job' button taking them to a new Screen
 					\end{packed_enum}
 				
@@ -626,7 +654,7 @@
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Leader, Organiser
 					\item \textbf{Goal:} Edit the details and specifics of the selected Job
-					\item \textbf{Stakeholders: } Database, Back-End(Server)
+					\item \textbf{Stakeholders: } Database, Back-End(Server), Worker
 					\item \textbf{Conditions: } Must be logged in and must have selected this Job by clicking on it on the list of Jobs
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
@@ -643,7 +671,12 @@
 							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 						\end{packed_enum}
 					
-						
+						\item[2.a] Illegal input
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
+							\item The steps above are repeated if new input isn't accepted either
+						\end{packed_enum}
 					
 						\item[3.a] Data not successfully sent to the Server
 						\item[] \begin{packed_enum}
@@ -657,7 +690,7 @@
 
 				\noindent \underbar{\textbf{UC19 - View the list of all the Festivals}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrator
+					\item \textbf{Main Stakeholders:} Administrators
 					\item \textbf{Goal:} View the list of all the Festivals
 					\item \textbf{Stakeholders: } Database, Back-End(Server)
 					\item \textbf{Conditions: } Must be logged in
@@ -670,14 +703,7 @@
 					\end{packed_enum}
 					
 					\begin{packed_item}
-						\item[1.a] Data not successfully retrieved
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data couldn't be retrieved
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
-							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
-						\end{packed_enum}
-						
-						\item[4.a] Data not successfully retrieved
+						\item[1.a, 4.a] Data not successfully retrieved
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User data couldn't be retrieved
 							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
@@ -688,9 +714,9 @@
 			
 				\noindent \underbar{\textbf{UC20 - Moderate the Festival}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrator
+					\item \textbf{Main Stakeholders:} Administrators
 					\item \textbf{Goal:} Modify or delete the selected Festival
-					\item \textbf{Stakeholders: } Database, Back-End(Server)
+					\item \textbf{Stakeholders: } Database, Back-End(Server), Organiser, Leader
 					\item \textbf{Conditions: } Must be logged in and must have selected the Festival to be moderated
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
@@ -709,12 +735,18 @@
 							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 						\end{packed_enum}
 					
-						\item[3.a] The User enters disallowed/illegal/rubbish data and the Server doesn't accept such an attempt
+						\item[3.a] Illegal input
 						\item[] \begin{packed_enum}
-							\item The wrong field values are reset
-							\item The User is notified that they have entered improper input. The notification mentions the limits and asks the User to change the invalid fields
-							\item The User enters the data again. If the input is illegal the same steps above apply.
-							\item Data is accepted and saved this time
+							\item An error message is displayed informing the User that they have entered illegal input
+							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
+							\item The steps above are repeated if new input isn't accepted either
+						\end{packed_enum}
+						
+						\item[5.a] Data not successfully sent to the Server
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User data wasn't successfully sent to the Server
+							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+							\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
 						\end{packed_enum}
 					\end{packed_item}
 				\end{packed_item}	
@@ -734,7 +766,7 @@
 					\end{packed_enum}
 				
 					\begin{packed_item}
-						\item[1.a] Data not successfully retrieved
+						\item[1.a, 4.a] Data not successfully retrieved
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User data couldn't be retrieved
 							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
@@ -771,7 +803,7 @@
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Leader
 					\item \textbf{Goal:} Delete their Festival
-					\item \textbf{Stakeholders: } Database, Back-End(Server)
+					\item \textbf{Stakeholders: } Database, Back-End(Server), Organiser, Workers
 					\item \textbf{Conditions: } Must be logged in, must have selected a Festival
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
@@ -783,7 +815,7 @@
 					\end{packed_enum}
 					
 					\begin{packed_item}
-						\item[5.a] Data not successfully sent to the Server
+						\item[4.a, 5.a] Data not successfully sent to the Server
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User data wasn't successfully sent to the Server
 							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
@@ -794,8 +826,8 @@
 			
 			\noindent \underbar{\textbf{UC24 - View Festival Job Timeline}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Administrator, Leader, Organiser
-				\item \textbf{Goal:} Inspect Festival Timeline regarding Jobs. Job overview
+				\item \textbf{Main Stakeholders:} Administrators, Leader, Organiser
+				\item \textbf{Goal:} Inspect Festival Timeline regarding Jobs - provide Job overview
 				\item \textbf{Stakeholders: } Database, Back-End(Server)
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival and then selected the button for viewing the Festival Job Timeline
 				\item \textbf{Event flow description: }
@@ -817,9 +849,9 @@
 		
 			\noindent \underbar{\textbf{UC25 - Remove a Job}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Administrator, Leader, Organiser
+				\item \textbf{Main Stakeholders:} Administrators, Leader, Organiser
 				\item \textbf{Goal:} Remove the selected Job
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Worker
 				\item \textbf{Conditions: } Must be logged in, must have selected a Job
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -842,9 +874,9 @@
 			
 			\noindent \underbar{\textbf{UC26 - Managing Festival Job Timeline}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Administrator, Leader, Organiser
-				\item \textbf{Goal:} Organise Job times in an effective manner
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Main Stakeholders:} Administrators, Leader, Organiser
+				\item \textbf{Goal:} Organise Jobs in an effective manner from a time point of view
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Workers
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival and then its Festival Job Timeline
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -866,10 +898,10 @@
 						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 					\end{packed_enum}
 					
-					\item[7.a] Illegal input(Time format!)
+					\item[2.a] Illegal input
 					\item[] \begin{packed_enum}
-						\item An error message is displayed informing the Leader that he has enter an illegal input
-						\item The notification asks the Leader to re-format and re-enter the input. The expected format and rules are displayed
+						\item An error message is displayed informing the User that they have entered illegal input
+						\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
 						\item The steps above are repeated if new input isn't accepted either
 					\end{packed_enum}
 					
@@ -885,8 +917,8 @@
 			\noindent \underbar{\textbf{UC27 - Add a Job to the Festival Timeline(Screen)}}
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Leader, Organiser
-				\item \textbf{Goal:} Add a Job onto the Festival Timeline Screen - so that it can be furtherly managed, organised and/or deleted
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Goal:} Add a Job onto the Festival Timeline Screen - so that it can be further managed, organised and/or deleted
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Workers
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival, its Festival Job Timeline and then selected the button 'Add a Job to the Timeline'
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -909,8 +941,8 @@
 			\noindent \underbar{\textbf{UC28 - View Job Worker Application Entries of the current Festival}}
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Leader, Organiser
-				\item \textbf{Goal:} View the list of all the Job Worker Application Entries, so that they can be verified in order for Workers to be selected to work on the given Jobs.
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Goal:} View the list of all the Job Worker Application Entries, so that they can be verified in order for Workers to enter the Auction process
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Workers
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -921,7 +953,7 @@
 				\end{packed_enum}
 				
 				\begin{packed_item}
-					\item[2.a] Data not successfully retrieved due to connection timeout(can be caused by various network problems)
+					\item[2.a] Data not successfully retrieved
 					\item[] \begin{packed_enum}
 						\item An error message is displayed informing the User data couldn't be retrieved
 						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
@@ -934,7 +966,7 @@
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Leader, Organiser
 				\item \textbf{Goal:} Inspect the Job Entry more closely as to be able to make a more quality decision on whether to verify this Entry or not
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Worker(s)
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival and a Job Entry
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -964,9 +996,9 @@
 			
 			\noindent \underbar{\textbf{UC30 - Verify Worker Job Application entry}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Leader, Organiser, Administrator
+				\item \textbf{Main Stakeholders:} Leader, Organiser
 				\item \textbf{Goal:} Upon inspection, if the Job Entry is deemed quality, verify this Entry so that it can compete with other Entries for the final approval
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Worker(s)
 				\item \textbf{Conditions: } Must be logged in, must have selected a Job to verify
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -987,9 +1019,9 @@
 
 			\noindent \underbar{\textbf{UC31 - Manage Job Activities}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Main Stakeholders:} Worker(s), Administrators
 				\item \textbf{Goal:} Manage and modify the list of all the Activities that make up a Job
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
 				\item \textbf{Conditions: } Must be logged in, must have selected a Job of which the Activities will be viewed and must have tapped the `Manage Job Activities` button of the selected Job
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1000,7 +1032,7 @@
 				\end{packed_enum}
 				
 				\begin{packed_item}
-					\item[1.a] Data not successfully retrieved
+					\item[1.a, 4.a] Data not successfully retrieved
 					\item[] \begin{packed_enum}
 						\item An error message is displayed informing the User data couldn't be retrieved
 						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
@@ -1011,9 +1043,9 @@
 			
 			\noindent \underbar{\textbf{UC32 - Inspect Job Activity details}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Main Stakeholders:} Worker(s), Administrators
 				\item \textbf{Goal:} Further inspect and view the details of a specific Job Activity
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
 				\item \textbf{Conditions: } Must be logged in, must have selected a Job and one of its Activities
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1042,9 +1074,9 @@
 
 			\noindent \underbar{\textbf{UC33 - Modify Job Activity}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Main Stakeholders:} Worker(s), Administrators
 				\item \textbf{Goal:} Modify Job Activity details
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
 				\item \textbf{Conditions: } Must be logged in, must have selected a Job and one of its Activities
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1080,9 +1112,9 @@
 			
 			\noindent \underbar{\textbf{UC34 - Create Job Activity}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Main Stakeholders:} Worker(s), Administrators
 				\item \textbf{Goal:} Create a new Job Activity
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
 				\item \textbf{Conditions: } Must be logged in, must have tapped the button to create a new Job Activity for a specific Job
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1110,7 +1142,7 @@
 			
 			\noindent \underbar{\textbf{UC35 - Remove Job Activity}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Main Stakeholders:} Worker, Administrators
 				\item \textbf{Goal:} Remove the selected Job Activity
 				\item \textbf{Stakeholders: } Database, Back-End(Server)
 				\item \textbf{Conditions: } Must be logged in, must have selected a Job and the Activity to be deleted
@@ -1133,9 +1165,9 @@
 			
 			\noindent \underbar{\textbf{UC36 - Manage Job Activities Timeline(Worker View)}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Main Stakeholders:} Worker(s), Administrators
 				\item \textbf{Goal:} Inspect and modify(in Administrator's case moderate) the list of Activities of the given Job
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
 				\item \textbf{Conditions: } Must be logged in, must have selected the option to go to Job Activity Timeline Management Screen
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1171,9 +1203,9 @@
 			
 			\noindent \underbar{\textbf{UC37 - Add Job Activity to Timeline}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Worker, Administrator
+				\item \textbf{Main Stakeholders:} Worker(s), Administrators
 				\item \textbf{Goal:} Add the selected Job Activity to the Timeline so that its Time parameters can be set and manipulated
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
 				\item \textbf{Conditions: } Must be logged in, must have selected a Job and the Activity to be added to the Job Activity Timeline
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1194,7 +1226,7 @@
 		
 			\noindent \underbar{\textbf{UC38 - Print Festival Card}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Leader, Organiser, and Worker
+				\item \textbf{Main Stakeholders:} All Users
 				\item \textbf{Goal:} Festival Stakeholder can print Cards granting them an entrance to the Festival itself
 				\item \textbf{Stakeholders: } Database, Back-End(Server)
 				\item \textbf{Conditions: } Must be logged in
@@ -1222,7 +1254,7 @@
 				\item \textbf{Conditions: } Must be logged in
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
-					\item After a specified period, according to the Job requirements, one or more Worker's entries are selected
+					\item After a specified period, according to the Job requirements, one or more Workers' entries are selected
 					\item The selected Workers are notified
 					\item The Jobs are added to the Worker's list of Jobs to be performed
 					\item Data is uploaded to the Server
@@ -1242,7 +1274,7 @@
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Leader, Organiser
 				\item \textbf{Goal:} Extend the Job Auction by 1 day due to various reasons - up to Leader/Organiser discretion
-				\item \textbf{Stakeholders: } Database, Back-End(Server), Worker
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Workers
 				\item \textbf{Conditions: } Must be logged in
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1263,7 +1295,7 @@
 		
 			\noindent \underbar{\textbf{UC41 - View list of Job Auctions}}
 			\begin{packed_item}
-				\item \textbf{Main Stakeholders:} Leader, Organiser, Administrator
+				\item \textbf{Main Stakeholders:} Leader, Organiser, Administrators
 				\item \textbf{Goal:} View the list of all the Job Auctions(both on-going and finished)
 				\item \textbf{Stakeholders: } Database, Back-End(Server)
 				\item \textbf{Conditions: } Must be logged in, and must have selected a Festival of which Job Auctions will be displayed
