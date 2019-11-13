@@ -72,14 +72,14 @@
 				
 				\item	\underbar{Leaders manage Festivals:}
 				\begin{packed_enum}
-					\item Create (multiple)Festivals
-					\item Modify or delete his Festivals	
+					\item Create [multiple] Festivals
+					\item Modify or delete their Festivals	
 					\item \textbf{Inherit Organiser functionalities for their Festivals}
-					\item Appoint Organisers to his Festivals(check if the selected Organiser is organising any possibly concurrent Festivals)
-					\item Access the Jobs, Activities, Workers and other details of his Festival
+					\item Appoint Organisers to their Festivals(check if the selected Organiser is organising any possibly concurrent Festivals)
+					\item Access the Jobs, Activities, Workers and other details of their Festival
 				\end{packed_enum}
 				
-				\item	\underbar{Organiser organise the concrete Festival workflow:}
+				\item	\underbar{Organiser organises the concrete Festival workflow:}
 				\begin{packed_enum}
 					\item Job management
 					\begin{packed_enum}
@@ -795,7 +795,7 @@
 			\noindent \underbar{\textbf{UC24 - View Festival Job Timeline}}
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Administrator, Leader, Organiser
-				\item \textbf{Goal:} Inspect Festival timeline regarding Jobs. Job overview
+				\item \textbf{Goal:} Inspect Festival Timeline regarding Jobs. Job overview
 				\item \textbf{Stakeholders: } Database, Back-End(Server)
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival and then selected the button for viewing the Festival Job Timeline
 				\item \textbf{Event flow description: }
@@ -1212,6 +1212,67 @@
 						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 					\end{packed_enum}
 				\end{packed_item}
+			\end{packed_item}
+		
+			\noindent \underbar{\textbf{UC39 - Job Entries Auction}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker
+				\item \textbf{Goal:} Select the Workers according to their Job Entries who will be given the task of performing the Job
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, and Organiser
+				\item \textbf{Conditions: } Must be logged in
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item After a specified period, according to the Job requirements, one or more Worker's entries are selected
+					\item The selected Workers are notified
+					\item The Jobs are added to the Worker's list of Jobs to be performed
+					\item Data is uploaded to the Server
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[4.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+		
+			\noindent \underbar{\textbf{UC40 - Extend Job Auction by 1 day}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Leader, Organiser
+				\item \textbf{Goal:} Extend the Job Auction by 1 day due to various reasons - up to Leader/Organiser discretion
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Worker
+				\item \textbf{Conditions: } Must be logged in
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The User taps the button to extend the Auction by 1 day
+					\item The Auction is extended by 1 day
+					\item Changes are sent to the Server to be parsed and saved there
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[3.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+		
+			\noindent \underbar{\textbf{UC41 - View list of Job Auctions}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Leader, Organiser, Administrator
+				\item \textbf{Goal:} View the list of all the Job Auctions(both on-going and finished)
+				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Conditions: } Must be logged in, and must have selected a Festival of which Job Auctions will be displayed
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The User taps the button to view the list of Job Auctions
+					\item The list of Job Auctions is displayed to the User
+					\item The User can add, remove or further inspect various Job Auctions
+				\end{packed_enum}
 			\end{packed_item}
 			
 			\subsubsection{Use Case Diagrams}
