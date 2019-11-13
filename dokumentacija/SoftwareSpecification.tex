@@ -823,7 +823,7 @@
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Administrators, Leader, Organiser
 				\item \textbf{Goal:} Inspect Festival Timeline regarding Jobs - provide Job overview
-				\item \textbf{Stakeholders: } Database, Back-End(Server)
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Festival Job Timeline
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival and then selected the button for viewing the Festival Job Timeline
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -871,7 +871,7 @@
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Administrators, Leader, Organiser
 				\item \textbf{Goal:} Organise Jobs in an effective manner from a time point of view
-				\item \textbf{Stakeholders: } Database, Back-End(Server), Workers
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Workers, Festival Job Timeline
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival and then its Festival Job Timeline
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -913,7 +913,7 @@
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Leader, Organiser
 				\item \textbf{Goal:} Add a Job onto the Festival Timeline Screen - so that it can be further managed, organised and/or deleted
-				\item \textbf{Stakeholders: } Database, Back-End(Server), Workers
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Workers, Festival Job Timeline
 				\item \textbf{Conditions: } Must be logged in, must have selected a Festival, its Festival Job Timeline and then selected the button 'Add a Job to the Timeline'
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1023,6 +1023,7 @@
 					\item Data(the list) is fetched from the Server and displayed to the User
 					\item The User can select a Specific Activity to inspect its Details
 					\item The User can add or remove Activities
+					\item The User can edit the Job Activity - if he is working with multiple Workers they are notified of this change via Push-Up Notifications
 					\item The User can tap the `View Job Activities Timeline` in order to manage the time-dimension of the aforementioned Activities
 				\end{packed_enum}
 				
@@ -1091,8 +1092,8 @@
 					
 					\item[3.a] Illegal input
 					\item[] \begin{packed_enum}
-						\item An error message is displayed informing the Leader that he has enter an illegal input
-						\item The notification asks the Leader to re-format and re-enter the input. The expected format and rules are displayed
+						\item An error message is displayed informing the User that they have entered illegal input
+						\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
 						\item The steps above are repeated if new input isn't accepted either
 					\end{packed_enum}
 					
@@ -1121,8 +1122,8 @@
 				\begin{packed_item}
 					\item[1.a] Illegal input
 					\item[] \begin{packed_enum}
-						\item An error message is displayed informing the Leader that he has enter an illegal input
-						\item The notification asks the Leader to re-format and re-enter the input. The expected format and rules are displayed
+						\item An error message is displayed informing the User that they have entered illegal input
+						\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
 						\item The steps above are repeated if new input isn't accepted either
 					\end{packed_enum}
 					
@@ -1162,7 +1163,7 @@
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Worker(s), Administrators
 				\item \textbf{Goal:} Inspect and modify(in Administrator's case moderate) the list of Activities of the given Job
-				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser, Job Activities Timeline
 				\item \textbf{Conditions: } Must be logged in, must have selected the option to go to Job Activity Timeline Management Screen
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1200,7 +1201,7 @@
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Worker(s), Administrators
 				\item \textbf{Goal:} Add the selected Job Activity to the Timeline so that its Time parameters can be set and manipulated
-				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser, Job Activities Timeline
 				\item \textbf{Conditions: } Must be logged in, must have selected a Job and the Activity to be added to the Job Activity Timeline
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
@@ -1300,6 +1301,60 @@
 					\item The list of Job Auctions is displayed to the User
 					\item The User can add, remove or further inspect various Job Auctions
 				\end{packed_enum}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC42 - Modify Job Activity}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker(s)
+				\item \textbf{Goal:} Modify Job Activities due to various reasons and necessities - up to lead Worker's discretion
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
+				\item \textbf{Conditions: } Must be logged in, and must have selected a Job and one of its Activities to modify
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The User modifies the Activity data arbitrarily
+					\item The User confirms the changes
+					\item The changes are sent to the Server to be saved
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[1.a] Illegal input
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User that they have entered illegal input
+						\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
+						\item The steps above are repeated if new input isn't accepted either
+					\end{packed_enum}
+					
+					\item[3.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC43 - Job awarded to Worker}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Worker(s)
+				\item \textbf{Goal:} Upon winning the Auction, the Worker is awarded the Job
+				\item \textbf{Stakeholders: } Database, Back-End(Server), Leader, Organiser
+				\item \textbf{Conditions: } Must be logged in, and must have won a Job Auction
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The Worker(s) is awarded the Job
+					\item Notify the Leader and Organiser of the corresponding Festival
+					\item Update the Worker(s)' profile
+					\item Send to, and save data on the Server 
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					\item[4.a] Data not successfully sent to the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data wasn't successfully sent to the Server
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+						\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+					\end{packed_enum}
+				\end{packed_item}
 			\end{packed_item}
 			
 			\subsubsection{Use Case Diagrams}

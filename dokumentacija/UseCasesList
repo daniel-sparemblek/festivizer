@@ -21,21 +21,22 @@ UC20 - Moderate the Festival
 UC21 - View the list of own Festivals(Leader, Organiser)
 UC22 - View the Festival details(Leader/Organiser)
 UC23 - Remove the Festival(Leader)
-UC24 - View Festival Job Timeline
-UC25 - Remove a Job from Festival Jobs
-UC26 - Managing Festival Job Timeline
-UC27 - Add a Job to the Festival Timeline(Screen)
+UC24 - View Festival Job Timeline   -   Festival Job Timeline
+UC25 - Remove a Job from Festival Jobs   -   Festival Job Timeline
+UC26 - Managing Festival Job Timeline   -   Festival Job Timeline
+UC27 - Add a Job to the Festival Timeline(Screen)   -   Festival Job Timeline
 UC28 - View Job Worker Application Entries - (Leader, Organiser)
 UC29 - Inspect Job Worker Application Entry
 UC30 - Verify Worker Job Application Entry
 UC31 - Manage Job Activities(Worker - Job)
 UC32 - Create Job Activity
 UC33 - Remove Job Activity(Worker)
-UC34 - Manage Job Activities Timeline(Worker)
-UC35 - Add Job Activity to Timeline(Worker)
+UC34 - Manage Job Activities Timeline(Worker)   -   Job Activity Timeline
+UC35 - Add Job Activity to Timeline(Worker)   -   Job Activity Timeline
 UC36 - Print Festival Card
 UC37 - Job Entries Auction
 UC38 - Job awarded to Worker
 UC39 - Extend Job Auction by 1 day
 UC40 - View List of Job Auctions
+UC41 - Modify Job Activity
 
