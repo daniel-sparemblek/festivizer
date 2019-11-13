@@ -37,6 +37,5 @@ UC36 - Manage Job Activities Timeline(Worker)
 UC37 - Add Job Activity to Timeline(Worker)
 UC38 - Print Festival Card
 UC39 - Job Entries Auction
-UC40 - Job awarded to Worker
-UC41 - Extend Job Auction by 1 day
-UC42 - View List of Job Auctions
+UC40 - Extend Job Auction by 1 day
+UC41 - View List of Job Auctions
