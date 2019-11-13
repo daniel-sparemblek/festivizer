@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.5)  13 NOV 2019 12:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.5)  13 NOV 2019 14:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1122,7 +1122,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.33 ...{4.1.1}Opis tablica}{47}{subsection.4.1.1}
+l.32 ...itecture and System Design}{49}{chapter.4}
                                                    [1
 
 ]
@@ -1278,17 +1278,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 99--100
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
+Missing character: There is no ‚ in font jkpmit7t!
+Missing character: There is no Ä in font jkpmit7t!
+Missing character: There is no ì in font jkpmit7t!
+Missing character: There is no ‚ in font jkpmit7t!
+Missing character: There is no Ä in font jkpmit7t!
+Missing character: There is no ô in font jkpmit7t!
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
 
  []
 
-[8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+[9] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 187--188
 
  []
 
-[10]
 Missing character: There is no ƒ in font jkpmn7t!
 Missing character: There is no ç in font jkpmn7t!
 Missing character: There is no ƒ in font jkpmn7t!
@@ -1299,37 +1304,38 @@ Missing character: There is no ƒ in font jkpmn7t!
 Missing character: There is no á in font jkpmn7t!
 Missing character: There is no ≈ in font jkpmn7t!
 Missing character: There is no ° in font jkpmn7t!
-LaTeX Font Info:    Try loading font information for OT1+jkptt on input line 17
-7.
- (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ot1jkptt.fd
+LaTeX Font Info:    Try loading font information for OT1+jkptt on input line 19
+1.
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ot1jkptt.fd
 File: ot1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for OT1/jkptt.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
+Underfull \hbox (badness 10000) in paragraph at lines 193--194
 
  []
 
 [11]
-<slike/aktivnost.PNG, id=339, 670.75594pt x 689.57625pt>
+<slike/aktivnost.PNG, id=341, 670.75594pt x 689.57625pt>
 File: slike/aktivnost.PNG Graphic file (type png)
 <use slike/aktivnost.PNG>
-Package pdftex.def Info: slike/aktivnost.PNG  used on input line 263.
+Package pdftex.def Info: slike/aktivnost.PNG  used on input line 277.
 (pdftex.def)             Requested size: 268.2976pt x 275.8256pt.
+ [12]
 File: slike/aktivnost.PNG Graphic file (type png)
 <use slike/aktivnost.PNG>
-Package pdftex.def Info: slike/aktivnost.PNG  used on input line 270.
+Package pdftex.def Info: slike/aktivnost.PNG  used on input line 284.
 (pdftex.def)             Requested size: 435.6108pt x 447.82993pt.
- [12pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+ [13pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.274 
-       <./slike/aktivnost.PNG>] [13pdfTeX warning (ext4): destination with the 
+l.288 
+       <./slike/aktivnost.PNG>] [14pdfTeX warning (ext4): destination with the 
 same identifier (name{figure.2.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.277 \eject
+l.291 \eject
             ])
 \openout2 = `SoftwareSpecification.aux'.
 
@@ -1360,16 +1366,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
-[14
+[15
 
 
 
-] [15]
+] [16]
 Overfull \hbox (95.35123pt too wide) in paragraph at lines 100--101
 []$[]$ 
  []
 
-[16]
+[17]
 Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no ° in font jkpmit7t!
 Missing character: There is no ≈ in font jkpmit7t!
@@ -1403,32 +1409,37 @@ Missing character: There is no ƒ in font jkpmn7t!
 Missing character: There is no á in font jkpmn7t!
 Missing character: There is no ƒ in font jkpmn7t!
 Missing character: There is no á in font jkpmn7t!
-[17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30]
+[18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31]
 Overfull \hbox (6.13322pt too wide) in paragraph at lines 756--757
 []\OT1/jkp/m/n/12 The Leader/Organiser can click the 'Mod-ify Fes-ti-val de-tai
 ls' but-ton which
  []
 
-[31] [32] [33] [34] [35] [36] [37] [38] [39] [40]
+[32] [33] [34] [35] [36] [37] [38] [39] [40] [41]
 Overfull \hbox (9.98764pt too wide) in paragraph at lines 1151--1153
 []\OT1/jkp/m/n/12 When done with chang-ing the di-a-gram, the User can tap the 
 'Save changes'
  []
 
-[41] [42] [43]
+[42] [43] [44]
+Overfull \hbox (45.2215pt too wide) in paragraph at lines 1244--1245
+[]\OT1/jkp/b/n/12 Goal: \OT1/jkp/m/n/12 Ex-tend the Job Auc-tion by 1 day due t
+o var-i-ous rea-sons - up to Leader/Organiser
+ []
+
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no á in font jkpmit7t!
 Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
- [44]
-Underfull \hbox (badness 10000) in paragraph at lines 1272--1273
+[45]
+Underfull \hbox (badness 10000) in paragraph at lines 1285--1286
 
  []
 
 Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
-[45]
-Underfull \hbox (badness 10000) in paragraph at lines 1279--1280
+[46]
+Underfull \hbox (badness 10000) in paragraph at lines 1292--1293
 
  []
 
@@ -1460,10 +1471,13 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no ° in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
-) [46]
+) [47]
 \openout2 = `Architecture.aux'.
 
- (./Architecture.tex
+ (./Architecture.tex [48
+
+
+]
 Chapter 4.
 
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
@@ -1520,41 +1534,39 @@ Missing character: There is no ç in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
 
-Overfull \hbox (1.82492pt too wide) in paragraph at lines 46--46
+Overfull \hbox (1.82492pt too wide) in paragraph at lines 47--47
 []\OT1/jkp/m/n/12 korisnickoIme|  
  []
 
-[47
-
-
+[49
 
 ]
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
-<slike/db_er_diag.png, id=946, 3617.515pt x 2067.725pt>
+<slike/db_er_diag.png, id=964, 3617.515pt x 2067.725pt>
 File: slike/db_er_diag.png Graphic file (type png)
 <use slike/db_er_diag.png>
-Package pdftex.def Info: slike/db_er_diag.png  used on input line 53.
+Package pdftex.def Info: slike/db_er_diag.png  used on input line 54.
 (pdftex.def)             Requested size: 435.6108pt x 248.96817pt.
-<slike/db_normal_diag.png, id=947, 1365.1pt x 907.39pt>
+<slike/db_normal_diag.png, id=965, 1365.1pt x 907.39pt>
 File: slike/db_normal_diag.png Graphic file (type png)
 <use slike/db_normal_diag.png>
-Package pdftex.def Info: slike/db_normal_diag.png  used on input line 60.
+Package pdftex.def Info: slike/db_normal_diag.png  used on input line 61.
 (pdftex.def)             Requested size: 435.6108pt x 289.54pt.
- [48pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [50pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.65 
-      <./slike/db_er_diag.png>] [49pdfTeX warning (ext4): destination with the 
+l.66 
+      <./slike/db_er_diag.png>] [51pdfTeX warning (ext4): destination with the 
 same identifier (name{figure.4.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.66 			\eject
+l.67 			\eject
                <./slike/db_normal_diag.png>]
 Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
@@ -1567,12 +1579,12 @@ Missing character: There is no ° in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--72
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--74
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
 
  []
 
@@ -1593,47 +1605,36 @@ Missing character: There is no á in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ë in font jkpmit7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
+Underfull \hbox (badness 10000) in paragraph at lines 76--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
  []
 
-[50]
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
-
- []
-
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ƒ in font jkpbit7t!
-Missing character: There is no ç in font jkpbit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no ° in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-[51]
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
-
- []
-
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
 [52]
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
+
+ []
+
+Missing character: There is no ≈ in font jkpmit7t!
+Missing character: There is no æ in font jkpmit7t!
+Missing character: There is no ƒ in font jkpbit7t!
+Missing character: There is no ç in font jkpbit7t!
+Missing character: There is no ƒ in font jkpmit7t!
+Missing character: There is no ç in font jkpmit7t!
+Missing character: There is no ƒ in font jkpmit7t!
+Missing character: There is no ç in font jkpmit7t!
+Missing character: There is no ≈ in font jkpmit7t!
+Missing character: There is no ° in font jkpmit7t!
+Missing character: There is no ƒ in font jkpmit7t!
+Missing character: There is no ç in font jkpmit7t!
+Missing character: There is no ƒ in font jkpmit7t!
+Missing character: There is no ç in font jkpmit7t!
+[53]
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
 
  []
 
@@ -1641,7 +1642,18 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no á in font jkpmit7t!
-) [53]
+Missing character: There is no ƒ in font jkpmit7t!
+Missing character: There is no ç in font jkpmit7t!
+[54]
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
+
+ []
+
+Missing character: There is no ≈ in font jkpmit7t!
+Missing character: There is no æ in font jkpmit7t!
+Missing character: There is no ƒ in font jkpmit7t!
+Missing character: There is no á in font jkpmit7t!
+) [55]
 \openout2 = `Implementation.aux'.
 
  (./Implementation.tex
@@ -1663,7 +1675,7 @@ Overfull \hbox (4.65672pt too wide) in paragraph at lines 8--9
 sti in-ter-net poveznicu \OT1/jkp/m/it/12 gdje se mogu preuzeti
  []
 
-[54
+[56
 
 
 
@@ -1750,7 +1762,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no ° in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no á in font jkpmit7t!
-[55]
+[57]
 Missing character: There is no ≈ in font jkpbn7t!
 Missing character: There is no ° in font jkpbn7t!
 Missing character: There is no ≈ in font jkpmit7t!
@@ -1763,7 +1775,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no ° in font jkpmit7t!
 Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
- [56]
+ [58]
 Missing character: There is no ≈ in font jkpbn7t!
 Missing character: There is no ° in font jkpbn7t!
 
@@ -1799,7 +1811,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no ° in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no á in font jkpmit7t!
-[57])
+[59])
 \openout2 = `Conclusion.aux'.
 
  (./Conclusion.tex
@@ -1826,7 +1838,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
-[58
+[60
 
 
 
@@ -1848,7 +1860,7 @@ Overfull \hbox (21.39998pt too wide) in paragraph at lines 18--19
 n/12 http : / / www . ece . rutgers . edu / []marsic /
  []
 
-) [59
+) [61
 
 
 
@@ -1856,7 +1868,7 @@ n/12 http : / / www . ece . rutgers . edu / []marsic /
 \tf@lof=\write5
 \openout5 = `OPP_ProjektnaDokumentacija_v5.lof'.
 
- [60
+ [62
 
 
 ]
@@ -1874,7 +1886,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
 Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no ° in font jkpmit7t!
-[61
+[63
 
 
 ]
@@ -1929,12 +1941,12 @@ Missing character: There is no ƒ in font jkpmn7t!
 Missing character: There is no á in font jkpmn7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
-[62] [63]
+[64] [65]
 Underfull \hbox (badness 10000) in paragraph at lines 103--104
 
  []
 
-) [64] 
+) [66] 
 AED: lastpage setting LastPage
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 135.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 135.
@@ -1946,13 +1958,13 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 135.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 135.
 Package rerunfilecheck Info: File `OPP_ProjektnaDokumentacija_v5.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: 666832510AC20D60C865C7F9BE786BD4;3137.
+(rerunfilecheck)             Checksum: 16C89842CDDB59D682F698348FB4EC8A;3201.
  ) 
 Here is how much of TeX's memory you used:
- 11490 strings out of 492982
- 159630 string characters out of 6134896
+ 11496 strings out of 492982
+ 159696 string characters out of 6134896
  316154 words of memory out of 5000000
- 14194 multiletter control sequences out of 15000+600000
+ 14195 multiletter control sequences out of 15000+600000
  56557 words of font info for 131 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,12n,43p,895b,662s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1968,10 +1980,10 @@ onts/jkpmit8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkp
 mite.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb>
-Output written on OPP_ProjektnaDokumentacija_v5.pdf (65 pages, 416267 bytes).
+Output written on OPP_ProjektnaDokumentacija_v5.pdf (67 pages, 418193 bytes).
 PDF statistics:
- 1215 PDF objects out of 1440 (max. 8388607)
- 1122 compressed objects within 12 object streams
- 564 named destinations out of 1000 (max. 500000)
- 384 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1234 PDF objects out of 1440 (max. 8388607)
+ 1139 compressed objects within 12 object streams
+ 569 named destinations out of 1000 (max. 500000)
+ 392 words of extra memory for PDF output out of 10000 (max. 10000000)
 
