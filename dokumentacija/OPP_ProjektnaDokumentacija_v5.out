@@ -12,6 +12,40 @@
 \BOOKMARK [2][-]{subsection.2.3.7}{Functions and happenings of the system}{section.2.3}% 12
 \BOOKMARK [2][-]{subsection.2.3.8}{Festival}{section.2.3}% 13
 \BOOKMARK [2][-]{subsection.2.3.9}{Auction}{section.2.3}% 14
+<<<<<<< HEAD
+\BOOKMARK [2][-]{subsection.2.3.10}{Job}{section.2.3}% 15
+\BOOKMARK [2][-]{subsection.2.3.11}{Activity}{section.2.3}% 16
+\BOOKMARK [2][-]{subsection.2.3.12}{Cards}{section.2.3}% 17
+\BOOKMARK [2][-]{subsection.2.3.13}{Card Format}{section.2.3}% 18
+\BOOKMARK [2][-]{subsection.2.3.14}{System implementation targets}{section.2.3}% 19
+\BOOKMARK [2][-]{subsection.2.3.15}{Project Scope and Targeted Users}{section.2.3}% 20
+\BOOKMARK [2][-]{subsection.2.3.16}{Changes, upgrades, adaptability of the Application}{section.2.3}% 21
+\BOOKMARK [1][-]{section.2.4}{Primjeri u LaTeXu}{chapter.2}% 22
+\BOOKMARK [0][-]{chapter.3}{Software Specification}{}% 23
+\BOOKMARK [1][-]{section.3.1}{Functional Requirements}{chapter.3}% 24
+\BOOKMARK [2][-]{subsection.3.1.1}{Use Cases}{section.3.1}% 25
+\BOOKMARK [2][-]{subsection.3.1.2}{Sekvencijski dijagrami}{section.3.1}% 26
+\BOOKMARK [1][-]{section.3.2}{Ostali zahtjevi}{chapter.3}% 27
+\BOOKMARK [0][-]{chapter.4}{Architecture and System Design}{}% 28
+\BOOKMARK [1][-]{section.4.1}{Database}{chapter.4}% 29
+\BOOKMARK [2][-]{subsection.4.1.1}{Tables details}{section.4.1}% 30
+\BOOKMARK [2][-]{subsection.4.1.2}{Database diagrams}{section.4.1}% 31
+\BOOKMARK [1][-]{section.4.2}{Dijagram razreda}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.3}{Dijagram stanja}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.4}{Dijagram aktivnosti}{chapter.4}% 34
+\BOOKMARK [1][-]{section.4.5}{Dijagram komponenti}{chapter.4}% 35
+\BOOKMARK [0][-]{chapter.5}{Implementation and User Interface}{}% 36
+\BOOKMARK [1][-]{section.5.1}{Kori\235tene tehnologije i alati}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.2}{Ispitivanje programskog rje\235enja}{chapter.5}% 38
+\BOOKMARK [2][-]{subsection.5.2.1}{Ispitivanje komponenti}{section.5.2}% 39
+\BOOKMARK [2][-]{subsection.5.2.2}{Ispitivanje sustava}{section.5.2}% 40
+\BOOKMARK [1][-]{section.5.3}{Dijagram razmje\235taja}{chapter.5}% 41
+\BOOKMARK [1][-]{section.5.4}{Upute za pu\235tanje u pogon}{chapter.5}% 42
+\BOOKMARK [0][-]{chapter.6}{Conclusion and Outline of Planned Future Work}{}% 43
+\BOOKMARK [0][-]{chapter*.4}{Popis literature}{}% 44
+\BOOKMARK [0][-]{chapter*.5}{Image and diagram index}{}% 45
+\BOOKMARK [0][-]{chapter*.6}{Dodatak: Prikaz aktivnosti grupe}{}% 46
+=======
 \BOOKMARK [2][-]{subsection.2.3.10}{Timelines}{section.2.3}% 15
 \BOOKMARK [2][-]{subsection.2.3.11}{Job}{section.2.3}% 16
 \BOOKMARK [2][-]{subsection.2.3.12}{Activity}{section.2.3}% 17
@@ -45,3 +79,4 @@
 \BOOKMARK [0][-]{chapter*.4}{Popis literature}{}% 45
 \BOOKMARK [0][-]{chapter*.5}{Image and diagram index}{}% 46
 \BOOKMARK [0][-]{chapter*.6}{Dodatak: Prikaz aktivnosti grupe}{}% 47
+>>>>>>> 8ddb7f63ce441212e34371f19afabc0af62e4d23

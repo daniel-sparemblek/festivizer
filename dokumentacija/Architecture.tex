@@ -15,40 +15,249 @@ git \chapter{Architecture and System Design}
 		
 
 				
-		\section{Baza podataka}
+		\section{Database}
 			
-			\textbf{\textit{dio 1. revizije}}\\
 			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+		\textit{Database used for this project is a relation based database. Relation is usually referred to as a table that has tuples. Tuple is an object that represents an information. Purpose of the database is easy and fast data manipulation, including saving, deleting, updating and sending data to the server. Database has relations:}
+	\begin{itemize}
+			\item 	\textit{User)}
+			\item 	\textit{Festival)}
+			\item 	\textit{Event)}
+			\item 	\textit{Specialization)}
+			\item 	\textit{WorkerSpec)}
+			\item 	\textit{Auction)}
+			\item 	\textit{Application)}
+			\item 	\textit{Job)}
+			\item 	\textit{JobSpec)}
+			\item 	\textit{FestivalOrganizers)}
+
+
+
+		\end{itemize}
 		
-			\subsection{Opis tablica}
+			\subsection{Tables details}
 			
 
-				\textbf{Ime Razreda} \textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+				\textbf{User} \textit{has entitites for every user of the app. It has all needed personal information about the user and his role.}
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{User}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{User}}	 \\[3pt] \hline
 					\endhead
 					
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam 	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\cellcolor{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\cellcolor{LightGreen}user\_id & INT	&  	User identification number 	\\ \hline
+					username	& VARCHAR &  Unique username 	\\ \hline 
+					password & VARCHAR & User account password  \\ \hline 
+					firstname & VARCHAR	&  Users first name	\\ \hline 
+					lastname & VARCHAR	&  Users last name	\\ \hline 
+					picture & VARCHAR	&  Profile picture string	\\ \hline 
+					phone & VARCHAR	&  Users phone number	\\ \hline 
+					email & VARCHAR	&  Users email address	\\ \hline 
+					role & VARCHAR	&  Role user will persue in application	\\ \hline
 					
+				\end{longtabu}
+
+				\textbf{Festival} \textit{contains all needed information about the festival.}
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Festival}}	 \\[3pt] \hline
+					\endfirsthead
+
+					\hline \multicolumn{3}{|c|}{\textbf{Festival}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}festival\_id & INT	&  	Festival identification number 	\\ \hline
+					\cellcolor{LightBlue}creator\_id	& INT &  ID of the user who created the festival 	\\ \hline 
+					name & VARCHAR & Festival name  \\ \hline 
+					desc & VARCHAR	&  Short festival description, can be empty	\\ \hline 
+					logo & VARCHAR	&  Festivals logo string	\\ \hline 
+					duration & INTERVAL	&  Festival duration interval	\\ \hline 
+					active & BOOLEAN	&  True if festival is active, False if it's unactive	\\ \hline 
+					
+				\end{longtabu}
+
+				\textbf{Event} \textit{contains information about the event of the festival.}
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Event}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Event}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}event\_id & INT	&  	Event identification number 	\\ \hline
+					\cellcolor{LightBlue}festival\_id	& INT &  ID of the festival that event belongs to 	\\ \hline 
+					\cellcolor{LightBlue}organizer\_id 	& INT &  ID of the user who created the event  	\\ \hline 
+					name & VARCHAR & Event name  \\ \hline 
+					desc & VARCHAR	&  Short event description, can be empty	\\ \hline 
+					location & VARCHAR	&  Events location	\\ \hline 
+					start\_Time & TIMESTAMP	&  Event start time	\\ \hline 
+					end\_Time & TIMESTAMP	&  Event end time  \\ \hline 
+					
+				\end{longtabu}
+
+
+				\textbf{Specialization} \textit{contains all different specializations and their names.}
+				
+				\begin{longtabu} to \textwidth {|X[7, l]|X[6, l]|X[19, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Specialization}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Specialization}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightBlue}specialization\_id & INT	&  	Specializations identification number 	\\ \hline
+					name & VARCHAR & Name of the specialization \\ \hline
+
+					
+				\end{longtabu}
+
+				\textbf{WorkerSpec} \textit{contains specifications about the user who wants to apply as a worker and his specializations.}
+				
+				\begin{longtabu} to \textwidth {|X[7, l]|X[6, l]|X[19, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{WorkerSpec}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{WorkerSpec}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}worker\_id & INT	&  	Workers identification number 	\\ \hline
+					\cellcolor{LightBlue}specialization\_id & INT	&  	Specializations identification number 	\\ \hline
+
+					
+				\end{longtabu}
+
+				\textbf{Auction} \textit{contains information about auctions.}
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Auction}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Auction}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}auction\_id & INT	&  	Auction identification number 	\\ \hline
+					start\_Time & TIMESTAMP	&  Auction start time	\\ \hline 
+					end\_Time & TIMESTAMP	&  Auction end time  \\ \hline 
+					
+				\end{longtabu}
+
+
+				\textbf{Application} \textit{contains information about applications for auctions.}
+				
+				\begin{longtabu} to \textwidth {|X[8, l]|X[6, l]|X[18, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Application}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Application}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}application\_id & INT	&  	Application identification number 	\\ \hline
+					\cellcolor{LightBlue}auction\_id & INT	&  	Auction identification number that worker applies for 	\\ \hline
+					\cellcolor{LightBlue}worker\_id & INT	&  	Workers identification number 	\\ \hline
+					price & FLOAT & Offered pay for the job \\ \hline
+					comment & VARCHAR & Additional comment for application, can be empty \\ \hline
+					approximate\_time & INT & Time needed to complete the job, in days \\ \hline
+					number\_of\_people & INT & Number of people that will be doing the job \\ \hline
+
 					
 				\end{longtabu}
 			
+
+				\textbf{Job} \textit{contains information about jobs that had an auction.}
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Job}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Job}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}job\_id & INT	&  	Job identification number 	\\ \hline
+					\cellcolor{LightBlue}event\_id & INT	&  	Events identification number that job is for\\ \hline
+					\cellcolor{LightBlue}worker\_id & INT	&  	Workers identification number that does the job\\ \hline
+					\cellcolor{LightBlue}auction\_id & INT	&  	Auctions identification number that auctioned the job\\ \hline
+					start\_Time & DATETIME	&  Jobs start time	\\ \hline 
+					is\_Completed & BOOLEAN	&  True if job is finished, false if it's still active \\ \hline 
+
+				
+				\end{longtabu}
+
+
+				\textbf{JobSpec} \textit{contains specializations that are needed for the job}
+				
+				\begin{longtabu} to \textwidth {|X[7, l]|X[6, l]|X[19, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{JobSpec}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{JobSpec}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}job\_id & INT	&  	Job identification number 	\\ \hline
+					\cellcolor{LightBlue}specialization\_id & INT	&  	Specializations identification number 	\\ \hline
+
+					
+				\end{longtabu}
+
+
+				\textbf{FestivalOrganizers} \textit{contains information which user, that is also an organizer, applied for which festival.}
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{FestivalOrganizers}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}festival\_id & INT	&  	Festival identification number 	\\ \hline
+					\cellcolor{LightGreen}organizer\_id & INT	&  	Organizers identification number 	\\ \hline
+					status & INT	&  \-1 when organizer is waiting on leader, 0 when rejected and 1 when accepted \\ \hline 
+
+				
+				\end{longtabu}
 			
-			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
+			\subsection{Database diagrams}
+				
 				
 				\begin{figure}[H]
 					\includegraphics[width=\linewidth]{slike/db_er_diag.png}
