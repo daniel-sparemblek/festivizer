@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.5)  11 NOV 2019 00:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.5)  13 NOV 2019 11:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1122,7 +1122,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.33 ...{4.1.1}Opis tablica}{37}{subsection.4.1.1}
+l.33 ...{4.1.1}Opis tablica}{46}{subsection.4.1.1}
                                                    [1
 
 ]
@@ -1409,20 +1409,26 @@ Overfull \hbox (6.13322pt too wide) in paragraph at lines 756--757
 ls' but-ton which
  []
 
-[31] [32] [33]
+[31] [32] [33] [34] [35] [36] [37] [38] [39] [40]
+Overfull \hbox (9.98764pt too wide) in paragraph at lines 1151--1153
+[]\OT1/jkp/m/n/12 When done with chang-ing the di-a-gram, the User can tap the 
+'Save changes'
+ []
+
+[41] [42]
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no ‡ in font jkpmit7t!
 Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¾ in font jkpmit7t!
- [34]
-Underfull \hbox (badness 10000) in paragraph at lines 876--877
+ [43]
+Underfull \hbox (badness 10000) in paragraph at lines 1224--1225
 
  []
 
 Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¾ in font jkpmit7t!
-[35]
-Underfull \hbox (badness 10000) in paragraph at lines 883--884
+[44]
+Underfull \hbox (badness 10000) in paragraph at lines 1231--1232
 
  []
 
@@ -1454,7 +1460,7 @@ Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¡ in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no  in font jkpmit7t!
-) [36]
+) [45]
 \openout2 = `Architecture.aux'.
 
  (./Architecture.tex
@@ -1518,7 +1524,7 @@ Overfull \hbox (1.82492pt too wide) in paragraph at lines 47--47
 []\OT1/jkp/m/n/12 korisnickoIme|  
  []
 
-[37
+[46
 
 
 
@@ -1527,7 +1533,7 @@ Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no  in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no  in font jkpmit7t!
- [38]
+ [47]
 Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¾ in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
@@ -1574,7 +1580,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
-[39]
+[48]
 Underfull \hbox (badness 10000) in paragraph at lines 75--76
 
  []
@@ -1593,7 +1599,7 @@ Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no  in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no  in font jkpmit7t!
-[40]
+[49]
 Underfull \hbox (badness 10000) in paragraph at lines 84--85
 
  []
@@ -1604,7 +1610,7 @@ Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no ‡ in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no  in font jkpmit7t!
-[41]
+[50]
 Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
@@ -1613,7 +1619,7 @@ Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¾ in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no ‡ in font jkpmit7t!
-) [42]
+) [51]
 \openout2 = `Implementation.aux'.
 
  (./Implementation.tex
@@ -1635,7 +1641,7 @@ Overfull \hbox (4.65672pt too wide) in paragraph at lines 8--9
 sti in-ter-net poveznicu \OT1/jkp/m/it/12 gdje se mogu preuzeti
  []
 
-[43
+[52
 
 
 
@@ -1722,7 +1728,7 @@ Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¡ in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no ‡ in font jkpmit7t!
-[44]
+[53]
 Missing character: There is no Å in font jkpbn7t!
 Missing character: There is no ¡ in font jkpbn7t!
 Missing character: There is no Å in font jkpmit7t!
@@ -1735,7 +1741,7 @@ Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¡ in font jkpmit7t!
 Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¾ in font jkpmit7t!
- [45]
+ [54]
 Missing character: There is no Å in font jkpbn7t!
 Missing character: There is no ¡ in font jkpbn7t!
 
@@ -1771,7 +1777,7 @@ Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¡ in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no ‡ in font jkpmit7t!
-[46])
+[55])
 \openout2 = `Conclusion.aux'.
 
  (./Conclusion.tex
@@ -1798,7 +1804,7 @@ Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¾ in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no  in font jkpmit7t!
-[47
+[56
 
 
 
@@ -1820,7 +1826,7 @@ Overfull \hbox (21.39998pt too wide) in paragraph at lines 18--19
 n/12 http : / / www . ece . rutgers . edu / []marsic /
  []
 
-) [48
+) [57
 
 
 
@@ -1828,7 +1834,7 @@ n/12 http : / / www . ece . rutgers . edu / []marsic /
 \tf@lof=\write5
 \openout5 = `OPP_ProjektnaDokumentacija_v5.lof'.
 
- [49
+ [58
 
 
 ]
@@ -1846,7 +1852,7 @@ Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¾ in font jkpmit7t!
 Missing character: There is no Å in font jkpmit7t!
 Missing character: There is no ¡ in font jkpmit7t!
-[50
+[59
 
 
 ]
@@ -1901,12 +1907,12 @@ Missing character: There is no Ä in font jkpmn7t!
 Missing character: There is no ‡ in font jkpmn7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no  in font jkpmit7t!
-[51] [52]
+[60] [61]
 Underfull \hbox (badness 10000) in paragraph at lines 103--104
 
  []
 
-) [53] 
+) [62] 
 AED: lastpage setting LastPage
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 135.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 135.
@@ -1921,8 +1927,8 @@ hanged.
 (rerunfilecheck)             Checksum: 666832510AC20D60C865C7F9BE786BD4;3137.
  ) 
 Here is how much of TeX's memory you used:
- 11338 strings out of 492982
- 158245 string characters out of 6134896
+ 11459 strings out of 492982
+ 159204 string characters out of 6134896
  316073 words of memory out of 5000000
  14184 multiletter control sequences out of 15000+600000
  56557 words of font info for 131 fonts, out of 8000000 for 9000
@@ -1940,10 +1946,10 @@ onts/jkpmit8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkp
 mite.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb>
-Output written on OPP_ProjektnaDokumentacija_v5.pdf (54 pages, 189881 bytes).
+Output written on OPP_ProjektnaDokumentacija_v5.pdf (63 pages, 207658 bytes).
 PDF statistics:
- 994 PDF objects out of 1000 (max. 8388607)
- 918 compressed objects within 10 object streams
- 425 named destinations out of 1000 (max. 500000)
+ 1179 PDF objects out of 1200 (max. 8388607)
+ 1093 compressed objects within 11 object streams
+ 546 named destinations out of 1000 (max. 500000)
  374 words of extra memory for PDF output out of 10000 (max. 10000000)
 
