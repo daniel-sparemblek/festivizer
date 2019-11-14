@@ -1,49 +1,49 @@
 \babel@toc {english}{}
-\contentsline {chapter}{\numberline {1}Documentation Change Log}{3}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Project Description}{4}{chapter.2}%
-\contentsline {section}{\numberline {2.1}General Idea}{4}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Position in the market - the competition}{4}{section.2.2}%
-\contentsline {section}{\numberline {2.3}In-Depth Description}{5}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Account Data}{5}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}User roles}{6}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Administrators}{6}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Creators}{6}{subsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.3.5}Organiser}{6}{subsection.2.3.5}%
-\contentsline {subsection}{\numberline {2.3.6}Worker}{7}{subsection.2.3.6}%
-\contentsline {subsection}{\numberline {2.3.7}Functions and happenings of the system}{7}{subsection.2.3.7}%
-\contentsline {subsection}{\numberline {2.3.8}Festival}{8}{subsection.2.3.8}%
-\contentsline {subsection}{\numberline {2.3.9}Auction}{8}{subsection.2.3.9}%
-\contentsline {subsection}{\numberline {2.3.10}Timelines}{8}{subsection.2.3.10}%
-\contentsline {subsection}{\numberline {2.3.11}Job}{9}{subsection.2.3.11}%
-\contentsline {subsection}{\numberline {2.3.12}Activity}{9}{subsection.2.3.12}%
-\contentsline {subsection}{\numberline {2.3.13}Cards}{9}{subsection.2.3.13}%
-\contentsline {subsection}{\numberline {2.3.14}Card Format}{9}{subsection.2.3.14}%
-\contentsline {subsection}{\numberline {2.3.15}System implementation targets}{10}{subsection.2.3.15}%
-\contentsline {subsection}{\numberline {2.3.16}Project Scope and Targeted Users}{10}{subsection.2.3.16}%
-\contentsline {subsection}{\numberline {2.3.17}Changes, upgrades, adaptability of the Application}{10}{subsection.2.3.17}%
-\contentsline {chapter}{\numberline {3}Software Specification}{12}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Functional Requirements}{12}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Use Cases}{15}{subsection.3.1.1}%
-\contentsline {subsubsection}{Use Cases Description}{15}{subsubsection*.2}%
-\contentsline {subsubsection}{Use Case Diagrams}{42}{subsubsection*.3}%
-\contentsline {subsection}{\numberline {3.1.2}Sekvencijski dijagrami}{43}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Ostali zahtjevi}{44}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Architecture and System Design}{46}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Database}{46}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Tables details}{47}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Database diagrams}{50}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Class Diagram}{52}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Dijagram stanja}{53}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Dijagram aktivnosti}{54}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Dijagram komponenti}{55}{section.4.5}%
-\contentsline {chapter}{\numberline {5}Implementation and User Interface}{56}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Korištene tehnologije i alati}{56}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Ispitivanje programskog rješenja}{57}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Ispitivanje komponenti}{57}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Ispitivanje sustava}{57}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Dijagram razmještaja}{58}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Upute za puštanje u pogon}{59}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Conclusion and Outline of Planned Future Work}{60}{chapter.6}%
-\contentsline {chapter}{Popis literature}{61}{chapter*.4}%
-\contentsline {chapter}{Image and diagram index}{62}{chapter*.5}%
-\contentsline {chapter}{Appendix: Preview of group activity}{63}{chapter*.6}%
+\contentsline {chapter}{\numberline {1}Documentation Change Log}{3}{chapter.1}
+\contentsline {chapter}{\numberline {2}Project Description}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}General Idea}{4}{section.2.1}
+\contentsline {section}{\numberline {2.2}Position in the market - the competition}{4}{section.2.2}
+\contentsline {section}{\numberline {2.3}In-Depth Description}{5}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Account Data}{5}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}User roles}{6}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Administrators}{6}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Creators}{6}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.5}Organiser}{6}{subsection.2.3.5}
+\contentsline {subsection}{\numberline {2.3.6}Worker}{7}{subsection.2.3.6}
+\contentsline {subsection}{\numberline {2.3.7}Functions and happenings of the system}{7}{subsection.2.3.7}
+\contentsline {subsection}{\numberline {2.3.8}Festival}{8}{subsection.2.3.8}
+\contentsline {subsection}{\numberline {2.3.9}Auction}{8}{subsection.2.3.9}
+\contentsline {subsection}{\numberline {2.3.10}Timelines}{8}{subsection.2.3.10}
+\contentsline {subsection}{\numberline {2.3.11}Job}{9}{subsection.2.3.11}
+\contentsline {subsection}{\numberline {2.3.12}Activity}{9}{subsection.2.3.12}
+\contentsline {subsection}{\numberline {2.3.13}Cards}{9}{subsection.2.3.13}
+\contentsline {subsection}{\numberline {2.3.14}Card Format}{9}{subsection.2.3.14}
+\contentsline {subsection}{\numberline {2.3.15}System implementation targets}{10}{subsection.2.3.15}
+\contentsline {subsection}{\numberline {2.3.16}Project Scope and Targeted Users}{10}{subsection.2.3.16}
+\contentsline {subsection}{\numberline {2.3.17}Changes, upgrades, adaptability of the Application}{10}{subsection.2.3.17}
+\contentsline {chapter}{\numberline {3}Software Specification}{12}{chapter.3}
+\contentsline {section}{\numberline {3.1}Functional Requirements}{12}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Use Cases}{15}{subsection.3.1.1}
+\contentsline {subsubsection}{Use Cases Description}{15}{subsubsection*.2}
+\contentsline {subsubsection}{Use Case Diagrams}{44}{subsubsection*.3}
+\contentsline {subsection}{\numberline {3.1.2}Sekvencijski dijagrami}{47}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Ostali zahtjevi}{48}{section.3.2}
+\contentsline {chapter}{\numberline {4}Architecture and System Design}{50}{chapter.4}
+\contentsline {section}{\numberline {4.1}Database}{50}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Tables details}{51}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Database diagrams}{54}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Class Diagram}{56}{section.4.2}
+\contentsline {section}{\numberline {4.3}Dijagram stanja}{57}{section.4.3}
+\contentsline {section}{\numberline {4.4}Dijagram aktivnosti}{58}{section.4.4}
+\contentsline {section}{\numberline {4.5}Dijagram komponenti}{59}{section.4.5}
+\contentsline {chapter}{\numberline {5}Implementation and User Interface}{60}{chapter.5}
+\contentsline {section}{\numberline {5.1}Korištene tehnologije i alati}{60}{section.5.1}
+\contentsline {section}{\numberline {5.2}Ispitivanje programskog rješenja}{61}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Ispitivanje komponenti}{61}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Ispitivanje sustava}{61}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}Dijagram razmještaja}{62}{section.5.3}
+\contentsline {section}{\numberline {5.4}Upute za puštanje u pogon}{63}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusion and Outline of Planned Future Work}{64}{chapter.6}
+\contentsline {chapter}{Popis literature}{65}{chapter*.4}
+\contentsline {chapter}{Image and diagram index}{66}{chapter*.5}
+\contentsline {chapter}{Appendix: Preview of group activity}{67}{chapter*.6}
