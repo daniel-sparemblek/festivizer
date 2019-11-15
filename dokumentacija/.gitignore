@@ -1,6 +1,1 @@
-#ignore all LaTex files
-vcs.xml
-Project.xml
-modules.xml
-misc.xml
-organization_of_the_festival.iml
+*.aux
