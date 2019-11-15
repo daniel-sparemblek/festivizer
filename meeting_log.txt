@@ -1,0 +1,68 @@
+MEETING LOG
+1. Meeting
+• Date: October 4, 2019
+• Attended: P.Fribert, D.R.Sparemblek, B.Bilic, K.Ceple, D.Strbad, L.Lendel,
+K.Jezic
+• Meeting theme:
+– initial getting to know each other, individual skills
+2. Meeting
+• Date: October 5, 2019
+• Attended: P.Fribert, D.R.Sparemblek, B.Bilic, K.Ceple, D.Strbad, L.Lendel,
+K.Jezic
+• Meeting theme:
+– creating back end, front end and server team
+3. Meeting
+• Date: October 15, 2019
+• Attended:D.R.Sparemblek, B.Bilic
+• Meeting theme:
+– making first draft database
+4. Meeting
+• Date: October 23, 2019
+• Attended:D.R.Sparemblek, B.Bilic, P.Fribert
+• Meeting theme:
+– making database in python
+5. Meeting
+• Date: October 24, 2019
+• Attended:L.Lendel, B.Bilic, K.Jezic, D.R.paremblek, P.Fribert
+kaoGrupa
+page 73/77
+November 15, 2019Oblikovanje programske potpore
+Festival Organization
+• Meeting theme:
+– signup and login screen functions
+6. Meeting
+• Date: November 6, 2019
+• Attended: P.Fribert, D.R.Sparemblek
+• Meeting theme:
+– foreign keys in database
+7. Meeting
+• Date: November 7, 2019
+• Attended: P.Fribert, B.Bilic, K.Ceple, D.Strbad, L.Lendel, K.Jezic
+• Meeting theme:
+– server functions
+– front end: hashing passwords and checking emails
+– documentation update
+8. Meeting
+• Date: November 10, 2019
+• Attended: D.R.Sparemblek, B.Bilic, L.Lendel, K.Jezic
+• Meeting theme:
+– debugging application, checking code
+9. Meeting
+• Date: November 11, 2019
+• Attended: P.Fribert, D.R.Sparemblek, B.Bilic, K.Ceple, D.Strbad, L.Lendel,
+K.Jezic
+• Meeting theme:
+– final changes before commiting project
+10. Meeting
+• Date: November 13, 2019
+• Attended: P.Fribert, K.Ceple
+• Meeting theme:
+– documentation specifics
+11. Meeting
+• Date: November 15, 2019
+• Attended: B. Bilic, D.R. Sparemblek, D. Strbad and K. Ceple
+• Meeting theme:
+– Create and add Class Diagrams to the Documentation
+– Check the Documentation for slip-ups, fix and add some items to it
+– Merge devdoc to master
+– Generate final document

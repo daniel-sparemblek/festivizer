@@ -32,18 +32,18 @@
 \contentsline {section}{\numberline {4.1}Database}{56}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Tables details}{57}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Database diagrams}{60}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Class Diagram}{62}{section.4.2}
-\contentsline {section}{\numberline {4.3}Dijagram stanja}{63}{section.4.3}
-\contentsline {section}{\numberline {4.4}Dijagram aktivnosti}{64}{section.4.4}
-\contentsline {section}{\numberline {4.5}Dijagram komponenti}{65}{section.4.5}
-\contentsline {chapter}{\numberline {5}Implementation and User Interface}{66}{chapter.5}
-\contentsline {section}{\numberline {5.1}Korištene tehnologije i alati}{66}{section.5.1}
-\contentsline {section}{\numberline {5.2}Ispitivanje programskog rješenja}{67}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Ispitivanje komponenti}{67}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Ispitivanje sustava}{67}{subsection.5.2.2}
-\contentsline {section}{\numberline {5.3}Dijagram razmještaja}{68}{section.5.3}
-\contentsline {section}{\numberline {5.4}Upute za puštanje u pogon}{69}{section.5.4}
-\contentsline {chapter}{\numberline {6}Conclusion and Outline of Planned Future Work}{70}{chapter.6}
-\contentsline {chapter}{Popis literature}{71}{chapter*.4}
-\contentsline {chapter}{Image and diagram index}{72}{chapter*.5}
-\contentsline {chapter}{Appendix: Preview of group activity}{73}{chapter*.6}
+\contentsline {section}{\numberline {4.2}Class Diagrams}{62}{section.4.2}
+\contentsline {section}{\numberline {4.3}Dijagram stanja}{64}{section.4.3}
+\contentsline {section}{\numberline {4.4}Dijagram aktivnosti}{65}{section.4.4}
+\contentsline {section}{\numberline {4.5}Dijagram komponenti}{66}{section.4.5}
+\contentsline {chapter}{\numberline {5}Implementation and User Interface}{67}{chapter.5}
+\contentsline {section}{\numberline {5.1}Korištene tehnologije i alati}{67}{section.5.1}
+\contentsline {section}{\numberline {5.2}Ispitivanje programskog rješenja}{68}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Ispitivanje komponenti}{68}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Ispitivanje sustava}{68}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}Dijagram razmještaja}{69}{section.5.3}
+\contentsline {section}{\numberline {5.4}Upute za puštanje u pogon}{70}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusion and Outline of Planned Future Work}{71}{chapter.6}
+\contentsline {chapter}{Popis literature}{72}{chapter*.4}
+\contentsline {chapter}{Image and diagram index}{73}{chapter*.5}
+\contentsline {chapter}{Appendix: Preview of group activity}{74}{chapter*.6}
