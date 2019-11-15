@@ -26,7 +26,7 @@
 \contentsline {subsection}{\numberline {3.1.1}Use Cases}{15}{subsection.3.1.1}
 \contentsline {subsubsection}{Use Cases Description}{15}{subsubsection*.2}
 \contentsline {subsubsection}{Use Case Diagrams}{44}{subsubsection*.3}
-\contentsline {subsection}{\numberline {3.1.2}Sekvencijski dijagrami}{47}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.2}Sequential Diagrams}{47}{subsection.3.1.2}
 \contentsline {section}{\numberline {3.2}Other requirements}{48}{section.3.2}
 \contentsline {chapter}{\numberline {4}Architecture and System Design}{50}{chapter.4}
 \contentsline {section}{\numberline {4.1}Database}{52}{section.4.1}
