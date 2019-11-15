@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.5)  15 NOV 2019 13:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.5)  15 NOV 2019 17:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1807,14 +1807,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 6--7
  []
 
 
-Overfull \hbox (7.51918pt too wide) in paragraph at lines 15--16
-[]\OT1/jkp/m/n/12 Attented: P.Fribert, D.R.Sparemblek, B.Bilic, K.Ceple, D.Strb
+Overfull \hbox (10.48318pt too wide) in paragraph at lines 15--16
+[]\OT1/jkp/m/n/12 Attended: P.Fribert, D.R.Sparemblek, B.Bilic, K.Ceple, D.Strb
 ad, L.Lendel,
  []
 
 
-Overfull \hbox (7.51918pt too wide) in paragraph at lines 24--25
-[]\OT1/jkp/m/n/12 Attented: P.Fribert, D.R.Sparemblek, B.Bilic, K.Ceple, D.Strb
+Overfull \hbox (10.48318pt too wide) in paragraph at lines 24--25
+[]\OT1/jkp/m/n/12 Attended: P.Fribert, D.R.Sparemblek, B.Bilic, K.Ceple, D.Strb
 ad, L.Lendel,
  []
 
@@ -1824,21 +1824,16 @@ Missing character: There is no   in font jkpmn7t!
 
 
 ]
-Overfull \hbox (7.51918pt too wide) in paragraph at lines 89--90
-[]\OT1/jkp/m/n/12 Attented: P.Fribert, D.R.Sparemblek, B.Bilic, K.Ceple, D.Strb
+Overfull \hbox (10.48318pt too wide) in paragraph at lines 89--90
+[]\OT1/jkp/m/n/12 Attended: P.Fribert, D.R.Sparemblek, B.Bilic, K.Ceple, D.Strb
 ad, L.Lendel,
  []
 
 [74]
-Missing character: There is no Å in font jkpbit7t!
-Missing character: There is no ¾ in font jkpbit7t!
-
 Underfull \hbox (badness 10000) in paragraph at lines 114--115
 
  []
 
-Missing character: There is no Ä in font jkpmit7t!
-Missing character: There is no  in font jkpmit7t!
 Missing character: There is no Å in font jkpmn7t!
 Missing character: There is no ¡ in font jkpmn7t!
 Missing character: There is no Å in font jkpmn7t!
@@ -1876,7 +1871,7 @@ Missing character: There is no  in font jkpmn7t!
 Missing character: There is no Ä in font jkpmn7t!
 Missing character: There is no ‡ in font jkpmn7t!
 [75] [76]
-Underfull \hbox (badness 10000) in paragraph at lines 178--179
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
 
  []
 
@@ -1913,7 +1908,7 @@ nts/type1/public/kpfonts/jkpbn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 kpfonts/jkpmite.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/j
 kpmn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb>
-Output written on OPP_ProjektnaDokumentacija_v5.pdf (78 pages, 2551268 bytes).
+Output written on OPP_ProjektnaDokumentacija_v5.pdf (78 pages, 2551368 bytes).
 PDF statistics:
  1372 PDF objects out of 1440 (max. 8388607)
  1248 compressed objects within 13 object streams
