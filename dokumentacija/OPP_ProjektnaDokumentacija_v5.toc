@@ -26,24 +26,24 @@
 \contentsline {subsection}{\numberline {3.1.1}Use Cases}{15}{subsection.3.1.1}
 \contentsline {subsubsection}{Use Cases Description}{15}{subsubsection*.2}
 \contentsline {subsubsection}{Use Case Diagrams}{44}{subsubsection*.3}
-\contentsline {subsection}{\numberline {3.1.2}Sequential Diagrams}{47}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Other requirements}{48}{section.3.2}
-\contentsline {chapter}{\numberline {4}Architecture and System Design}{50}{chapter.4}
-\contentsline {section}{\numberline {4.1}Database}{52}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Tables details}{53}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Database diagrams}{56}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Class Diagram}{58}{section.4.2}
-\contentsline {section}{\numberline {4.3}Dijagram stanja}{59}{section.4.3}
-\contentsline {section}{\numberline {4.4}Dijagram aktivnosti}{60}{section.4.4}
-\contentsline {section}{\numberline {4.5}Dijagram komponenti}{61}{section.4.5}
-\contentsline {chapter}{\numberline {5}Implementation and User Interface}{62}{chapter.5}
-\contentsline {section}{\numberline {5.1}Korištene tehnologije i alati}{62}{section.5.1}
-\contentsline {section}{\numberline {5.2}Ispitivanje programskog rješenja}{63}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Ispitivanje komponenti}{63}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Ispitivanje sustava}{63}{subsection.5.2.2}
-\contentsline {section}{\numberline {5.3}Dijagram razmještaja}{64}{section.5.3}
-\contentsline {section}{\numberline {5.4}Upute za puštanje u pogon}{65}{section.5.4}
-\contentsline {chapter}{\numberline {6}Conclusion and Outline of Planned Future Work}{66}{chapter.6}
-\contentsline {chapter}{Popis literature}{67}{chapter*.4}
-\contentsline {chapter}{Image and diagram index}{68}{chapter*.5}
-\contentsline {chapter}{Appendix: Preview of group activity}{69}{chapter*.6}
+\contentsline {subsection}{\numberline {3.1.2}Sequence Diagrams}{47}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Other requirements}{53}{section.3.2}
+\contentsline {chapter}{\numberline {4}Architecture and System Design}{54}{chapter.4}
+\contentsline {section}{\numberline {4.1}Database}{56}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Tables details}{57}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Database diagrams}{60}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Class Diagram}{62}{section.4.2}
+\contentsline {section}{\numberline {4.3}Dijagram stanja}{63}{section.4.3}
+\contentsline {section}{\numberline {4.4}Dijagram aktivnosti}{64}{section.4.4}
+\contentsline {section}{\numberline {4.5}Dijagram komponenti}{65}{section.4.5}
+\contentsline {chapter}{\numberline {5}Implementation and User Interface}{66}{chapter.5}
+\contentsline {section}{\numberline {5.1}Korištene tehnologije i alati}{66}{section.5.1}
+\contentsline {section}{\numberline {5.2}Ispitivanje programskog rješenja}{67}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Ispitivanje komponenti}{67}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Ispitivanje sustava}{67}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}Dijagram razmještaja}{68}{section.5.3}
+\contentsline {section}{\numberline {5.4}Upute za puštanje u pogon}{69}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusion and Outline of Planned Future Work}{70}{chapter.6}
+\contentsline {chapter}{Popis literature}{71}{chapter*.4}
+\contentsline {chapter}{Image and diagram index}{72}{chapter*.5}
+\contentsline {chapter}{Appendix: Preview of group activity}{73}{chapter*.6}

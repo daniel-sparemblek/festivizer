@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.5)  15 NOV 2019 03:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.5)  15 NOV 2019 13:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1080,38 +1080,36 @@ LaTeX Info: Redefining \nameref on input line 74.
 \@outlinefile=\write3
 \openout3 = `OPP_ProjektnaDokumentacija_v5.out'.
 
-LaTeX Font Info:    Try loading font information for U+jkpsya on input line 86.
 
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+(./OPP_ProjektnaDokumentacija_v5.toc
+LaTeX Font Info:    Try loading font information for U+jkpsya on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsya.fd
 File: ujkpsya.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+jkpsyb on input line 86.
-
+LaTeX Font Info:    Try loading font information for U+jkpsyb on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsyb.fd
 File: ujkpsyb.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for OT1+txr on input line 86.
+LaTeX Font Info:    Try loading font information for OT1+txr on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/ot1txr.fd
 File: ot1txr.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for U+jkpmia on input line 86.
-
+LaTeX Font Info:    Try loading font information for U+jkpmia on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpmia.fd
 File: ujkpmia.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 86.
-
+LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
-) [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./OPP_ProjektnaDokumentac
-ija_v5.toc
+)
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
@@ -1122,7 +1120,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.33 ....1.1}Tables details}{53}{subsection.4.1.1}
+l.33 ....1.1}Tables details}{57}{subsection.4.1.1}
                                                    [1
 
 ]
@@ -1145,46 +1143,35 @@ Missing character: There is no ° in font jkpmn7t!
 (./DocumentationChangeLog.tex
 Chapter 1.
 
-Overfull \hbox (6.59265pt too wide) in paragraph at lines 20--20
+Overfull \hbox (6.59265pt too wide) in paragraph at lines 22--22
 []\OT1/jkp/m/n/12 20.10.2019.||  
  []
 
 
-Overfull \hbox (6.59265pt too wide) in paragraph at lines 20--20
+Overfull \hbox (6.59265pt too wide) in paragraph at lines 22--22
 []\OT1/jkp/m/n/12 12.11.2019.||  
  []
 
 
-Overfull \hbox (6.59265pt too wide) in paragraph at lines 20--20
+Overfull \hbox (6.59265pt too wide) in paragraph at lines 22--22
 []\OT1/jkp/m/n/12 13.11.2019.||  
  []
 
 
-Overfull \hbox (6.59265pt too wide) in paragraph at lines 20--20
+Overfull \hbox (6.59265pt too wide) in paragraph at lines 22--22
 []\OT1/jkp/m/n/12 13.11.2019.||  
  []
 
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ë in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ‚ in font jkpmit7t!
-Missing character: There is no Ä in font jkpmit7t!
-Missing character: There is no ¶ in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
+
+Overfull \hbox (6.59265pt too wide) in paragraph at lines 22--22
+[]\OT1/jkp/m/n/12 14.11.2019.||  
+ []
+
+
+Overfull \hbox (6.59265pt too wide) in paragraph at lines 22--22
+[]\OT1/jkp/m/n/12 15.11.2019.||  
+ []
+
 ) [3
 
 
@@ -1311,60 +1298,27 @@ Overfull \hbox (95.35123pt too wide) in paragraph at lines 95--96
 []$[]$ 
  []
 
-[13] [14]
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no ° in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no ° in font jkpmit7t!
-
-Underfull \hbox (badness 10000) in paragraph at lines 116--117
-
- []
-
-Missing character: There is no ƒ in font jkpmn7t!
-Missing character: There is no ç in font jkpmn7t!
-Missing character: There is no ƒ in font jkpbn7t!
-Missing character: There is no á in font jkpbn7t!
-Missing character: There is no ƒ in font jkpmn7t!
-Missing character: There is no á in font jkpmn7t!
-Missing character: There is no ≈ in font jkpmn7t!
-Missing character: There is no ° in font jkpmn7t!
-Missing character: There is no ƒ in font jkpmn7t!
-Missing character: There is no á in font jkpmn7t!
-Missing character: There is no ≈ in font jkpmn7t!
-Missing character: There is no ° in font jkpmn7t!
-Missing character: There is no ƒ in font jkpmn7t!
-Missing character: There is no á in font jkpmn7t!
-Missing character: There is no ƒ in font jkpmn7t!
-Missing character: There is no á in font jkpmn7t!
-Missing character: There is no ƒ in font jkpmn7t!
-Missing character: There is no á in font jkpmn7t!
-[15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29]
-Overfull \hbox (6.13322pt too wide) in paragraph at lines 784--785
+[13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27]
+[28]
+Overfull \hbox (6.13322pt too wide) in paragraph at lines 745--746
 []\OT1/jkp/m/n/12 The Leader/Organiser can click the 'Mod-ify Fes-ti-val de-tai
 ls' but-ton which
  []
 
-[30] [31] [32] [33] [34] [35] [36] [37] [38] [39]
-Overfull \hbox (9.98764pt too wide) in paragraph at lines 1181--1183
+[29] [30] [31] [32] [33] [34] [35] [36] [37] [38]
+Overfull \hbox (9.98764pt too wide) in paragraph at lines 1142--1144
 []\OT1/jkp/m/n/12 When done with chang-ing the di-a-gram, the User can tap the 
 'Save changes'
  []
 
-[40] [41]
-Overfull \hbox (45.2215pt too wide) in paragraph at lines 1274--1275
+[39] [40]
+Overfull \hbox (45.2215pt too wide) in paragraph at lines 1235--1236
 []\OT1/jkp/b/n/12 Goal: \OT1/jkp/m/n/12 Ex-tend the Job Auc-tion by 1 day due t
 o var-i-ous rea-sons - up to Leader/Organiser
  []
 
-[42]
-Overfull \hbox (40.76755pt too wide) in paragraph at lines 1318--1319
+[41] [42]
+Overfull \hbox (40.76755pt too wide) in paragraph at lines 1279--1280
 []\OT1/jkp/m/n/12 If an Ad-min-is-tra-tor mod-er-ated, the af-fected Stake-hold
 -ers are no-ti-fied(Worker(s),
  []
@@ -1375,47 +1329,47 @@ Missing character: There is no á in font jkpmit7t!
 Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
  [44]
-<diagrams/uc-diag0-general.png, id=947, 1562.83875pt x 867.99281pt>
+<diagrams/uc-diag0-general.png, id=939, 1562.83875pt x 867.99281pt>
 File: diagrams/uc-diag0-general.png Graphic file (type png)
 <use diagrams/uc-diag0-general.png>
-Package pdftex.def Info: diagrams/uc-diag0-general.png  used on input line 1369
+Package pdftex.def Info: diagrams/uc-diag0-general.png  used on input line 1330
 .
 (pdftex.def)             Requested size: 435.6108pt x 241.93703pt.
-<diagrams/uc-diag1-festival.png, id=949, 1567.35562pt x 816.04875pt>
+<diagrams/uc-diag1-festival.png, id=941, 1567.35562pt x 816.04875pt>
 File: diagrams/uc-diag1-festival.png Graphic file (type png)
 <use diagrams/uc-diag1-festival.png>
-Package pdftex.def Info: diagrams/uc-diag1-festival.png  used on input line 137
-5.
+Package pdftex.def Info: diagrams/uc-diag1-festival.png  used on input line 133
+6.
 (pdftex.def)             Requested size: 435.6108pt x 226.79863pt.
-<diagrams/uc-diag2-job.png, id=950, 1565.85pt x 892.08281pt>
+<diagrams/uc-diag2-job.png, id=942, 1565.85pt x 892.08281pt>
 File: diagrams/uc-diag2-job.png Graphic file (type png)
 <use diagrams/uc-diag2-job.png>
-Package pdftex.def Info: diagrams/uc-diag2-job.png  used on input line 1381.
+Package pdftex.def Info: diagrams/uc-diag2-job.png  used on input line 1342.
 (pdftex.def)             Requested size: 435.6108pt x 248.16164pt.
  [45pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1385 
+l.1346 
        pdfTeX warning (ext4): destination with the same identifier (name{figure
 .3.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1385 
+l.1346 
         <./diagrams/uc-diag0-general.png> <./diagrams/uc-diag1-festival.png>]
-<diagrams/uc-diag3-auction.png, id=960, 1753.30031pt x 973.38657pt>
+<diagrams/uc-diag3-auction.png, id=952, 1753.30031pt x 973.38657pt>
 File: diagrams/uc-diag3-auction.png Graphic file (type png)
 <use diagrams/uc-diag3-auction.png>
-Package pdftex.def Info: diagrams/uc-diag3-auction.png  used on input line 1388
+Package pdftex.def Info: diagrams/uc-diag3-auction.png  used on input line 1349
 .
 (pdftex.def)             Requested size: 435.6108pt x 241.83107pt.
-<diagrams/uc-diag4-activity.png, id=961, 2008.50375pt x 1066.7353pt>
+<diagrams/uc-diag4-activity.png, id=953, 2008.50375pt x 1066.7353pt>
 File: diagrams/uc-diag4-activity.png Graphic file (type png)
 <use diagrams/uc-diag4-activity.png>
-Package pdftex.def Info: diagrams/uc-diag4-activity.png  used on input line 139
-4.
+Package pdftex.def Info: diagrams/uc-diag4-activity.png  used on input line 135
+5.
 (pdftex.def)             Requested size: 435.6108pt x 231.34569pt.
 
 [46pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3
@@ -1423,179 +1377,158 @@ Package pdftex.def Info: diagrams/uc-diag4-activity.png  used on input line 139
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1398 
+l.1359 
        pdfTeX warning (ext4): destination with the same identifier (name{figure
 .3.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1398 
+l.1359 
         <./diagrams/uc-diag2-job.png> <./diagrams/uc-diag3-auction.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1401--1402
+Underfull \hbox (badness 10000) in paragraph at lines 1362--1363
 
  []
 
 Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
+<diagrams/sd-diag0-jobact.png, id=963, 1196.21906pt x 1761.58125pt>
+File: diagrams/sd-diag0-jobact.png Graphic file (type png)
+<use diagrams/sd-diag0-jobact.png>
+Package pdftex.def Info: diagrams/sd-diag0-jobact.png  used on input line 1375.
+
+(pdftex.def)             Requested size: 435.6108pt x 641.48001pt.
 [47pdfTeX warning (ext4): destination with the same identifier (name{figure.3.5
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1413 				\eject
-                  <./diagrams/uc-diag4-activity.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1417--1418
+l.1379 
+        <./diagrams/uc-diag4-activity.png>]
+Overfull \vbox (12.2538pt too high) has occurred while \output is active []
 
- []
 
-Missing character: There is no ≈ in font jkpbit7t!
-Missing character: There is no ° in font jkpbit7t!
-Missing character: There is no ƒ in font jkpbit7t!
-Missing character: There is no ç in font jkpbit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no ° in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no ° in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no ° in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
+[48pdfTeX warning (ext4): destination with the same identifier (name{figure.3.6
+}) has been already used, duplicate ignored
 
-Overfull \hbox (4.95546pt too wide) in paragraph at lines 1430--1431
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1379 
+        <./diagrams/sd-diag0-jobact.png>]
+<diagrams/sd-diag1-fjt.png, id=979, 1312.905pt x 1466.47874pt>
+File: diagrams/sd-diag1-fjt.png Graphic file (type png)
+<use diagrams/sd-diag1-fjt.png>
+Package pdftex.def Info: diagrams/sd-diag1-fjt.png  used on input line 1388.
+(pdftex.def)             Requested size: 435.6108pt x 486.55756pt.
+ [49pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+7}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1395 
+        <./diagrams/sd-diag1-fjt.png>]
+<diagrams/sd-diag2-jat.png, id=987, 1325.70282pt x 1461.20906pt>
+File: diagrams/sd-diag2-jat.png Graphic file (type png)
+<use diagrams/sd-diag2-jat.png>
+Package pdftex.def Info: diagrams/sd-diag2-jat.png  used on input line 1401.
+(pdftex.def)             Requested size: 435.6108pt x 480.12694pt.
+ [50]
+<diagrams/sd-diag3-festivalList.png, id=993, 1410.77063pt x 1581.65906pt>
+File: diagrams/sd-diag3-festivalList.png Graphic file (type png)
+<use diagrams/sd-diag3-festivalList.png>
+Package pdftex.def Info: diagrams/sd-diag3-festivalList.png  used on input line
+ 1411.
+(pdftex.def)             Requested size: 435.6108pt x 488.37851pt.
+ [51pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+8}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1415 
+        <./diagrams/sd-diag2-jat.png>] [52pdfTeX warning (ext4): destination wi
+th the same identifier (name{figure.3.9}) has been already used, duplicate igno
+red
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1416 				\eject
+                  <./diagrams/sd-diag3-festivalList.png>]
+Overfull \hbox (4.95546pt too wide) in paragraph at lines 1429--1430
 []\OT1/jkp/m/n/12 Implementation - us-ing moder Object-Oriented Pro-gram-ming L
 an-guages such
  []
 
-) [48]
+) [53]
 \openout2 = `Architecture.aux'.
 
- (./Architecture.tex [49
-
-
-]
+ (./Architecture.tex
 Chapter 4.
 Missing character: There is no ‚ in font jkpmit7t!
 Missing character: There is no Ä in font jkpmit7t!
 Missing character: There is no ô in font jkpmit7t!
-[50
+[54
 
-] [51] [52] [53]
-Overfull \hbox (1.13509pt too wide) in paragraph at lines 156--156
+
+
+] [55] [56] [57]
+Overfull \hbox (1.13509pt too wide) in paragraph at lines 137--137
 []\OT1/jkp/m/n/12 specialization[]id|  
  []
 
 
-Overfull \hbox (1.13509pt too wide) in paragraph at lines 175--175
+Overfull \hbox (1.13509pt too wide) in paragraph at lines 153--153
 []\OT1/jkp/m/n/12 specialization[]id|  
  []
 
-[54]
-Overfull \hbox (1.13509pt too wide) in paragraph at lines 263--263
+[58]
+Overfull \hbox (1.13509pt too wide) in paragraph at lines 238--238
 []\OT1/jkp/m/n/12 specialization[]id|  
  []
 
-[55]
-<diagrams/db_er_diag.png, id=1030, 3617.515pt x 2067.725pt>
+[59]
+<diagrams/db_er_diag.png, id=1054, 3617.515pt x 2067.725pt>
 File: diagrams/db_er_diag.png Graphic file (type png)
 <use diagrams/db_er_diag.png>
-Package pdftex.def Info: diagrams/db_er_diag.png  used on input line 288.
+Package pdftex.def Info: diagrams/db_er_diag.png  used on input line 262.
 (pdftex.def)             Requested size: 435.6108pt x 248.96817pt.
-<diagrams/db_normal_diag.png, id=1031, 1365.1pt x 907.39pt>
+<diagrams/db_normal_diag.png, id=1055, 1365.1pt x 907.39pt>
 File: diagrams/db_normal_diag.png Graphic file (type png)
 <use diagrams/db_normal_diag.png>
-Package pdftex.def Info: diagrams/db_normal_diag.png  used on input line 295.
+Package pdftex.def Info: diagrams/db_normal_diag.png  used on input line 269.
 (pdftex.def)             Requested size: 435.6108pt x 289.54pt.
- [56pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [60pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.300 
-       <./diagrams/db_er_diag.png>] [57pdfTeX warning (ext4): destination with 
+l.274 
+       <./diagrams/db_er_diag.png>] [61pdfTeX warning (ext4): destination with 
 the same identifier (name{figure.4.2}) has been already used, duplicate ignored
 
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.301 			\eject
+l.275 			\eject
                 <./diagrams/db_normal_diag.png>]
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no ° in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ç in font jkpmit7t!
-
-Underfull \hbox (badness 10000) in paragraph at lines 306--307
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 308--309
-
- []
-
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no æ in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ë in font jkpmit7t!
-Missing character: There is no ƒ in font jkpbit7t!
-Missing character: There is no ç in font jkpbit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ë in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ≈ in font jkpmit7t!
-Missing character: There is no ° in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no á in font jkpmit7t!
-Missing character: There is no ƒ in font jkpmit7t!
-Missing character: There is no ë in font jkpmit7t!
-
-Underfull \hbox (badness 10000) in paragraph at lines 310--311
-
- []
-
-<diagrams/UML-OrganizationOfTheFestival_v1.png, id=1046, 3908.6025pt x 2147.021
+<diagrams/UML-OrganizationOfTheFestival_v1.png, id=1071, 3908.6025pt x 2147.021
 26pt>
 File: diagrams/UML-OrganizationOfTheFestival_v1.png Graphic file (type png)
 <use diagrams/UML-OrganizationOfTheFestival_v1.png>
 Package pdftex.def Info: diagrams/UML-OrganizationOfTheFestival_v1.png  used on
- input line 313.
+ input line 281.
 (pdftex.def)             Requested size: 435.6108pt x 239.28535pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 318--319
+Underfull \hbox (badness 10000) in paragraph at lines 286--287
 
  []
 
-[58pdfTeX warning (ext4): destination with the same identifier (name{figure.4.3
+[62pdfTeX warning (ext4): destination with the same identifier (name{figure.4.3
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.324 			\eject
+l.292 			\eject
                 <./diagrams/UML-OrganizationOfTheFestival_v1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 329--330
+Underfull \hbox (badness 10000) in paragraph at lines 297--298
 
  []
 
@@ -1613,8 +1546,8 @@ Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
-[59]
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+[63]
+Underfull \hbox (badness 10000) in paragraph at lines 306--307
 
  []
 
@@ -1624,8 +1557,8 @@ Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no á in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
-[60]
-Underfull \hbox (badness 10000) in paragraph at lines 345--346
+[64]
+Underfull \hbox (badness 10000) in paragraph at lines 313--314
 
  []
 
@@ -1633,7 +1566,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no á in font jkpmit7t!
-) [61]
+) [65]
 \openout2 = `Implementation.aux'.
 
  (./Implementation.tex
@@ -1655,7 +1588,7 @@ Overfull \hbox (4.65672pt too wide) in paragraph at lines 8--9
 sti in-ter-net poveznicu \OT1/jkp/m/it/12 gdje se mogu preuzeti
  []
 
-[62
+[66
 
 
 
@@ -1747,7 +1680,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no ° in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no á in font jkpmit7t!
-[63]
+[67]
 Missing character: There is no ≈ in font jkpbn7t!
 Missing character: There is no ° in font jkpbn7t!
 Missing character: There is no ≈ in font jkpmit7t!
@@ -1760,7 +1693,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no ° in font jkpmit7t!
 Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
- [64]
+ [68]
 Missing character: There is no ≈ in font jkpbn7t!
 Missing character: There is no ° in font jkpbn7t!
 
@@ -1796,7 +1729,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no ° in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no á in font jkpmit7t!
-[65])
+[69])
 \openout2 = `Conclusion.aux'.
 
  (./Conclusion.tex
@@ -1823,7 +1756,7 @@ Missing character: There is no ≈ in font jkpmit7t!
 Missing character: There is no æ in font jkpmit7t!
 Missing character: There is no ƒ in font jkpmit7t!
 Missing character: There is no ç in font jkpmit7t!
-[66
+[70
 
 
 
@@ -1851,7 +1784,7 @@ Overfull \hbox (15.43352pt too wide) in paragraph at lines 30--31
  www . tutorialspoint . com / mvc _ framework /
  []
 
-) [67
+) [71
 
 
 
@@ -1859,7 +1792,7 @@ Overfull \hbox (15.43352pt too wide) in paragraph at lines 30--31
 \tf@lof=\write5
 \openout5 = `OPP_ProjektnaDokumentacija_v5.lof'.
 
- [68
+ [72
 
 
 ]
@@ -1887,7 +1820,7 @@ ad, L.Lendel,
 
 Missing character: There is no ≈ in font jkpmn7t!
 Missing character: There is no † in font jkpmn7t!
-[69
+[73
 
 
 ]
@@ -1896,7 +1829,7 @@ Overfull \hbox (7.51918pt too wide) in paragraph at lines 89--90
 ad, L.Lendel,
  []
 
-[70]
+[74]
 Missing character: There is no ≈ in font jkpbit7t!
 Missing character: There is no æ in font jkpbit7t!
 
@@ -1942,12 +1875,12 @@ Missing character: There is no ƒ in font jkpmn7t!
 Missing character: There is no ç in font jkpmn7t!
 Missing character: There is no ƒ in font jkpmn7t!
 Missing character: There is no á in font jkpmn7t!
-[71] [72]
+[75] [76]
 Underfull \hbox (badness 10000) in paragraph at lines 178--179
 
  []
 
-) [73] 
+) [77] 
 AED: lastpage setting LastPage
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 135.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 135.
@@ -1957,24 +1890,16 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 135.
 (./Appendix.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 135.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 135.
-
-
-Package rerunfilecheck Warning: File `OPP_ProjektnaDokumentacija_v5.out' has ch
-anged.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `OPP_ProjektnaDokumentacija_v5.out':
-
-(rerunfilecheck)             Before: 523294A8D5D2E715521BF2FB272D5131;3132
-(rerunfilecheck)             After:  D926AE713D564BB20E70A5BD9D6ED5A0;3129.
+Package rerunfilecheck Info: File `OPP_ProjektnaDokumentacija_v5.out' has not c
+hanged.
+(rerunfilecheck)             Checksum: 6A30B7DF22CAABF898B5D2997CE37B0F;3127.
  ) 
 Here is how much of TeX's memory you used:
- 11589 strings out of 492982
- 161201 string characters out of 6134896
- 316672 words of memory out of 5000000
- 14225 multiletter control sequences out of 15000+600000
- 56557 words of font info for 131 fonts, out of 8000000 for 9000
+ 11605 strings out of 492982
+ 161763 string characters out of 6134896
+ 316936 words of memory out of 5000000
+ 14236 multiletter control sequences out of 15000+600000
+ 53357 words of font info for 122 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,12n,43p,895b,599s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
@@ -1984,15 +1909,14 @@ st, replaced by a fixed one
 texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}</usr/share/texlive/texmf
 -dist/fonts/type1/public/kpfonts/jkpbit8a.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/kpfonts/jkpbn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/kpfonts/jkpmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpf
-onts/jkpmit8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkp
-mite.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb>
-Output written on OPP_ProjektnaDokumentacija_v5.pdf (74 pages, 1965243 bytes).
+/public/kpfonts/jkpmit8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+kpfonts/jkpmite.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/j
+kpmn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb>
+Output written on OPP_ProjektnaDokumentacija_v5.pdf (78 pages, 2551268 bytes).
 PDF statistics:
- 1347 PDF objects out of 1440 (max. 8388607)
- 1234 compressed objects within 13 object streams
- 628 named destinations out of 1000 (max. 500000)
- 409 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1372 PDF objects out of 1440 (max. 8388607)
+ 1248 compressed objects within 13 object streams
+ 629 named destinations out of 1000 (max. 500000)
+ 429 words of extra memory for PDF output out of 10000 (max. 10000000)
 

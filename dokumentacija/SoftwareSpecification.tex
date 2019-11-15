@@ -110,47 +110,8 @@
 				
 			\subsection{Use Cases}
 				
-				\textbf{\textit{dio 1. revizije}}
-				
 				\subsubsection{Use Cases Description}
-					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
 					
-
-					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
-					\begin{packed_item}
-	
-						\item \textbf{Glavni sudionik: }$<$sudionik$>$
-						\item  \textbf{Cilj:} $<$cilj$>$
-						\item  \textbf{Sudionici:} $<$sudionici$>$
-						\item  \textbf{Preduvjet:} $<$preduvjet$>$
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-	
-							\item $<$opis korak jedan$>$
-							\item $<$opis korak dva$>$
-							\item $<$opis korak tri$>$
-							\item $<$opis korak četiri$>$
-							\item $<$opis korak pet$>$
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-	
-							\item[2.a] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[] \begin{packed_enum}
-								
-								\item $<$opis rješenja mogućeg scenarija korak 1$>$
-								\item $<$opis rješenja mogućeg scenarija korak 2$>$
-								
-							\end{packed_enum}
-							\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
-							
-						\end{packed_item}
-					\end{packed_item}
-				
 				\noindent \underbar{\textbf{UC1 - Festivals Overview and Detail inspection}}
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Administrators
@@ -1396,7 +1357,7 @@
 					\label{fig:uc_diag_4_activity}
 				\end{figure}
 				
-			\subsection{Sequential Diagrams}
+			\subsection{Sequence Diagrams}
 				
 				\textbf{\textit{dio 1. revizije}}\\
 				
@@ -1407,16 +1368,54 @@
 				Here goes the diagram
 				
 				\textbf{Use Case 31 Manage Job Activities(Worker view)}
-				\textit{The Worker needs to organise the Job he's been assigned. He does this by creating, modifying and removing(= manipulating) Activities that compose individual Jobs. This Use Case depicts the management of such a list of Activities that make up a Job. These Activities can then be added to the Timeline, where their time domain will be well defined and visible - this will enable an easy visualisation of the way the Job will be done and organised.}
+				\textit{The Worker needs to organise the Job he's been assigned. He does this by creating, modifying and removing(= manipulating) Activities that compose individual Jobs.}
+					
+				\textit{This Use Case depicts the management of such a list of Activities that make up a Job. These Activities can then be added to the Timeline, where their time domain will be well defined and visible - this will enable an easy visualisation of the way the Job will be done and organised.}
+				\begin{figure}[H]
+					\includegraphics[width=\linewidth]{diagrams/sd-diag0-jobact.png}
+					\caption{Job Activities Sequence Diagram}
+					\label{fig:sd0_job_activities}
+				\end{figure}
 				
+				\textbf{Use Case 26 Managing Festival Job Timeline}
+				\textit{It is necessary for the Festival Leader or Organiser to properly manage the Festival Jobs with regard to Time organisation.}
+				
+				\textit{This Use Case allows the Leader/Organiser to define the beginning and end times of certain Job Festivals, as well as modify their durations.}
+			
+				\textit{Timeline is a graphical flowchart - easy and intuitive Festival Job organisation. Concurrency and parallelisation can also be easily achieved.}
+				
+				\begin{figure}[H]
+					\includegraphics[width=\linewidth]{diagrams/sd-diag1-fjt.png}
+					\caption{Festival Job Timeline Sequence Diagram}
+					\label{fig:sd1_festival_job_timeline}
+				\end{figure}
+				
+				\textbf{Use Case 36 Manage Job Activities Timeline(Worker view)}
+				\textit{Just as it is with Festival Leaders and Organiser and Festival Jobs Management so it is with Workers and Job Activities Management.}
+				
+				\textit{Lead Workers must manage their Jobs' Activities in much the same way. They have to take into consideration the start and end times of each Activity, as well as parallelise those Activities.}
+			
+				\textit{The purpose of the Timeline here is, too, to provide an easy, graphical, and intuitive way of doing this Job Activities manipulation and organisation.}
+				
+				\begin{figure}[H]
+					\includegraphics[width=\linewidth]{diagrams/sd-diag2-jat.png}
+					\caption{Job Activities Timeline Sequence Diagram}
+					\label{fig:sd2_job_activities_timeline}
+				\end{figure}
+				
+				\textbf{Use Case 21 View the List of own Festivals}
+				\textit{Leaders and Organisers must view the List of the Festivals that they're reponsible for so they can further view the details of those Festivals, and then work on those Festivals.}
+				
+				\textit{This Use Case is one of the pillars of the app, as it enables the management of the selected Festivals - Leaders and Organisers are in charge of those Festivals.}
+				\begin{figure}[H]
+					\includegraphics[width=\linewidth]{diagrams/sd-diag3-festivalList.png}
+					\caption{Organiser/Leader Festival List Sequence Diagram}
+					\label{fig:sd3_festival_list}
+				\end{figure}
 				
 				\eject
 	
 		\section{Other requirements}
-		
-			\textbf{\textit{dio 1. revizije}}\\
-		 
-			 \textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene dopunjuju funkcionalne zahtjeve. Oni opisuju \textbf{kako se sustav treba ponašati} i koja \textbf{ograničenja} treba poštivati (performanse, korisničko iskustvo, pouzdanost, standardi kvalitete, sigurnost...). Primjeri takvih zahtjeva u Vašem projektu mogu biti: podržani jezici korisničkog sučelja, vrijeme odziva, najveći mogući podržani broj korisnika, podržane web/mobilne platforme, razina zaštite (protokoli komunikacije, kriptiranje...)... Svaki takav zahtjev potrebno je navesti u jednoj ili dvije rečenice.}
 			 
 			 \begin{packed_item}
 			 	\item The System should allow concurrent usage by multiple Users
@@ -1430,7 +1429,3 @@
 			 	\item Implementation - using moder Object-Oriented Programming Languages such as Java or Kotlin
 			 	\item The System should be as bug resistant as possible
 			 \end{packed_item}
-			 
-			 
-			 
-	

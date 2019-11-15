@@ -1,6 +1,6 @@
-git \chapter{Architecture and System Design}
+\chapter{Architecture and System Design}
 
-		\textit{ System architecture can be divided into three sub-systems :}
+	\textit{ System architecture can be divided into three sub-systems :}
 	\begin{itemize}
 		\item 	\textit{Web server}
 		\item 	\textit{Android application}
@@ -26,25 +26,21 @@ git \chapter{Architecture and System Design}
 
 		\textbf{Model}
 		\textit{The Model component corresponds to all the data-related logic that the user works with. This can represent either the data that is being transferred between the View and Controller components or any other business logic-related data. For example, a Customer object will retrieve the customer information from the database, manipulate it and update it data back to the database or use it to render data. 
-In Android application Model is usually represented as independent Java class that contains data about e.g. Customer. That data is the one that is kept in the data base and displayed in the View component. }
+		In Android application Model is usually represented as independent Java class that contains data about e.g. Customer. That data is the one that is kept in the data base and displayed in the View component. }
 
 		\textbf{View}
-		 \textit{The View component is used for all the UI logic of the application. For example, the Customer view will include all the UI components such as text boxes, dropdowns, etc. that the final user interacts with. 
-In our application an example of View would be Activity for register, user interacts with the View, enters the necessary information that are then transferred to the Model and finally to the database via Controller.}
+		\textit{The View component is used for all the UI logic of the application. For example, the Customer view will include all the UI components such as text boxes, dropdowns, etc. that the final user interacts with. 
+		In our application an example of View would be Activity for register, user interacts with the View, enters the necessary information that are then transferred to the Model and finally to the database via Controller.}
 
 		\textbf{Controller}
 		\textit{Controllers act as an interface between Model and View components to process all the business logic and incoming requests, manipulate data using the Model component and interact with the Views to render the final output. For example, the Customer controller will handle all the interactions and inputs from the Customer View and update the database using the Customer Model. The same controller will be used to view the Customer data.}
-	
-		
-
-		
 \pagebreak
 				
 		\section{Database}
 			
 			
 		\textit{Database used for this project is a relation based database. Relation is usually referred to as a table that has tuples. Tuple is an object that represents an information. Purpose of the database is easy and fast data manipulation, including saving, deleting, updating and sending data to the server. Database has relations:}
-	\begin{itemize}
+		\begin{itemize}
 			\item 	\textit{User}
 			\item 	\textit{Festival}
 			\item 	\textit{Event}
@@ -55,23 +51,17 @@ In our application an example of View would be Activity for register, user inter
 			\item 	\textit{Job}
 			\item 	\textit{JobSpec}
 			\item 	\textit{FestivalOrganizers}
-
-
-
 		\end{itemize}
 		\pagebreak
 			\subsection{Tables details}
 			
 
-				\textbf{User} \textit{has entitites for every user of the app. It has all needed personal information about the user and his role.}
+				\textbf{User} \textit{has entities for every user of the app. It has all needed personal information about the user and his role.}
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
 					\hline \multicolumn{3}{|c|}{\textbf{User}}	 \\[3pt] \hline
 					\endfirsthead
-					
-
-
 					
 					\hline 
 					\endlastfoot
@@ -95,9 +85,6 @@ In our application an example of View would be Activity for register, user inter
 					\hline \multicolumn{3}{|c|}{\textbf{Festival}}	 \\[3pt] \hline
 					\endfirsthead
 
-
-
-					
 					\hline 
 					\endlastfoot
 					
@@ -117,9 +104,6 @@ In our application an example of View would be Activity for register, user inter
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Event}}	 \\[3pt] \hline
 					\endfirsthead
-					
-
-					
 					
 					\hline 
 					\endlastfoot
@@ -143,9 +127,6 @@ In our application an example of View would be Activity for register, user inter
 					\hline \multicolumn{3}{|c|}{\textbf{Specialization}}	 \\[3pt] \hline
 					\endfirsthead
 					
-
-
-					
 					\hline 
 					\endlastfoot
 					
@@ -162,9 +143,6 @@ In our application an example of View would be Activity for register, user inter
 					\hline \multicolumn{3}{|c|}{\textbf{WorkerSpec}}	 \\[3pt] \hline
 					\endfirsthead
 					
-
-
-					
 					\hline 
 					\endlastfoot
 					
@@ -180,9 +158,6 @@ In our application an example of View would be Activity for register, user inter
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Auction}}	 \\[3pt] \hline
 					\endfirsthead
-					
-
-
 					
 					\hline 
 					\endlastfoot
@@ -270,7 +245,6 @@ In our application an example of View would be Activity for register, user inter
 					\hline \multicolumn{3}{|c|}{\textbf{FestivalOrganizers}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					
 					\hline 
 					\endlastfoot
 					
@@ -302,12 +276,6 @@ In our application an example of View would be Activity for register, user inter
 			
 			\pagebreak
 		\section{Class Diagram}
-		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
-			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
 			
 			\begin{figure}[H]
 				\includegraphics[width=\linewidth]{diagrams/UML-OrganizationOfTheFestival_v1.png}
