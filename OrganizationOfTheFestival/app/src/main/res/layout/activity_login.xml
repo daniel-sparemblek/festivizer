@@ -22,7 +22,7 @@
 
         <!-- E-mail (or Username) Label -->
         <EditText
-            android:id="@+id/input_email"
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
@@ -32,7 +32,7 @@
             android:textCursorDrawable="@null" />
 
         <!-- Password Label -->
-        <EditText android:id="@+id/input_password"
+        <EditText android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -54,7 +54,7 @@
             android:background="@drawable/login_button" />
 
         <!-- Signup Button -->
-        <TextView android:id="@+id/link_signup"
+        <TextView android:id="@+id/tw_register_link"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"

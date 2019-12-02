@@ -23,7 +23,7 @@ public class Connector {
     /**
      * This variable represents url address of server.
      */
-    protected static final String url = "http://barbil.pythonanywhere.com/";
+    protected static final String url = "https://barbil.pythonanywhere.com/";
 
     /**
      * This is interface which every Activity that wants to call
