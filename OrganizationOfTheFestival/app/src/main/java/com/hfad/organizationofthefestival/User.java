@@ -1,4 +1,5 @@
 package com.hfad.organizationofthefestival;
 
-public class User {
+public abstract class User {
+
 }
