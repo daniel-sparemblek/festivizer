@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.hfad.organizationofthefestival.AdminActivity;
 import com.hfad.organizationofthefestival.Connector;
-import com.hfad.organizationofthefestival.LeaderActivity;
+import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.OrganizerActivity;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.ServerStatus;

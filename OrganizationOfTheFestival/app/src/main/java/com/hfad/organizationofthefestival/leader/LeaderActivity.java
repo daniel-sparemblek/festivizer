@@ -1,20 +1,20 @@
-package com.hfad.organizationofthefestival;
+package com.hfad.organizationofthefestival.leader;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
+import com.hfad.organizationofthefestival.Decision;
+import com.hfad.organizationofthefestival.PendingOrganizer;
+import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.ServerStatus;
 import com.hfad.organizationofthefestival.adapters.LeaderAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class LeaderActivity extends AppCompatActivity implements LeaderConnector.LeaderListener{
+public class LeaderActivity extends AppCompatActivity implements LeaderController.LeaderListener {
 
     ArrayList<PendingOrganizer> pendingOrganizers = new ArrayList<>();
     private ListView approvalList;
@@ -31,7 +31,7 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
         username = getIntent().getStringExtra("USERNAME");
         password = getIntent().getStringExtra("PASSWORD");
 
-        LeaderConnector.getPendingOrganizers(username, password, this);
+        LeaderController.getPendingOrganizers(username, password, this);
     }
 
 
@@ -57,17 +57,18 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
 
     @Override
     public void onSendDecisionResponse(ServerStatus serverStatus) {
-        LeaderConnector.getPendingOrganizers(username, password, this);
+        LeaderController.getPendingOrganizers(username, password, this);
 
     }
 
+    // Decisions need to be fixed when JSONs get here
     public void onClickAccept(View view) {
         final int position = approvalList.getPositionForView((LinearLayout)view.getParent());
 
         String organizerUsername = pendingOrganizers.get(position).getUsername();
         int festivalId = pendingOrganizers.get(position).getFestivalId();
 
-        LeaderConnector.sendDecision(username, password, organizerUsername, Integer.toString(festivalId), Decision.ACCEPT, this);
+        // LeaderController.sendDecision(username, password, organizerUsername, Integer.toString(festivalId), Decision.ACCEPT, this);
     }
 
     public void onClickDecline(View view) {
@@ -76,7 +77,7 @@ public class LeaderActivity extends AppCompatActivity implements LeaderConnector
         String organizerUsername = pendingOrganizers.get(position).getUsername();
         int festivalId = pendingOrganizers.get(position).getFestivalId();
 
-        LeaderConnector.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.DECLINE, this);
+       //  LeaderController.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.DECLINE, this);
 
     }
 }
