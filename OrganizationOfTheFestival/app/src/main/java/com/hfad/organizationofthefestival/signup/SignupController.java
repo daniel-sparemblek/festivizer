@@ -3,7 +3,7 @@ package com.hfad.organizationofthefestival.signup;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.LeaderActivity;
+import com.hfad.organizationofthefestival.leader.LeaderActivity;git
 import com.hfad.organizationofthefestival.OrganizerActivity;
 import com.hfad.organizationofthefestival.User;
 import com.hfad.organizationofthefestival.WorkerActivity;
