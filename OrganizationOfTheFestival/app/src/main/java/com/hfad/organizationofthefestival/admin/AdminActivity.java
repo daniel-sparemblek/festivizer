@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival;
+package com.hfad.organizationofthefestival.admin;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.view.View;
 
+import com.hfad.organizationofthefestival.AdminConnector;
+import com.hfad.organizationofthefestival.Decision;
+import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.ServerStatus;
 import com.hfad.organizationofthefestival.adapters.AdminAdapter;
 
 import java.util.ArrayList;
