@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class SignupActivity extends AppCompatActivity implements Connector.ServerListener {
+public class SignupActivity extends AppCompatActivity {
 
     private ImageView profile_picture;
     private EditText username;
@@ -87,42 +87,7 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register.setEnabled(false);
-                //Converting profile_picture to byte array
-                bitmap = ((BitmapDrawable) profile_picture.getDrawable()).getBitmap();
-                baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                profilePictureInByte = baos.toByteArray();
 
-                //Taking text from all the EditTexts and converting it to string
-                usernameString = username.getText().toString();
-                nameString = name.getText().toString();
-                lastNameString = lastName.getText().toString();
-                phoneString = phone.getText().toString();
-                emailString = email.getText().toString();
-                pwd1String = password1.getText().toString();
-                pwd2String = password2.getText().toString();
-
-                if(roleChooserDropDown.getSelectedItem().toString().equals("LEADER")) {
-                    userRole = Role.LEADER;
-                } else if(roleChooserDropDown.getSelectedItem().toString().equals("ORGANIZER")) {
-                    userRole = Role.ORGANIZER;
-                } else if(roleChooserDropDown.getSelectedItem().toString().equals("WORKER")) {
-                    userRole = Role.WORKER;
-                }
-                //Calling the method register from class Connector if email is valid
-                if (emailIsInvalid(emailString)){
-                    email.setText("");
-                    email.requestFocus();
-                    toast("Email format is invalid.");
-                    register.setEnabled(true);
-                } else if (!verifyPassword(pwd1String, pwd2String)) {
-                    password1.requestFocus();
-                    toast("Passwords do not match!");
-                    register.setEnabled(true);
-                } else {
-                    Connector.register(usernameString, securePassword(pwd1String), nameString, lastNameString, profilePictureInByte, phoneString, emailString, userRole, SignupActivity.this);
-                }
             }
         });
 
@@ -166,28 +131,6 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         return password1.equals(password2);
     }
 
-    private String securePassword(String password){
-        String generatedPassword = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(password.getBytes());
-            byte[] bytes = md.digest();
-            StringBuilder sb = new StringBuilder();
-            for (int i=0; i<bytes.length; i++){
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
-
-    @Override
-    public void onLogInResponse(ServerStatus status) {
-
-    }
-
     private void toast(CharSequence message) {
         Context context;
         Toast toast;
@@ -195,30 +138,6 @@ public class SignupActivity extends AppCompatActivity implements Connector.Serve
         int duration = Toast.LENGTH_SHORT;
         toast = Toast.makeText(context, message, duration);
         toast.show();
-    }
-
-    @Override
-    public void onRegisterResponse(ServerStatus status) {
-        if(status == ServerStatus.SUCCESS){
-            toast("Well done! Please login");
-            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-        }
-        if(status == ServerStatus.SERVER_DOWN){
-            toast("Server is currently down. Please try again later");
-        }
-        if(status == ServerStatus.EMAIL_EXISTS){
-            toast("This email is already in use");
-        }
-        if(status == ServerStatus.USERNAME_EXISTS){
-            toast("Username is already taken");
-        }
-        if(status == ServerStatus.PHONE_EXISTS){
-            toast("This phone is already linked to another account");
-        }
-        if(status == ServerStatus.UNKNOWN){
-            toast("Something terrible happened. Please try again later");
-        }
-        register.setEnabled(true);
     }
 
     private static boolean emailIsInvalid(String email){

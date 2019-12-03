@@ -56,7 +56,7 @@ public class SignupController {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(signupActivity, "server error :(", Toast.LENGTH_SHORT).show();
+                Toast.makeText(signupActivity, "servergit error :(", Toast.LENGTH_SHORT).show();
             }
         });
     }
