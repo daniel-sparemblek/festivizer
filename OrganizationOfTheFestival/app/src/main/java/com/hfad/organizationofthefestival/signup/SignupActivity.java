@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival;
+package com.hfad.organizationofthefestival.signup;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hfad.organizationofthefestival.Connector;
+import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.Role;
+import com.hfad.organizationofthefestival.ServerStatus;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 
 import java.security.MessageDigest;

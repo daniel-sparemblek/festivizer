@@ -16,8 +16,8 @@
         <activity android:name=".leader.LeaderActivity" />
         <activity android:name=".WorkerActivity" />
         <activity android:name=".OrganizerActivity" />
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".SignupActivity" />
+        <activity android:name=".admin.AdminActivity" />
+        <activity android:name=".signup.SignupActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
