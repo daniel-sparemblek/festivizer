@@ -69,7 +69,7 @@
 				\begin{packed_enum}
 					\item Create [multiple] Festivals
 					\item Modify or delete their Festivals	
-					\item \textbf{Inherit Organiser functionalities for their own Festivals}
+					\item Inherit Organiser functionalities for their own Festivals
 					\item Appoint Organisers to their Festivals(check if the selected Organiser is organising any possibly concurrent Festivals)
 					\item Access the Jobs, Activities, Workers and other details of their Festival
 				\end{packed_enum}
@@ -79,7 +79,7 @@
 					\item Job management
 					\begin{packed_enum}
 						\item Select which Jobs need to be done - open their corresponding Job Auctions
-						\item Job Sequence - order and parallelise Jobs -> Festival Job Timeline
+						\item Job Sequence - order and parallelise Jobs - Festival Job Timeline
 						\item Ability to extend Job Auction lifetime by 1 day
 						\item View and modify Jobs
 						\begin{packed_enum}
@@ -92,11 +92,11 @@
 					\item Organise a Festival -- Ability to organise multiple Festivals - check for concurrency!
 				\end{packed_enum}
 				
-				\item \underbar{Workers perform specific Jobs. If necessary, multiple Workers work on the same Job. They can:}
+				\item \underbar {Workers perform specific Jobs. They can:}
 				\begin{packed_enum}
 					\item Select their fields of specialisation
 					\item Apply to Job Auctions
-					\item Perform Job - can perform multiple Jobs - check for concurrency!
+					\item Perform Job - can perform multiple Jobs - check for concurrency
 					\item Fill out Job information sheet
 					\begin{packed_enum}
 						\item Job Description
@@ -1321,10 +1321,7 @@
 				\end{packed_item}
 			\end{packed_item}
 			
-			\subsubsection{Use Case Diagrams}
-					
-					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
-				\eject		
+			\subsubsection{Use Case Diagrams}		
 				
 				\begin{figure}[H]
 					\includegraphics[width=\linewidth]{diagrams/uc-diag0-general.png}
@@ -1356,21 +1353,14 @@
 					\caption{Use Case diagram - Activity}
 					\label{fig:uc_diag_4_activity}
 				\end{figure}
-				
+			
+			\eject
+
 			\subsection{Sequence Diagrams}
-				
-				\textbf{\textit{dio 1. revizije}}\\
-				
-				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
-				
-				\textbf{Use Case name}
-				\textit{Use Case description}
-				Here goes the diagram
-				
+								
 				\textbf{Use Case 31 Manage Job Activities(Worker view)}
-				\textit{The Worker needs to organise the Job he's been assigned. He does this by creating, modifying and removing(= manipulating) Activities that compose individual Jobs.}
-					
-				\textit{This Use Case depicts the management of such a list of Activities that make up a Job. These Activities can then be added to the Timeline, where their time domain will be well defined and visible - this will enable an easy visualisation of the way the Job will be done and organised.}
+				The Worker needs to organise the Job he's been assigned. He does this by creating, modifying and removing(= manipulating) Activities that compose individual Jobs.
+				This Use Case depicts the management of such a list of Activities that make up a Job. These Activities can then be added to the Timeline, where their time domain will be well defined and visible - this will enable an easy visualisation of the way the Job will be done and organised.
 				\begin{figure}[H]
 					\includegraphics[width=\linewidth]{diagrams/sd-diag0-jobact.png}
 					\caption{Job Activities Sequence Diagram}
@@ -1378,11 +1368,9 @@
 				\end{figure}
 				
 				\textbf{Use Case 26 Managing Festival Job Timeline}
-				\textit{It is necessary for the Festival Leader or Organiser to properly manage the Festival Jobs with regard to Time organisation.}
-				
-				\textit{This Use Case allows the Leader/Organiser to define the beginning and end times of certain Job Festivals, as well as modify their durations.}
-			
-				\textit{Timeline is a graphical flowchart - easy and intuitive Festival Job organisation. Concurrency and parallelisation can also be easily achieved.}
+				It is necessary for the Festival Leader or Organiser to properly manage the Festival Jobs with regard to Time organisation.
+				This Use Case allows the Leader/Organiser to define the beginning and end times of certain Job Festivals, as well as modify their durations.
+				Timeline is a graphical flowchart - easy and intuitive Festival Job organisation. Concurrency and parallelisation can also be easily achieved.
 				
 				\begin{figure}[H]
 					\includegraphics[width=\linewidth]{diagrams/sd-diag1-fjt.png}
@@ -1391,11 +1379,9 @@
 				\end{figure}
 				
 				\textbf{Use Case 36 Manage Job Activities Timeline(Worker view)}
-				\textit{Just as it is with Festival Leaders and Organiser and Festival Jobs Management so it is with Workers and Job Activities Management.}
-				
-				\textit{Lead Workers must manage their Jobs' Activities in much the same way. They have to take into consideration the start and end times of each Activity, as well as parallelise those Activities.}
-			
-				\textit{The purpose of the Timeline here is, too, to provide an easy, graphical, and intuitive way of doing this Job Activities manipulation and organisation.}
+				Just as it is with Festival Leaders and Organiser and Festival Jobs Management so it is with Workers and Job Activities Management.
+				Lead Workers must manage their Jobs' Activities in much the same way. They have to take into consideration the start and end times of each Activity, as well as parallelise those Activities.
+				The purpose of the Timeline here is, too, to provide an easy, graphical, and intuitive way of doing this Job Activities manipulation and organisation.
 				
 				\begin{figure}[H]
 					\includegraphics[width=\linewidth]{diagrams/sd-diag2-jat.png}
@@ -1404,9 +1390,9 @@
 				\end{figure}
 				
 				\textbf{Use Case 21 View the List of own Festivals}
-				\textit{Leaders and Organisers must view the List of the Festivals that they're reponsible for so they can further view the details of those Festivals, and then work on those Festivals.}
-				
-				\textit{This Use Case is one of the pillars of the app, as it enables the management of the selected Festivals - Leaders and Organisers are in charge of those Festivals.}
+				Leaders and Organisers must view the List of the Festivals that they're reponsible for so they can further view the details of those Festivals, and then work on those Festivals.
+				This Use Case is one of the pillars of the app, as it enables the management of the selected Festivals - Leaders and Organisers are in charge of those Festivals.
+
 				\begin{figure}[H]
 					\includegraphics[width=\linewidth]{diagrams/sd-diag3-festivalList.png}
 					\caption{Organiser/Leader Festival List Sequence Diagram}

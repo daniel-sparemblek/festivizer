@@ -1,62 +1,62 @@
 \chapter{Architecture and System Design}
 
-	\textit{ System architecture can be divided into three sub-systems :}
+	System architecture can be divided into three sub-systems :
 	\begin{itemize}
-		\item 	\textit{Web server}
-		\item 	\textit{Android application}
-		\item 	\textit{Database}		
+		\item 	 Web server
+		\item 	 Android application
+		\item 	 Database
 	\end{itemize}
 		
 		\textbf{Android application}
-		\textit{It allows user to view and interact with the specific components of the graphic interface. In Android, graphical components are written in the XML (Extensible Markup Language) which is the language that can be understood by human and by the machine. On interaction with the GUI elements certain parts of the Android code are executed, mostly the ones that send HTTP requests to the Web Server. To send HTTP requests we are using Android’s Volley library.}
+		 It allows user to view and interact with the specific components of the graphic interface. In Android, graphical components are written in the XML (Extensible Markup Language) which is the language that can be understood by human and by the machine. On interaction with the GUI elements certain parts of the Android code are executed, mostly the ones that send HTTP requests to the Web Server. To send HTTP requests we are using Android’s Volley library.
 
-		\textbf{Web Server }
-		\textit{Web Server is the one who responds to the HTTP requests that are sent by Android application. Primary task of the web server is communication with the client (Android application) and fetching data from the database. Required data is then sent back to the client that displays data on the GUI. Response can be sent in the JSON (JavaScript Object Notation) format or as the plain String. Web server is also the one responsible for authentication and authorization of the user, server checks if the user has permission to access the certain data. If user does not have the required permission, Server will send Error response back to the client whose task is to handle the error properly. }
+		\textbf{Web Server}
+		 Web Server is the one who responds to the HTTP requests that are sent by Android application. Primary task of the web server is communication with the client (Android application) and fetching data from the database. Required data is then sent back to the client that displays data on the GUI. Response can be sent in the JSON (JavaScript Object Notation) format or as the plain String. Web server is also the one responsible for authentication and authorization of the user, server checks if the user has permission to access the certain data. If user does not have the required permission, Server will send Error response back to the client whose task is to handle the error properly.
 
-		\textit{Programming language in which we have coded the Android application is Java, GUI components are written in the XML language and server-side code is written in Python. IDE (Integrated development environment) we are using is Android Studio for the client-side code and IDLE for the server-side code.}
+		 Programming language in which we have coded the Android application is Java, GUI components are written in the XML language and server-side code is written in Python. IDE (Integrated development environment) we are using is Android Studio for the client-side code and IDLE for the server-side code.
 
-		\textit{Design pattern we are using is MVC(Model-View-Controller). It is a common architectural pattern which is used to design and create interfaces and the structure of an application. This pattern divides the application into three parts that are dependent and connected to each other. These designs are used to distinguish the presentation of data from the way the data is accepted from the user to the data that is being shown. }
-		\textit{MVC design pattern consists of: }
+		 Design pattern we are using is MVC(Model-View-Controller). It is a common architectural pattern which is used to design and create interfaces and the structure of an application. This pattern divides the application into three parts that are dependent and connected to each other. These designs are used to distinguish the presentation of data from the way the data is accepted from the user to the data that is being shown. 
+		 MVC design pattern consists of: 
 			
 		\begin{itemize}
-			\item 	\textit{Model}
-			\item 	\textit{View }
-			\item 	\textit{Controller}		
+			\item 	 Model
+			\item 	 View
+			\item 	 Controller		
 		\end{itemize}
 
 		\textbf{Model}
-		\textit{The Model component corresponds to all the data-related logic that the user works with. This can represent either the data that is being transferred between the View and Controller components or any other business logic-related data. For example, a Customer object will retrieve the customer information from the database, manipulate it and update it data back to the database or use it to render data. 
-		In Android application Model is usually represented as independent Java class that contains data about e.g. Customer. That data is the one that is kept in the data base and displayed in the View component. }
+		 The Model component corresponds to all the data-related logic that the user works with. This can represent either the data that is being transferred between the View and Controller components or any other business logic-related data. For example, a Customer object will retrieve the customer information from the database, manipulate it and update it data back to the database or use it to render data. 
+		In Android application Model is usually represented as independent Java class that contains data about e.g. Customer. That data is the one that is kept in the data base and displayed in the View component. 
 
 		\textbf{View}
-		\textit{The View component is used for all the UI logic of the application. For example, the Customer view will include all the UI components such as text boxes, dropdowns, etc. that the final user interacts with. 
-		In our application an example of View would be Activity for register, user interacts with the View, enters the necessary information that are then transferred to the Model and finally to the database via Controller.}
+		 The View component is used for all the UI logic of the application. For example, the Customer view will include all the UI components such as text boxes, dropdowns, etc. that the final user interacts with. 
+		In our application an example of View would be Activity for register, user interacts with the View, enters the necessary information that are then transferred to the Model and finally to the database via Controller.
 
 		\textbf{Controller}
-		\textit{Controllers act as an interface between Model and View components to process all the business logic and incoming requests, manipulate data using the Model component and interact with the Views to render the final output. For example, the Customer controller will handle all the interactions and inputs from the Customer View and update the database using the Customer Model. The same controller will be used to view the Customer data.}
+		 Controllers act as an interface between Model and View components to process all the business logic and incoming requests, manipulate data using the Model component and interact with the Views to render the final output. For example, the Customer controller will handle all the interactions and inputs from the Customer View and update the database using the Customer Model. The same controller will be used to view the Customer data.
 \pagebreak
 				
 		\section{Database}
 			
 			
-		\textit{Database used for this project is a relation based database. Relation is usually referred to as a table that has tuples. Tuple is an object that represents an information. Purpose of the database is easy and fast data manipulation, including saving, deleting, updating and sending data to the server. Database has relations:}
+		 Database used for this project is a relation based database made in SQLite. Relation is usually referred to as a table that has tuples. Tuple is an object that represents an information. Purpose of the database is easy and fast data manipulation, including saving, deleting, updating and sending data to the server. Database has relations:
 		\begin{itemize}
-			\item 	\textit{User}
-			\item 	\textit{Festival}
-			\item 	\textit{Event}
-			\item 	\textit{Specialization}
-			\item 	\textit{WorkerSpec}
-			\item 	\textit{Auction}
-			\item 	\textit{Application}
-			\item 	\textit{Job}
-			\item 	\textit{JobSpec}
-			\item 	\textit{FestivalOrganizers}
+			\item 	 User
+			\item 	 Festival
+			\item 	 Event
+			\item 	 Specialization
+			\item 	 WorkerSpec
+			\item 	 Auction
+			\item 	 Application
+			\item 	 Job
+			\item 	 JobSpec
+			\item 	 FestivalOrganizers
 		\end{itemize}
 		\pagebreak
 			\subsection{Tables details}
 			
 
-				\textbf{User} \textit{has entities for every user of the app. It has all needed personal information about the user and his role.}
+				\textbf{User}  has entities for every user of the app. It has all needed personal information about the user and his role.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -78,7 +78,7 @@
 					
 				\end{longtabu}
 
-				\textbf{Festival} \textit{contains all needed information about the festival.}
+				\textbf{Festival}  contains all needed information about the festival.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -98,7 +98,7 @@
 					
 				\end{longtabu}
 
-				\textbf{Event} \textit{contains information about the event of the festival.}
+				\textbf{Event}  contains information about the event of the festival.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -120,7 +120,7 @@
 				\end{longtabu}
 
 
-				\textbf{Specialization} \textit{contains all different specializations and their names.}
+				\textbf{Specialization}  contains all different specializations and their names.
 				
 				\begin{longtabu} to \textwidth {|X[7, l]|X[6, l]|X[19, l]|}
 					
@@ -136,7 +136,7 @@
 					
 				\end{longtabu}
 
-				\textbf{WorkerSpec} \textit{contains specifications about the user who wants to apply as a worker and his specializations.}
+				\textbf{WorkerSpec}  contains specifications about the user who wants to apply as a worker and his specializations.
 				
 				\begin{longtabu} to \textwidth {|X[7, l]|X[6, l]|X[19, l]|}
 					
@@ -152,7 +152,7 @@
 					
 				\end{longtabu}
 
-				\textbf{Auction} \textit{contains information about auctions.}
+				\textbf{Auction}  contains information about auctions.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -169,7 +169,7 @@
 				\end{longtabu}
 
 
-				\textbf{Application} \textit{contains information about applications for auctions.}
+				\textbf{Application}  contains information about applications for auctions.
 				
 				\begin{longtabu} to \textwidth {|X[8, l]|X[6, l]|X[18, l]|}
 					
@@ -194,7 +194,7 @@
 				\end{longtabu}
 			
 
-				\textbf{Job} \textit{contains information about jobs that had an auction.}
+				\textbf{Job}  contains information about jobs that had an auction.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -218,7 +218,7 @@
 				\end{longtabu}
 
 
-				\textbf{JobSpec} \textit{contains specializations that are needed for the job.}
+				\textbf{JobSpec}  contains specializations that are needed for the job.
 				
 				\begin{longtabu} to \textwidth {|X[7, l]|X[6, l]|X[19, l]|}
 					
@@ -238,7 +238,7 @@
 				\end{longtabu}
 
 
-				\textbf{FestivalOrganizers} \textit{contains information which user, that is also an organizer, applied for which festival.}
+				\textbf{FestivalOrganizers}  contains information which user, that is also an organizer, applied for which festival.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -283,9 +283,9 @@
 				\label{fig:class_diag}
 			\end{figure}
 			
-			\textbf{\textit{dio 2. revizije}}\\			
+			\textbf{ dio 2. revizije}\\			
 			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
+			 Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije
 			
 			
 			
@@ -294,22 +294,22 @@
 		\section{Dijagram stanja}
 			
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			\textbf{ dio 2. revizije}\\
 			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+			 Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. 
 			
 			
 			\eject 
 		
 		\section{Dijagram aktivnosti}
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			\textbf{ dio 2. revizije}\\
 			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+			  Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.
 			
 			\eject
 		\section{Dijagram komponenti}
 		
-			\textbf{\textit{dio 2. revizije}}\\
+			\textbf{ dio 2. revizije}\\
 		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			  Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.
