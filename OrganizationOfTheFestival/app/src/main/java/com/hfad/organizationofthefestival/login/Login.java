@@ -9,4 +9,12 @@ public class Login {
         this.username = username;
         this.password = password;
     }
+
+    public boolean isValid() {
+        if (!username.isEmpty() && !password.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
