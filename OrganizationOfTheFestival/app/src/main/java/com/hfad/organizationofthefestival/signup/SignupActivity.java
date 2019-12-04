@@ -83,17 +83,17 @@ public class SignupActivity extends AppCompatActivity {
                 role = getRoleEnum(roleChooserDropDown.getSelectedItem().toString());
                 signup = new Signup(username.getText().toString(),
                         password1.getText().toString(),
-                        password2.getText().toString(),
                         name.getText().toString(),
                         lastName.getText().toString(),
-                        profilePictureInBytes,
+                        profilePictureInBytes.toString(),
                         phone.getText().toString(),
                         email.getText().toString(),
-                        role);
-                if (signup.check() == null) {
+                        role.toString());
+                signupController.signUp(signup);
+                /*if (signup.check() == null) {
                     user = signup.makeUser();
                     signupController.signUp(signup);
-                }
+                }*/
             }
         });
 

@@ -11,19 +11,17 @@ import java.util.regex.Pattern;
 public class Signup {
 
     private String username;
-    private String inputPassword;
-    private String verifyPassword;
+    private String password;
     private String firstName;
     private String lastName;
-    private byte[] picture;
+    private String picture;
     private String phone;
     private String email;
-    private Role role;
+    private String role;
 
-    public Signup(String username, String inputPassword, String verifyPassword, String firstName, String lastName, byte[] picture, String phone, String email, Role role) {
+    public Signup(String username, String password, String firstName, String lastName, String picture, String phone, String email, String role) {
         this.username = username;
-        this.inputPassword = inputPassword;
-        this.verifyPassword = verifyPassword;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.picture = picture;
@@ -32,47 +30,75 @@ public class Signup {
         this.role = role;
     }
 
-    public String check() {
-        if (username.isEmpty())
-            return String.format("username is empty");
-        if (email.isEmpty())
-            return String.format("email is empty");
-        if (checkEmail()) {
-            return String.format("email is not valid");
-        }
-        if (inputPassword.isEmpty())
-            return String.format("password is empty");
-        if (verifyPassword.isEmpty())
-            return String.format("verify password is empty");
-        if (!inputPassword.equals(verifyPassword))
-            return String.format("passwords do not match");
-        if (phone.isEmpty())
-            return String.format("phone is empty");
-        if (firstName.isEmpty())
-            return String.format("first name is empty");
-        if (lastName.isEmpty())
-            return String.format("last name is empty");
-        return null;
+    public String getUsername() {
+        return username;
     }
 
-    private boolean checkEmail() {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                "[a-zA-Z0-9_+&*-]+)*@" +
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                "A-Z]{2,7}$";
-        Pattern pat = Pattern.compile(emailRegex);
-        return !pat.matcher(email).matches();
+    public String getInputPassword() {
+        return password;
     }
 
-    public User makeUser() {
-        switch (role) {
-            case LEADER:
-                return new Leader(username, inputPassword, firstName, lastName, picture, phone, email, role);
-            case WORKER:
-                return new Worker(username, inputPassword, firstName, lastName, picture, phone, email, role);
-            case ORGANIZER:
-                return new Organizer(username, inputPassword, firstName, lastName, picture, phone, email, role);
-        }
-        return null;
+    /*public String getVerifyPassword() {
+        return verifyPassword;
+    }*/
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setpassword(String password) {
+        this.password = password;
+    }
+
+    /*public void setVerifyPassword(String verifyPassword) {
+        this.verifyPassword = verifyPassword;
+    }*/
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
