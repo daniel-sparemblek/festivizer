@@ -1,13 +1,7 @@
 package com.hfad.organizationofthefestival.signup;
 
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.hfad.organizationofthefestival.leader.LeaderActivity;
-import com.hfad.organizationofthefestival.OrganizerActivity;
-import com.hfad.organizationofthefestival.User;
-import com.hfad.organizationofthefestival.WorkerActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +31,7 @@ public class SignupController {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(signupActivity, response.body().getAccessToken(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(signupActivity, response.body().getAccess_token(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(signupActivity, response.raw().toString(), Toast.LENGTH_SHORT).show();
                     System.err.println("ERROR " + response.raw().toString());

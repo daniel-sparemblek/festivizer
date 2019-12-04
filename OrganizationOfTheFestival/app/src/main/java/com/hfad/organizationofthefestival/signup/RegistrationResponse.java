@@ -3,13 +3,13 @@ package com.hfad.organizationofthefestival.signup;
 public class RegistrationResponse {
 
     private String message;
-    private String accessToken;
-    private String refreshToken;
+    private String access_token;
+    private String refresh_token;
 
-    public RegistrationResponse(String message, String accessToken, String refreshToken) {
+    public RegistrationResponse(String message, String access_token, String refresh_token) {
         this.message = message;
-        this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
+        this.access_token = access_token;
+        this.refresh_token = refresh_token;
     }
 
     public String getMessage() {
@@ -20,19 +20,19 @@ public class RegistrationResponse {
         this.message = message;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getAccess_token() {
+        return access_token;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
     }
 
-    public String getRefreshToken() {
-        return refreshToken;
+    public String getRefresh_token() {
+        return refresh_token;
     }
 
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public void setRefresh_token(String refresh_token) {
+        this.refresh_token = refresh_token;
     }
 }
