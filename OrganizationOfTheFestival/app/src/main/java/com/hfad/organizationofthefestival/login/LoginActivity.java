@@ -1,14 +1,38 @@
 package com.hfad.organizationofthefestival.login;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.IntentSender;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.database.DatabaseErrorHandler;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.UserHandle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.hfad.organizationofthefestival.admin.AdminActivity;
 import com.hfad.organizationofthefestival.Connector;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
@@ -18,10 +42,17 @@ import com.hfad.organizationofthefestival.ServerStatus;
 import com.hfad.organizationofthefestival.signup.SignupActivity;
 import com.hfad.organizationofthefestival.UnconfirmedActivity;
 import com.hfad.organizationofthefestival.WorkerActivity;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class LoginActivity extends AppCompatActivity implements Connector.ServerListener {
+public class LoginActivity extends AppCompatActivity {
 
     /**
      * User's email EditText field.
@@ -37,11 +68,7 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
     private TextView twRegisterLink;
     private Button btnLogin;
 
-    private String user_email;
-    private String user_pwd;
-
     private LoginController loginController;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +82,6 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
         twRegisterLink = findViewById(R.id.tw_register_link);
         btnLogin = findViewById(R.id.btn_login);
 
-        etEmail.requestFocus();
-
         twRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,103 +94,21 @@ public class LoginActivity extends AppCompatActivity implements Connector.Server
             @Override
             public void onClick(View v) {
                 btnLogin.setEnabled(false);
-                Connector.logIn(etEmail.getText().toString().trim(), securePassword(etPassword.getText().toString()), LoginActivity.this);
+
+                Login login = new Login(etEmail.getText().toString(), etPassword.getText().toString());
+                if (login.isValid()) {
+                    loginController.login(login);
+                } else {
+                    Toast.makeText(getApplicationContext(), "No fields should be empty!", Toast.LENGTH_SHORT).show();
+                    btnLogin.setEnabled(true);
+                    return;
+                }
             }
         });
     }
 
-    private String securePassword(String password){
-        String generatedPassword = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(password.getBytes());
-            byte[] bytes = md.digest();
-            StringBuilder sb = new StringBuilder();
-            for (int i=0; i<bytes.length; i++){
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
-
     @Override
-    public void onLogInResponse(ServerStatus status) {
-
-        if(status == ServerStatus.SUCCESS) {
-            Intent intent = new Intent(this, WorkerActivity.class);
-            intent.putExtra("USERNAME", user_email);
-            intent.putExtra("PASSWORD", securePassword(user_pwd));
-            startActivity(intent);
-        }
-
-        if(status == ServerStatus.ADMIN) {
-            Intent intent = new Intent(this, AdminActivity.class);
-            intent.putExtra("USERNAME", user_email);
-            intent.putExtra("PASSWORD", securePassword(user_pwd));
-            startActivity(intent);
-        }
-
-        if(status == ServerStatus.ORGANIZER) {
-            Intent intent = new Intent(this, OrganizerActivity.class);
-            intent.putExtra("USERNAME", user_email);
-            intent.putExtra("PASSWORD", securePassword(user_pwd));
-            startActivity(intent);
-        }
-
-        if(status == ServerStatus.LEADER_CONFIRMED) {
-            Intent intent = new Intent(this, LeaderActivity.class);
-            intent.putExtra("USERNAME", user_email);
-            intent.putExtra("PASSWORD", securePassword(user_pwd));
-            startActivity(intent);
-        }
-
-        if(status == ServerStatus.LEADER_PENDING) {
-            Intent intent = new Intent(this, UnconfirmedActivity.class);
-            startActivity(intent);
-        }
-
-        if(status == ServerStatus.SERVER_DOWN) {
-            Context context;
-            Toast toast;
-            context = getApplicationContext();
-            CharSequence message = "Server is currently down. Please try again later";
-            int duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, message, duration);
-            toast.show();
-        }
-        if(status == ServerStatus.NO_USERNAME) {
-            etEmail.requestFocus();
-            Context context;
-            Toast toast;
-            context = getApplicationContext();
-            CharSequence message = "Username doesn't exist. Please register";
-            int duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, message, duration);
-            toast.show();
-        }
-        if(status == ServerStatus.WRONG_PASSWORD) {
-            etPassword.requestFocus();
-            Context context;
-            Toast toast;
-            context = getApplicationContext();
-            CharSequence message = "Wrong password";
-            int duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, message, duration);
-            toast.show();
-        }
-        btnLogin.setEnabled(true);
-    }
-
-    @Override
-    public void onRegisterResponse(ServerStatus status) {
-
-    }
-
-    @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         twRegisterLink.setClickable(true);
     }
