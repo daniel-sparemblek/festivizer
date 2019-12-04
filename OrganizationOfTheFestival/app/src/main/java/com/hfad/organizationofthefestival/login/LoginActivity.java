@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.hfad.organizationofthefestival.admin.AdminActivity;
 import com.hfad.organizationofthefestival.Connector;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
@@ -18,10 +19,11 @@ import com.hfad.organizationofthefestival.ServerStatus;
 import com.hfad.organizationofthefestival.signup.SignupActivity;
 import com.hfad.organizationofthefestival.UnconfirmedActivity;
 import com.hfad.organizationofthefestival.WorkerActivity;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
 
     /**
      * User's email EditText field.
@@ -37,11 +39,7 @@ public class LoginActivity extends AppCompatActivity{
     private TextView twRegisterLink;
     private Button btnLogin;
 
-    private String user_email;
-    private String user_pwd;
-
     private LoginController loginController;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +73,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         twRegisterLink.setClickable(true);
     }
