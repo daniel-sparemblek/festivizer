@@ -15,7 +15,7 @@ public interface SignupClient {
     Call<RegistrationResponse> signup(@Body Signup signup);
 
     @GET("registration")
-    Call<ResponseBody> getUser(@Header("Authorization") String authToken);
+    Call<User> getUser(@Header("Authorization") String authToken);
 
 
 }

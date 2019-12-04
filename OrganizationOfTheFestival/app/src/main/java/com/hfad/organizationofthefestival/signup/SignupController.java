@@ -1,7 +1,10 @@
 package com.hfad.organizationofthefestival.signup;
 
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.hfad.organizationofthefestival.login.LoginActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,16 +28,29 @@ public class SignupController {
     SignupClient signupClient = retrofit.create(SignupClient.class);
 
     public void signUp(Signup signup) {
-        Call<RegistrationResponse> call = signupClient.signup(signup);
+        Call<RegistrationResponse> callSignup = signupClient.signup(signup);
 
-        call.enqueue(new Callback<RegistrationResponse>() {
+        callSignup.enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(signupActivity, response.body().getAccess_token(), Toast.LENGTH_SHORT).show();
+
+                    if (response.body().getMessage().equals("Username already exists!")) {
+                        Toast.makeText(signupActivity, "User already exists!", Toast.LENGTH_SHORT).show();
+                    } else if (response.body().getMessage().equals("Phone is already in use")) {
+                        Toast.makeText(signupActivity, "Phone already exists!", Toast.LENGTH_SHORT).show();
+                    } else if (response.body().getMessage().equals("Email already exists")) {
+                        Toast.makeText(signupActivity, "Email already exists!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(signupActivity, "Great! You successfully signed up! Please login", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(signupActivity, LoginActivity.class);
+                        intent.putExtra("accessToken", response.body().getAccess_token());
+                        intent.putExtra("refreshToken", response.body().getRefresh_token());
+                        signupActivity.startActivity(intent);
+                    }
                 } else {
                     Toast.makeText(signupActivity, response.raw().toString(), Toast.LENGTH_SHORT).show();
-                    System.err.println("ERROR " + response.raw().toString());
+                    System.err.println("ERROR " + response.body().getMessage());
                 }
             }
 

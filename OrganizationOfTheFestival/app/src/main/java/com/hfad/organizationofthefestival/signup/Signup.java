@@ -22,17 +22,35 @@ public class Signup {
         this.role = role;
     }
 
+    public String checkInput(String verifyPassword) {
+        if (username.equals("")) {
+            return "Username cannot be blank!";
+        }
+        if (!password.equals(verifyPassword)){
+            return "Passwords do not match!";
+        }
+        if (firstName.equals("")){
+            return "Name cannot be blank!";
+        }
+        if (lastName.equals("")){
+            return  "Last name cannot be blank!";
+        }
+        if (phone.equals("")){
+            return "Phone cannot be blank!";
+        }
+        if (email.equals("")){
+            return "email cannot be blank!";
+        }
+        return null;
+    }
+
     public String getUsername() {
         return username;
     }
 
-    public String getInputPassword() {
+    public String getPassword() {
         return password;
     }
-
-    /*public String getVerifyPassword() {
-        return verifyPassword;
-    }*/
 
     public String getFirstName() {
         return firstName;
@@ -65,10 +83,6 @@ public class Signup {
     public void setpassword(String password) {
         this.password = password;
     }
-
-    /*public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
-    }*/
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
