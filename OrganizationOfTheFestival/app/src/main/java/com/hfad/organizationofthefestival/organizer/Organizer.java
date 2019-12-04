@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival.Organizer;
+package com.hfad.organizationofthefestival.organizer;
 
 import com.hfad.organizationofthefestival.Role;
 import com.hfad.organizationofthefestival.User;

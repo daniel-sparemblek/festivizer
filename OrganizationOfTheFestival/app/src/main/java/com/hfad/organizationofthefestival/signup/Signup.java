@@ -1,13 +1,5 @@
 package com.hfad.organizationofthefestival.signup;
 
-import com.hfad.organizationofthefestival.Organizer.Organizer;
-import com.hfad.organizationofthefestival.Role;
-import com.hfad.organizationofthefestival.User;
-import com.hfad.organizationofthefestival.Worker;
-import com.hfad.organizationofthefestival.leader.Leader;
-
-import java.util.regex.Pattern;
-
 public class Signup {
 
     private String username;
