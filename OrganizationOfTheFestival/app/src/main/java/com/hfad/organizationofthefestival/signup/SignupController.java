@@ -3,10 +3,12 @@ package com.hfad.organizationofthefestival.signup;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.OrganizerActivity;
 import com.hfad.organizationofthefestival.User;
 import com.hfad.organizationofthefestival.WorkerActivity;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,14 +30,14 @@ public class SignupController {
     Retrofit retrofit = builder.build();
     SignupClient signupClient = retrofit.create(SignupClient.class);
 
-    public void signUp(Signup signup){
+    public void signUp(Signup signup) {
         Call<User> call = signupClient.signup(signup);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
-                    switch (response.body().getRole()){
+                if (response.isSuccessful()) {
+                    switch (response.body().getRole()) {
                         case LEADER:
                             signupActivity.startActivity(new Intent(signupActivity, LeaderActivity.class));
                             break;

@@ -9,3 +9,4 @@ public class Organizer extends User {
         super(username, password, firstName, lastName, picture, phone, email, role);
     }
 }
+

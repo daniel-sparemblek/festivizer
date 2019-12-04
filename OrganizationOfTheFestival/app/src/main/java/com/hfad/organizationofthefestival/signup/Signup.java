@@ -5,6 +5,7 @@ import com.hfad.organizationofthefestival.Role;
 import com.hfad.organizationofthefestival.User;
 import com.hfad.organizationofthefestival.Worker;
 import com.hfad.organizationofthefestival.leader.Leader;
+
 import java.util.regex.Pattern;
 
 public class Signup {
@@ -31,17 +32,17 @@ public class Signup {
         this.role = role;
     }
 
-    public String check(){
+    public String check() {
         if (username.isEmpty())
             return String.format("username is empty");
         if (email.isEmpty())
-            return  String.format("email is empty");
-        if (checkEmail()){
-            return  String.format("email is not valid");
+            return String.format("email is empty");
+        if (checkEmail()) {
+            return String.format("email is not valid");
         }
         if (inputPassword.isEmpty())
             return String.format("password is empty");
-        if(verifyPassword.isEmpty())
+        if (verifyPassword.isEmpty())
             return String.format("verify password is empty");
         if (!inputPassword.equals(verifyPassword))
             return String.format("passwords do not match");
@@ -63,12 +64,12 @@ public class Signup {
         return !pat.matcher(email).matches();
     }
 
-    public User makeUser(){
-        switch (role){
+    public User makeUser() {
+        switch (role) {
             case LEADER:
                 return new Leader(username, inputPassword, firstName, lastName, picture, phone, email, role);
             case WORKER:
-                return  new Worker(username, inputPassword, firstName, lastName, picture, phone, email, role);
+                return new Worker(username, inputPassword, firstName, lastName, picture, phone, email, role);
             case ORGANIZER:
                 return new Organizer(username, inputPassword, firstName, lastName, picture, phone, email, role);
         }

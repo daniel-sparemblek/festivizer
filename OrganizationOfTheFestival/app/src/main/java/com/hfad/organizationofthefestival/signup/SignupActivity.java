@@ -90,7 +90,7 @@ public class SignupActivity extends AppCompatActivity {
                         phone.getText().toString(),
                         email.getText().toString(),
                         role);
-                if (signup.check() == null){
+                if (signup.check() == null) {
                     user = signup.makeUser();
                     signupController.signUp(signup);
                 }
@@ -108,7 +108,7 @@ public class SignupActivity extends AppCompatActivity {
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(Intent.ACTION_PICK,
+                Intent intent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, PICK_IMAGE_REQUEST);
             }
@@ -134,13 +134,13 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         register.setEnabled(true);
         login.setEnabled(true);
     }
 
-    private static byte[] pictureToByteArray(Bitmap bitmap){
+    private static byte[] pictureToByteArray(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] profilePictureInByte;
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -148,12 +148,12 @@ public class SignupActivity extends AppCompatActivity {
         return profilePictureInByte;
     }
 
-    private static Role getRoleEnum(String role){
-        switch (role){
+    private static Role getRoleEnum(String role) {
+        switch (role) {
             case "LEADER":
                 return Role.LEADER;
             case "ORGANIZER":
-                return  Role.ORGANIZER;
+                return Role.ORGANIZER;
             default:
                 return Role.WORKER;
         }
