@@ -21,6 +21,7 @@ import com.hfad.organizationofthefestival.Connector;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.Role;
 import com.hfad.organizationofthefestival.ServerStatus;
+import com.hfad.organizationofthefestival.User;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 
 import java.security.MessageDigest;
@@ -43,19 +44,11 @@ public class SignupActivity extends AppCompatActivity {
     private TextView login;
     private EditText password2;
     private Spinner roleChooserDropDown;
-
-    private String usernameString;
-    private String nameString;
-    private String lastNameString;
-    private String phoneString;
-    private String emailString;
-    private String pwd1String;
-    private String pwd2String;
-    private Role userRole;
-
-    private Bitmap bitmap;
-    private ByteArrayOutputStream baos;
-    private byte[] profilePictureInByte;
+    private byte[] profilePictureInBytes;
+    private Role role;
+    private SignupController signupController;
+    private Signup signup;
+    private User user;
 
     private static int PICK_IMAGE_REQUEST = 1;
 
@@ -64,6 +57,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        signupController = new SignupController(this);
         profile_picture = findViewById(R.id.profile_picture);
         username = findViewById(R.id.input_username);
         email = findViewById(R.id.input_email);
@@ -76,9 +70,7 @@ public class SignupActivity extends AppCompatActivity {
         password2 = findViewById(R.id.verify_password);
         roleChooserDropDown = findViewById(R.id.roleChooser);
 
-        username.requestFocus();
-
-        //SetUp roleChoser dropdown list
+        //SetUp roleChooser dropdown list
         String[] items = new String[]{Role.LEADER.toString(), Role.ORGANIZER.toString(), Role.WORKER.toString()}; //Leader, Organizer, Worker
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         roleChooserDropDown.setAdapter(adapter);
@@ -87,7 +79,21 @@ public class SignupActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                profilePictureInBytes = pictureToByteArray(((BitmapDrawable) profile_picture.getDrawable()).getBitmap());
+                role = getRoleEnum(roleChooserDropDown.getSelectedItem().toString());
+                signup = new Signup(username.getText().toString(),
+                        password1.getText().toString(),
+                        password2.getText().toString(),
+                        name.getText().toString(),
+                        lastName.getText().toString(),
+                        profilePictureInBytes,
+                        phone.getText().toString(),
+                        email.getText().toString(),
+                        role);
+                if (signup.check() == null){
+                    user = signup.makeUser();
+                    signupController.signUp(signup);
+                }
             }
         });
 
@@ -127,32 +133,29 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    private static boolean verifyPassword(String password1, String password2){
-        return password1.equals(password2);
-    }
-
-    private void toast(CharSequence message) {
-        Context context;
-        Toast toast;
-        context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        toast = Toast.makeText(context, message, duration);
-        toast.show();
-    }
-
-    private static boolean emailIsInvalid(String email){
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
-                "[a-zA-Z0-9_+&*-]+)*@" +
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                "A-Z]{2,7}$";
-        Pattern pat = Pattern.compile(emailRegex);
-        return !pat.matcher(email).matches();
-    }
-
     @Override
     public void onResume(){
         super.onResume();
         register.setEnabled(true);
         login.setEnabled(true);
+    }
+
+    private static byte[] pictureToByteArray(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] profilePictureInByte;
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        profilePictureInByte = baos.toByteArray();
+        return profilePictureInByte;
+    }
+
+    private static Role getRoleEnum(String role){
+        switch (role){
+            case "LEADER":
+                return Role.LEADER;
+            case "ORGANIZER":
+                return  Role.ORGANIZER;
+            default:
+                return Role.WORKER;
+        }
     }
 }

@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 public interface SignupClient {
 
     @POST("registration")
-    Call<User> signup(@Body User user);
+    Call<User> signup(@Body Signup signup);
 
     @GET("registration")
     Call<ResponseBody> getUser(@Header("Authorization") String authToken);

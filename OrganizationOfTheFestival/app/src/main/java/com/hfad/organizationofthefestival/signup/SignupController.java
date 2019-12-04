@@ -1,13 +1,12 @@
 package com.hfad.organizationofthefestival.signup;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
-
-import com.hfad.organizationofthefestival.leader.LeaderActivity;git
+import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.OrganizerActivity;
 import com.hfad.organizationofthefestival.User;
 import com.hfad.organizationofthefestival.WorkerActivity;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,14 +22,14 @@ public class SignupController {
     }
 
     Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://barbil.pythonanywhere.com/")
+            .baseUrl("https:///")
             .addConverterFactory(GsonConverterFactory.create());
 
     Retrofit retrofit = builder.build();
     SignupClient signupClient = retrofit.create(SignupClient.class);
 
-    private void signUp(User user){
-        Call<User> call = signupClient.signup(user);
+    public void signUp(Signup signup){
+        Call<User> call = signupClient.signup(signup);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -56,7 +55,8 @@ public class SignupController {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(signupActivity, "servergit error :(", Toast.LENGTH_SHORT).show();
+                Toast.makeText(signupActivity, "server error :(", Toast.LENGTH_SHORT).show();
+                Log.d("error", t.toString());
             }
         });
     }

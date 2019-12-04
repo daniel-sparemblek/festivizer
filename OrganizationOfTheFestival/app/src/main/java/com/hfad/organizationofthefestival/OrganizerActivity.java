@@ -27,9 +27,9 @@ public class OrganizerActivity extends AppCompatActivity implements OrganizerCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organizer);
-        username = getIntent().getStringExtra("USERNAME");
-        festivalList = findViewById(R.id.festivalList);
-        OrganizerConnector.getFestivals(username, OrganizerActivity.this);
+        //username = getIntent().getStringExtra("USERNAME");
+        //festivalList = findViewById(R.id.festivalList);
+        //OrganizerConnector.getFestivals(username, OrganizerActivity.this);
     }
 
     public void onClickApply(View view) {
