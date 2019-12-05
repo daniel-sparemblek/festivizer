@@ -10,6 +10,10 @@ public class Login {
         this.password = password;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public boolean isValid() {
         if (!username.isEmpty() && !password.isEmpty()) {
             return true;
