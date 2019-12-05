@@ -51,7 +51,7 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
     }
 
     public void adminOnClickAccept(View view) {
-        final int position = approvalList.getPositionForView((LinearLayout)view.getParent());
+        final int position = approvalList.getPositionForView((LinearLayout) view.getParent());
 
         String leaderUsername = data.get(position);
 
@@ -59,7 +59,7 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
     }
 
     public void adminOnClickDecline(View view) {
-        final int position = approvalList.getPositionForView((LinearLayout)view.getParent());
+        final int position = approvalList.getPositionForView((LinearLayout) view.getParent());
 
         String leaderUsername = data.get(position);
 

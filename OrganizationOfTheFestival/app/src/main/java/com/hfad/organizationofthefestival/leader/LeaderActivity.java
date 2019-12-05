@@ -39,9 +39,9 @@ public class LeaderActivity extends AppCompatActivity implements LeaderControlle
     public void onGetPendingOrganizersResponse(ArrayList<String> pendingOrganizer) {
 
         pendingOrganizers = new ArrayList<>();
-        for(String s : pendingOrganizer) {
+        for (String s : pendingOrganizer) {
 
-            if(s.isEmpty()) {
+            if (s.isEmpty()) {
                 break;
             }
 
@@ -63,7 +63,7 @@ public class LeaderActivity extends AppCompatActivity implements LeaderControlle
 
     // Decisions need to be fixed when JSONs get here
     public void onClickAccept(View view) {
-        final int position = approvalList.getPositionForView((LinearLayout)view.getParent());
+        final int position = approvalList.getPositionForView((LinearLayout) view.getParent());
 
         String organizerUsername = pendingOrganizers.get(position).getUsername();
         int festivalId = pendingOrganizers.get(position).getFestivalId();
@@ -72,12 +72,12 @@ public class LeaderActivity extends AppCompatActivity implements LeaderControlle
     }
 
     public void onClickDecline(View view) {
-        final int position = approvalList.getPositionForView((LinearLayout)view.getParent());
+        final int position = approvalList.getPositionForView((LinearLayout) view.getParent());
 
         String organizerUsername = pendingOrganizers.get(position).getUsername();
         int festivalId = pendingOrganizers.get(position).getFestivalId();
 
-       //  LeaderController.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.DECLINE, this);
+        //  LeaderController.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.DECLINE, this);
 
     }
 }

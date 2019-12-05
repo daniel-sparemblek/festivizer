@@ -56,7 +56,7 @@ public class OrganizerAdapter extends BaseAdapter {
         Integer value = getItem(position);
         ViewHolder viewHolder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.organizer_row_layout, parent, false);
@@ -71,7 +71,7 @@ public class OrganizerAdapter extends BaseAdapter {
         viewHolder.festivalName.setText(festival);
         if (value == -2)
             viewHolder.appButton.setText("Apply");
-        else if (value == -1){
+        else if (value == -1) {
             viewHolder.appButton.setText("Cancel");
         }
         return convertView;

@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.Role;
-import com.hfad.organizationofthefestival.User;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -28,16 +27,17 @@ public class SignupActivity extends AppCompatActivity {
 
     private ImageView profile_picture;
 
-    private EditText username;
-    private EditText email;
-    private EditText inputPassword;
-    private EditText lastName;
-    private EditText name;
-    private EditText phone;
-    private EditText verifyPassword;
-    private AppCompatButton register;
-    private TextView login;
-    private Spinner roleChooserDropDown;
+    private EditText etUsername;
+    private EditText etEmail;
+    private EditText etInputPassword;
+    private EditText etLastName;
+    private EditText etFirstName;
+    private EditText etPhone;
+    private EditText etVerifyPassword;
+    private AppCompatButton apbRegister;
+    private TextView tvLogin;
+    private Spinner sRoleChooserDropDown;
+
     private byte[] profilePictureInBytes;
     private Role role;
     private SignupController signupController;
@@ -55,21 +55,21 @@ public class SignupActivity extends AppCompatActivity {
         findIds();
         setupRoleChooser();
 
-        register.setOnClickListener(new View.OnClickListener() {
+        apbRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 profilePictureInBytes = pictureToByteArray(((BitmapDrawable) profile_picture.getDrawable()).getBitmap());
-                role = getRoleEnum(roleChooserDropDown.getSelectedItem().toString());
+                role = getRoleEnum(sRoleChooserDropDown.getSelectedItem().toString());
 
-                signup = new Signup(username.getText().toString(),
-                        inputPassword.getText().toString(),
-                        name.getText().toString(),
-                        lastName.getText().toString(),
+                signup = new Signup(etUsername.getText().toString(),
+                        etInputPassword.getText().toString(),
+                        etFirstName.getText().toString(),
+                        etLastName.getText().toString(),
                         profilePictureInBytes.toString(),
-                        phone.getText().toString(),
-                        email.getText().toString(),
+                        etPhone.getText().toString(),
+                        etEmail.getText().toString(),
                         role.toString());
-                String textFieldsStatus = signup.checkInput(verifyPassword.getText().toString());
+                String textFieldsStatus = signup.checkInput(etVerifyPassword.getText().toString());
                 if (textFieldsStatus == null) {
                     signupController.signUp(signup);
                 }
@@ -78,10 +78,10 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        login.setOnClickListener(new View.OnClickListener() {
+        tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login.setEnabled(false);
+                tvLogin.setEnabled(false);
                 startActivity(new Intent(SignupActivity.this, LoginActivity.class));
             }
         });
@@ -117,8 +117,8 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        register.setEnabled(true);
-        login.setEnabled(true);
+        apbRegister.setEnabled(true);
+        tvLogin.setEnabled(true);
     }
 
     private static byte[] pictureToByteArray(Bitmap bitmap) {
@@ -142,21 +142,21 @@ public class SignupActivity extends AppCompatActivity {
 
     private void findIds() {
         profile_picture = findViewById(R.id.profile_picture);
-        username = findViewById(R.id.input_username);
-        email = findViewById(R.id.input_email);
-        inputPassword = findViewById(R.id.input_password);
-        lastName = findViewById(R.id.input_surname);
-        name = findViewById(R.id.input_name);
-        phone = findViewById(R.id.input_phone);
-        register = findViewById(R.id.btn_signup);
-        login = findViewById(R.id.link_login);
-        verifyPassword = findViewById(R.id.verify_password);
-        roleChooserDropDown = findViewById(R.id.roleChooser);
+        etUsername = findViewById(R.id.input_username);
+        etEmail = findViewById(R.id.input_email);
+        etInputPassword = findViewById(R.id.input_password);
+        etLastName = findViewById(R.id.input_surname);
+        etFirstName = findViewById(R.id.input_name);
+        etPhone = findViewById(R.id.input_phone);
+        apbRegister = findViewById(R.id.btn_signup);
+        tvLogin = findViewById(R.id.link_login);
+        etVerifyPassword = findViewById(R.id.verify_password);
+        sRoleChooserDropDown = findViewById(R.id.roleChooser);
     }
 
     private void setupRoleChooser() {
         String[] items = new String[]{Role.LEADER.toString(), Role.ORGANIZER.toString(), Role.WORKER.toString()}; //Leader, Organizer, Worker
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        roleChooserDropDown.setAdapter(adapter);
+        sRoleChooserDropDown.setAdapter(adapter);
     }
 }
