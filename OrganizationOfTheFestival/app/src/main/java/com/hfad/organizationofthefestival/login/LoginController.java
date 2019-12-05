@@ -64,20 +64,23 @@ public class LoginController {
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()) {
                     // Sending the username in the intent may be needed
-                    Intent intent = new Intent(loginActivity, LoginActivity.class);
-                    intent.putExtra("accessToken", accessToken);
-
                     switch (response.body().getRole()) {
                         case LEADER:
-                            new LeaderActivity().startActivity(intent);
+                            Intent intent = new Intent(loginActivity, LeaderActivity.class);
+                            intent.putExtra("accessToken", accessToken);
+                            loginActivity.startActivity(intent);
                             break;
 
                         case WORKER:
-                            new WorkerActivity().startActivity(intent);
+                            Intent intent2 = new Intent(loginActivity, WorkerActivity.class);
+                            intent2.putExtra("accessToken", accessToken);
+                            loginActivity.startActivity(intent2);
                             break;
 
                         case ORGANIZER:
-                            new OrganizerActivity().startActivity(intent);
+                            Intent intent3 = new Intent(loginActivity, OrganizerActivity.class);
+                            intent3.putExtra("accessToken", accessToken);
+                            loginActivity.startActivity(intent3);
                             break;
                     }
                 } else {

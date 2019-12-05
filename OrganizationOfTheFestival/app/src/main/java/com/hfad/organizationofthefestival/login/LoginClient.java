@@ -14,6 +14,6 @@ public interface LoginClient {
     @POST("login")
     Call<LoginResponse> login(@Body Login login);
 
-    @GET("{username}")
+    @GET("user/{username}")
     Call<User> getUser(@Path("username") String username, @Header("Authorization") String authorization);
 }
