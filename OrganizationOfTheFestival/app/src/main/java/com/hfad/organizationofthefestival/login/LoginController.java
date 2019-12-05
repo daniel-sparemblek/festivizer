@@ -43,7 +43,7 @@ public class LoginController {
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.isSuccessful() && response.body().getAccess_token() != null) {
+                if (response.isSuccessful()) {
                     enterAccount(response.body().getAccess_token(), response.body().getRefresh_token(), login.getUsername());
                 } else {
                     try {
