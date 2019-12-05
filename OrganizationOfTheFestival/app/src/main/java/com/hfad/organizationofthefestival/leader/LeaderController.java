@@ -1,6 +1,7 @@
 package com.hfad.organizationofthefestival.leader;
 
 import android.content.Context;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,17 +23,17 @@ public class LeaderController {
 
     public interface LeaderListener {
         void onGetPendingOrganizersResponse(ArrayList<String> pendingOrganizers);
+
         void onSendDecisionResponse(ServerStatus serverStatus);
     }
 
     public static void getPendingOrganizers(final String username, final String password, final Context context) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String leaderUrl = url + "leader/"+username+"/get_organizers";
+        String leaderUrl = url + "leader/" + username + "/get_organizers";
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, leaderUrl,
-                new Response.Listener<String>()
-                {
+                new Response.Listener<String>() {
                     public void onResponse(String response) {
                         ArrayList<String> pendingOrganizers = new ArrayList<>();
 
@@ -40,13 +41,12 @@ public class LeaderController {
 
                         pendingOrganizers.addAll(Arrays.asList(organizerList));
 
-                        ((LeaderListener)context).onGetPendingOrganizersResponse(pendingOrganizers);
+                        ((LeaderListener) context).onGetPendingOrganizersResponse(pendingOrganizers);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     public void onErrorResponse(VolleyError error) {
-                        ((LeaderListener)context).onGetPendingOrganizersResponse(null);
+                        ((LeaderListener) context).onGetPendingOrganizersResponse(null);
                     }
                 }
         ) {
@@ -54,9 +54,8 @@ public class LeaderController {
                 return "application/x-www-form-urlencoded; charset=UTF-8";
             }
 
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
                 params.put("user_identifier", username);
                 params.put("password", password);
                 return params;
@@ -104,10 +103,10 @@ public class LeaderController {
     }*/
 
     protected static String convertDecisionToString(Decision decision) {
-        if(decision == Decision.ACCEPT) {
+        if (decision == Decision.ACCEPT) {
             return "accept";
         }
-        if(decision == Decision.DECLINE) {
+        if (decision == Decision.DECLINE) {
             return "decline";
         }
         return null;

@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import com.hfad.organizationofthefestival.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class AdminAdapter extends ArrayAdapter<String> {
     private int resource;
     private List<String> leaderList = new ArrayList<>();
 
-    public AdminAdapter(Context context, int resource,  ArrayList<String> leaderList) {
+    public AdminAdapter(Context context, int resource, ArrayList<String> leaderList) {
         super(context, resource, leaderList);
         this.context = context;
         this.leaderList = leaderList;
@@ -26,7 +28,7 @@ public class AdminAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
-        if(view == null) {
+        if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.admin_row_layout, parent, false);
         }
 

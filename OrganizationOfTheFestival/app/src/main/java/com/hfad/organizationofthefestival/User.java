@@ -1,6 +1,6 @@
 package com.hfad.organizationofthefestival;
 
-public abstract class User {
+public class User {
 
     private int userID;
     private String username;

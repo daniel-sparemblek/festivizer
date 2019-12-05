@@ -28,7 +28,7 @@ public class LeaderAdapter extends ArrayAdapter<PendingOrganizer> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
-        if(view == null) {
+        if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.leader_row_layout, parent, false);
         }
 
