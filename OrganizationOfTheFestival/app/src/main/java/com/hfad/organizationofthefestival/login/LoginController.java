@@ -65,19 +65,19 @@ public class LoginController {
                 if(response.isSuccessful()) {
                     // Sending the username in the intent may be needed
                     switch (response.body().getRole()) {
-                        case LEADER:
+                        case "LEADER":
                             Intent intent = new Intent(loginActivity, LeaderActivity.class);
                             intent.putExtra("accessToken", accessToken);
                             loginActivity.startActivity(intent);
                             break;
 
-                        case WORKER:
+                        case "WORKER":
                             Intent intent2 = new Intent(loginActivity, WorkerActivity.class);
                             intent2.putExtra("accessToken", accessToken);
                             loginActivity.startActivity(intent2);
                             break;
 
-                        case ORGANIZER:
+                        case "ORGANIZER":
                             Intent intent3 = new Intent(loginActivity, OrganizerActivity.class);
                             intent3.putExtra("accessToken", accessToken);
                             loginActivity.startActivity(intent3);
@@ -90,7 +90,7 @@ public class LoginController {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(loginActivity, "Server-side or internet error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(loginActivity, "Penis", Toast.LENGTH_SHORT).show();
             }
         });
     }
