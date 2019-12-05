@@ -59,7 +59,6 @@ public class SignupController {
             @Override
             public void onFailure(Call<RegistrationResponse> call, Throwable t) {
                 Toast.makeText(signupActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
-                Log.d("error", t.toString());
             }
         });
     }
