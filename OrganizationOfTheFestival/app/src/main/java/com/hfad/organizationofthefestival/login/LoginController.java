@@ -9,6 +9,9 @@ import com.hfad.organizationofthefestival.User;
 import com.hfad.organizationofthefestival.WorkerActivity;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import retrofit2.Call;
@@ -45,13 +48,22 @@ public class LoginController {
                         enterAccount(response.body().getAccess_token(), response.body().getRefresh_token(), login.getUsername());
                     }
                 } else {
-                    Toast.makeText(loginActivity, "Client error", Toast.LENGTH_SHORT).show();
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(loginActivity, errorObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(loginActivity, "Server-side or internet error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(loginActivity, "Server-side or internet error on login", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -84,13 +96,22 @@ public class LoginController {
                             break;
                     }
                 } else {
-                    Toast.makeText(loginActivity, call.request().toString(), Toast.LENGTH_SHORT).show();
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(loginActivity, errorObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(loginActivity, "Penis", Toast.LENGTH_SHORT).show();
+                Toast.makeText(loginActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });
     }
