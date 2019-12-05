@@ -26,19 +26,19 @@ public class Signup {
         if (username.equals("")) {
             return "Username cannot be blank!";
         }
-        if (!password.equals(verifyPassword)){
+        if (!password.equals(verifyPassword)) {
             return "Passwords do not match!";
         }
-        if (firstName.equals("")){
+        if (firstName.equals("")) {
             return "Name cannot be blank!";
         }
-        if (lastName.equals("")){
-            return  "Last name cannot be blank!";
+        if (lastName.equals("")) {
+            return "Last name cannot be blank!";
         }
-        if (phone.equals("")){
+        if (phone.equals("")) {
             return "Phone cannot be blank!";
         }
-        if (email.equals("")){
+        if (email.equals("")) {
             return "email cannot be blank!";
         }
         return null;
