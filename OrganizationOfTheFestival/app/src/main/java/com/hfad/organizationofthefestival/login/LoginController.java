@@ -1,8 +1,15 @@
 package com.hfad.organizationofthefestival.login;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.widget.Toast;
 
+import com.hfad.organizationofthefestival.OrganizerActivity;
 import com.hfad.organizationofthefestival.User;
+import com.hfad.organizationofthefestival.WorkerActivity;
+import com.hfad.organizationofthefestival.leader.LeaderActivity;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,18 +56,38 @@ public class LoginController {
         });
     }
 
-    public void enterAccount(String accessToken, String refreshToken, String username) {
+    public void enterAccount(final String accessToken, String refreshToken, String username) {
         Call<User> call = loginClient.getUser(username, accessToken);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()) {
+                    // Sending the username in the intent may be needed
+                    Intent intent = new Intent(loginActivity, LoginActivity.class);
+                    intent.putExtra("accessToken", accessToken);
 
+                    switch (response.body().getRole()) {
+                        case LEADER:
+                            new LeaderActivity().startActivity(intent);
+                            break;
+
+                        case WORKER:
+                            new WorkerActivity().startActivity(intent);
+                            break;
+
+                        case ORGANIZER:
+                            new OrganizerActivity().startActivity(intent);
+                            break;
+                    }
+                } else {
+                    Toast.makeText(loginActivity, call.request().toString(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
+                Toast.makeText(loginActivity, "Server-side or internet error", Toast.LENGTH_SHORT).show();
             }
         });
     }
