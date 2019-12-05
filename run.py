@@ -9,8 +9,8 @@ api = Api(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = "b'\xbe\xadI\x13\xaf\x959f\x18=\x8d\x06Q\x9a\xd6y\x93\xee52\x01\x15B\x83'"
-app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+app.config['SECRET_KEY'] = 'b\'\xbe\xadI\x13\xaf\x959f\x18=\x8d\x06Q\x9a\xd6y\x93\xee52\x01\x15B\x83\''
+app.config['JWT_SECRET_KEY'] = 'b\'\x856\xbb\xdf\xf49S\xfep\x1eJEc>\xf1\xec(\x08n#6\x01*\xa6\''
 app.config['JWT_BLACKLIST_ENABLED'] = True
 app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
 

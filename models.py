@@ -1,3 +1,5 @@
+import sys
+
 from run import db
 from run import ma
 from passlib.hash import pbkdf2_sha256 as sha256
@@ -29,9 +31,10 @@ class UserModel(db.Model):
         db.session.commit()
         result = users_schema.dump(users)
         response = {
+            'status': 'success',
             'data': result,
-            'status_code': 202
-        }
+            'message': '{} users sent'.format(len(users))
+        }, 200
         return response
 
     @classmethod
@@ -39,17 +42,26 @@ class UserModel(db.Model):
         try:
             num_rows_deleted = db.session.query(cls).delete()
             db.session.commit()
-            return {'message': '{} row(s) deleted'.format(num_rows_deleted)}
-        except:
-            return {'message': 'Something went wrong'}
+            return {
+                'status': 'success',
+                'data': None,
+                'message': '{} row(s) deleted'.format(num_rows_deleted),
+            }, 200
+        except Exception as e:
+            print(str(e), sys.err)
+            return {
+                'success': 'error',
+                'data': None,
+                'message': 'Internal server error'
+            }, 500
 
     @staticmethod
     def generate_hash(password):
         return sha256.hash(password)
 
     @staticmethod
-    def verify_hash(password, hash):
-        return sha256.verify(password, hash)
+    def verify_hash(password, hashing):
+        return sha256.verify(password, hashing)
 
     def save_to_db(self):
         db.session.add(self)
@@ -71,7 +83,7 @@ class LeaderModel(UserModel):
         response = {
             'status': 'success',
             'data': result,
-            'message': 'List of leaders sent.'
+            'message': '{} users sent.'.format(len(leaders))
         }, 200
         return response
 
