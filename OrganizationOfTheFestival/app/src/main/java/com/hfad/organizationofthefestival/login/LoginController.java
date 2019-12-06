@@ -1,13 +1,11 @@
 package com.hfad.organizationofthefestival.login;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.OrganizerActivity;
-import com.hfad.organizationofthefestival.Role;
+import com.hfad.organizationofthefestival.organizer.OrganizerActivity;
 import com.hfad.organizationofthefestival.User;
-import com.hfad.organizationofthefestival.WorkerActivity;
+import com.hfad.organizationofthefestival.Worker.WorkerActivity;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import org.json.JSONException;

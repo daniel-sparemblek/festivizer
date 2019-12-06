@@ -6,15 +6,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.hfad.organizationofthefestival.Decision;
-import com.hfad.organizationofthefestival.PendingOrganizer;
+import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.ServerStatus;
 import com.hfad.organizationofthefestival.adapters.LeaderAdapter;
 
 import java.util.ArrayList;
 
-public class LeaderActivity extends AppCompatActivity implements LeaderController.LeaderListener {
+public class LeaderActivity extends AppCompatActivity {
 
     ArrayList<PendingOrganizer> pendingOrganizers = new ArrayList<>();
     private ListView approvalList;
@@ -31,35 +29,9 @@ public class LeaderActivity extends AppCompatActivity implements LeaderControlle
         username = getIntent().getStringExtra("USERNAME");
         password = getIntent().getStringExtra("PASSWORD");
 
-        LeaderController.getPendingOrganizers(username, password, this);
+        //LeaderController.getPendingOrganizers(username, password, this);
     }
 
-
-    @Override
-    public void onGetPendingOrganizersResponse(ArrayList<String> pendingOrganizer) {
-
-        pendingOrganizers = new ArrayList<>();
-        for (String s : pendingOrganizer) {
-
-            if (s.isEmpty()) {
-                break;
-            }
-
-            String[] fragments = s.split("\\s");
-
-            pendingOrganizers.add(new PendingOrganizer(fragments[0], fragments[2], Integer.parseInt(fragments[1])));
-        }
-
-
-        LeaderAdapter adapter = new LeaderAdapter(this, pendingOrganizers);
-        approvalList.setAdapter(adapter);
-    }
-
-    @Override
-    public void onSendDecisionResponse(ServerStatus serverStatus) {
-        LeaderController.getPendingOrganizers(username, password, this);
-
-    }
 
     // Decisions need to be fixed when JSONs get here
     public void onClickAccept(View view) {

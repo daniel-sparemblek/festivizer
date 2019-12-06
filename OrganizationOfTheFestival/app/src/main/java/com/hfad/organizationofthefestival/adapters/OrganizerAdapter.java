@@ -4,17 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.hfad.organizationofthefestival.Festival;
 import com.hfad.organizationofthefestival.R;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OrganizerAdapter extends BaseAdapter {

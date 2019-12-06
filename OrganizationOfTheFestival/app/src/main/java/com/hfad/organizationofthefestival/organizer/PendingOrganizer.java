@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival;
+package com.hfad.organizationofthefestival.organizer;
 
 public class PendingOrganizer {
 

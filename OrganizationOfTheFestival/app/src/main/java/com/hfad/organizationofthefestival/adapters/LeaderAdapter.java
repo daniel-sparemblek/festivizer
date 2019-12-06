@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.hfad.organizationofthefestival.PendingOrganizer;
+import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
 import com.hfad.organizationofthefestival.R;
 
 import java.util.ArrayList;

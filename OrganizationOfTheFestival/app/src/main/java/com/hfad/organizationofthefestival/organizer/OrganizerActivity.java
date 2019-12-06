@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival;
+package com.hfad.organizationofthefestival.organizer;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -7,15 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.OrganizerAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class OrganizerActivity extends AppCompatActivity implements OrganizerConnector.OrganizerListener {
+public class OrganizerActivity extends AppCompatActivity {
 
     private ListView festivalList;
     private static OrganizerAdapter adapter;
@@ -41,10 +41,10 @@ public class OrganizerActivity extends AppCompatActivity implements OrganizerCon
         Button applyBtn = l1.findViewById(R.id.btnApply);
         if(applyBtn.getText().toString().equals("Apply")) {
             applyBtn.setText("Cancel");
-            OrganizerConnector.applyForFestival(festivalName, username, "Apply", OrganizerActivity.this);
+            //OrganizerConnector.applyForFestival(festivalName, username, "Apply", OrganizerActivity.this);
         } else {
             applyBtn.setText("Apply");
-            OrganizerConnector.applyForFestival(festivalName, username, "Cancel", OrganizerActivity.this);
+            //OrganizerConnector.applyForFestival(festivalName, username, "Cancel", OrganizerActivity.this);
         }
     }
 
@@ -55,25 +55,5 @@ public class OrganizerActivity extends AppCompatActivity implements OrganizerCon
         int duration = Toast.LENGTH_SHORT;
         toast = Toast.makeText(context, message, duration);
         toast.show();
-    }
-
-    @Override
-    public void onGetFestivalsResponse(HashMap<String, Integer> festivals){
-        adapter = new OrganizerAdapter(festivals, this);
-        this.festivals = festivals;
-        festivalList.setAdapter((adapter));
-    }
-
-    @Override
-    public void onApplyForFestivalResponse(ServerStatus status) {
-        if (status == ServerStatus.SUCCESS){
-            toast("Great! Your request is being processed.");
-        }
-        if (status == ServerStatus.SERVER_DOWN){
-            toast("Server is down");
-        }
-        if (status == ServerStatus.UNKNOWN) {
-            toast("Something went wrong. Please try again later.");
-        }
     }
 }

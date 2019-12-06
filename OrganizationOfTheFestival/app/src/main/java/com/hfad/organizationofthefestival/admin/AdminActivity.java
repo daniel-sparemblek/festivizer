@@ -2,21 +2,17 @@ package com.hfad.organizationofthefestival.admin;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.view.View;
 
-import com.hfad.organizationofthefestival.AdminConnector;
-import com.hfad.organizationofthefestival.Decision;
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.ServerStatus;
 import com.hfad.organizationofthefestival.adapters.AdminAdapter;
 
 import java.util.ArrayList;
 
 
-public class AdminActivity extends AppCompatActivity implements AdminConnector.AdminListener {
+public class AdminActivity extends AppCompatActivity {
 
     private ArrayList<String> data = new ArrayList<>();     //admin username
     private ListView approvalList;
@@ -34,20 +30,7 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
         username = getIntent().getStringExtra("USERNAME");
         password = getIntent().getStringExtra("PASSWORD");
 
-        AdminConnector.getPendingLeaders(username, password, this);
-    }
-
-    @Override
-    public void onAdminResponse(ArrayList<String> pendingLeaders) {
-        data = pendingLeaders;
-        AdminAdapter adapter = new AdminAdapter(this, R.layout.skroznovi, data);
-        approvalList.setAdapter(adapter);
-    }
-
-    @Override
-    public void onSendDecisionResponse(ServerStatus serverStatus) {
-        AdminConnector.getPendingLeaders(username, password, this);
-
+        //AdminConnector.getPendingLeaders(username, password, this);
     }
 
     public void adminOnClickAccept(View view) {
@@ -55,7 +38,7 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
 
         String leaderUsername = data.get(position);
 
-        AdminConnector.sendDecision(username, password, leaderUsername, Decision.ACCEPT, this);
+        //AdminConnector.sendDecision(username, password, leaderUsername, Decision.ACCEPT, this);
     }
 
     public void adminOnClickDecline(View view) {
@@ -63,7 +46,7 @@ public class AdminActivity extends AppCompatActivity implements AdminConnector.A
 
         String leaderUsername = data.get(position);
 
-        AdminConnector.sendDecision(username, password, leaderUsername, Decision.DECLINE, this);
+        //AdminConnector.sendDecision(username, password, leaderUsername, Decision.DECLINE, this);
     }
 
 }
