@@ -10,10 +10,10 @@ public class User {
     private String picture;
     private String phone;
     private String email;
-    private String role;
+    private int permission;
     private String authToken;
 
-    public User(String username, String password, String first_name, String last_name, String picture, String phone, String email, String role) {
+    public User(String username, String password, String first_name, String last_name, String picture, String phone, String email, int permission) {
         this.username = username;
         this.password = password;
         this.first_name = first_name;
@@ -21,7 +21,7 @@ public class User {
         this.picture = picture;
         this.phone = phone;
         this.email = email;
-        this.role = role;
+        this.permission = permission;
     }
 
     public int getId() {
@@ -56,8 +56,8 @@ public class User {
         return email;
     }
 
-    public String getRole() {
-        return role;
+    public int getRole() {
+        return permission;
     }
 
     public void setId(int id) {
@@ -101,6 +101,6 @@ public class User {
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.permission = permission;
     }
 }

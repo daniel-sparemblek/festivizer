@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.OrganizerActivity;
+import com.hfad.organizationofthefestival.Role;
 import com.hfad.organizationofthefestival.User;
 import com.hfad.organizationofthefestival.WorkerActivity;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
@@ -75,19 +76,19 @@ public class LoginController {
                 if (response.isSuccessful()) {
                     // Sending the username in the intent may be needed
                     switch (response.body().getRole()) {
-                        case "LEADER":
+                        case 1:
                             Intent intent = new Intent(loginActivity, LeaderActivity.class);
                             intent.putExtra("accessToken", accessToken);
                             loginActivity.startActivity(intent);
                             break;
 
-                        case "WORKER":
+                        case 2:
                             Intent intent2 = new Intent(loginActivity, WorkerActivity.class);
                             intent2.putExtra("accessToken", accessToken);
                             loginActivity.startActivity(intent2);
                             break;
 
-                        case "ORGANIZER":
+                        case 3:
                             Intent intent3 = new Intent(loginActivity, OrganizerActivity.class);
                             intent3.putExtra("accessToken", accessToken);
                             loginActivity.startActivity(intent3);

@@ -4,7 +4,7 @@ import com.hfad.organizationofthefestival.Role;
 import com.hfad.organizationofthefestival.User;
 
 public class Leader extends User {
-    public Leader(String username, String password, String firstName, String lastName, String picture, String phone, String email, String role) {
-        super(username, password, firstName, lastName, picture, phone, email, role);
+    public Leader(String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission) {
+        super(username, password, firstName, lastName, picture, phone, email, permission);
     }
 }
