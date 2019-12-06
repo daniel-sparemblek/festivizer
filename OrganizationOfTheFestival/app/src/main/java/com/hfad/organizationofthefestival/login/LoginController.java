@@ -4,20 +4,10 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.organizer.OrganizerActivity;
-<<<<<<< HEAD
-import com.hfad.organizationofthefestival.User;
 import com.hfad.organizationofthefestival.worker.WorkerActivity;
-=======
 import com.hfad.organizationofthefestival.utility.User;
-import com.hfad.organizationofthefestival.Worker.WorkerActivity;
->>>>>>> 2defffdb390e858c690e6eaba83ed8464c524bc9
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

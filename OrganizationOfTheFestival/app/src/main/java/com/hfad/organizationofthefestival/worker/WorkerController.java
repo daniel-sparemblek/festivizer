@@ -30,7 +30,6 @@ public class WorkerController {
         call.enqueue(new Callback<Worker>() {
             @Override
             public void onResponse(Call<Worker> call, Response<Worker> response) {
-
             }
 
             @Override
