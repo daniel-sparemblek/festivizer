@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival.Worker;
+package com.hfad.organizationofthefestival.worker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,5 +11,7 @@ public class WorkerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker);
+
+
     }
 }

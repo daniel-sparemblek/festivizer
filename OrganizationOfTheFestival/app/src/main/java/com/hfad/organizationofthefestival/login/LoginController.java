@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.organizer.OrganizerActivity;
 import com.hfad.organizationofthefestival.User;
-import com.hfad.organizationofthefestival.Worker.WorkerActivity;
+import com.hfad.organizationofthefestival.worker.WorkerActivity;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import org.json.JSONException;

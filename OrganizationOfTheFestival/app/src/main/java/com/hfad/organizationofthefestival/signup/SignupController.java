@@ -32,7 +32,7 @@ public class SignupController {
     Retrofit retrofit = builder.build();
     SignupClient signupClient = retrofit.create(SignupClient.class);
 
-    public void signUp(Signup signup) {
+    public void signUp(final Signup signup) {
         Call<RegistrationResponse> callSignup = signupClient.signup(signup);
 
         callSignup.enqueue(new Callback<RegistrationResponse>() {
