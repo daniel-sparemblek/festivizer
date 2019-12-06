@@ -71,7 +71,7 @@ public class LoginController {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    switchActivity(response, accessToken);
+                    switchActivity(response, accessToken, refreshToken);
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
@@ -90,7 +90,7 @@ public class LoginController {
         });
     }
 
-    public void switchActivity(Response<User> response, String accessToken) {
+    public void switchActivity(Response<User> response, String accessToken, String refreshToken) {
         // Sending the username in the intent may be needed
         Intent intent;
 
@@ -98,18 +98,21 @@ public class LoginController {
             case 1:
                 intent = new Intent(loginActivity, LeaderActivity.class);
                 intent.putExtra("accessToken", accessToken);
+                intent.putExtra("refreshToken", refreshToken);
                 loginActivity.startActivity(intent);
                 break;
 
             case 2:
                 intent = new Intent(loginActivity, WorkerActivity.class);
                 intent.putExtra("accessToken", accessToken);
+                intent.putExtra("refreshToken", refreshToken)
                 loginActivity.startActivity(intent);
                 break;
 
             case 3:
                 intent = new Intent(loginActivity, OrganizerActivity.class);
                 intent.putExtra("accessToken", accessToken);
+                intent.putExtra("refreshToken", refreshToken)
                 loginActivity.startActivity(intent);
                 break;
         }
