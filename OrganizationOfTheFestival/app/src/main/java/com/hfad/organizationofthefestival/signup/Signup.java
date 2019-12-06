@@ -1,10 +1,14 @@
 package com.hfad.organizationofthefestival.signup;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Signup {
 
     private String username;
     private String password;
+    @SerializedName("serialized_name")
     private String firstName;
+    @SerializedName("last_name")
     private String lastName;
     private String picture;
     private String phone;
