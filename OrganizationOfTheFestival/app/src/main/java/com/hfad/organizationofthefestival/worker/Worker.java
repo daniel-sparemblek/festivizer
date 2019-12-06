@@ -1,6 +1,6 @@
 package com.hfad.organizationofthefestival.worker;
 
-import com.hfad.organizationofthefestival.User;
+import com.hfad.organizationofthefestival.utility.User;
 
 import java.util.ArrayList;
 import java.util.List;

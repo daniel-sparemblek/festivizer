@@ -1,7 +1,6 @@
 package com.hfad.organizationofthefestival.organizer;
 
-import com.hfad.organizationofthefestival.Role;
-import com.hfad.organizationofthefestival.User;
+import com.hfad.organizationofthefestival.utility.User;
 
 public class Organizer extends User {
 

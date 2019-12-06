@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.Role;
+import com.hfad.organizationofthefestival.utility.Role;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 
 import java.io.ByteArrayOutputStream;
