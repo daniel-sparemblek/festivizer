@@ -13,4 +13,12 @@ public class Worker extends User {
         super(username, password, firstName, lastName, picture, phone, email, permission);
         specializations = new ArrayList<>();
     }
+
+    public List<Specialization> getSpecializations() {
+        return specializations;
+    }
+
+    public void setSpecializations(List<Specialization> specializations) {
+        this.specializations = specializations;
+    }
 }
