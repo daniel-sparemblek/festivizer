@@ -1,7 +1,6 @@
 package com.hfad.organizationofthefestival.admin;
 
-import com.hfad.organizationofthefestival.Role;
-import com.hfad.organizationofthefestival.User;
+import com.hfad.organizationofthefestival.utility.User;
 import com.hfad.organizationofthefestival.leader.Leader;
 
 import java.util.LinkedList;

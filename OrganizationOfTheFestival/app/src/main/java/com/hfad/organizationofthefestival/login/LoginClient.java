@@ -1,6 +1,6 @@
 package com.hfad.organizationofthefestival.login;
 
-import com.hfad.organizationofthefestival.User;
+import com.hfad.organizationofthefestival.utility.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

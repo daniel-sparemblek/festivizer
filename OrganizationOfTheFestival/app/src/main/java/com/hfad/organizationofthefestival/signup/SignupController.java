@@ -46,10 +46,7 @@ public class SignupController {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
                         Toast.makeText(signupActivity, errorObject.getString("message"), Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
-                        Toast.makeText(signupActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         Toast.makeText(signupActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }

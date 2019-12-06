@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.organizer.OrganizerActivity;
-import com.hfad.organizationofthefestival.User;
+import com.hfad.organizationofthefestival.utility.User;
 import com.hfad.organizationofthefestival.Worker.WorkerActivity;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
@@ -48,10 +48,7 @@ public class LoginController {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
                         Toast.makeText(loginActivity, errorObject.getString("message"), Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
-                        Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
@@ -65,41 +62,21 @@ public class LoginController {
         });
     }
 
-    public void enterAccount(final String accessToken, String refreshToken, String username) {
+    public void enterAccount(final String accessToken, final String refreshToken, String username) {
+        // This class will handle possible access token expiration using the refresh token
+
         Call<User> call = loginClient.getUser(username, accessToken);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    // Sending the username in the intent may be needed
-                    switch (response.body().getRole()) {
-                        case 1:
-                            Intent intent = new Intent(loginActivity, LeaderActivity.class);
-                            intent.putExtra("accessToken", accessToken);
-                            loginActivity.startActivity(intent);
-                            break;
-
-                        case 2:
-                            Intent intent2 = new Intent(loginActivity, WorkerActivity.class);
-                            intent2.putExtra("accessToken", accessToken);
-                            loginActivity.startActivity(intent2);
-                            break;
-
-                        case 3:
-                            Intent intent3 = new Intent(loginActivity, OrganizerActivity.class);
-                            intent3.putExtra("accessToken", accessToken);
-                            loginActivity.startActivity(intent3);
-                            break;
-                    }
+                    switchActivity(response, accessToken);
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
                         Toast.makeText(loginActivity, errorObject.getString("message"), Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
-                        Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
@@ -111,5 +88,30 @@ public class LoginController {
                 Toast.makeText(loginActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void switchActivity(Response<User> response, String accessToken) {
+        // Sending the username in the intent may be needed
+        Intent intent;
+
+        switch (response.body().getRole()) {
+            case 1:
+                intent = new Intent(loginActivity, LeaderActivity.class);
+                intent.putExtra("accessToken", accessToken);
+                loginActivity.startActivity(intent);
+                break;
+
+            case 2:
+                intent = new Intent(loginActivity, WorkerActivity.class);
+                intent.putExtra("accessToken", accessToken);
+                loginActivity.startActivity(intent);
+                break;
+
+            case 3:
+                intent = new Intent(loginActivity, OrganizerActivity.class);
+                intent.putExtra("accessToken", accessToken);
+                loginActivity.startActivity(intent);
+                break;
+        }
     }
 }
