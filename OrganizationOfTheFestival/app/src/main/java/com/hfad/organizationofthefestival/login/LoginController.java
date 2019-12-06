@@ -105,14 +105,14 @@ public class LoginController {
             case 2:
                 intent = new Intent(loginActivity, WorkerActivity.class);
                 intent.putExtra("accessToken", accessToken);
-                intent.putExtra("refreshToken", refreshToken)
+                intent.putExtra("refreshToken", refreshToken);
                 loginActivity.startActivity(intent);
                 break;
 
             case 3:
                 intent = new Intent(loginActivity, OrganizerActivity.class);
                 intent.putExtra("accessToken", accessToken);
-                intent.putExtra("refreshToken", refreshToken)
+                intent.putExtra("refreshToken", refreshToken);
                 loginActivity.startActivity(intent);
                 break;
         }
