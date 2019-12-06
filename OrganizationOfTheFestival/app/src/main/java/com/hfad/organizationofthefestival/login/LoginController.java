@@ -94,6 +94,7 @@ public class LoginController {
                 intent = new Intent(loginActivity, LeaderActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
+                intent.putExtra("username", response.body().getUsername());
                 loginActivity.startActivity(intent);
                 break;
 
@@ -101,6 +102,7 @@ public class LoginController {
                 intent = new Intent(loginActivity, WorkerActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
+                intent.putExtra("username", response.body().getUsername());
                 loginActivity.startActivity(intent);
                 break;
 
@@ -108,6 +110,7 @@ public class LoginController {
                 intent = new Intent(loginActivity, OrganizerActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
+                intent.putExtra("username", response.body().getUsername());
                 loginActivity.startActivity(intent);
                 break;
         }
