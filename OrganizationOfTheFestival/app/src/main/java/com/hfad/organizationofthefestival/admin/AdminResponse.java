@@ -1,7 +1,4 @@
 package com.hfad.organizationofthefestival.admin;
 
-
-public class AdminConnector {
-
-
+public class AdminResponse {
 }
