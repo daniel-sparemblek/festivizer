@@ -7,7 +7,9 @@ import com.hfad.organizationofthefestival.organizer.OrganizerActivity;
 import com.hfad.organizationofthefestival.worker.WorkerActivity;
 import com.hfad.organizationofthefestival.utility.User;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
+
 import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,7 +88,6 @@ public class LoginController {
     }
 
     public void switchActivity(Response<User> response, String accessToken, String refreshToken) {
-        // Sending the username in the intent may be needed
         Intent intent;
 
         switch (response.body().getRole()) {
