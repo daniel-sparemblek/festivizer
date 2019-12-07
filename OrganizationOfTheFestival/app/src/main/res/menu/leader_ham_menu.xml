@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" >
+    <!--  -->
+    <!-- tools:showIn="navigation_view" -->
 
     <item android:title="Menu">
         <menu>
             <item
                 android:id="@+id/myProfile"
+                android:icon="@drawable/ic_my_profile"
                 android:title="My profile" />
             <item
                 android:id="@+id/myFests"
+                android:icon="@drawable/ic_festivals"
                 android:title="My Festivals" />
             <item
                 android:id="@+id/createNewFest"
+                android:icon="@drawable/ic_new_festival"
                 android:title="Crete new Festival" />
             <item
                 android:id="@+id/jobAuctns"
+                android:icon="@drawable/ic_money"
                 android:title="Job Auctions" />
             <item
                 android:id="@+id/printPass"
+                android:icon="@drawable/ic_pass"
                 android:title="Print Pass" />
             <item
                 android:id="@+id/search"
+                android:icon="@drawable/ic_search"
                 android:title="Search" />
         </menu>
     </item>

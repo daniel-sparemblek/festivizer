@@ -62,36 +62,41 @@
         android:paddingRight="25dp"
         android:paddingBottom="10dp">
 
-        <Button
+        <TextView
             android:id="@+id/festName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Festival     >" />
-        <Button
+            android:text="Festival"
+            android:textSize="21sp" />
+        <TextView
             android:id="@+id/startTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Stat time     >" />
-        <Button
+            android:text="Stat time"
+            android:textSize="21sp" />
+        <TextView
             android:id="@+id/endTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="End time     >" />
-        <Button
+            android:text="End time"
+            android:textSize="21sp" />
+        <TextView
             android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Location     >" />
-        <Button
+            android:text="Location"
+            android:textSize="21sp" />
+        <TextView
             android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Description     >" />
+            android:text="Description"
+            android:textSize="21sp" />
     </LinearLayout>
 
     <LinearLayout
