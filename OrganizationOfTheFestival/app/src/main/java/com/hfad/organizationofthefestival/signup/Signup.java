@@ -6,16 +6,16 @@ public class Signup {
 
     private String username;
     private String password;
-    @SerializedName("serialized_name")
+    @SerializedName("first_name")
     private String firstName;
     @SerializedName("last_name")
     private String lastName;
     private String picture;
     private String phone;
     private String email;
-    private String role;
+    private int permission;
 
-    public Signup(String username, String password, String firstName, String lastName, String picture, String phone, String email, String role) {
+    public Signup(String username, String password, String firstName, String lastName, String picture, String phone, String email, int premission) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -23,7 +23,7 @@ public class Signup {
         this.picture = picture;
         this.phone = phone;
         this.email = email;
-        this.role = role;
+        this.permission = premission;
     }
 
     public String checkInput(String verifyPassword) {
@@ -76,8 +76,8 @@ public class Signup {
         return email;
     }
 
-    public String getRole() {
-        return role;
+    public int getRole() {
+        return permission;
     }
 
     public void setUsername(String username) {
@@ -109,6 +109,6 @@ public class Signup {
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.permission = permission;
     }
 }

@@ -42,7 +42,7 @@ public class LoginController {
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(loginActivity, errorObject.getString("message"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(loginActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
@@ -60,7 +60,7 @@ public class LoginController {
     public void enterAccount(final String accessToken, final String refreshToken, String username) {
         // This class will handle possible access token expiration using the refresh token
 
-        Call<User> call = loginClient.getUser(username, accessToken);
+        Call<User> call = loginClient.getUser(username, "Bearer " + accessToken);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -70,7 +70,7 @@ public class LoginController {
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(loginActivity, errorObject.getString("message"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(loginActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();

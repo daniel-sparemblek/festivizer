@@ -1,17 +1,14 @@
 package com.hfad.organizationofthefestival.signup;
 
-import com.google.gson.annotations.SerializedName;
-
 public class RegistrationResponse {
 
-    @SerializedName("msg")
-    private String message;
+    private String msg;
 
-    public RegistrationResponse(String message) {
-        this.message = message;
+    public RegistrationResponse(String msg) {
+        this.msg = msg;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 }

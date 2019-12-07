@@ -68,7 +68,7 @@ public class SignupActivity extends AppCompatActivity {
                         profilePictureInBytes.toString(),
                         etPhone.getText().toString(),
                         etEmail.getText().toString(),
-                        role.toString());
+                        role.getValue());
                 String textFieldsStatus = signup.checkInput(etVerifyPassword.getText().toString());
                 if (textFieldsStatus == null) {
                     signupController.signUp(signup);

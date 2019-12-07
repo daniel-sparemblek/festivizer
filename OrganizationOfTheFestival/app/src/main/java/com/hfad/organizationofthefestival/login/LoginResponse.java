@@ -1,22 +1,19 @@
 package com.hfad.organizationofthefestival.login;
 
-import com.google.gson.annotations.SerializedName;
-
 public class LoginResponse {
 
-    @SerializedName("msg")
-    private String message;
+    private String msg;
     private String access_token;
     private String refresh_token;
 
     public LoginResponse(String message, String access_token, String refresh_token) {
-        this.message = message;
+        this.msg = message;
         this.access_token = access_token;
         this.refresh_token = refresh_token;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
     public String getAccess_token() {
