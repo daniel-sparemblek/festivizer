@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background_gradient">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/noName1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Festival creation"
+                android:textSize="21sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="28dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <ImageView
+            android:id="@+id/myPicture"
+            android:layout_width="178dp"
+            android:layout_height="178dp"
+            android:layout_gravity="left|top"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/default_profile_picture" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="21dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="24dp">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="textCapWords" />
+        <EditText
+            android:id="@+id/descIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:inputType="textCapWords" />
+        <EditText
+            android:id="@+id/duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Duration"
+            android:inputType="textCapWords" />
+        <EditText
+            android:id="@+id/startTimeIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Start time"
+            android:inputType="textCapWords" />
+        <EditText
+            android:id="@+id/endTimeIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="End time"
+            android:inputType="textCapWords" />
+
+
+        <Button
+            android:id="@+id/createBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Create" />
+
+    </LinearLayout>
+
+</LinearLayout>

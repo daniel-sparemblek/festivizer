@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background_gradient">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/noName1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Event view"
+                android:textSize="21sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="28dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="24dp">
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/nameOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:hint="Name"
+            android:textSize="21sp" />
+        <TextView
+            android:id="@+id/descOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Desc"
+            android:textSize="21sp" />
+        <TextView
+            android:id="@+id/locationOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location"
+            android:textSize="21sp" />
+        <TextView
+            android:id="@+id/startTimeOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Start time"
+            android:textSize="21sp" />
+        <TextView
+            android:id="@+id/endTimeOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="End time"
+            android:textSize="21sp" />
+        <TextView
+            android:id="@+id/organizerOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Organizer"
+            android:textSize="21sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="28dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="24dp">
+
+    </LinearLayout>
+
+
+</LinearLayout>
