@@ -31,44 +31,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Search"
+                android:text="My Events"
                 android:textSize="21sp" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="28dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <Button
+            android:id="@+id/org_btnStarted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Started" />
+        <Button
+            android:id="@+id/org_btnActive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Active" />
+        <Button
+            android:id="@+id/org_btnComplited"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Complited" />
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
-
-        <EditText
-            android:id="@+id/searchTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Search here"
-            android:inputType="textCapWords" />
-        <Button
-            android:id="@+id/searchBtn"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:text="Search now  ->" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:paddingTop="10dp"
+        android:paddingTop="25dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="100dp">
 
         <ListView
-            android:id="@+id/approvalList1"
+            android:id="@+id/org_leaderList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
@@ -77,6 +84,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
-
 
 </LinearLayout>

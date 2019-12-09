@@ -31,10 +31,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Search"
+                android:text="Job"
                 android:textSize="21sp" />
         </LinearLayout>
     </LinearLayout>
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -44,39 +45,50 @@
         android:paddingLeft="25dp"
         android:paddingRight="24dp">
 
-        <EditText
-            android:id="@+id/searchTxt"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/org_event"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Search here"
-            android:inputType="textCapWords" />
+            android:layout_gravity="left"
+            android:text="Event"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/org_fest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Festival"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/org_startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Start time"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/org_workerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Worker name"
+            android:textSize="25sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text=""
+            android:textSize="25sp" />
+
+
         <Button
-            android:id="@+id/searchBtn"
+            android:id="@+id/org_auction"
             android:layout_width="150dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Search now  ->" />
+            android:text="Auction" />
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:paddingTop="10dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="10dp">
-
-        <ListView
-            android:id="@+id/approvalList1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
-
 
 </LinearLayout>

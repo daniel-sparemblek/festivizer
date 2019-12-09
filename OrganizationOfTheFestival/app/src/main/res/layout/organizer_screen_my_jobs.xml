@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Search"
+                android:text="My Jobs"
                 android:textSize="21sp" />
         </LinearLayout>
     </LinearLayout>
@@ -40,35 +40,72 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
-        <EditText
-            android:id="@+id/searchTxt"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Search here"
-            android:inputType="textCapWords" />
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
         <Button
-            android:id="@+id/searchBtn"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:text="Search now  ->" />
+            android:id="@+id/org_btnAuct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Auction" />
+        <Button
+            android:id="@+id/org_btnActive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Active" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+    <Button
+        android:id="@+id/org_btnPndg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:text="Pending" />
+    <Button
+        android:id="@+id/org_btnComplited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:text="Complited" />
+
+</LinearLayout>
+
+
+
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:paddingTop="10dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="25dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="100dp">
 
         <ListView
-            android:id="@+id/approvalList1"
+            android:id="@+id/org_eventList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
@@ -77,6 +114,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
-
 
 </LinearLayout>

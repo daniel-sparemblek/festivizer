@@ -7,22 +7,22 @@
     android:orientation="horizontal" >
 
     <TextView
-        android:id="@+id/txt"
-        android:layout_width="150dp"
+        android:id="@+id/org_rowTxt"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:text="Job ABC, until ending:\n\  1:25:32"
+        android:text="Name ABC (change in JAVA)"
         android:textSize="14sp" />
     <Button
-        android:id="@+id/btnAccept"
+        android:id="@+id/org_rowBtn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="Accept" />
+        android:text="+" />
     <Button
-        android:id="@+id/btnDecline"
+        android:id="@+id/org_rowBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="Decline" />
+        android:text="x" />
 </LinearLayout>

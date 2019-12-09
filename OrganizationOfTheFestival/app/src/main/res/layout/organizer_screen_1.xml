@@ -31,9 +31,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Waiting list"
+                android:text="My Profile"
                 android:textSize="21sp" />
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="28dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <ImageView
+            android:id="@+id/org_myPicture"
+            android:layout_width="178dp"
+            android:layout_height="178dp"
+            android:layout_gravity="left|top"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/default_profile_picture" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="28dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="24dp">
+
+            <TextView
+                android:id="@+id/org_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Name"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/org_eMail1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="E-Mail"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/org_festivalName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Phone"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -49,58 +100,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="Waiting for approval"
+            android:text="Festivals I'm organizing"
             android:textSize="25sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:paddingTop="10dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="10dp">
-
-        <ListView
-            android:id="@+id/approvalList1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
-
-        <TextView
-            android:id="@+id/noName3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="BIDS"
-            android:textSize="25sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:paddingTop="10dp"
+        android:paddingTop="25dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="100dp">
 
         <ListView
-            android:id="@+id/leaderList"
+            android:id="@+id/org_leaderList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

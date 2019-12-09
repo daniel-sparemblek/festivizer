@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" >
+    <!--  -->
+    <!-- tools:showIn="navigation_view" -->
+
+            <item
+                android:id="@+id/org_myProfile"
+                android:title="My profile" />
+            <item
+                android:id="@+id/org_applyForFest"
+                android:title="My Festivals" />
+            <item
+                android:id="@+id/org_myEvents"
+                android:title="MY Events" />
+            <item
+                android:id="@+id/org_myJobs"
+                android:title="My Jobs" />
+            <item
+                android:id="@+id/org_printPass"
+                android:title="Print Pass" />
+            <item
+                android:id="@+id/org_search"
+                android:title="Search" />
+
+</menu>

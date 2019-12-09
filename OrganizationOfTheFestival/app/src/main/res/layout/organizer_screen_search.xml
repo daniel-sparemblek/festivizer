@@ -45,13 +45,13 @@
         android:paddingRight="24dp">
 
         <EditText
-            android:id="@+id/searchTxt"
+            android:id="@+id/org_searchTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search here"
             android:inputType="textCapWords" />
         <Button
-            android:id="@+id/searchBtn"
+            android:id="@+id/org_searchBtn"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -68,7 +68,7 @@
         android:paddingBottom="10dp">
 
         <ListView
-            android:id="@+id/approvalList1"
+            android:id="@+id/org_searchList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

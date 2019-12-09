@@ -31,10 +31,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Search"
+                android:text="Application profile"
                 android:textSize="21sp" />
         </LinearLayout>
     </LinearLayout>
+
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -44,39 +46,41 @@
         android:paddingLeft="25dp"
         android:paddingRight="24dp">
 
-        <EditText
-            android:id="@+id/searchTxt"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/org_worker"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Search here"
-            android:inputType="textCapWords" />
-        <Button
-            android:id="@+id/searchBtn"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:text="Search now  ->" />
+            android:layout_gravity="left"
+            android:text="Worker"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/org_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Price"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/org_numbOfPeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Number of people"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/org_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Time"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/org_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Comment"
+            android:textSize="25sp" />
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:paddingTop="10dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="10dp">
-
-        <ListView
-            android:id="@+id/approvalList1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
-
 
 </LinearLayout>

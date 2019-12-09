@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Search"
+                android:text="Print Password"
                 android:textSize="21sp" />
         </LinearLayout>
     </LinearLayout>
@@ -44,39 +44,27 @@
         android:paddingLeft="25dp"
         android:paddingRight="24dp">
 
-        <EditText
-            android:id="@+id/searchTxt"
+        <Spinner
+            android:id="@+id/org_pickFestival"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search here"
-            android:inputType="textCapWords" />
+            android:spinnerMode="dropdown"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text=""
+            android:textSize="25sp" />
+
+
         <Button
-            android:id="@+id/searchBtn"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
+            android:id="@+id/org_genPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Search now  ->" />
+            android:text="Generate Password" />
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:paddingTop="10dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="10dp">
-
-        <ListView
-            android:id="@+id/approvalList1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
-
 
 </LinearLayout>
