@@ -45,7 +45,7 @@
         android:paddingRight="24dp">
 
         <TextView
-            android:id="@+id/frustrationLvl2000"
+            android:id="@+id/noName1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
