@@ -4,6 +4,7 @@ from run import ma
 import re
 from passlib.hash import pbkdf2_sha256 as sha256
 
+
 # MODELS
 
 
@@ -11,15 +12,15 @@ class UserModel(db.Model):
     __tablename__ = 'users'
 
     def __init__(self, username, password, first_name, last_name, picture, phone, email, permission, is_pending):
-        self.username=username
-        self.password=password
-        self.first_name=first_name
-        self.last_name=last_name
-        self.picture=picture
-        self.phone=phone
-        self.email=email
-        self.permission=permission
-        self.is_pending=is_pending
+        self.username = username
+        self.password = password
+        self.first_name = first_name
+        self.last_name = last_name
+        self.picture = picture
+        self.phone = phone
+        self.email = email
+        self.permission = permission
+        self.is_pending = is_pending
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
@@ -39,6 +40,11 @@ class UserModel(db.Model):
     @classmethod
     def find_by_username(cls, username):
         return cls.query.filter_by(username=username).first()
+
+    @classmethod
+    def find_by_username_start(cls, start):
+        search = "{}%".format(start)
+        return cls.query.filter(cls.username.like(search)).all()
 
     @classmethod
     def find_by_phone(cls, phone):
@@ -70,6 +76,31 @@ class UserModel(db.Model):
         db.session.commit()
 
 
+class FestivalModel(db.Model):
+    __tablename__ = 'festivals'
+
+    festival_id = db.Column(db.Integer, primary_key=True)
+    leader_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    desc = db.Column(db.String(250), nullable=True)
+    logo = db.Column(db.String(250), nullable=True)
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime, nullable=False)
+    status = db.Column(db.Integer, nullable=False)
+
+    @classmethod
+    def find_by_leader_id(cls, leader_id):
+        return cls.query.filter_by(leader_id=leader_id).all()
+
+    @classmethod
+    def return_all(cls):
+        return cls.query.all()
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+
 class RevokedTokenModel(db.Model):
     __tablename__ = 'revoked_tokens'
 
@@ -85,11 +116,11 @@ class RevokedTokenModel(db.Model):
         query = cls.query.filter_by(jti=jti).first()
         return bool(query)
 
+
 # SCHEMAS
 
 
 class UserSchema(ma.ModelSchema):
-
     id = fields.Integer(required=False)
     username = fields.Str(required=True, error_messages={"required": "Missing username."})
     password = fields.Str(required=True, error_messages={"required": "Missing password"})
@@ -126,3 +157,30 @@ class UserSchema(ma.ModelSchema):
 
     class Meta:
         model = UserModel
+
+
+class FestivalSchema(ma.ModelSchema):
+    festival_id = fields.Integer(required=False)
+    leader_id = fields.Integer(required=True, error_messages={"required": "Missing leader."})
+    name = fields.Str(required=True, error_messages={"required": "Missing festival's name."})
+    desc = fields.Str(required=False)
+    logo = fields.Str(required=False)
+    start_time = fields.DateTime(required=True, error_messages={"required": "Missing start time."})
+    end_time = fields.DateTime(required=True, error_messages={"required": "Missing end time."})
+    status = fields.Integer(required=True, error_messages={"required": "Missing status."})
+
+    @validates('status')
+    def validate_status(self, value):
+        if value != 0 and value != 1 and value != 2:
+            raise ValidationError("Status must be 0, 1 or 2.")
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            festival_schema = FestivalSchema(many=True)
+            return festival_schema.dump(value)
+        return FestivalSchema().dump(value)
+
+    class Meta:
+        model = UserModel
+

@@ -1,7 +1,9 @@
 from flask_restful import Resource
 from flask import request, redirect
+from datetime import datetime
+from sqlalchemy.exc import IntegrityError
 from decorators import permission_required
-from models import UserModel, RevokedTokenModel, UserSchema
+from models import UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalSchema
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
@@ -67,8 +69,10 @@ class UserRegistration(Resource):
             return {
                 'msg': 'User {} was created'.format(data['username'])
             }
-        except Exception as e:
-            return {'msg': 'Internal Server Error,'}, 500
+        except IntegrityError:
+            return {'msg': 'Bad request'}, 400
+        except:
+            return {'msg': 'Internal server error'}, 500
 
 
 class UserLogin(Resource):
@@ -111,32 +115,76 @@ class User(Resource):
 
 class Users(Resource):
     @jwt_required
-    @permission_required(0)
     def get(self):
-        permission = request.args.get('permission')
-        is_pending = request.args.get('is_pending')
-
         if len(list(request.args)) == 0:
             return UserSchema(many=True).dump(UserModel.return_all()), 200
+
+        permission = request.args.get('permission')
+        is_pending = request.args.get('is_pending')
 
         if permission and is_pending and len(list(request.args)) == 2:
             users = UserModel.query.filter_by(permission=permission, is_pending=is_pending).all()
             return UserSchema(many=True).dump(users), 200
         else:
-            return redirect("http://localhost:5000/users")
+            return redirect("http://localhost:5000/users")  # Change to server address
 
 
-
+class Festivals(Resource):
     @jwt_required
-    @permission_required(0)
-    def delete(self):
-        return UserModel.delete_all()
+    def get(self):
+        leader_id = request.args.get('leader_id')
+
+        if len(list(request.args)) == 1 and leader_id:
+            festivals = FestivalModel.find_by_leader_id(leader_id)
+            return FestivalSchema(many=True).dump(festivals)
+
+        festivals = FestivalModel.return_all()
+        return FestivalSchema(many=True).dump(festivals)
 
 
-class UsersFilterByPermissionAndFilterByIsPending(Resource):
+class Festival(Resource):
     @jwt_required
-    def get(self, permission, is_pending):
-        users = UserModel.query.filter_by(permission=permission, is_pending=is_pending).all()
+    @permission_required(1)
+    def post(self):
+        username = get_jwt_identity()
+        user = UserModel.find_by_username(username)
+        leader_id = user.id
+
+        data = request.get_json()
+        data['leader_id'] = leader_id
+
+        festival_schema = FestivalSchema()
+        validate = festival_schema.validate(data)
+
+        if bool(validate):
+            value = list(validate.values())[0]
+            return {"msg": value[0]}, 422
+
+        new_festival = FestivalModel(
+            leader_id=data['leader_id'],
+            name=data['name'],
+            desc=data['desc'],
+            logo=data['logo'],
+            start_time=datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ'),
+            end_time=datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ'),
+            status=data['status']
+        )
+
+        try:
+            new_festival.save_to_db()
+            return {'msg': 'Festival {} was successfully created!'.format(data['name'])}, 200
+        except IntegrityError:
+            return {'msg': 'Bad request'}, 400
+        except:
+            return {'msg': 'Internal server error'}, 500
+
+
+class SearchUsers(Resource):
+    @jwt_required
+    def post(self):
+        data = request.get_json()
+        search = data['search']
+        users = UserModel.find_by_username_start(search)
         return UserSchema(many=True).dump(users)
 
 
@@ -147,7 +195,7 @@ class UserLogoutAccess(Resource):
         try:
             revoked_token = RevokedTokenModel(jti=jti)
             revoked_token.add()
-            return {'msg': 'Access token has been revoked.'}
+            return {'msg': 'Access token has been revoked.'}, 200
         except:
             return {'msg': 'Internal server error.'}, 500
 

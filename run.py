@@ -3,6 +3,9 @@ from flask_jwt_extended import JWTManager, jwt_refresh_token_required, get_jwt_i
 from flask_marshmallow import Marshmallow
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.engine import Engine
+from sqlalchemy import event
+import sqlite3
 
 
 app = Flask(__name__)
@@ -31,6 +34,14 @@ def check_if_token_in_blacklist(decrypted_token):
 
 @app.before_first_request
 def create_tables():
+
+    @event.listens_for(Engine, "connect")
+    def set_sqlite_pragma(dbapi_connection, connection_record):
+        if type(dbapi_connection) is sqlite3.Connection:  # play well with other DB backends
+            cursor = dbapi_connection.cursor()
+            cursor.execute("PRAGMA foreign_keys=ON")
+            cursor.close()
+
     db.create_all()
     db.query_expression
 
@@ -39,6 +50,10 @@ api.add_resource(resources.UserRegistration, '/registration')
 api.add_resource(resources.UserLogin, '/login')
 api.add_resource(resources.User, '/user/<string:username>')
 api.add_resource(resources.Users, '/users')
+api.add_resource(resources.Festival, '/festival')
+api.add_resource(resources.Festivals, '/festivals')
+api.add_resource(resources.SearchUsers, '/search/users')
+
 api.add_resource(resources.UserLogoutAccess, '/logout/access')
 api.add_resource(resources.UserLogoutRefresh, '/logout/refresh')
 api.add_resource(resources.TokenRefresh, '/token/refresh')
