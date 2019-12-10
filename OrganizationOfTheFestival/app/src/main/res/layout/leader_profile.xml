@@ -107,7 +107,7 @@
         android:paddingBottom="100dp">
 
         <ListView
-            android:id="@+id/festivalList"
+            android:id="@+id/specializationsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

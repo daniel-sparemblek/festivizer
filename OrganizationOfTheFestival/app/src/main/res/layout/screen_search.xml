@@ -23,23 +23,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="@string/job_auctions"
+            android:text="@string/search"
             android:textSize="21sp" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="28dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="24dp">
+
+        <EditText
+            android:id="@+id/org_searchTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_here"
+            android:inputType="textCapWords"
+            android:autofillHints="" tools:targetApi="o" />
+
+        <Button
+            android:id="@+id/org_searchBtn"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/search" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
         android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="55dp">
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="10dp">
 
         <ListView
-            android:id="@+id/specializationsList"
+            android:id="@+id/org_searchList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
@@ -49,4 +72,5 @@
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
-</LinearLayout>
+
+    </LinearLayout>

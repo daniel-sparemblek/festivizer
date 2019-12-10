@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" >
+    <!--  -->
+    <!-- tools:showIn="navigation_view" -->
+
+    <item
+        android:id="@+id/addSpecialization"
+        android:title="@string/add_specialization" />
+    <item
+        android:id="@+id/applyForJob"
+        android:title="@string/apply_for_a_job" />
+    <item
+        android:id="@+id/activeJobs"
+        android:title="@string/active_jobs" />
+    <item
+        android:id="@+id/myApplications"
+        android:title="@string/my_applications" />
+    <item
+        android:id="@+id/printPass"
+        android:title="@string/print_pass" />
+    <item
+        android:id="@+id/search"
+        android:title="@string/search" />
+
+</menu>

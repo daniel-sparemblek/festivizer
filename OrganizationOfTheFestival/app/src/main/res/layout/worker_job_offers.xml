@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -23,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="@string/job_auctions"
+            android:text="@string/apply_for_a_job"
             android:textSize="21sp" />
 
     </LinearLayout>
@@ -33,13 +32,13 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="55dp">
+        android:paddingTop="25dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="100dp">
 
         <ListView
-            android:id="@+id/specializationsList"
+            android:id="@+id/workerJobList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

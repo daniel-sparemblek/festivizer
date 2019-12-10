@@ -5,23 +5,23 @@
     <!--  -->
     <!-- tools:showIn="navigation_view" -->
 
+        <item
+            android:id="@+id/myProfile"
+            android:title="@string/my_profile" />
+        <item
+            android:id="@+id/applyForFest"
+            android:title="@string/apply_for_a_festival" />
+        <item
+            android:id="@+id/myEvents"
+            android:title="@string/my_events" />
             <item
-                android:id="@+id/org_myProfile"
-                android:title="My profile" />
+                android:id="@+id/myJobs"
+                android:title="@string/my_jobs" />
             <item
-                android:id="@+id/org_applyForFest"
-                android:title="My Festivals" />
+                android:id="@+id/printPass"
+                android:title="@string/print_pass" />
             <item
-                android:id="@+id/org_myEvents"
-                android:title="MY Events" />
-            <item
-                android:id="@+id/org_myJobs"
-                android:title="My Jobs" />
-            <item
-                android:id="@+id/org_printPass"
-                android:title="Print Pass" />
-            <item
-                android:id="@+id/org_search"
-                android:title="Search" />
+                android:id="@+id/search"
+                android:title="@string/search" />
 
 </menu>

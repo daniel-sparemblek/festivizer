@@ -23,30 +23,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="@string/job_auctions"
+            android:text="@string/print_pass"
             android:textSize="21sp" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="55dp">
+        android:paddingTop="28dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="24dp">
 
-        <ListView
-            android:id="@+id/specializationsList"
+        <Spinner
+            android:id="@+id/pick_job"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text=""
+            android:textSize="25sp" />
+
+
+        <Button
+            android:id="@+id/genPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/generate_pass" />
     </LinearLayout>
 
 </LinearLayout>

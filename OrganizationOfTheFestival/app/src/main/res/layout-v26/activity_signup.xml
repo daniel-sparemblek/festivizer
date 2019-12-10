@@ -16,7 +16,7 @@
 
         <!--  Profile picture -->
         <ImageView
-            android:id="@+id/profile_picture"
+            android:id="@+id/profilePicture"
             android:layout_width="wrap_content"
             android:layout_height="128dp"
             android:layout_gravity="center_horizontal"

@@ -6,28 +6,28 @@
     <!-- tools:showIn="navigation_view" -->
 
     <item
-        android:id="@+id/applicationProfile"
+        android:id="@+id/myProfile"
         android:icon="@drawable/ic_my_profile"
-        android:title="My profile" />
+        android:title="@string/my_profile" />
     <item
         android:id="@+id/myFests"
         android:icon="@drawable/ic_festivals"
-        android:title="My Festivals" />
+        android:title="@string/my_festivals" />
     <item
         android:id="@+id/createNewFest"
         android:icon="@drawable/ic_new_festival"
-        android:title="Create new Festival" />
+        android:title="@string/create_new_festival" />
     <item
         android:id="@+id/jobAuctns"
         android:icon="@drawable/ic_money"
-        android:title="Job Auctions" />
+        android:title="@string/job_auctions" />
     <item
         android:id="@+id/printPass"
         android:icon="@drawable/ic_pass"
-        android:title="Print Pass" />
+        android:title="@string/print_pass" />
     <item
         android:id="@+id/search"
         android:icon="@drawable/ic_search"
-        android:title="Search" />
+        android:title="@string/search" />
 
 </menu>

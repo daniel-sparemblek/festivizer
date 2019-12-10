@@ -37,11 +37,18 @@
         android:paddingRight="24dp">
 
         <TextView
-            android:id="@+id/org_festName"
+        android:id="@+id/festName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:text="@string/festival_name"
+        android:textSize="21sp" />
+        <TextView
+            android:id="@+id/eventName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="@string/festival_name"
+            android:text="@string/event_name"
             android:textSize="21sp" />
 
     </LinearLayout>
@@ -56,33 +63,40 @@
         android:paddingEnd="24dp">
 
         <TextView
-            android:id="@+id/org_name"
+            android:id="@+id/jobName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/name"
             android:textSize="25sp" />
+
         <TextView
-            android:id="@+id/org_startTime"
+            android:id="@+id/jobDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/description"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/startTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/start_time"
             android:textSize="25sp" />
 
-
         <Spinner
-            android:id="@+id/org_spec1"
+            android:id="@+id/spec1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"/>
         <Spinner
-            android:id="@+id/org_spec2"
+            android:id="@+id/spec2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"/>
         <Spinner
-            android:id="@+id/org_spec3"
+            android:id="@+id/spec3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"/>
