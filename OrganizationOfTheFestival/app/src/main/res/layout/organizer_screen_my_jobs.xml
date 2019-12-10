@@ -11,87 +11,58 @@
 
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
+        android:paddingTop="5dp"
         android:paddingRight="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
+            android:layout_gravity="start"
+            android:text="@string/my_jobs"
+            android:textSize="21sp" />
 
-            <TextView
-                android:id="@+id/noName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="My Jobs"
-                android:textSize="21sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-        <Button
-            android:id="@+id/org_btnAuct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="Auction" />
-        <Button
-            android:id="@+id/org_btnActive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="Active" />
-
-        </LinearLayout>
-
-    <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
         android:paddingLeft="10dp"
+        android:paddingTop="10dp"
         android:paddingRight="10dp">
 
     <Button
-        android:id="@+id/org_btnPndg"
+        android:id="@+id/org_btnAuction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:text="Pending" />
-    <Button
-        android:id="@+id/org_btnComplited"
+        android:text="@string/auction" />
+
+        <Button
+        android:id="@+id/org_btnActive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:text="Complited" />
+        android:text="@string/active" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/org_btnPending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/pending" />
 
-
-
+        <Button
+            android:id="@+id/org_btnCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/completed" />
 
     </LinearLayout>
 

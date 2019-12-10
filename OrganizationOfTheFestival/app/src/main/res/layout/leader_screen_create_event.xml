@@ -18,31 +18,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
+            android:layout_gravity="start"
+            android:text="@string/create_event"
+            android:textSize="21sp" />
 
-            <TextView
-                android:id="@+id/noName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Create event"
-                android:textSize="21sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
     </LinearLayout>
 
     <LinearLayout
@@ -55,35 +38,41 @@
         android:paddingBottom="10dp">
 
         <EditText
-            android:id="@+id/nameIn"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="@string/name"
+            android:inputType="textCapWords"
+            android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/desc"
+            android:inputType="textCapWords"
+            android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/location"
+            android:inputType="textCapWords"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/startTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/start_time"
+            android:importantForAutofill="no"
             android:inputType="textCapWords" />
         <EditText
-            android:id="@+id/descIn"
+            android:id="@+id/endTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Desc"
-            android:inputType="textCapWords" />
-        <EditText
-            android:id="@+id/locationIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Location"
-            android:inputType="textCapWords" />
-        <EditText
-            android:id="@+id/startTimeIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Start time"
-            android:inputType="textCapWords" />
-        <EditText
-            android:id="@+id/endTimeIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="End time"
-            android:inputType="textCapWords" />
+            android:hint="@string/end_time"
+            android:inputType="textCapWords"
+            android:importantForAutofill="no" />
         <Spinner
             android:id="@+id/selOrganizerIn"
             android:layout_width="fill_parent"
@@ -96,15 +85,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
+        android:paddingStart="25dp"
+        android:paddingEnd="24dp">
 
         <Button
             android:id="@+id/createJob"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:text="Create" />
+            android:text="@string/create" />
     </LinearLayout>
 
 

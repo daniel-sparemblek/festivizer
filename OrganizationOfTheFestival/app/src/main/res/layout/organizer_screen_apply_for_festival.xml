@@ -18,22 +18,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
+            android:layout_gravity="start"
+            android:text="@string/apply_for_a_festival"
+            android:textSize="21sp" />
 
-            <TextView
-                android:id="@+id/noName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Apply for a festival"
-                android:textSize="21sp" />
-        </LinearLayout>
     </LinearLayout>
 
 
@@ -47,7 +39,7 @@
         android:paddingBottom="100dp">
 
         <ListView
-            android:id="@+id/org_leaderList"
+            android:id="@+id/orgFestivalList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

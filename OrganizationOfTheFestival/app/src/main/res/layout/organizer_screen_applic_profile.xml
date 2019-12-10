@@ -18,22 +18,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
+            android:layout_gravity="start"
+            android:text="@string/application_profile"
+            android:textSize="21sp" />
 
-            <TextView
-                android:id="@+id/noName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Application profile"
-                android:textSize="21sp" />
-        </LinearLayout>
     </LinearLayout>
 
 
@@ -43,43 +35,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
+        android:paddingStart="25dp"
+        android:paddingEnd="24dp">
 
         <TextView
             android:id="@+id/org_worker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Worker"
+            android:layout_gravity="start"
+            android:text="@string/worker"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/org_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Price"
+            android:layout_gravity="start"
+            android:text="@string/price"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/org_numbOfPeople"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Number of people"
+            android:layout_gravity="start"
+            android:text="@string/number_of_people"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/org_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Time"
+            android:layout_gravity="start"
+            android:text="@string/time"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/org_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Comment"
+            android:layout_gravity="start"
+            android:text="@string/comment"
             android:textSize="25sp" />
     </LinearLayout>
 

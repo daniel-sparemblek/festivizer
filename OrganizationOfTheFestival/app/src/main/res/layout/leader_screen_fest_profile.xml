@@ -18,22 +18,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
+            android:layout_gravity="start"
+            android:text="@string/festival_profile"
+            android:textSize="21sp" />
 
-            <TextView
-                android:id="@+id/noName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Festival profile"
-                android:textSize="21sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -45,11 +37,12 @@
         android:paddingRight="24dp">
 
         <ImageView
-            android:id="@+id/myPicture"
+            android:id="@+id/festivalLogo"
             android:layout_width="178dp"
             android:layout_height="178dp"
-            android:layout_gravity="left|top"
+            android:layout_gravity="start|top"
             android:layout_marginBottom="10dp"
+            android:contentDescription="@string/profile_picture"
             android:src="@drawable/default_profile_picture" />
 
         <LinearLayout
@@ -57,15 +50,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="28dp"
-            android:paddingLeft="3dp"
-            android:paddingRight="24dp">
+            android:paddingStart="3dp"
+            android:paddingEnd="24dp">
 
             <TextView
                 android:id="@+id/festName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Name"
+                android:layout_gravity="start"
+                android:text="@string/name"
                 android:textSize="21sp" />
         </LinearLayout>
     </LinearLayout>
@@ -76,51 +69,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
+        android:paddingStart="25dp"
+        android:paddingEnd="24dp">
 
         <TextView
             android:id="@+id/desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Description"
+            android:layout_gravity="start"
+            android:text="@string/description"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Duration"
+            android:layout_gravity="start"
+            android:text="@string/duration"
             android:textSize="25sp" />
+
         <TextView
             android:id="@+id/startTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Start time"
+            android:layout_gravity="start"
+            android:text="@string/start_time"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/endTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="End time"
+            android:layout_gravity="start"
+            android:text="@string/end_time"
             android:textSize="25sp" />
 
         <Button
             android:id="@+id/events"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Events" />
+            android:layout_gravity="start"
+            android:text="@string/events" />
 
         <Button
             android:id="@+id/btnApply"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Add new event" />
+            android:layout_gravity="start"
+            android:text="@string/add_new_event" />
     </LinearLayout>
 
 </LinearLayout>

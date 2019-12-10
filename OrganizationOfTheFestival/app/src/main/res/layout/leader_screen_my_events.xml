@@ -7,7 +7,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/background_gradient">
+    android:background="@drawable/background_gradient"
+    style="?android:attr/buttonBarStyle">
 
 
     <LinearLayout
@@ -18,22 +19,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
+            android:layout_gravity="start"
+            android:text="@string/my_events"
+            android:textSize="21sp" />
 
-            <TextView
-                android:id="@+id/noName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="My Events"
-                android:textSize="21sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -49,19 +42,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Active" />
+            android:text="@string/active"
+            style="?android:attr/buttonBarStyle"/>
         <Button
             android:id="@+id/btnPending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Pending" />
+            android:text="@string/pending"
+            style="?android:attr/buttonBarStyle"/>
+
         <Button
-            android:id="@+id/btnComplited"
+            android:id="@+id/btnCompleted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Complited" />
+            android:text="@string/completed"
+            style="?android:attr/buttonBarStyle"/>
 
     </LinearLayout>
 
@@ -75,7 +72,7 @@
         android:paddingBottom="100dp">
 
         <ListView
-            android:id="@+id/leaderList"
+            android:id="@+id/festivalList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

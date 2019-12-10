@@ -9,8 +9,8 @@
     <TextView
         android:id="@+id/leaderUsername"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Job ABC, until ending:\n\  1:25:32"
+        android:layout_height="35dp"
+        android:layout_gravity="start"
+        android:text="@string/job_abc_until_ending_n_1_25_32"
         android:textSize="18sp" />
 </LinearLayout>

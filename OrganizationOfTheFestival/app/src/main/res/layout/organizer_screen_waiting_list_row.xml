@@ -10,19 +10,19 @@
         android:id="@+id/org_rowTxt"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Name ABC (change in JAVA)"
+        android:layout_gravity="start"
+        android:text="@string/name_abc_change_in_java"
         android:textSize="14sp" />
     <Button
         android:id="@+id/org_rowBtn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="+" />
+        android:layout_gravity="end"
+        android:text="@string/approve" />
     <Button
         android:id="@+id/org_rowBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="x" />
+        android:layout_gravity="end"
+        android:text="@string/decline" />
 </LinearLayout>

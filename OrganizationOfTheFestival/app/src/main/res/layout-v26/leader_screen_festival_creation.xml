@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="@string/job_creation"
+            android:text="@string/festival_creation"
             android:textSize="21sp" />
 
     </LinearLayout>
@@ -36,14 +36,14 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <TextView
-            android:id="@+id/org_festName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/festival_name"
-            android:textSize="21sp" />
-
+        <ImageView
+            android:id="@+id/festivalLogo"
+            android:layout_width="178dp"
+            android:layout_height="178dp"
+            android:layout_gravity="start|top"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/festival_logo"
+            android:src="@drawable/default_profile_picture" />
     </LinearLayout>
 
 
@@ -51,57 +51,55 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="28dp"
+        android:paddingTop="21dp"
         android:paddingStart="25dp"
         android:paddingEnd="24dp">
 
-        <TextView
-            android:id="@+id/org_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/name"
-            android:textSize="25sp" />
-        <TextView
-            android:id="@+id/org_startTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/start_time"
-            android:textSize="25sp" />
-
-
-        <Spinner
-            android:id="@+id/org_spec1"
+        <EditText
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"/>
-        <Spinner
-            android:id="@+id/org_spec2"
+            android:hint="@string/name"
+            android:inputType="textCapWords"
+            android:autofillHints="" />
+        <EditText
+            android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"/>
-        <Spinner
-            android:id="@+id/org_spec3"
+            android:hint="@string/description"
+            android:inputType="textCapWords"
+            android:autofillHints="" />
+        <EditText
+            android:id="@+id/duration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"/>
+            android:hint="@string/duration"
+            android:inputType="textCapWords"
+            android:autofillHints="" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/startTime"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text=""
-            android:textSize="25sp" />
+            android:hint="@string/start_time"
+            android:inputType="textCapWords"
+            android:autofillHints="" />
+        <EditText
+            android:id="@+id/endTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/end_time"
+            android:inputType="textCapWords"
+            android:autofillHints="" />
 
 
         <Button
-            android:id="@+id/org_createJob"
+            android:id="@+id/createBtn"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/create_job" />
+            android:layout_gravity="start"
+            android:text="@string/create" />
+
     </LinearLayout>
 
 </LinearLayout>

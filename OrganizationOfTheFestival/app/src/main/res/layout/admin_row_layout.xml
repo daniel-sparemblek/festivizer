@@ -8,23 +8,23 @@
 
     <TextView
         android:id="@+id/leaderUsername"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Default Leader"
+        android:layout_width="193dp"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
+        android:text="@string/default_leader"
         android:textSize="14sp" />
     <Button
-        android:id="@+id/btnAccept"
+        android:id="@+id/accept"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Accept"
+        android:layout_gravity="end"
+        android:text="@string/accept"
         android:onClick="adminOnClickAccept" />
     <Button
-        android:id="@+id/btnDecline"
+        android:id="@+id/decline"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Decline"
+        android:layout_gravity="end"
+        android:text="@string/decline"
         android:onClick="adminOnClickDecline" />
 </LinearLayout>

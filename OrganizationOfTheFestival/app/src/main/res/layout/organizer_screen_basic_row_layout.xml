@@ -10,6 +10,6 @@
         android:id="@+id/btnApply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Some name (change from java code)     >" />
+        android:layout_gravity="start"
+        android:text="@string/some_name_change_from_java_code" />
 </LinearLayout>

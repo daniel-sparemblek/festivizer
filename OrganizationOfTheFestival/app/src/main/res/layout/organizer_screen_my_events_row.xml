@@ -10,6 +10,6 @@
         android:id="@+id/org_btnExtend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Some txt (change from Java)   ->" />
+        android:layout_gravity="start"
+        android:text="@string/some_txt_change_from_java" />
 </LinearLayout>

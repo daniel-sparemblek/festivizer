@@ -11,47 +11,12 @@
 
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
-
-            <TextView
-                android:id="@+id/noName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Application profile"
-                android:textSize="21sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
+        android:layout_height="121dp"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:paddingStart="25dp"
         android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
-
-        <TextView
-            android:id="@+id/noName1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Application profile"
-            android:textSize="25sp" />
-    </LinearLayout>
+        android:paddingEnd="24dp" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -66,36 +31,37 @@
             android:id="@+id/festName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Festival"
+            android:layout_gravity="end"
+            android:text="@string/festival"
             android:textSize="21sp" />
+
         <TextView
             android:id="@+id/startTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Stat time"
+            android:layout_gravity="end"
+            android:text="@string/start_time"
             android:textSize="21sp" />
         <TextView
             android:id="@+id/endTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="End time"
+            android:layout_gravity="end"
+            android:text="@string/end_time"
             android:textSize="21sp" />
         <TextView
             android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Location"
+            android:layout_gravity="end"
+            android:text="@string/location"
             android:textSize="21sp" />
         <TextView
             android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Description"
+            android:layout_gravity="end"
+            android:text="@string/description"
             android:textSize="21sp" />
     </LinearLayout>
 
@@ -104,15 +70,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
+        android:paddingStart="25dp"
+        android:paddingEnd="24dp">
 
         <Button
             android:id="@+id/newJob"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:text="New Job" />
+            android:text="@string/new_job" />
     </LinearLayout>
 
 

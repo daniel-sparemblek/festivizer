@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
     android:background="@drawable/background_gradient">
@@ -14,14 +14,12 @@
         android:paddingRight="24dp">
 
         <!-- Our Logo -->
-        <ImageView
-            android:id="@+id/appName"
+        <ImageView android:src="@drawable/logo"
             android:layout_width="wrap_content"
             android:layout_height="128dp"
-            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/logo" />
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="TODO" />
 
         <!-- E-mail (or Username) Label -->
         <EditText
@@ -29,22 +27,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
-            android:hint="@string/e_mail_or_username"
+            android:hint="E-mail or Username"
             android:inputType="textEmailAddress"
             android:textColor="#FFFFFF"
             android:textCursorDrawable="@null"
-            android:autofillHints="" tools:targetApi="o"/>
+            android:autofillHints="" />
 
         <!-- Password Label -->
         <EditText android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/password"
+                android:hint="Password"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="@color/colorAccent"
-                android:textCursorDrawable="@null"
-            android:autofillHints="" tools:targetApi="o"/>
+                android:textCursorDrawable="@null"/>
 
         <!-- Login Button -->
         <android.support.v7.widget.AppCompatButton
@@ -54,7 +51,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:text="@string/login"
+            android:text="Login"
             android:textColor="#FFFFFF"
             android:background="@drawable/login_button" />
 
@@ -63,9 +60,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="@string/no_account_yet_create_one"
+            android:text="No account yet? Create one"
             android:gravity="center"
-            android:textSize="16sp"
+            android:textSize="16dip"
             android:textColor="#FFFFFF"/>
 
     </LinearLayout>

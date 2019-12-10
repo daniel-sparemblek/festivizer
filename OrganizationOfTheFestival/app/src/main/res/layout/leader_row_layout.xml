@@ -13,19 +13,19 @@
 
         <TextView
             android:id="@+id/organizerUsername"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Default Organizer"
+            android:layout_width="152dp"
+            android:layout_height="35dp"
+            android:layout_gravity="start"
+            android:text="@string/default_organizer"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/organizerFestival"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Default Festival"
-            android:textSize="14sp"/>
+            android:layout_width="146dp"
+            android:layout_height="38dp"
+            android:layout_gravity="start"
+            android:text="@string/default_festival"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -33,14 +33,15 @@
         android:id="@+id/btnAcceptOrganizer"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Accept"
-        android:onClick="onClickAccept" />
+        android:layout_gravity="end"
+        android:onClick="onClickAccept"
+        android:text="@string/accept" />
+
     <Button
         android:id="@+id/btnDeclineOrganizer"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Decline"
-        android:onClick="onClickDecline" />
+        android:layout_gravity="end"
+        android:onClick="onClickDecline"
+        android:text="@string/decline" />
 </LinearLayout>

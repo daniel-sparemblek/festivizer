@@ -18,26 +18,13 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
-
-            <TextView
-                android:id="@+id/noName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="My Profile"
-                android:textSize="21sp" />
-        </LinearLayout>
-
-
-
-
+            android:layout_gravity="start"
+            android:text="@string/my_profile"
+            android:textSize="21sp" />
 
 
     </LinearLayout>
@@ -51,11 +38,12 @@
         android:paddingRight="24dp">
 
         <ImageView
-            android:id="@+id/myPicture"
+            android:id="@+id/festivalLogo"
             android:layout_width="178dp"
             android:layout_height="178dp"
-            android:layout_gravity="left|top"
+            android:layout_gravity="start|top"
             android:layout_marginBottom="10dp"
+            android:contentDescription="@string/profile_picture"
             android:src="@drawable/default_profile_picture" />
 
         <LinearLayout
@@ -63,29 +51,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="28dp"
-            android:paddingLeft="3dp"
-            android:paddingRight="24dp">
+            android:paddingStart="3dp"
+            android:paddingEnd="24dp">
 
             <TextView
-                android:id="@+id/name1"
+                android:id="@+id/leaderName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Name"
+                android:layout_gravity="start"
+                android:text="@string/name"
                 android:textSize="15sp" />
             <TextView
-                android:id="@+id/eMail1"
+                android:id="@+id/leaderEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="E-Mail"
+                android:layout_gravity="start"
+                android:text="@string/e_mail"
                 android:textSize="15sp" />
             <TextView
                 android:id="@+id/festivalName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Phone"
+                android:layout_gravity="start"
+                android:text="@string/phone"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -97,15 +85,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
+        android:paddingStart="25dp"
+        android:paddingEnd="24dp">
 
         <TextView
-            android:id="@+id/noName2"
+            android:id="@+id/festivals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Festivals"
+            android:layout_gravity="start"
+            android:text="@string/festivals"
             android:textSize="25sp" />
     </LinearLayout>
 
@@ -119,7 +107,7 @@
         android:paddingBottom="100dp">
 
         <ListView
-            android:id="@+id/leaderList"
+            android:id="@+id/festivalList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

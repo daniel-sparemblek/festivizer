@@ -18,22 +18,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
+            android:layout_gravity="start"
+            android:text="@string/event"
+            android:textSize="21sp" />
 
-            <TextView
-                android:id="@+id/noName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Event"
-                android:textSize="21sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -44,22 +36,14 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/org_festName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="28dp"
-            android:paddingLeft="3dp"
-            android:paddingRight="24dp">
+            android:layout_gravity="start"
+            android:text="@string/festival_name"
+            android:textSize="21sp" />
 
-            <TextView
-                android:id="@+id/org_festName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Festival Name"
-                android:textSize="21sp" />
-        </LinearLayout>
     </LinearLayout>
 
 
@@ -68,43 +52,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="28dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="24dp">
+        android:paddingStart="25dp"
+        android:paddingEnd="24dp">
 
         <TextView
             android:id="@+id/org_festival"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Festival"
+            android:layout_gravity="start"
+            android:text="@string/festival"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/org_startTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Start Time"
+            android:layout_gravity="start"
+            android:text="@string/start_time"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/org_endTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="End time"
+            android:layout_gravity="start"
+            android:text="@string/end_time"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/org_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Location"
+            android:layout_gravity="start"
+            android:text="@string/location"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/org_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Decs"
+            android:layout_gravity="start"
+            android:text="@string/decs"
             android:textSize="25sp" />
 
 
@@ -112,7 +96,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:text=""
             android:textSize="25sp" />
 
@@ -122,7 +106,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="New Job" />
+            android:text="@string/new_job" />
     </LinearLayout>
 
 </LinearLayout>
