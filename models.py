@@ -1,4 +1,4 @@
-from marshmallow import validates, ValidationError, fields
+from marshmallow import validates, ValidationError, fields, validates_schema
 from run import db
 from run import ma
 import re
@@ -101,6 +101,36 @@ class FestivalModel(db.Model):
         db.session.commit()
 
 
+class FestivalOrganizers(db.Model):
+    __tablename__ = 'festival_organizers'
+
+    festival_organizers_id = db.Column(db.Integer, primary_key=True)
+    festival_id = db.Column(db.Integer, db.ForeignKey('festivals.festival_id'))
+    organizer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    status = db.Column(db.Integer, nullable=False)
+    __table_args__ = (db.UniqueConstraint('festival_id', 'organizer_id'), )
+
+
+class EventModel(db.Model):
+    __tablename__ = 'events'
+
+    event_id = db.Column(db.Integer, primary_key=True)
+    festival_id = db.Column(db.Integer, nullable=False)
+    organizer_id = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    desc = db.Column(db.String(250), nullable=True)
+    location = db.Column(db.String, nullable=False)
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime, nullable=False)
+    __table_args__ = (db.UniqueConstraint('festival_id', 'organizer_id', 'name', 'location', 'start_time'), )
+    db.ForeignKeyConstraint(['festival_id', 'organizer_id'],
+                            ['festival_organizers.festival_id', 'festival_organizers.organizer_id'])
+
+    @classmethod
+    def find_by_festival_id(cls, festival_id):
+        return cls.query.filter_by(festival_id=festival_id)
+
+
 class RevokedTokenModel(db.Model):
     __tablename__ = 'revoked_tokens'
 
@@ -182,5 +212,25 @@ class FestivalSchema(ma.ModelSchema):
         return FestivalSchema().dump(value)
 
     class Meta:
-        model = UserModel
+        model = FestivalModel
 
+
+class EventSchema(ma.ModelSchema):
+    event_id = fields.Integer(required=False)
+    festival_id = fields.Integer(required=True, error_messages={"required": "Missing festival's id."})
+    organizer_id = fields.Integer(required=True, error_messages={"required": "Missing organizer's id."})
+    name = fields.Str(required=True, error_messages={"required": "Missing name."})
+    desc = fields.Str(required=True, error_messages={"required": "Missing description."})
+    location = fields.Str(required=True, error_messages={"required": "Missing location."})
+    start_time = fields.DateTime(required=True, error_messages={"required": "Missing start time."})
+    end_time = fields.DateTime(required=True, error_messages={"required": "Missing end time."})
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            event_schema = EventSchema(many=True)
+            return event_schema.dump(value)
+        return EventSchema().dump(value)
+
+    class Meta:
+        model = EventModel

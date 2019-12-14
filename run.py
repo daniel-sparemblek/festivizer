@@ -7,7 +7,6 @@ from sqlalchemy.engine import Engine
 from sqlalchemy import event
 import sqlite3
 
-
 app = Flask(__name__)
 api = Api(app)
 
@@ -34,7 +33,6 @@ def check_if_token_in_blacklist(decrypted_token):
 
 @app.before_first_request
 def create_tables():
-
     @event.listens_for(Engine, "connect")
     def set_sqlite_pragma(dbapi_connection, connection_record):
         if type(dbapi_connection) is sqlite3.Connection:  # play well with other DB backends
@@ -53,11 +51,10 @@ api.add_resource(resources.Users, '/users')
 api.add_resource(resources.Festival, '/festival')
 api.add_resource(resources.Festivals, '/festivals')
 api.add_resource(resources.SearchUsers, '/search/users')
+api.add_resource(resources.Events, '/events')
 
 api.add_resource(resources.UserLogoutAccess, '/logout/access')
 api.add_resource(resources.UserLogoutRefresh, '/logout/refresh')
 api.add_resource(resources.TokenRefresh, '/token/refresh')
 api.add_resource(resources.SecretResource, '/secret')
 api.add_resource(resources.Test, '/test')
-
-

@@ -3,7 +3,7 @@ from flask import request, redirect
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from decorators import permission_required
-from models import UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalSchema
+from models import UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalSchema, EventModel, EventSchema
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
@@ -26,18 +26,18 @@ class UserRegistration(Resource):
 
         if UserModel.find_by_username(data['username']):
             return {
-                'msg': 'User {} already exists'.format(data['username'])
-            }, 422
+                       'msg': 'User {} already exists'.format(data['username'])
+                   }, 422
 
         if UserModel.find_by_phone(data['phone']):
             return {
-                'msg': 'Phone {} already exists'.format(data['phone'])
-            }, 422
+                       'msg': 'Phone {} already exists'.format(data['phone'])
+                   }, 422
 
         if UserModel.find_by_email(data['email']):
             return {
-                'msg': 'User {} already exists'.format(data['email'])
-            }, 422
+                       'msg': 'User {} already exists'.format(data['email'])
+                   }, 422
 
         if data['permission'] == '1':
             new_user = UserModel(
@@ -95,10 +95,10 @@ class UserLogin(Resource):
             access_token = create_access_token(identity=data['username'])
             refresh_token = create_refresh_token(identity=data['username'])
             return {
-                'msg': 'Logged in as {}'.format(current_user.username),
-                'access_token': access_token,
-                'refresh_token': refresh_token
-            }, 200
+                       'msg': 'Logged in as {}'.format(current_user.username),
+                       'access_token': access_token,
+                       'refresh_token': refresh_token
+                   }, 200
         else:
             return {'msg': 'Wrong credentials'}, 400
 
@@ -160,6 +160,12 @@ class Festival(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        if end_time < start_time:
+            return {"msg": "End time can't be before start time."}
+
         new_festival = FestivalModel(
             leader_id=data['leader_id'],
             name=data['name'],
@@ -185,7 +191,18 @@ class SearchUsers(Resource):
         data = request.get_json()
         search = data['search']
         users = UserModel.find_by_username_start(search)
-        return UserSchema(many=True).dump(users)
+        return UserSchema.to_json(users)
+
+
+class Events(Resource):
+    @jwt_required
+    def get(self):
+        festival_id = request.args.get('festival_id')
+
+        if len(list(request.args)) == 1 and festival_id:
+            events = EventModel.find_by_festival_id(festival_id)
+            return EventSchema(many=True).dump(events)
+
 
 
 class UserLogoutAccess(Resource):
@@ -205,7 +222,7 @@ class UserLogoutRefresh(Resource):
     def post(self):
         jti = get_raw_jwt()['jti']
         try:
-            revoked_token = RevokedTokenModel(jti = jti)
+            revoked_token = RevokedTokenModel(jti=jti)
             revoked_token.add()
             return {'message': 'Refresh token has been revoked'}
         except:
@@ -216,7 +233,7 @@ class TokenRefresh(Resource):
     @jwt_refresh_token_required
     def post(self):
         current_user = get_jwt_identity()
-        access_token = create_access_token(identity = current_user)
+        access_token = create_access_token(identity=current_user)
         return {'access_token': access_token}
 
 
