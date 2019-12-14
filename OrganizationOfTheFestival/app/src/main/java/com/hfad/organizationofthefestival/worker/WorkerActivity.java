@@ -17,7 +17,7 @@ public class WorkerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_worker);
+        setContentView(R.layout.obsolete_activity_worker);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");

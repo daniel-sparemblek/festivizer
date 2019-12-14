@@ -8,7 +8,6 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.adapters.LeaderAdapter;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class LeaderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leader);
+        setContentView(R.layout.obsolete_activity_leader);
 
         approvalList = findViewById(R.id.leaderList);
         username = getIntent().getStringExtra("USERNAME");

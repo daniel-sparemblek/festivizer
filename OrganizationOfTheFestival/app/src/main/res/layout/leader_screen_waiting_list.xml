@@ -92,7 +92,7 @@
         android:paddingBottom="10dp">
 
         <ListView
-            android:id="@+id/specializationsList"
+            android:id="@+id/bidList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

@@ -119,7 +119,7 @@
 
 
             <ListView
-                android:id="@+id/specializationsList"
+                android:id="@+id/specializationList"
                 android:layout_width="match_parent"
                 android:layout_height="175dp" />
 
