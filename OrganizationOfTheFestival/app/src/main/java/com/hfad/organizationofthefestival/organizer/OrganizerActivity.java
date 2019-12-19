@@ -3,6 +3,9 @@ package com.hfad.organizationofthefestival.organizer;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -30,7 +33,31 @@ public class OrganizerActivity extends AppCompatActivity {
         //username = getIntent().getStringExtra("USERNAME");
         //festivalList = findViewById(R.id.festivalList);
         //OrganizerConnector.getFestivals(username, OrganizerActivity.this);
+
+        Toolbar toolbar = findViewById(R.id.organizer_toolbar);
+        setSupportActionBar(toolbar);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.organizer_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.myProfile) {
+            System.out.println("Stisnuo sam My Profile");
+        } else if(id == R.id.applyForFest) {
+            System.out.println("Stisnuo sam Apply For a Festival");
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void onClickApply(View view) {
         final int position = festivalList.getPositionForView((LinearLayout)view.getParent());
