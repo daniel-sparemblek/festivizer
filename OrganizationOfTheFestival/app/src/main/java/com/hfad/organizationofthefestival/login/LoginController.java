@@ -20,6 +20,7 @@ public class LoginController {
 
     private LoginActivity loginActivity;
     private Retrofit retrofit;
+    private LoginClient loginClient;
 
     public LoginController(LoginActivity loginActivity) {
         retrofit = new Retrofit.Builder()
@@ -27,11 +28,9 @@ public class LoginController {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+        loginClient = retrofit.create(LoginClient.class);
         this.loginActivity = loginActivity;
     }
-
-
-    private LoginClient loginClient = retrofit.create(LoginClient.class);
 
     public void login(final Login login) {
         Call<LoginResponse> call = loginClient.login(login);

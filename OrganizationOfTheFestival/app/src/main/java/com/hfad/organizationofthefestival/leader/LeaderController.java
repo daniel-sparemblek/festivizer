@@ -6,12 +6,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LeaderController {
 
     private LeaderActivity leaderActivity;
-    private Retrofit.Builder builder;
+    private Retrofit builder;
 
     public LeaderController(LeaderActivity leaderActivity) {
         builder = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
-                .addConverterFactory(GsonConverterFactory.create());
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         this.leaderActivity = leaderActivity;
     }
