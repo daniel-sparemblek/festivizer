@@ -8,6 +8,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface LeaderClient {
+
     @GET("festivals")
     Call<Festivals> getFestivals(@Header("Authorization") String authorization);
 }

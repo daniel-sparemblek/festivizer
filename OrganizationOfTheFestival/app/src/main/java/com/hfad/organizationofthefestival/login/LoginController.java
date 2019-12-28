@@ -19,17 +19,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginController {
 
     private LoginActivity loginActivity;
+    private Retrofit retrofit;
 
     public LoginController(LoginActivity loginActivity) {
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https://kaogrupa.pythonanywhere.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         this.loginActivity = loginActivity;
     }
 
-    private Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://kaogrupa.pythonanywhere.com/")
-            .addConverterFactory(GsonConverterFactory.create());
-
-    private Retrofit retrofit = builder.build();
 
     private LoginClient loginClient = retrofit.create(LoginClient.class);
 
