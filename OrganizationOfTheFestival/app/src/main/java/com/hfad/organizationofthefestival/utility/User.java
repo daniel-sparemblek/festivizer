@@ -15,7 +15,6 @@ public class User {
     private String phone;
     private String email;
     private int permission;
-    private String authToken;
 
     public User(String username, String password, String first_name, String last_name, String picture, String phone, String email, int permission) {
         this.username = username;
@@ -78,14 +77,6 @@ public class User {
 
     public void setFirst_name(String first_name) {
         this.firstName = first_name;
-    }
-
-    public String getAuthToken() {
-        return authToken;
-    }
-
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
     }
 
     public void setLastName(String lastName) {

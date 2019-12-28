@@ -20,6 +20,7 @@ public class LeaderActivity extends AppCompatActivity {
     private TextView tvLeaderEmail;
     private TextView tvPhone;
     private ImageView ivProfilePicture;
+    private ListView lvFestivalList;
 
     ArrayList<PendingOrganizer> pendingOrganizers = new ArrayList<>();
     private ListView approvalList;
@@ -52,6 +53,7 @@ public class LeaderActivity extends AppCompatActivity {
         controller = new LeaderController(this, accessToken, username, refreshToken);
 
         leader = controller.getData();
+
     }
 
     private void fillInActivity(Leader leader){
