@@ -129,7 +129,7 @@ class Users(Resource):
             users = UserModel.query.filter_by(permission=permission, is_pending=is_pending).all()
             return UserSchema(many=True).dump(users), 200
         else:
-            return redirect("http://localhost:5000/users")  # Change to server address
+            return redirect("https://kaogrupa.pythonanywhere.com/users")
 
 
 class Festivals(Resource):
