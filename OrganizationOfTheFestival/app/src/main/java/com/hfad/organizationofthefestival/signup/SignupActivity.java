@@ -25,7 +25,7 @@ import java.io.IOException;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private ImageView profile_picture;
+    private ImageView ivProfilePicture;
 
     private EditText etUsername;
     private EditText etEmail;
@@ -58,7 +58,7 @@ public class SignupActivity extends AppCompatActivity {
         apbRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profilePictureInBytes = pictureToByteArray(((BitmapDrawable) profile_picture.getDrawable()).getBitmap());
+                profilePictureInBytes = pictureToByteArray(((BitmapDrawable) ivProfilePicture.getDrawable()).getBitmap());
                 role = getRoleEnum(sRoleChooserDropDown.getSelectedItem().toString());
 
                 signup = new Signup(etUsername.getText().toString(),
@@ -86,7 +86,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        profile_picture.setOnClickListener(new View.OnClickListener() {
+        ivProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK,
@@ -141,7 +141,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void findIds() {
-        profile_picture = findViewById(R.id.profile_picture);
+        ivProfilePicture = findViewById(R.id.profile_picture);
         etUsername = findViewById(R.id.input_username);
         etEmail = findViewById(R.id.input_email);
         etInputPassword = findViewById(R.id.input_password);

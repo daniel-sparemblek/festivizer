@@ -38,6 +38,7 @@ public class LoginController {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
+                    System.out.println("peder");
                     enterAccount(response.body().getAccess_token(), response.body().getRefresh_token(), login.getUsername());
                 } else {
                     try {

@@ -37,7 +37,7 @@
         android:paddingRight="24dp">
 
         <ImageView
-            android:id="@+id/profilePicture"
+            android:id="@+id/profile_picture"
             android:layout_width="178dp"
             android:layout_height="178dp"
             android:layout_gravity="start|top"
