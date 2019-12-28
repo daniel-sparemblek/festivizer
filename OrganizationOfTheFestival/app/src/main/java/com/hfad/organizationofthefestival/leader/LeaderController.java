@@ -2,7 +2,11 @@ package com.hfad.organizationofthefestival.leader;
 
 import android.widget.Toast;
 
+import com.hfad.organizationofthefestival.utility.User;
+
 import org.json.JSONObject;
+
+import java.sql.SQLOutput;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,24 +38,30 @@ public class LeaderController {
     }
 
     public Leader getData() {
-        Call<Leader> leaderCall = api.getLeaderData("Barer" + accessToken, username);
+        Call<User> leaderCall = api.getLeaderData(username, "Bearer " + accessToken);
 
-        leaderCall.enqueue(new Callback<Leader>() {
+        // IT DOESN'T GO IN ENQUEUE!!!! SKRRR
+        leaderCall.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Leader> call, Response<Leader> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    leader = response.body();
+                    leader = new Leader(response.body());
                 } else {
-                    // TODO what is access token expired
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(leaderActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(leaderActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<Leader> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(leaderActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
-
         return leader;
     }
 }

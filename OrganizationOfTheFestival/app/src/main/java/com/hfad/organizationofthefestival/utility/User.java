@@ -39,10 +39,6 @@ public class User {
         return password;
     }
 
-    public String getFirst_name() {
-        return firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -75,10 +71,6 @@ public class User {
         this.password = password;
     }
 
-    public void setFirst_name(String first_name) {
-        this.firstName = first_name;
-    }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -97,5 +89,36 @@ public class User {
 
     public void setRole(String role) {
         this.permission = permission;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public int getPermission() {
+        return permission;
+    }
+
+    public void setPermission(int permission) {
+        this.permission = permission;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", picture='" + picture + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", permission=" + permission +
+                '}';
     }
 }

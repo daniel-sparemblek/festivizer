@@ -36,7 +36,7 @@ public class LeaderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.obsolete_activity_leader);
+        setContentView(R.layout.leader_profile);
 
         tvLeaderEmail = findViewById(R.id.leaderEmail);
         tvLeaderName = findViewById(R.id.leaderName);
@@ -53,6 +53,7 @@ public class LeaderActivity extends AppCompatActivity {
         controller = new LeaderController(this, accessToken, username, refreshToken);
 
         leader = controller.getData();
+        fillInActivity(leader);
 
     }
 
