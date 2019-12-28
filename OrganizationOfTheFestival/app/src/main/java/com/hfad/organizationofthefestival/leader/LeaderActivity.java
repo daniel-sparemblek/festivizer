@@ -17,7 +17,10 @@ public class LeaderActivity extends AppCompatActivity {
     private ListView approvalList;
 
     private String username;
-    private String password;
+    private String accessToken;
+    private String refreshToken;
+
+    private LeaderController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +28,14 @@ public class LeaderActivity extends AppCompatActivity {
         setContentView(R.layout.obsolete_activity_leader);
 
         approvalList = findViewById(R.id.leaderList);
-        username = getIntent().getStringExtra("USERNAME");
-        password = getIntent().getStringExtra("PASSWORD");
+        username = getIntent().getStringExtra("username");
+        accessToken = getIntent().getStringExtra("accessToken");
+        refreshToken = getIntent().getStringExtra("refreshToken");
 
-        //LeaderController.getPendingOrganizers(username, password, this);
+        controller = new LeaderController(this, accessToken, username);
+
+
+
     }
 
 

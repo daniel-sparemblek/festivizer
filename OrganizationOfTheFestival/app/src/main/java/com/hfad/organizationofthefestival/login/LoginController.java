@@ -19,10 +19,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginController {
 
     private LoginActivity loginActivity;
-    private LoginClient api;
+    private LoginClient loginAPI;
 
     public LoginController(LoginActivity loginActivity) {
-        api = new Retrofit.Builder()
+        loginAPI = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -32,7 +32,7 @@ public class LoginController {
     }
 
     public void login(final Login login) {
-        Call<LoginResponse> call = api.login(login);
+        Call<LoginResponse> call = loginAPI.login(login);
 
         call.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -60,7 +60,7 @@ public class LoginController {
     public void enterAccount(final String accessToken, final String refreshToken, String username) {
         // This class will handle possible access token expiration using the refresh token
 
-        Call<User> call = api.getUser(username, "Bearer " + accessToken);
+        Call<User> call = loginAPI.getUser(username, "Bearer " + accessToken);
 
         call.enqueue(new Callback<User>() {
             @Override
