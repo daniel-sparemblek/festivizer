@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ public class LeaderActivity extends AppCompatActivity {
         // change festival name to phone when activity is changed
         tvPhone = findViewById(R.id.festivalName);
         // change festival logo to profile picture when activity is changed
-        ivProfilePicture = findViewById(R.id.festivalLogo);
+        ivProfilePicture = findViewById(R.id.profile_picture);
 
         approvalList = findViewById(R.id.leaderList);
         username = getIntent().getStringExtra("username");
@@ -57,8 +58,9 @@ public class LeaderActivity extends AppCompatActivity {
     public void fillInActivity(Leader leader){
         tvLeaderName.setText(leader.getUsername());
         tvLeaderEmail.setText(leader.getEmail());
-        ivProfilePicture.setImageBitmap(BitmapFactory.decodeByteArray(leader.getPicture().getBytes(),
-                0, leader.getPicture().length()));
+
+        // TODO import picture to image view
+
         tvPhone.setText(leader.getPhone());
     }
 
