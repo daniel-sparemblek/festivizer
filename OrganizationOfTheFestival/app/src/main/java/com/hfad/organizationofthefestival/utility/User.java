@@ -9,7 +9,7 @@ public class User {
     private String password;
     @SerializedName("first_name")
     private String firstName;
-    @SerializedName("lastName")
+    @SerializedName("last_name")
     private String lastName;
     private String picture;
     private String phone;

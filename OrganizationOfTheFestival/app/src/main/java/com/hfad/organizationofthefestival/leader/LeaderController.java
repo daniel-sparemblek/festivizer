@@ -6,7 +6,7 @@ import com.hfad.organizationofthefestival.utility.User;
 
 import org.json.JSONObject;
 
-import java.sql.SQLOutput;
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,8 +20,8 @@ public class LeaderController {
     private LeaderClient api;
     private String accessToken;
     private String username;
-    private Leader leader;
     private String refreshToken;
+    private Leader leader;
 
     public LeaderController(LeaderActivity leaderActivity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
@@ -34,18 +34,17 @@ public class LeaderController {
         this.username = username;
         this.leaderActivity = leaderActivity;
         this.refreshToken = refreshToken;
-        this.leader = null;
     }
 
-    public Leader getData() {
+    public void getData() {
         Call<User> leaderCall = api.getLeaderData(username, "Bearer " + accessToken);
 
-        // IT DOESN'T GO IN ENQUEUE!!!! SKRRR
         leaderCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     leader = new Leader(response.body());
+                    leaderActivity.fillInActivity(leader);
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
@@ -62,6 +61,9 @@ public class LeaderController {
                 Toast.makeText(leaderActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public Leader getLeader() {
         return leader;
     }
 }

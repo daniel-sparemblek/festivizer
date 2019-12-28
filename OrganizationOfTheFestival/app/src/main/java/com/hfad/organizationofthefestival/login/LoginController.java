@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.organizer.OrganizerActivity;
 import com.hfad.organizationofthefestival.worker.WorkerActivity;
-import com.hfad.organizationofthefestival.utility.User;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import org.json.JSONObject;
@@ -38,7 +37,8 @@ public class LoginController {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
-                    enterAccount(response.body().getAccess_token(), response.body().getRefresh_token(), login.getUsername());
+                    switchActivity(login.getUsername(), response.body().getAccess_token(),
+                            response.body().getRefresh_token(), response.body().getPermission());
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
@@ -57,43 +57,16 @@ public class LoginController {
         });
     }
 
-    public void enterAccount(final String accessToken, final String refreshToken, String username) {
-        // This class will handle possible access token expiration using the refresh token
-
-        Call<User> call = loginAPI.getUser(username, "Bearer " + accessToken);
-
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    switchActivity(response, accessToken, refreshToken);
-                } else {
-                    try {
-                        JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(loginActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(loginActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public void switchActivity(Response<User> response, String accessToken, String refreshToken) {
+    public void switchActivity(String username, String accessToken, String refreshToken,
+                               int permission) {
         Intent intent;
 
-        switch (response.body().getRole()) {
+        switch (permission) {
             case 1:
                 intent = new Intent(loginActivity, LeaderActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
-                intent.putExtra("username", response.body().getUsername());
+                intent.putExtra("username", username);
                 loginActivity.startActivity(intent);
                 break;
 
@@ -101,7 +74,7 @@ public class LoginController {
                 intent = new Intent(loginActivity, WorkerActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
-                intent.putExtra("username", response.body().getUsername());
+                intent.putExtra("username", username);
                 loginActivity.startActivity(intent);
                 break;
 
@@ -109,7 +82,7 @@ public class LoginController {
                 intent = new Intent(loginActivity, OrganizerActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
-                intent.putExtra("username", response.body().getUsername());
+                intent.putExtra("username", username);
                 loginActivity.startActivity(intent);
                 break;
         }

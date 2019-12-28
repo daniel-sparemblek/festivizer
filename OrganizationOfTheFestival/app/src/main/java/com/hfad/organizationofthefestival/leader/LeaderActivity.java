@@ -29,8 +29,6 @@ public class LeaderActivity extends AppCompatActivity {
     private String accessToken;
     private String refreshToken;
 
-    private Leader leader;
-
     private LeaderController controller;
 
     @Override
@@ -52,18 +50,17 @@ public class LeaderActivity extends AppCompatActivity {
 
         controller = new LeaderController(this, accessToken, username, refreshToken);
 
-        leader = controller.getData();
-        fillInActivity(leader);
+        controller.getData();
 
     }
 
-    private void fillInActivity(Leader leader){
+    public void fillInActivity(Leader leader){
         tvLeaderName.setText(leader.getUsername());
         tvLeaderEmail.setText(leader.getEmail());
         ivProfilePicture.setImageBitmap(BitmapFactory.decodeByteArray(leader.getPicture().getBytes(),
                 0, leader.getPicture().length()));
+        tvPhone.setText(leader.getPhone());
     }
-
 
     // Decisions need to be fixed when JSONs get here
     public void onClickAccept(View view) {
