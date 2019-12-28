@@ -62,7 +62,7 @@
     <string name="comment">Comment</string>
     <string name="application_profile">Application profile</string>
     <string name="apply_for_a_festival">Apply for a festival</string>
-    <string name="some_name_change_from_java_code"><![CDATA[Some name (change from java code) >]]></string>
+    <string name="festivalName">festival name</string>
     <string name="event">Event</string>
     <string name="decs">Decs</string>
     <string name="festival_name">Festival Name</string>

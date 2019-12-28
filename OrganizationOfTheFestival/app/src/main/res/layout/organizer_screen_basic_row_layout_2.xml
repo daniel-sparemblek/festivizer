@@ -11,5 +11,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:text="@string/some_name_change_from_java_code" />
+        android:text="@string/festivalName" />
 </LinearLayout>

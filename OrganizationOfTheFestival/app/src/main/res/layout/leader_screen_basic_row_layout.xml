@@ -6,10 +6,10 @@
     android:paddingRight="16dp"
     android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/btnApply"
+    <TextView
+        android:id="@+id/festival"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="@string/some_name_change_from_java_code" />
+        android:text="@string/festivalName" />
 </LinearLayout>

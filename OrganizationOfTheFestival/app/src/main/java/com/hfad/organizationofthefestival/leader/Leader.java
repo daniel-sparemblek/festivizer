@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Leader extends User {
 
-    private List<Festival> festivals;
+    private Festival[] festivals;
 
     public Leader(User user){
         this(user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
@@ -19,7 +19,11 @@ public class Leader extends User {
         super(username, password, firstName, lastName, picture, phone, email, permission);
     }
 
-    public void setFestivals(List<Festival> festivals) {
+    public void setFestivals(Festival[] festivals) {
         this.festivals = festivals;
+    }
+
+    public Festival[] getFestivals() {
+        return festivals;
     }
 }

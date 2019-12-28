@@ -5,15 +5,21 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.internal.bind.ArrayTypeAdapter;
+import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
 import com.hfad.organizationofthefestival.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LeaderActivity extends AppCompatActivity {
 
@@ -62,6 +68,10 @@ public class LeaderActivity extends AppCompatActivity {
         // TODO import picture to image view
 
         tvPhone.setText(leader.getPhone());
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                R.layout.leader_screen_basic_row_layout, makeList(leader.getFestivals()));
+        lvFestivalList.setAdapter(arrayAdapter);
+
     }
 
     // Decisions need to be fixed when JSONs get here
@@ -82,5 +92,13 @@ public class LeaderActivity extends AppCompatActivity {
 
         //  LeaderController.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.DECLINE, this);
 
+    }
+
+    private List<String> makeList(Festival[] festivals){
+        List<String> festivalNames = new ArrayList<>();
+        for (Festival festival : festivals){
+            festivalNames.add(festival.getName());
+        }
+        return festivalNames;
     }
 }

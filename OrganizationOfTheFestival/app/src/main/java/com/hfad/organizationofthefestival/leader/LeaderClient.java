@@ -19,6 +19,6 @@ public interface LeaderClient {
                              @Header("Authorization") String authorization);
 
     @GET("festivals")
-    Call<List<Festival>> getFestivals(@Query("leader_id") int id,
+    Call<Festival[]> getFestivals(@Query("leader_id") int id,
                                        @Header("Authorization") String authorization);
 }

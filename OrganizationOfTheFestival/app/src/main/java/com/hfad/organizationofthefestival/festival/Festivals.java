@@ -1,16 +1,16 @@
 package com.hfad.organizationofthefestival.festival;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Festivals {
 
-    private ArrayList<Festival> festivals;
+    private List<Festival> festivals;
 
-    public ArrayList<Festival> getFestivals() {
+    public List<Festival> getFestivals() {
         return festivals;
     }
 
-    public void setFestivals(ArrayList<Festival> festivals) {
+    public void setFestivals(List<Festival> festivals) {
         this.festivals = festivals;
     }
 }

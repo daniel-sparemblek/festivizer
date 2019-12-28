@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.leader;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.festival.Festivals;
 import com.hfad.organizationofthefestival.utility.User;
 
 import org.json.JSONObject;
@@ -45,7 +46,8 @@ public class LeaderController {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     leader = new Leader(response.body());
-                    fetchFestivals(leader);
+                    // OVO NE RADI JEBO TE POPRAVI TO
+                    fetchFestivals();
                     leaderActivity.fillInActivity(leader);
                 } else {
                     try {
@@ -65,12 +67,13 @@ public class LeaderController {
         });
     }
 
-    public void fetchFestivals(final Leader leader) {
-        Call<List<Festival>> festivalsCall = api.getFestivals(leader.getId(), "Bearer " + accessToken);
+    public void fetchFestivals() {
+        Call<Festival[]> festivalsCall = api.getFestivals(leader.getId(), "Bearer " + accessToken);
 
-        festivalsCall.enqueue(new Callback<List<Festival>>() {
+        festivalsCall.enqueue(new Callback<Festival[]>() {
             @Override
-            public void onResponse(Call<List<Festival>> call, Response<List<Festival>> response) {
+            public void onResponse(Call<Festival[]> call, Response<Festival[]> response) {
+                System.out.println("kurac" + response.message());
                 if(response.isSuccessful()) {
                     leader.setFestivals(response.body());
                 } else {
@@ -85,7 +88,8 @@ public class LeaderController {
             }
 
             @Override
-            public void onFailure(Call<List<Festival>> call, Throwable t) {
+            public void onFailure(Call<Festival[]> call, Throwable t) {
+                System.out.println("OSTTEOPOOROZAAAA");
                 Toast.makeText(leaderActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
