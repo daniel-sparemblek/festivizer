@@ -55,6 +55,16 @@ class UserModel(db.Model):
         return cls.query.filter_by(username=username).first()
 
     @classmethod
+    def find_by_organizing_festival_id_pending(cls, festival_id):
+        return db.session.query(cls).join(FestivalOrganizers, FestivalOrganizers.organizer_id == cls.id) \
+            .filter(festival_id == festival_id, FestivalOrganizers.status == 1).all()
+
+    @classmethod
+    def find_by_organizing_festival_id_accepted(cls, festival_id):
+        return db.session.query(cls).join(FestivalOrganizers, FestivalOrganizers.organizer_id == cls.id) \
+            .filter(FestivalOrganizers.festival_id == festival_id, FestivalOrganizers.status == 0).all()
+
+    @classmethod
     def return_all(cls):
         return cls.query.all()
 
@@ -93,6 +103,10 @@ class FestivalModel(db.Model):
         return cls.query.filter_by(leader_id=leader_id).all()
 
     @classmethod
+    def find_by_festival_id(cls, festival_id):
+        return cls.query.filter_by(festival_id=festival_id).first()
+
+    @classmethod
     def return_all(cls):
         return cls.query.all()
 
@@ -108,7 +122,11 @@ class FestivalOrganizers(db.Model):
     festival_id = db.Column(db.Integer, db.ForeignKey('festivals.festival_id'))
     organizer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     status = db.Column(db.Integer, nullable=False)
-    __table_args__ = (db.UniqueConstraint('festival_id', 'organizer_id'), )
+    __table_args__ = (db.UniqueConstraint('festival_id', 'organizer_id'),)
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 class EventModel(db.Model):
@@ -122,13 +140,92 @@ class EventModel(db.Model):
     location = db.Column(db.String, nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime, nullable=False)
-    __table_args__ = (db.UniqueConstraint('festival_id', 'organizer_id', 'name', 'location', 'start_time'), )
+    __table_args__ = (db.UniqueConstraint('festival_id', 'organizer_id', 'name', 'location', 'start_time'),)
     db.ForeignKeyConstraint(['festival_id', 'organizer_id'],
                             ['festival_organizers.festival_id', 'festival_organizers.organizer_id'])
 
     @classmethod
     def find_by_festival_id(cls, festival_id):
         return cls.query.filter_by(festival_id=festival_id)
+
+    @classmethod
+    def find_by_event_id(cls, event_id):
+        return cls.query.filter_by(event_id=event_id).first()
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+
+class AuctionModel(db.Model):
+    __tablename__ = 'auctions'
+
+    auction_id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer, db.ForeignKey('jobs.job_id'), unique=True)
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime, nullable=False)
+
+    @classmethod
+    def find_by_auction_id(cls, auction_id):
+        return cls.query.filter_by(auction_id=auction_id).first()
+
+    @classmethod
+    def find_by_leader_id(cls, leader_id):
+        return db.session.query(cls).join(JobModel, JobModel.job_id == cls.job_id)\
+            .join(EventModel, EventModel.event_id == JobModel.event_id)\
+            .join(FestivalModel, FestivalModel.festival_id == EventModel.festival_id)\
+            .filter(FestivalModel.leader_id == leader_id).all()
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+
+class JobModel(db.Model):
+    __tablename__ = 'jobs'
+
+    job_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey('events.event_id'))
+    worker_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    start_time = db.Column(db.DateTime, nullable=False)
+    is_completed = db.Column(db.Boolean, nullable=False)
+
+    @classmethod
+    def find_by_job_id(cls, job_id):
+        return cls.query.filter_by(job_id=job_id).first()
+
+    @classmethod
+    def find_jobs_on_auction_by_leader_id(cls, leader_id):
+        return db.session.query(cls).join(AuctionModel, AuctionModel.job_id == cls.job_id) \
+            .join(EventModel, EventModel.event_id == JobModel.event_id) \
+            .join(FestivalModel, FestivalModel.festival_id == EventModel.festival_id) \
+            .filter(FestivalModel.leader_id == leader_id).all()
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_all(cls):
+        return cls.query.all()
+
+
+class Application(db.Model):
+    __tablename__ = 'application'
+
+    application_id = db.Column(db.Integer, primary_key=True)
+    auction_id = db.Column(db.Integer, db.ForeignKey('auctions.auction_id'))
+    worker_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    price = db.Column(db.Float, nullable=False)
+    comment = db.Column(db.String(500), nullable=True)
+    duration = db.Column(db.Integer, nullable=False)
+    people_number = db.Column(db.Integer, nullable=False)
+    __table_args__ = (db.UniqueConstraint('auction_id', 'worker_id'), )
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 class RevokedTokenModel(db.Model):
@@ -234,3 +331,49 @@ class EventSchema(ma.ModelSchema):
 
     class Meta:
         model = EventModel
+
+
+class AuctionSchema(ma.ModelSchema):
+    auction_id = fields.Integer(required=False)
+    job_id = fields.Integer(required=True, error_messages={"required": "Missing job id."})
+    start_time = fields.DateTime(required=True, error_messages={"required:": "Missing start time."})
+    end_time = fields.DateTime(required=True, error_messages={"required": "Missing end time."})
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            event_schema = cls(many=True)
+            return event_schema.dump(value)
+        return cls().dump(value)
+
+    class Meta:
+        model = AuctionModel
+
+
+class JobSchema(ma.ModelSchema):
+    job_id = fields.Integer(required=False)
+    name = fields.String(required=True, error_messages={"required": "Missing name."})
+    event_id = fields.Integer(required=True, error_messages={"required": "Missing event id."})
+    worker_id = fields.Integer(required=True, error_messages={"required": "Missing worker id."})
+    start_time = fields.DateTime(required=True, error_messages={"required": "Missing start time"})
+    is_completed = fields.Boolean(required=True, error_messages={"required": "Missing completion"})
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            event_schema = cls(many=True)
+            return event_schema.dump(value)
+        return cls().dump(value)
+
+    class Meta:
+        model = JobModel
+
+
+class ApplicationSchema(ma.ModelSchema):
+    application_id = fields.Integer(required=False)
+    auction_id = fields.Integer(required=True, error_messages={"required": "Missing auction id"})
+    worker_id = fields.Integer(required=True, error_messages={"required": "Missing worker id"})
+    price = fields.Float(required=True, error_messages={"required": "Missing price"})
+    comment = fields.String(required=False)
+    duration = fields.Integer(required=True, error_messages={"required": "Missing duration"})
+    people_number = fields.Integer(required=True, error_messages={"required": "Missing number of people"})

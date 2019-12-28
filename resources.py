@@ -3,7 +3,9 @@ from flask import request, redirect
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from decorators import permission_required
-from models import UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalSchema, EventModel, EventSchema
+from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalOrganizers, FestivalSchema,
+                    EventModel, EventSchema, JobModel, JobSchema, AuctionModel, AuctionSchema, Application,
+                    ApplicationSchema)
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
@@ -96,6 +98,7 @@ class UserLogin(Resource):
             refresh_token = create_refresh_token(identity=data['username'])
             return {
                        'msg': 'Logged in as {}'.format(current_user.username),
+                       'permission': current_user.permission,
                        'access_token': access_token,
                        'refresh_token': refresh_token
                    }, 200
@@ -185,6 +188,42 @@ class Festival(Resource):
             return {'msg': 'Internal server error'}, 500
 
 
+class FestivalUnique(Resource):
+    @jwt_required
+    def get(self, festival_id):
+        festival = FestivalModel.find_by_festival_id(festival_id=festival_id)
+        return FestivalSchema.to_json(festival)
+
+
+class FestivalApply(Resource):
+    @jwt_required
+    def post(self, festival_id):
+        username = get_jwt_identity()
+        user = UserModel.find_by_username(username=username)
+        festival_organizers = FestivalOrganizersPending(
+            festival_id=festival_id,
+            organizer_id=user.id,
+            status=1
+        )
+        FestivalOrganizersPending.save_to_db(festival_organizers)
+        festival = FestivalModel.find_by_festival_id(festival_id=festival_id)
+        return {'msg': '{} successfully applied to {} festival.'.format(username, festival.name)}
+
+
+class FestivalOrganizersPending(Resource):
+    @jwt_required
+    def get(self, festival_id):
+        users = UserModel.find_by_organizing_festival_id_pending(festival_id=festival_id)
+        return UserSchema.to_json(users)
+
+
+class FestivalOrganizersAccepted(Resource):
+    @jwt_required
+    def get(self, festival_id):
+        users = UserModel.find_by_organizing_festival_id_accepted(festival_id=festival_id)
+        return UserSchema.to_json(users)
+
+
 class SearchUsers(Resource):
     @jwt_required
     def post(self):
@@ -203,6 +242,140 @@ class Events(Resource):
             events = EventModel.find_by_festival_id(festival_id)
             return EventSchema(many=True).dump(events)
 
+        return {'msg:': 'Bad request'}, 400
+
+
+class Event(Resource):
+    @jwt_required
+    def post(self):
+        data = request.get_json()
+
+        event_schema = EventSchema()
+        validate = event_schema.validate(data)
+
+        if bool(validate):
+            value = list(validate.values())[0]
+            return {"msg": value[0]}, 422
+
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        if end_time < start_time:
+            return {"msg": "End time can't be before start time."}
+
+        new_event = EventModel(
+            festival_id=data['festival_id'],
+            organizer_id=data['organizer_id'],
+            name=data['name'],
+            desc=data['desc'],
+            location=data['location'],
+            start_time=datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ'),
+            end_time=datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        )
+
+        try:
+            new_event.save_to_db()
+            return {'msg': 'Event {} was successfully created!'.format(data['name'])}, 200
+        except IntegrityError:
+            return {'msg': 'Bad request'}, 400
+        except Exception as e:
+            print(e)
+            return {'msg': 'Internal server error'}, 500
+
+
+class EventUnique(Resource):
+    @jwt_required
+    def get(self, event_id):
+        event = EventModel.find_by_event_id(event_id)
+        return EventSchema.to_json(event)
+
+
+class Job(Resource):
+    @jwt_required
+    def post(self):
+        data = request.get_json()
+
+        data['is_completed'] = False
+
+        job_schema = JobSchema()
+        validate = job_schema.validate(data)
+
+        if bool(validate):
+            value = list(validate.values())[0]
+            return {"msg": value[0]}, 422
+
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        new_job = JobModel(
+            name=data['name'],
+            event_id=data['event_id'],
+            worker_id=data['worker_id'],
+            start_time=start_time,
+            is_completed=data["is_completed"]
+        )
+
+        try:
+            new_job.save_to_db()
+            return {'msg': 'Job {} was successfully created!'.format(data['name'])}, 200
+        except IntegrityError:
+            return {'msg': 'Bad request'}, 400
+        except Exception as e:
+            raise e
+            return {'msg': 'Internal server error'}, 500
+
+
+class Jobs(Resource):
+    def get(self):
+        leader_id = request.args.get('leader_id')
+
+        if leader_id:
+            return JobSchema.to_json(JobModel.find_jobs_on_auction_by_leader_id(leader_id=leader_id))
+
+        jobs = JobModel.get_all()
+        return JobSchema.to_json(jobs)
+
+
+class Auction(Resource):
+    @jwt_required
+    def post(self):
+        data = request.get_json()
+
+        auction_schema = AuctionSchema()
+        validate = auction_schema.validate(data)
+
+        if bool(validate):
+            value = list(validate.values())[0]
+            return {"msg": value[0]}, 422
+
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        if end_time < start_time:
+            return {"msg": "End time can't be before start time."}
+
+        new_auction = AuctionModel(
+            job_id=data['job_id'],
+            start_time=start_time,
+            end_time=end_time
+        )
+
+        try:
+            new_auction.save_to_db()
+            job = JobModel.find_by_job_id(data['job_id'])
+            return {'msg': 'Auction for {} was successfully created!'.format(job.name)}, 200
+        except IntegrityError:
+            return {'msg': 'Bad request'}, 400
+        except Exception as e:
+            raise e
+            return {'msg': 'Internal server error'}, 500
+
+
+class Auctions(Resource):
+    @jwt_required
+    def get(self):
+        leader_id = request.args.get('leader_id')
+        auctions = AuctionModel.find_by_leader_id(leader_id=leader_id)
+        return AuctionSchema.to_json(auctions)
 
 
 class UserLogoutAccess(Resource):
@@ -215,6 +388,39 @@ class UserLogoutAccess(Resource):
             return {'msg': 'Access token has been revoked.'}, 200
         except:
             return {'msg': 'Internal server error.'}, 500
+
+
+class Applications(Resource):
+    @jwt_required
+    def post(self):
+        data = request.get_json()
+
+        application_schema = ApplicationSchema()
+        validate = application_schema.validate(data)
+
+        if bool(validate):
+            value = list(validate.values())[0]
+            return {"msg": value[0]}, 422
+
+        new_application = Application(
+            auction_id=data['auction_id'],
+            worker_id=data['worker_id'],
+            price=data['price'],
+            comment=data['comment'],
+            duration=data['duration'],
+            people_number=data['people_number']
+        )
+
+        try:
+            new_application.save_to_db()
+            auction = AuctionModel.find_by_auction_id(data['auction_id'])
+            job = JobModel.find_by_job_id(auction.job_id)
+            return {'msg': 'Application for {} was successfully created!'.format(job.name)}, 200
+        except IntegrityError:
+            return {'msg': 'Bad request'}, 400
+        except Exception as e:
+            raise e
+            return {'msg': 'Internal server error'}, 500
 
 
 class UserLogoutRefresh(Resource):
