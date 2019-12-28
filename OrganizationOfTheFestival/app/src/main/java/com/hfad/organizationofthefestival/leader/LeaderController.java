@@ -17,8 +17,9 @@ public class LeaderController {
     private String accessToken;
     private String username;
     private Leader leader;
+    private String refreshToken;
 
-    public LeaderController(LeaderActivity leaderActivity, String accessToken, String username) {
+    public LeaderController(LeaderActivity leaderActivity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -28,6 +29,7 @@ public class LeaderController {
         this.accessToken = accessToken;
         this.username = username;
         this.leaderActivity = leaderActivity;
+        this.refreshToken = refreshToken;
         this.leader = null;
     }
 
@@ -40,13 +42,7 @@ public class LeaderController {
                 if (response.isSuccessful()) {
                     leader = response.body();
                 } else {
-                    try {
-                        JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(leaderActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        Toast.makeText(leaderActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    }
+                    // TODO what is access token expired
                 }
             }
 
@@ -55,6 +51,7 @@ public class LeaderController {
                 Toast.makeText(leaderActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
+
         return leader;
     }
 }
