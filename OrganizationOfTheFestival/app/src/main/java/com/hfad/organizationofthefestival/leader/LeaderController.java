@@ -2,11 +2,12 @@ package com.hfad.organizationofthefestival.leader;
 
 import android.widget.Toast;
 
+import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.utility.User;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +45,7 @@ public class LeaderController {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     leader = new Leader(response.body());
+                    fetchFestivals(leader);
                     leaderActivity.fillInActivity(leader);
                 } else {
                     try {
@@ -58,6 +60,32 @@ public class LeaderController {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(leaderActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void fetchFestivals(final Leader leader) {
+        Call<List<Festival>> festivalsCall = api.getFestivals(leader.getId(), "Bearer " + accessToken);
+
+        festivalsCall.enqueue(new Callback<List<Festival>>() {
+            @Override
+            public void onResponse(Call<List<Festival>> call, Response<List<Festival>> response) {
+                if(response.isSuccessful()) {
+                    leader.setFestivals(response.body());
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(leaderActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(leaderActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Festival>> call, Throwable t) {
                 Toast.makeText(leaderActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
