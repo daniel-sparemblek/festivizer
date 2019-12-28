@@ -7,7 +7,7 @@ public class LeaderController {
 
     private LeaderActivity leaderActivity;
     private Retrofit retrofit;
-    private LeaderClient leaderClient;
+    private LeaderClient api;
 
     public LeaderController(LeaderActivity leaderActivity) {
         retrofit = new Retrofit.Builder()
@@ -15,7 +15,7 @@ public class LeaderController {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        leaderClient = retrofit.create(LeaderClient.class);
+        api = retrofit.create(LeaderClient.class);
         this.leaderActivity = leaderActivity;
     }
 }

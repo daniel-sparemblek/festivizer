@@ -16,21 +16,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SignupController {
 
     private SignupActivity signupActivity;
-    private Retrofit retrofit;
-    private SignupClient signupClient;
+    private SignupClient api;
 
     public SignupController(SignupActivity signupActivity) {
-        retrofit = new Retrofit.Builder()
+        api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .build()
+                .create(SignupClient.class);
 
-        signupClient = retrofit.create(SignupClient.class);
         this.signupActivity = signupActivity;
     }
 
     public void signUp(final Signup signup) {
-        Call<RegistrationResponse> callSignup = signupClient.signup(signup);
+        Call<RegistrationResponse> callSignup = api.signup(signup);
 
         callSignup.enqueue(new Callback<RegistrationResponse>() {
             @Override
