@@ -5,7 +5,7 @@ import com.hfad.organizationofthefestival.utility.User;
 public class Leader extends User {
 
     public Leader (User user){
-        super(user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+        this(user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
                 user.getPicture(), user.getPhone(), user.getEmail(), user.getPermission());
     }
 
