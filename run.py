@@ -53,20 +53,16 @@ api.add_resource(resources.FestivalUnique, '/festival/<string:festival_id>')
 api.add_resource(resources.FestivalApply, '/festival/<string:festival_id>/apply')
 api.add_resource(resources.FestivalOrganizersPending, '/festival/<string:festival_id>/organizers/pending')
 api.add_resource(resources.FestivalOrganizersAccepted, '/festival/<string:festival_id>/organizers/accepted')
-
 api.add_resource(resources.Festivals, '/festivals')
 api.add_resource(resources.SearchUsers, '/search/users')
 api.add_resource(resources.Events, '/events')
 api.add_resource(resources.Event, '/event')
 api.add_resource(resources.EventUnique, '/event/<string:event_id>')
-
 api.add_resource(resources.Job, '/job')
 api.add_resource(resources.Jobs, '/jobs')
 api.add_resource(resources.Auction, '/auction')
 api.add_resource(resources.Auctions, '/auctions')
-
 api.add_resource(resources.Applications, '/applications')
-
 api.add_resource(resources.UserLogoutAccess, '/logout/access')
 api.add_resource(resources.UserLogoutRefresh, '/logout/refresh')
 api.add_resource(resources.TokenRefresh, '/token/refresh')
