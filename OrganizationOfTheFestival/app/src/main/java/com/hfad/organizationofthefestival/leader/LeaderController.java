@@ -73,7 +73,6 @@ public class LeaderController {
         festivalsCall.enqueue(new Callback<Festival[]>() {
             @Override
             public void onResponse(Call<Festival[]> call, Response<Festival[]> response) {
-                System.out.println("kurac" + response.message());
                 if(response.isSuccessful()) {
                     leader.setFestivals(response.body());
                 } else {
@@ -89,7 +88,6 @@ public class LeaderController {
 
             @Override
             public void onFailure(Call<Festival[]> call, Throwable t) {
-                System.out.println("OSTTEOPOOROZAAAA");
                 Toast.makeText(leaderActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });

@@ -66,7 +66,6 @@ public class LeaderActivity extends AppCompatActivity {
         tvLeaderEmail.setText(leader.getEmail());
 
         // TODO import picture to image view
-
         tvPhone.setText(leader.getPhone());
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
                 R.layout.leader_screen_basic_row_layout, makeList(leader.getFestivals()));
@@ -94,7 +93,7 @@ public class LeaderActivity extends AppCompatActivity {
 
     }
 
-    private List<String> makeList(Festival[] festivals){
+    private List<String> makeList(List<Festival> festivals){
         List<String> festivalNames = new ArrayList<>();
         for (Festival festival : festivals){
             festivalNames.add(festival.getName());
