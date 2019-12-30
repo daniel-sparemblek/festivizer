@@ -44,10 +44,18 @@ def create_tables():
     db.query_expression
 
 
+api.add_resource(resources.Users, '/users')
+api.add_resource(resources.Workers, '/workers')
+api.add_resource(resources.Leaders, '/leaders')
+#  api.add_resource(resources.Users, '/organizers')
+
+api.add_resource(resources.Specializations, '/specializations')
+api.add_resource(resources.SpecializationAdd, '/specializations/<string:specialization_id>/add')
+
 api.add_resource(resources.UserRegistration, '/registration')
 api.add_resource(resources.UserLogin, '/login')
 api.add_resource(resources.User, '/user/<string:username>')
-api.add_resource(resources.Users, '/users')
+
 api.add_resource(resources.Festival, '/festival')
 api.add_resource(resources.FestivalUnique, '/festival/<string:festival_id>')
 api.add_resource(resources.FestivalApply, '/festival/<string:festival_id>/apply')

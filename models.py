@@ -3,6 +3,7 @@ from run import db
 from run import ma
 import re
 from passlib.hash import pbkdf2_sha256 as sha256
+import json
 
 
 # MODELS
@@ -10,17 +11,6 @@ from passlib.hash import pbkdf2_sha256 as sha256
 
 class UserModel(db.Model):
     __tablename__ = 'users'
-
-    def __init__(self, username, password, first_name, last_name, picture, phone, email, permission, is_pending):
-        self.username = username
-        self.password = password
-        self.first_name = first_name
-        self.last_name = last_name
-        self.picture = picture
-        self.phone = phone
-        self.email = email
-        self.permission = permission
-        self.is_pending = is_pending
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
@@ -63,6 +53,10 @@ class UserModel(db.Model):
     def find_by_organizing_festival_id_accepted(cls, festival_id):
         return db.session.query(cls).join(FestivalOrganizers, FestivalOrganizers.organizer_id == cls.id) \
             .filter(FestivalOrganizers.festival_id == festival_id, FestivalOrganizers.status == 0).all()
+
+    @classmethod
+    def find_by_permission(cls, value):
+        return cls.query.filter_by(permission=value).all()
 
     @classmethod
     def return_all(cls):
@@ -171,9 +165,9 @@ class AuctionModel(db.Model):
 
     @classmethod
     def find_by_leader_id(cls, leader_id):
-        return db.session.query(cls).join(JobModel, JobModel.job_id == cls.job_id)\
-            .join(EventModel, EventModel.event_id == JobModel.event_id)\
-            .join(FestivalModel, FestivalModel.festival_id == EventModel.festival_id)\
+        return db.session.query(cls).join(JobModel, JobModel.job_id == cls.job_id) \
+            .join(EventModel, EventModel.event_id == JobModel.event_id) \
+            .join(FestivalModel, FestivalModel.festival_id == EventModel.festival_id) \
             .filter(FestivalModel.leader_id == leader_id).all()
 
     def save_to_db(self):
@@ -202,6 +196,10 @@ class JobModel(db.Model):
             .join(FestivalModel, FestivalModel.festival_id == EventModel.festival_id) \
             .filter(FestivalModel.leader_id == leader_id).all()
 
+    @classmethod
+    def find_completed_by_worker_id(cls, worker_id):
+        return cls.query.filter_by(worker_id=worker_id, is_completed=1).all()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
@@ -221,11 +219,56 @@ class Application(db.Model):
     comment = db.Column(db.String(500), nullable=True)
     duration = db.Column(db.Integer, nullable=False)
     people_number = db.Column(db.Integer, nullable=False)
-    __table_args__ = (db.UniqueConstraint('auction_id', 'worker_id'), )
+    __table_args__ = (db.UniqueConstraint('auction_id', 'worker_id'),)
 
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+
+
+class SpecializationModel(db.Model):
+    __tablename__ = 'specializations'
+
+    specialization_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True)
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def find_by_worker_id(cls, worker_id):
+        return db.session.query(cls) \
+            .join(WorkerSpecializations, WorkerSpecializations.specialization_id == cls.specialization_id) \
+            .filter(WorkerSpecializations.worker_id == worker_id).all()
+
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
+
+    @classmethod
+    def find_by_specialization_id(cls, specialization_id):
+        return cls.query.filter_by(specialization_id=specialization_id).one()
+
+
+class WorkerSpecializations(db.Model):
+    __tablename__ = 'worker_specializations'
+
+    worker_specializations_id = db.Column(db.Integer, primary_key=True)
+    worker_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    specialization_id = db.Column(db.Integer, db.ForeignKey('specializations.specialization_id'))
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+
+class JobSpecializations(db.Model):
+    __tablename__ = 'job_specializations'
+
+    job_specializations_id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer, db.ForeignKey('jobs.job_id'))
+    specialization_id = db.Column(db.Integer, db.ForeignKey('specializations.specialization_id'))
 
 
 class RevokedTokenModel(db.Model):
@@ -284,6 +327,53 @@ class UserSchema(ma.ModelSchema):
 
     class Meta:
         model = UserModel
+
+
+class SpecializationSchema(ma.ModelSchema):
+    specialization_id = fields.Integer(required=False)
+    name = fields.Str(required=True, error_messages={"required": "Missing name,"})
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            specialization_schema = cls(many=True)
+            return specialization_schema.dump(value)
+        return cls().dump(value)
+
+    class Meta:
+        model = SpecializationModel
+
+
+class WorkerSpecializationSchema(ma.ModelSchema):
+    worker_specializations_id = fields.Integer(required=False)
+    worker_id = fields.Integer(required=True, error_messages={"required": "Missing worker id"})
+    specialization_id = fields.Integer(required=True, error_messages={"required": "Missing specialization id"})
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            specialization_schema = cls(many=True)
+            return specialization_schema.dump(value)
+        return cls().dump(value)
+
+    class Meta:
+        model = WorkerSpecializations
+
+
+class JobSpecializationSchema(ma.ModelSchema):
+    job_specializations_id = fields.Integer(required=False)
+    job_id = fields.Integer(required=True, error_messages={"required": "Missing job id"})
+    specialization_id = fields.Integer(required=True, error_messages={"required": "Missing specialization id"})
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            specialization_schema = cls(many=True)
+            return specialization_schema.dump(value)
+        return cls().dump(value)
+
+    class Meta:
+        model = JobSpecializations
 
 
 class FestivalSchema(ma.ModelSchema):
@@ -377,3 +467,143 @@ class ApplicationSchema(ma.ModelSchema):
     comment = fields.String(required=False)
     duration = fields.Integer(required=True, error_messages={"required": "Missing duration"})
     people_number = fields.Integer(required=True, error_messages={"required": "Missing number of people"})
+
+
+class User(object):
+    def __init__(self, user_id, username, password, first_name, last_name, picture, phone, email, permission,
+                 is_pending):
+        self.user_id = user_id
+        self.username = username
+        self.password = password
+        self.first_name = first_name
+        self.last_name = last_name
+        self.picture = picture
+        self.phone = phone
+        self.email = email
+        self.permission = permission
+        self.is_pending = is_pending
+
+
+class Leader(User):
+    def __init__(self, user_id, username, password, first_name, last_name, picture, phone, email, permission,
+                 is_pending, festivals):
+        super(Leader, self).__init__(user_id, username, password, first_name, last_name, picture, phone, email,
+                                     permission, is_pending)
+        self.festivals = festivals
+
+
+class Worker(User):
+    def __init__(self, user_id, username, password, first_name, last_name, picture, phone, email, permission,
+                 is_pending, specializations, jobs):
+        super(Worker, self).__init__(user_id, username, password, first_name, last_name, picture, phone, email,
+                                     permission, is_pending)
+        self.specializations = specializations
+        self.jobs = jobs
+
+
+class LeaderSchema(ma.Schema):
+    user_id = fields.Integer(required=False)
+    username = fields.Str(required=True, error_messages={"required": "Missing username."})
+    password = fields.Str(required=True, error_messages={"required": "Missing password"})
+    first_name = fields.Str(required=True, error_messages={"required": "Missing first name."})
+    last_name = fields.Str(required=True, error_messages={"required": "Missing last name."})
+    picture = fields.Str(required=True, error_messages={"required": "Missing picture."})
+    phone = fields.Str(required=True, error_messages={"required": "Missing phone."})
+    email = fields.Str(required=True, error_messages={"required": "Missing email."})
+    permission = fields.Int(required=True, error_messages={"required": "Missing permission."})
+    festivals = fields.List(fields.Nested(FestivalSchema))
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            leaders = []
+            for leader in value:
+                festivals = FestivalModel.find_by_leader_id(leader.id)
+                new_leader = Leader(
+                    user_id=leader.id,
+                    username=leader.username,
+                    password=leader.password,
+                    first_name=leader.first_name,
+                    last_name=leader.last_name,
+                    picture=leader.picture,
+                    phone=leader.phone,
+                    email=leader.email,
+                    permission=leader.permission,
+                    is_pending=leader.is_pending,
+                    festivals=festivals
+                )
+                leaders.append(new_leader)
+            return cls(many=True).dump(leaders)
+        festivals = FestivalModel.find_by_leader_id(value.id)
+        leader = Leader(
+            user_id=value.id,
+            username=value.username,
+            password=value.password,
+            first_name=value.first_name,
+            last_name=value.last_name,
+            picture=value.picture,
+            phone=value.phone,
+            email=value.email,
+            permission=value.permission,
+            is_pending=value.is_pending,
+            festivals=festivals
+        )
+        return cls().dump(leader)
+
+
+class WorkerSchema(ma.Schema):
+    user_id = fields.Integer(required=True)
+    username = fields.Str(required=True, error_messages={"required": "Missing username."})
+    password = fields.Str(required=True, error_messages={"required": "Missing password"})
+    first_name = fields.Str(required=True, error_messages={"required": "Missing first name."})
+    last_name = fields.Str(required=True, error_messages={"required": "Missing last name."})
+    picture = fields.Str(required=True, error_messages={"required": "Missing picture."})
+    phone = fields.Str(required=True, error_messages={"required": "Missing phone."})
+    email = fields.Str(required=True, error_messages={"required": "Missing email."})
+    permission = fields.Int(required=True, error_messages={"required": "Missing permission."})
+    specializations = fields.List(fields.Nested(SpecializationSchema))
+    jobs = fields.List(fields.Nested(JobSchema))
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            workers = []
+            for worker in value:
+                specializations = SpecializationModel.find_by_worker_id(worker_id=worker.id)
+                jobs = JobModel.find_completed_by_worker_id(worker_id=worker.id)
+                new_worker = Worker(
+                    user_id=worker.id,
+                    username=worker.username,
+                    password=worker.password,
+                    first_name=worker.first_name,
+                    last_name=worker.last_name,
+                    picture=worker.picture,
+                    phone=worker.phone,
+                    email=worker.email,
+                    permission=worker.permission,
+                    is_pending=worker.is_pending,
+                    specializations=specializations,
+                    jobs=jobs
+                )
+                workers.append(new_worker)
+                for spec in specializations:
+                    print(type(spec.specialization_id))
+            return cls(many=True).dump(workers)
+        specializations = SpecializationModel.find_by_worker_id(worker_id=value.id)
+        jobs = JobModel.find_completed_by_worker_id(worker_id=value.id)
+        worker = Worker(
+            user_id=value.id,
+            username=value.username,
+            password=value.password,
+            first_name=value.first_name,
+            last_name=value.last_name,
+            picture=value.picture,
+            phone=value.phone,
+            email=value.email,
+            permission=value.permission,
+            is_pending=value.is_pending,
+            specializations=specializations,
+            jobs=jobs
+        )
+        print("ID " + worker.id)
+        return cls().dump(worker)

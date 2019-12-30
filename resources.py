@@ -4,8 +4,9 @@ from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from decorators import permission_required
 from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalOrganizers, FestivalSchema,
-                    EventModel, EventSchema, JobModel, JobSchema, AuctionModel, AuctionSchema, Application,
-                    ApplicationSchema)
+                    EventModel, EventSchema, JobModel, JobSchema, AuctionModel, AuctionSchema, LeaderSchema,
+                    Application, ApplicationSchema, WorkerSchema, SpecializationSchema, SpecializationModel,
+                    WorkerSpecializations)
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
@@ -130,6 +131,86 @@ class Users(Resource):
             return UserSchema(many=True).dump(users), 200
         else:
             return redirect("https://kaogrupa.pythonanywhere.com/users")
+
+
+class Leaders(Resource):
+    @jwt_required
+    def get(self):
+        if len(list(request.args)) == 0:
+            leaders = UserModel.find_by_permission(1)
+            return LeaderSchema.to_json(leaders)
+
+        username = request.args.get('username')
+        if username:
+            leader = UserModel.find_by_username(username=username)
+            if leader is not None and leader.permission == 1:
+                return LeaderSchema.to_json(leader)
+        return {}, 200
+
+
+class Workers(Resource):
+    def get(self):
+        if len(list(request.args)) == 0:
+            leaders = UserModel.find_by_permission(3)
+            return WorkerSchema.to_json(leaders)
+
+        username = request.args.get('username')
+        if username:
+            worker = UserModel.find_by_username(username=username)
+            if worker is not None and worker.permission == 1:
+                return LeaderSchema.to_json(worker)
+        return {}, 200
+
+
+class Specializations(Resource):
+    @jwt_required
+    @permission_required(3)
+    def post(self):
+        data = request.get_json()
+
+        specialization_schema = SpecializationSchema()
+        validate = specialization_schema.validate(data)
+
+        if bool(validate):
+            value = list(validate.values())[0]
+            return {"msg": value[0]}, 422
+
+        new_specialization = SpecializationModel(
+            name=data['name']
+        )
+
+        try:
+            new_specialization.save_to_db()
+            return {'msg': 'Specialization {} was successfully created!'.format(data['name'])}, 200
+        except IntegrityError:
+            return {'msg': 'Bad request'}, 400
+        except:
+            return {'msg': 'Internal server error'}, 500
+
+    @jwt_required
+    def get(self):
+        worker_id = request.args.get('worker_id')
+
+        if worker_id:
+            specializations = SpecializationModel.find_by_worker_id(worker_id=worker_id)
+            return SpecializationSchema.to_json(specializations)
+
+        return SpecializationSchema(many=True).dump(SpecializationModel.find_all()), 200
+
+
+class SpecializationAdd(Resource):
+    @jwt_required
+    def post(self, specialization_id):
+        username = get_jwt_identity()
+        user = UserModel.find_by_username(username=username)
+
+        worker_spec = WorkerSpecializations(
+            worker_id=user.id,
+            specialization_id=specialization_id
+        )
+        worker_spec.save_to_db()
+        specialization = SpecializationModel.find_by_specialization_id(specialization_id)
+        return {'msg': 'Specialization {} was successfully added to {}.'.format(specialization.name, username)}, 200
 
 
 class Festivals(Resource):
@@ -444,8 +525,9 @@ class TokenRefresh(Resource):
 
 
 class Test(Resource):
-    def post(self):
-        return {'message': 'Test passed!'}
+    def get(self):
+        leader = UserModel.find_by_username_start("")
+        return LeaderSchema.to_json(leader)
 
 
 class SecretResource(Resource):
