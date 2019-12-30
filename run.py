@@ -47,7 +47,7 @@ def create_tables():
 api.add_resource(resources.Users, '/users')
 api.add_resource(resources.Workers, '/workers')
 api.add_resource(resources.Leaders, '/leaders')
-#  api.add_resource(resources.Users, '/organizers')
+api.add_resource(resources.Organizers, '/organizers')
 
 api.add_resource(resources.Specializations, '/specializations')
 api.add_resource(resources.SpecializationAdd, '/specializations/<string:specialization_id>/add')

@@ -104,6 +104,11 @@ class FestivalModel(db.Model):
     def return_all(cls):
         return cls.query.all()
 
+    @classmethod
+    def find_by_organizer_id(cls, organizer_id):
+        return db.session.query(cls).join(FestivalOrganizers, FestivalOrganizers.festival_id == cls.festival_id)\
+            .filter(FestivalOrganizers.organizer_id == organizer_id).all()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
@@ -501,6 +506,14 @@ class Worker(User):
         self.jobs = jobs
 
 
+class Organizer(User):
+    def __init__(self, user_id, username, password, first_name, last_name, picture, phone, email, permission,
+                 is_pending, festivals):
+        super(Organizer, self).__init__(user_id, username, password, first_name, last_name, picture, phone, email,
+                                        permission, is_pending)
+        self.festivals = festivals
+
+
 class LeaderSchema(ma.Schema):
     user_id = fields.Integer(required=False)
     username = fields.Str(required=True, error_messages={"required": "Missing username."})
@@ -586,8 +599,6 @@ class WorkerSchema(ma.Schema):
                     jobs=jobs
                 )
                 workers.append(new_worker)
-                for spec in specializations:
-                    print(type(spec.specialization_id))
             return cls(many=True).dump(workers)
         specializations = SpecializationModel.find_by_worker_id(worker_id=value.id)
         jobs = JobModel.find_completed_by_worker_id(worker_id=value.id)
@@ -605,5 +616,54 @@ class WorkerSchema(ma.Schema):
             specializations=specializations,
             jobs=jobs
         )
-        print("ID " + worker.id)
         return cls().dump(worker)
+
+
+class OrganizerSchema(ma.Schema):
+    user_id = fields.Integer(required=False)
+    username = fields.Str(required=True, error_messages={"required": "Missing username."})
+    password = fields.Str(required=True, error_messages={"required": "Missing password"})
+    first_name = fields.Str(required=True, error_messages={"required": "Missing first name."})
+    last_name = fields.Str(required=True, error_messages={"required": "Missing last name."})
+    picture = fields.Str(required=True, error_messages={"required": "Missing picture."})
+    phone = fields.Str(required=True, error_messages={"required": "Missing phone."})
+    email = fields.Str(required=True, error_messages={"required": "Missing email."})
+    permission = fields.Int(required=True, error_messages={"required": "Missing permission."})
+    festivals = fields.List(fields.Nested(FestivalSchema))
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            organizers = []
+            for organizer in value:
+                festivals = FestivalModel.find_by_organizer_id(organizer_id=organizer.id)
+                new_organizer = Organizer(
+                    user_id=organizer.id,
+                    username=organizer.username,
+                    password=organizer.password,
+                    first_name=organizer.first_name,
+                    last_name=organizer.last_name,
+                    picture=organizer.picture,
+                    phone=organizer.phone,
+                    email=organizer.email,
+                    permission=organizer.permission,
+                    is_pending=organizer.is_pending,
+                    festivals=festivals
+                )
+                organizers.append(new_organizer)
+            return cls(many=True).dump(organizers)
+        festivals = FestivalModel.find_by_organizer_id(organizer_id=value.id)
+        organizer = Organizer(
+            user_id=value.id,
+            username=value.username,
+            password=value.password,
+            first_name=value.first_name,
+            last_name=value.last_name,
+            picture=value.picture,
+            phone=value.phone,
+            email=value.email,
+            permission=value.permission,
+            is_pending=value.is_pending,
+            festivals=festivals
+        )
+        return cls().dump(organizer)

@@ -6,7 +6,7 @@ from decorators import permission_required
 from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalOrganizers, FestivalSchema,
                     EventModel, EventSchema, JobModel, JobSchema, AuctionModel, AuctionSchema, LeaderSchema,
                     Application, ApplicationSchema, WorkerSchema, SpecializationSchema, SpecializationModel,
-                    WorkerSpecializations)
+                    WorkerSpecializations, OrganizerSchema)
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
@@ -149,16 +149,32 @@ class Leaders(Resource):
 
 
 class Workers(Resource):
+    @jwt_required
     def get(self):
         if len(list(request.args)) == 0:
-            leaders = UserModel.find_by_permission(3)
-            return WorkerSchema.to_json(leaders)
+            workers = UserModel.find_by_permission(3)
+            return WorkerSchema.to_json(workers)
 
         username = request.args.get('username')
         if username:
             worker = UserModel.find_by_username(username=username)
-            if worker is not None and worker.permission == 1:
-                return LeaderSchema.to_json(worker)
+            if worker is not None and worker.permission == 3:
+                return WorkerSchema.to_json(worker)
+        return {}, 200
+
+
+class Organizers(Resource):
+    @jwt_required
+    def get(self):
+        if len(list(request.args)) == 0:
+            organizers = UserModel.find_by_permission(2)
+            return OrganizerSchema.to_json(organizers)
+
+        username = request.args.get('username')
+        if username:
+            organizer = UserModel.find_by_username(username=username)
+            if organizer is not None and organizer.permission == 2:
+                return OrganizerSchema.to_json(organizer)
         return {}, 200
 
 
@@ -204,13 +220,15 @@ class SpecializationAdd(Resource):
         username = get_jwt_identity()
         user = UserModel.find_by_username(username=username)
 
-        worker_spec = WorkerSpecializations(
-            worker_id=user.id,
-            specialization_id=specialization_id
-        )
-        worker_spec.save_to_db()
-        specialization = SpecializationModel.find_by_specialization_id(specialization_id)
-        return {'msg': 'Specialization {} was successfully added to {}.'.format(specialization.name, username)}, 200
+        if user.permission == 3:
+            worker_spec = WorkerSpecializations(
+                worker_id=user.id,
+                specialization_id=specialization_id
+            )
+            worker_spec.save_to_db()
+            specialization = SpecializationModel.find_by_specialization_id(specialization_id)
+            return {'msg': 'Specialization {} was successfully added to {}.'.format(specialization.name, username)}, 200
+        return {'msg': 'Only workers can add specializations!'}, 403
 
 
 class Festivals(Resource):
@@ -360,7 +378,6 @@ class Event(Resource):
         except IntegrityError:
             return {'msg': 'Bad request'}, 400
         except Exception as e:
-            print(e)
             return {'msg': 'Internal server error'}, 500
 
 
