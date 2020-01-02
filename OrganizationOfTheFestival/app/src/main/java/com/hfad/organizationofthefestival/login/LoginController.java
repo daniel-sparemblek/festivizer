@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -63,6 +64,7 @@ public class LoginController {
 
         switch (permission) {
             case 1:
+                System.out.println("Moj perm je: " + permission);
                 intent = new Intent(loginActivity, LeaderActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
@@ -71,7 +73,8 @@ public class LoginController {
                 break;
 
             case 2:
-                intent = new Intent(loginActivity, WorkerActivity.class);
+                System.out.println("Moj perm je: " + permission);
+                intent = new Intent(loginActivity, OrganizerActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
                 intent.putExtra("username", username);
@@ -79,7 +82,8 @@ public class LoginController {
                 break;
 
             case 3:
-                intent = new Intent(loginActivity, OrganizerActivity.class);
+                System.out.println("Moj perm je: " + permission);
+                intent = new Intent(loginActivity, WorkerActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
                 intent.putExtra("username", username);

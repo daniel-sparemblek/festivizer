@@ -5,12 +5,10 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface WorkerClient {
 
-    @GET("user/{username}")
-    Call<Worker> getWorker(@Path("username") String username, @Header("Autothorization") String authorization);
-
-    @GET("specializations")
-    Call<List<Specialization>> getSpecializations(@Header("Autothorization") String authorization);
+    @GET("workers")
+    Call<Worker> getWorker(@Query("username") String username, @Header("Authorization") String authorization);
 }

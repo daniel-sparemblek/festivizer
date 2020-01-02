@@ -67,8 +67,9 @@ public class LeaderActivity extends AppCompatActivity {
 
         // TODO import picture to image view
         tvPhone.setText(leader.getPhone());
+        lvFestivalList = findViewById(R.id.festivalList);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                R.layout.leader_screen_basic_row_layout, makeList(leader.getFestivals()));
+                android.R.layout.simple_list_item_1, leader.getFestivals());
         lvFestivalList.setAdapter(arrayAdapter);
 
     }

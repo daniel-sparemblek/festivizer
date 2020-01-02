@@ -39,15 +39,13 @@ public class LeaderController {
     }
 
     public void getData() {
-        Call<User> leaderCall = api.getLeaderData(username, "Bearer " + accessToken);
+        Call<Leader> leaderCall = api.getAll(username, "Bearer " + accessToken);
 
-        leaderCall.enqueue(new Callback<User>() {
+        leaderCall.enqueue(new Callback<Leader>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Leader> call, Response<Leader> response) {
                 if (response.isSuccessful()) {
-                    leader = new Leader(response.body());
-                    // OVO NE RADI JEBO TE POPRAVI TO
-                    fetchFestivals();
+                    leader = response.body();
                     leaderActivity.fillInActivity(leader);
                 } else {
                     try {
@@ -61,39 +59,9 @@ public class LeaderController {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Leader> call, Throwable t) {
                 Toast.makeText(leaderActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public void fetchFestivals() {
-        Call<Festival[]> festivalsCall = api.getFestivals(leader.getId(), "Bearer " + accessToken);
-
-        festivalsCall.enqueue(new Callback<Festival[]>() {
-            @Override
-            public void onResponse(Call<Festival[]> call, Response<Festival[]> response) {
-                if(response.isSuccessful()) {
-                    leader.setFestivals(response.body());
-                } else {
-                    try {
-                        JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(leaderActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        Toast.makeText(leaderActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Festival[]> call, Throwable t) {
-                Toast.makeText(leaderActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public Leader getLeader() {
-        return leader;
     }
 }

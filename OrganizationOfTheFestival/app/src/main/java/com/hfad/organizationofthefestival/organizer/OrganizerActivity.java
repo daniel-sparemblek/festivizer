@@ -1,41 +1,49 @@
 package com.hfad.organizationofthefestival.organizer;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.adapters.OrganizerAdapter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class OrganizerActivity extends AppCompatActivity {
 
-    private ListView festivalList;
-    private static OrganizerAdapter adapter;
-    private HashMap<String, Integer> festivals;
+    private OrganizerController organizerController;
+    private String accessToken;
+    private String refreshToken;
     private String username;
-    private ArrayList<String> namesOfFestivals;
+
+    private TextView tvName;
+    private TextView tvEmail;
+    private TextView tvPhone;
+    private ListView lvFestivals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("WORKER");
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.obsolete_activity_organizer);
-        //username = getIntent().getStringExtra("USERNAME");
-        //festivalList = findViewById(R.id.festivalList);
-        //OrganizerConnector.getFestivals(username, OrganizerActivity.this);
+        setContentView(R.layout.organizer_profile);
 
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
         setSupportActionBar(toolbar);
+
+
+        Intent intent = getIntent();
+        accessToken = intent.getStringExtra("accessToken");
+        refreshToken = intent.getStringExtra("refreshToken");
+        username = intent.getStringExtra("username");
+
+
+        organizerController = new OrganizerController(this, accessToken, username, refreshToken);
+
+        organizerController.getOrganizer();
     }
 
     @Override
@@ -47,40 +55,35 @@ public class OrganizerActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.myProfile) {
-            System.out.println("Stisnuo sam My Profile");
-        } else if(id == R.id.applyForFest) {
-            System.out.println("Stisnuo sam Apply For a Festival");
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.myEvents) {
+            System.out.println("Stisnuo sam evente");
+        } else if(id == R.id.myProfile) {
+            System.out.println("Stisnuo sam profil");
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void fillInActivity(Organizer organizer) {
+        tvName = findViewById(R.id.orgName);
+        tvPhone = findViewById(R.id.orgPhone);
+        tvEmail = findViewById(R.id.orgEmail);
 
-    public void onClickApply(View view) {
-        final int position = festivalList.getPositionForView((LinearLayout)view.getParent());
-        namesOfFestivals = new ArrayList<>();
-        namesOfFestivals.addAll(festivals.keySet());
-        String festivalName = namesOfFestivals.get(position);
-        LinearLayout l1 = (LinearLayout)view.getParent();
-        Button applyBtn = l1.findViewById(R.id.btnApply);
-        if(applyBtn.getText().toString().equals("Apply")) {
-            applyBtn.setText("Cancel");
-            //OrganizerConnector.applyForFestival(festivalName, username, "Apply", OrganizerActivity.this);
-        } else {
-            applyBtn.setText("Apply");
-            //OrganizerConnector.applyForFestival(festivalName, username, "Cancel", OrganizerActivity.this);
-        }
-    }
+        System.out.println("kurcic " + organizer);
 
-    private void toast(CharSequence message) {
-        Context context;
-        Toast toast;
-        context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        toast = Toast.makeText(context, message, duration);
-        toast.show();
+        tvName.setText(organizer.getUsername());
+        tvPhone.setText(organizer.getPhone());
+        tvEmail.setText(organizer.getEmail());
+
+        lvFestivals = findViewById(R.id.orgFestivalList);
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, organizer.getFestivals());
+        lvFestivals.setAdapter(specializationArrayAdapter);
     }
 }
