@@ -1,5 +1,7 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.widget.Toast;
+
 import com.hfad.organizationofthefestival.festival.Festival;
 
 import retrofit2.Call;
@@ -41,7 +43,7 @@ public class ApplyFestController {
 
             @Override
             public void onFailure(Call<Festival[]> call, Throwable t) {
-
+                Toast.makeText(applyFestActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
             }
         });
     }

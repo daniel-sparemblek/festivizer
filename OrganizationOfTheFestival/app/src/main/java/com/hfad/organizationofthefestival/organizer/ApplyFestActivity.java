@@ -47,12 +47,8 @@ public class ApplyFestActivity extends AppCompatActivity {
 
         applyFestController.fetchFestivals();
 
-        lvFestivals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                name  = (String) parent.getItemAtPosition(position);
-            }
-        });
+        System.out.println("AAAAAAAAA");
+        lvFestivals.setOnItemClickListener((parent, view, position, id) -> name  = (String) parent.getItemAtPosition(position));
     }
 
     @Override
@@ -93,6 +89,7 @@ public class ApplyFestActivity extends AppCompatActivity {
 
 
     public void fillInActivity(Festival[] festivals) {
+        System.out.println("jebise " + festivals);
         ArrayAdapter<String> festivalsArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, festivalsAsList(festivals));
         lvFestivals.setAdapter(festivalsArrayAdapter);
@@ -100,11 +97,17 @@ public class ApplyFestActivity extends AppCompatActivity {
 
     private List<String> festivalsAsList(Festival[] festivals) {
         List<String> result = new ArrayList<>();
+        char c = 0x2714;
 
         for(Festival festival : festivals) {
-            result.add(festival.toString());
+            if (festival.getStatus() == 1) {
+                result.add(festival.toString() + " " + c);
+            } else if (festival.getStatus() == 0) {
+                result.add(festival.toString());
+            }
         }
 
+        System.out.println("jojoj " + result);
         return result;
     }
 }

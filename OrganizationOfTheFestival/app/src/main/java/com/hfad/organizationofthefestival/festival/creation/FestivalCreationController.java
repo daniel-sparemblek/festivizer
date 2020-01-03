@@ -14,10 +14,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FestivalCreationController {
 
-    private CreateFastivalActivity activity;
+    private CreateFestivalActivity activity;
     private CreateFestivalApi api;
 
-    public FestivalCreationController(CreateFastivalActivity activity) {
+    public FestivalCreationController(CreateFestivalActivity activity) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())

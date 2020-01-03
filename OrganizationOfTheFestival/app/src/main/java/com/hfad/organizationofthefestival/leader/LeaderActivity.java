@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.festival.creation.CreateFastivalActivity;
+import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
 
 import java.util.ArrayList;
@@ -87,7 +87,7 @@ public class LeaderActivity extends AppCompatActivity {
         } else if(id == R.id.myProfile) {
             System.out.println("Stisnuo sam profil");
         } else if (id == R.id.createNewFest){
-            Intent intent = new Intent(LeaderActivity.this, CreateFastivalActivity.class);
+            Intent intent = new Intent(LeaderActivity.this, CreateFestivalActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             startActivity(intent);

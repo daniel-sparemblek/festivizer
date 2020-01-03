@@ -16,13 +16,12 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.leader.Leader;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.time.ZonedDateTime;
 
-public class CreateFastivalActivity extends AppCompatActivity {
+public class CreateFestivalActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -51,34 +50,28 @@ public class CreateFastivalActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
 
-        btCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (CreateFastivalActivity.this.checkEntry() == false) {
-                    return;
-                }
-                festival = new Festival(etName.getText().toString(),
-                        etDescription.getText().toString(),
-                        CreateFastivalActivity.this.getPictureString(),
-                        ZonedDateTime.parse(etStartTime.getText().toString()),
-                        ZonedDateTime.parse(etEndTime.getText().toString()));
-                controller.createFestival(festival, accessToken);
-                CreateFastivalActivity.this.returnToLeaderActivity();
+        btCreate.setOnClickListener(v -> {
+            if (!CreateFestivalActivity.this.checkEntry()) {
+                return;
             }
+            festival = new Festival(etName.getText().toString(),
+                    etDescription.getText().toString(),
+                    CreateFestivalActivity.this.getPictureString(),
+                    etStartTime.getText().toString(),
+                    etEndTime.getText().toString());
+            controller.createFestival(festival, accessToken);
+            CreateFestivalActivity.this.returnToLeaderActivity();
         });
 
-        ivLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                CreateFastivalActivity.this.startActivityForResult(intent1, PICK_IMAGE_REQUEST);
-            }
+        ivLogo.setOnClickListener(v -> {
+            Intent intent1 = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            CreateFestivalActivity.this.startActivityForResult(intent1, PICK_IMAGE_REQUEST);
         });
     }
 
     private void returnToLeaderActivity() {
-        Intent intent = new Intent(CreateFastivalActivity.this, LeaderActivity.class);
+        Intent intent = new Intent(CreateFestivalActivity.this, LeaderActivity.class);
         startActivity(intent);
     }
 
