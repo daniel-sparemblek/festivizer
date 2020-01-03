@@ -1,9 +1,10 @@
 package com.hfad.organizationofthefestival.leader;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -11,15 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.internal.bind.ArrayTypeAdapter;
+import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
-import com.hfad.organizationofthefestival.R;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LeaderActivity extends AppCompatActivity {
 
@@ -43,6 +41,9 @@ public class LeaderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leader_profile);
 
+        Toolbar toolbar = findViewById(R.id.leader_toolbar);
+        setSupportActionBar(toolbar);
+
         tvLeaderEmail = findViewById(R.id.leaderEmail);
         tvLeaderName = findViewById(R.id.leaderName);
         // change festival name to phone when activity is changed
@@ -59,6 +60,30 @@ public class LeaderActivity extends AppCompatActivity {
 
         controller.getData();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.leader_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.myEvents) {
+            System.out.println("Stisnuo sam evente");
+        } else if(id == R.id.myProfile) {
+            System.out.println("Stisnuo sam profil");
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void fillInActivity(Leader leader){
