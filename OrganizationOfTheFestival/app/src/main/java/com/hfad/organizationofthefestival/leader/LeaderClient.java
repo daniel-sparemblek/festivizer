@@ -1,8 +1,5 @@
 package com.hfad.organizationofthefestival.leader;
 
-import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.utility.User;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;

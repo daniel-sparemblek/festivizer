@@ -108,7 +108,7 @@ public class Leader {
     }
 
 
-    public List<String> getFestivals() {
+    public List<String> getFestivalNames() {
         List<String> fests = new ArrayList<>();
 
         for (Festival fest : festivals) {

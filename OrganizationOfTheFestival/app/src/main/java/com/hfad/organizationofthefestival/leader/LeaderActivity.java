@@ -13,11 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LeaderActivity extends AppCompatActivity {
 
@@ -94,7 +92,7 @@ public class LeaderActivity extends AppCompatActivity {
         tvPhone.setText(leader.getPhone());
         lvFestivalList = findViewById(R.id.festivalList);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, leader.getFestivals());
+                android.R.layout.simple_list_item_1, leader.getFestivalNames());
         lvFestivalList.setAdapter(arrayAdapter);
 
     }
@@ -117,13 +115,5 @@ public class LeaderActivity extends AppCompatActivity {
 
         //  LeaderController.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.DECLINE, this);
 
-    }
-
-    private List<String> makeList(List<Festival> festivals){
-        List<String> festivalNames = new ArrayList<>();
-        for (Festival festival : festivals){
-            festivalNames.add(festival.getName());
-        }
-        return festivalNames;
     }
 }
