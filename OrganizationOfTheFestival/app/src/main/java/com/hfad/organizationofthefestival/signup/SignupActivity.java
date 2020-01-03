@@ -55,44 +55,35 @@ public class SignupActivity extends AppCompatActivity {
         findIds();
         setupRoleChooser();
 
-        apbRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                profilePictureInBytes = pictureToByteArray(((BitmapDrawable) ivProfilePicture.getDrawable()).getBitmap());
-                role = getRoleEnum(sRoleChooserDropDown.getSelectedItem().toString());
+        apbRegister.setOnClickListener(v -> {
+            profilePictureInBytes = pictureToByteArray(((BitmapDrawable) ivProfilePicture.getDrawable()).getBitmap());
+            role = getRoleEnum(sRoleChooserDropDown.getSelectedItem().toString());
 
-                signup = new Signup(etUsername.getText().toString(),
-                        etInputPassword.getText().toString(),
-                        etFirstName.getText().toString(),
-                        etLastName.getText().toString(),
-                        profilePictureInBytes.toString(),
-                        etPhone.getText().toString(),
-                        etEmail.getText().toString(),
-                        role.getValue());
-                String textFieldsStatus = signup.checkInput(etVerifyPassword.getText().toString());
-                if (textFieldsStatus == null) {
-                    signupController.signUp(signup);
-                }
-                Toast.makeText(SignupActivity.this, textFieldsStatus, Toast.LENGTH_SHORT).show();
-
+            signup = new Signup(etUsername.getText().toString(),
+                    etInputPassword.getText().toString(),
+                    etFirstName.getText().toString(),
+                    etLastName.getText().toString(),
+                    profilePictureInBytes.toString(),
+                    etPhone.getText().toString(),
+                    etEmail.getText().toString(),
+                    role.getValue());
+            String textFieldsStatus = signup.checkInput(etVerifyPassword.getText().toString());
+            if (textFieldsStatus == null) {
+                signupController.signUp(signup);
             }
+            Toast.makeText(SignupActivity.this, textFieldsStatus, Toast.LENGTH_SHORT).show();
+
         });
 
-        tvLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvLogin.setEnabled(false);
-                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-            }
+        tvLogin.setOnClickListener(v -> {
+            tvLogin.setEnabled(false);
+            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
         });
 
-        ivProfilePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, PICK_IMAGE_REQUEST);
-            }
+        ivProfilePicture.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, PICK_IMAGE_REQUEST);
         });
     }
 

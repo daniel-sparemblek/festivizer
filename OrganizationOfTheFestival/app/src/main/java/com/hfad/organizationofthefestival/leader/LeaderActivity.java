@@ -1,5 +1,7 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class LeaderActivity extends AppCompatActivity {
@@ -89,6 +92,7 @@ public class LeaderActivity extends AppCompatActivity {
         tvLeaderEmail.setText(leader.getEmail());
 
         // TODO import picture to image view
+
         tvPhone.setText(leader.getPhone());
         lvFestivalList = findViewById(R.id.festivalList);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
@@ -115,5 +119,8 @@ public class LeaderActivity extends AppCompatActivity {
 
         //  LeaderController.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.DECLINE, this);
 
+    }
+
+    private void setImage(String picture){
     }
 }
