@@ -26,4 +26,7 @@ public interface WorkerClient {
 
     @POST("specializations/{specId}/add")
     Call<Void> addSpecialization(@Path("specId") String specId, @Header("Authorization") String authorization);
+
+    @GET("specializations")
+    Call<Specialization[]> getWorkerSpecializations(@Query("username") String username, @Header("Authorization") String authorization);
 }

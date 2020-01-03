@@ -33,6 +33,7 @@ public class SpecializationsActivity extends AppCompatActivity {
     private Button btnCreateSpec;
 
     private List<Specialization> specializations;
+    private List<Specialization> mySpecializations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +46,30 @@ public class SpecializationsActivity extends AppCompatActivity {
         username = intent.getStringExtra("username");
 
         this.specializationsController = new SpecializationsController(this, accessToken, username, refreshToken);
-        specializationsController.getSpecializations();
+        specializationsController.getSpecializationsByUsername();
     }
 
     public void fillInActivity(Specialization[] specializations) {
         this.specializations = Arrays.asList(specializations);
+
         lvSpecializations = findViewById(R.id.worker_search_specialization);
         tvSearch = findViewById(R.id.worker_searchTxt);
         btnSearch = findViewById(R.id.worker_searchBtn);
         btnCreateSpec = findViewById(R.id.btn_create_spec);
         tvCreateSpec = findViewById(R.id.tv_create_spec);
 
+        List<String> specStrings = specializationsToString(specializations);
+
+        char c = 0x2714;
+
+        for(int i = 0; i < this.specializations.size(); i++) {
+            if(mySpecializations.contains(this.specializations.get(i))) {
+                specStrings.set(i, specStrings.get(i) + c);
+            }
+        }
+
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, specializationsToString(specializations));
+                android.R.layout.simple_list_item_1, specStrings);
         lvSpecializations.setAdapter(specializationArrayAdapter);
 
         lvSpecializations.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,7 +78,6 @@ public class SpecializationsActivity extends AppCompatActivity {
                 specializationsController.addSpecializationToWorker(SpecializationsActivity.this.specializations.get(position));
             }
         });
-
     }
 
     public List<String> specializationsToString(Specialization[] specializations) {
@@ -95,4 +106,26 @@ public class SpecializationsActivity extends AppCompatActivity {
         specializationsController.searchSpecialization(searched);
     }
 
+    public void setMySpecializations(Specialization[] specializations) {
+        this.mySpecializations = Arrays.asList(specializations);
+        System.out.println("JA SAM SE IZVRŠIO!!");
+    }
+
+    public void markExistingSpecs(Specialization[] specializations) {
+        List<Specialization> specs = Arrays.asList(specializations);
+        List<String> specStrings = specializationsToString(specializations);
+
+        char c = 0x2714;
+
+        for(int i = 0; i < this.specializations.size(); i++) {
+            if(specs.contains(this.specializations.get(i))) {
+                specStrings.set(i, specStrings.get(i) + c);
+            }
+        }
+
+
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, specStrings);
+        lvSpecializations.setAdapter(specializationArrayAdapter);
+    }
 }

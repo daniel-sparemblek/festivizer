@@ -2,6 +2,8 @@ package com.hfad.organizationofthefestival.worker;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class Specialization {
 
     @SerializedName("specialization_id")
@@ -32,5 +34,18 @@ public class Specialization {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Specialization that = (Specialization) o;
+        return specializationId == that.specializationId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(specializationId);
     }
 }

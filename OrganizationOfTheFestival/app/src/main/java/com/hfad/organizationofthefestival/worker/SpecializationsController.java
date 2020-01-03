@@ -1,6 +1,5 @@
 package com.hfad.organizationofthefestival.worker;
 
-import android.widget.GridLayout;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -20,9 +19,6 @@ public class SpecializationsController {
     private String accessToken;
     private String username;
     private String refreshToken;
-    private Worker worker;
-
-
 
     public SpecializationsController(SpecializationsActivity specializationsActivity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
@@ -46,7 +42,33 @@ public class SpecializationsController {
             public void onResponse(Call<Specialization[]> call, Response<Specialization[]> response) {
                 if (response.isSuccessful()) {
                     specializationsActivity.fillInActivity(response.body());
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(specializationsActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(specializationsActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Specialization[]> call, Throwable t) {
+                Toast.makeText(specializationsActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getSpecializationsByUsername() {
+        Call<Specialization[]> call = api.getWorkerSpecializations(username, "Bearer " + accessToken);
+
+        call.enqueue(new Callback<Specialization[]>() {
+            @Override
+            public void onResponse(Call<Specialization[]> call, Response<Specialization[]> response) {
+                if (response.isSuccessful()) {
+                    specializationsActivity.setMySpecializations(response.body());
+                    getSpecializations();
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
