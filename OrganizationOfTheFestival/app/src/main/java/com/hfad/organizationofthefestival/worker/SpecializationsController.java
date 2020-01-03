@@ -10,16 +10,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class WorkerController {
+public class SpecializationsController {
 
-    private WorkerActivity workerActivity;
+    private SpecializationsActivity specializationsActivity;
     private WorkerClient api;
     private String accessToken;
     private String username;
     private String refreshToken;
     private Worker worker;
 
-    public WorkerController(WorkerActivity workerActivity, String accessToken, String username, String refreshToken) {
+    public SpecializationsController(SpecializationsActivity specializationsActivity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -28,35 +28,35 @@ public class WorkerController {
 
         this.accessToken = accessToken;
         this.username = username;
-        this.workerActivity = workerActivity;
+        this.specializationsActivity = specializationsActivity;
         this.refreshToken = refreshToken;
     }
 
-    public void getWorker() {
-        Call<Worker> call = api.getWorker(username, "Bearer " + accessToken);
 
-        call.enqueue(new Callback<Worker>() {
+    public void getSpecializations() {
+        Call<Specialization[]> call = api.getSpecializations("Bearer " + accessToken);
+
+        call.enqueue(new Callback<Specialization[]>() {
             @Override
-            public void onResponse(Call<Worker> call, Response<Worker> response) {
+            public void onResponse(Call<Specialization[]> call, Response<Specialization[]> response) {
                 if (response.isSuccessful()) {
-                    workerActivity.fillInActivity(response.body());
+                    specializationsActivity.fillInActivity(response.body());
+
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(workerActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(specializationsActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Toast.makeText(workerActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(specializationsActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<Worker> call, Throwable t) {
-                Toast.makeText(workerActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Specialization[]> call, Throwable t) {
+                Toast.makeText(specializationsActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
 }
