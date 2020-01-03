@@ -5,15 +5,16 @@ public class Festival {
     private long festivalId;
     private long creatorId;
     private String name, desc;
-    // private byte[] logo;
+    private String logo;
     private int duration;
     private boolean active;
 
-    public Festival(long festivalId, long creatorId, String name, String desc, int duration, boolean active) {
+    public Festival(long festivalId, long creatorId, String name, String desc, String logo, int duration, boolean active) {
         this.festivalId = festivalId;
         this.creatorId = creatorId;
         this.name = name;
         this.desc = desc;
+        this.logo = logo;
         this.duration = duration;
         this.active = active;
     }
@@ -64,6 +65,14 @@ public class Festival {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     @Override
