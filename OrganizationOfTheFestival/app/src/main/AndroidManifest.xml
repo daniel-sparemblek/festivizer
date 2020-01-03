@@ -12,12 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".worker.SpecializationsActivity"></activity>
         <activity android:name=".leader.LeaderActivity" />
         <activity android:name=".worker.WorkerActivity" />
         <activity android:name=".organizer.OrganizerActivity" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".organizer.ApplyFestActivity" />
         <activity android:name=".signup.SignupActivity" />
+        <activity android:name=".festival.creation.CreateFastivalActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

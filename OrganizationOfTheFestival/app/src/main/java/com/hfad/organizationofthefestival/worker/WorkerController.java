@@ -13,21 +13,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WorkerController {
 
     private WorkerActivity workerActivity;
+    private WorkerClient api;
+    private String accessToken;
+    private String username;
+    private String refreshToken;
+    private Worker worker;
 
-    public WorkerController(WorkerActivity workerActivity) {
+    public WorkerController(WorkerActivity workerActivity, String accessToken, String username, String refreshToken) {
+        api = new Retrofit.Builder()
+                .baseUrl("https://kaogrupa.pythonanywhere.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(WorkerClient.class);
+
+        this.accessToken = accessToken;
+        this.username = username;
         this.workerActivity = workerActivity;
+        this.refreshToken = refreshToken;
     }
 
-    private Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://kaogrupa.pythonanywhere.com/")
-            .addConverterFactory(GsonConverterFactory.create());
-
-    private Retrofit retrofit = builder.build();
-
-    private WorkerClient workerClient = retrofit.create(WorkerClient.class);
-
-    public void getWorker(final String accessToken, String username, final Worker worker) {
-        Call<Worker> call = workerClient.getWorker(username, "Bearer " + accessToken);
+    public void getWorker() {
+        Call<Worker> call = api.getWorker(username, "Bearer " + accessToken);
 
         call.enqueue(new Callback<Worker>() {
             @Override
@@ -51,4 +57,6 @@ public class WorkerController {
             }
         });
     }
+
+
 }

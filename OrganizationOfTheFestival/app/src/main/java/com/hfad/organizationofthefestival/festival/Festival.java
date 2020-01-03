@@ -4,19 +4,17 @@ public class Festival {
 
     private long festivalId;
     private long creatorId;
-    private String name, desc;
+    private String name;
+    private String desc;
     private String logo;
     private int duration;
     private boolean active;
 
-    public Festival(long festivalId, long creatorId, String name, String desc, String logo, int duration, boolean active) {
-        this.festivalId = festivalId;
-        this.creatorId = creatorId;
+    public Festival(String name, String desc, String logo, int duration) {
         this.name = name;
         this.desc = desc;
         this.logo = logo;
         this.duration = duration;
-        this.active = active;
     }
 
     public long getFestivalId() {

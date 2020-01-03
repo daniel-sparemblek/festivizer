@@ -44,6 +44,7 @@ public class LoginController {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
                         Toast.makeText(loginActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        loginActivity.getBtnLogin().setEnabled(true);
                     } catch (Exception e) {
                         Toast.makeText(loginActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
