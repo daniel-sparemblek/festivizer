@@ -2,11 +2,7 @@ package com.hfad.organizationofthefestival.worker;
 
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.signup.RegistrationResponse;
-
 import org.json.JSONObject;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

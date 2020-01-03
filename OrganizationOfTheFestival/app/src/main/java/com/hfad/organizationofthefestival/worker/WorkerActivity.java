@@ -1,12 +1,16 @@
 package com.hfad.organizationofthefestival.worker;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +29,7 @@ public class WorkerActivity extends AppCompatActivity {
     private TextView tvPhone;
     private ListView lvSpecializations;
     private ListView lvJobs;
+    private ImageView ivProfilePicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,8 @@ public class WorkerActivity extends AppCompatActivity {
     }
 
     public void fillInActivity(Worker worker) {
+
+        ivProfilePicture = findViewById(R.id.profile_picture);
         tvName = findViewById(R.id.workerName);
         tvPhone = findViewById(R.id.workerPhone);
         tvEmail = findViewById(R.id.workerEmail);
@@ -78,6 +85,7 @@ public class WorkerActivity extends AppCompatActivity {
         tvPhone.setText(worker.getPhone());
         tvEmail.setText(worker.getEmail());
 
+        setProfilePicture(worker.getPicture());
         lvJobs = findViewById(R.id.jobsList);
         ArrayAdapter<String> jobsArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, worker.getJobs());
@@ -87,5 +95,11 @@ public class WorkerActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, worker.getSpecializations());
         lvSpecializations.setAdapter(specializationArrayAdapter);
+    }
+
+    private void setProfilePicture(String picture){
+        byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
+        ivProfilePicture.setImageBitmap(bitmap);
     }
 }
