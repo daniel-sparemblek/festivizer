@@ -12,8 +12,9 @@
         android:id="@+id/worker_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme" />
+        android:background="#200e07"
+        android:theme="@style/ToolbarTheme"
+        app:titleTextColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/title"

@@ -3,8 +3,8 @@ package com.hfad.organizationofthefestival.worker;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.Menu;
@@ -52,19 +52,14 @@ public class WorkerActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.worker_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.addSpecialization) {
             Intent intent = new Intent(this, SpecializationsActivity.class);
             intent.putExtra("accessToken", accessToken);
@@ -73,7 +68,11 @@ public class WorkerActivity extends AppCompatActivity {
             this.startActivity(intent);
 
         } else if (id == R.id.applyForJob) {
-            System.out.println("Stisnuo sam profil");
+            Intent intent = new Intent(this, JobApplyActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            this.startActivity(intent);
         } else if (id == R.id.activeJobs) {
 
         } else if (id == R.id.myApplications) {

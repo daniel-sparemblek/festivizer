@@ -1,5 +1,7 @@
 package com.hfad.organizationofthefestival.worker;
 
+import com.hfad.organizationofthefestival.utility.Job;
+
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -29,4 +31,7 @@ public interface WorkerClient {
 
     @GET("specializations")
     Call<Specialization[]> getWorkerSpecializations(@Query("username") String username, @Header("Authorization") String authorization);
+
+    @GET("jobs/on_auction")
+    Call<Job[]> getJobs(@Header("Authorization") String authorization);
 }

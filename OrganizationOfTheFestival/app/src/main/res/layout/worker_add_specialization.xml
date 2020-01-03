@@ -11,20 +11,20 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.2"
         android:layout_gravity="start"
-        android:text="@string/search"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_weight="0.2"
+        android:text="@string/search"
         android:textSize="21sp" />
 
     <EditText
         android:id="@+id/worker_searchTxt"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:layout_weight="0.3"
         android:autofillHints=""
-        android:layout_marginStart="8dp"
         android:hint="@string/search_here"
         android:inputType="textCapWords"
         tools:targetApi="o" />
@@ -33,10 +33,10 @@
         android:id="@+id/worker_searchBtn"
         android:layout_width="150dp"
         android:layout_height="0dp"
-        android:layout_weight="0.3"
         android:layout_gravity="center"
-        android:text="@string/search"
-        android:onClick="searchSpecialization"/>
+        android:layout_weight="0.3"
+        android:onClick="searchSpecialization"
+        android:text="@string/search" />
 
 
     <EditText
@@ -55,8 +55,8 @@
         android:id="@+id/btn_create_spec"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.3"
         android:layout_gravity="center"
+        android:layout_weight="0.3"
         android:gravity="center"
         android:onClick="createSpecialization"
         android:text="@string/add_specialization" />
@@ -65,10 +65,8 @@
         android:id="@+id/worker_search_specialization"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.4"
-        android:layout_margin="8dp">
-    </ListView>
-
+        android:layout_margin="8dp"
+        android:layout_weight="2.4"></ListView>
 
 
 </LinearLayout>

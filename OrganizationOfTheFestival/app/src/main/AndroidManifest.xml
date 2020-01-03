@@ -12,8 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".worker.SpecializationsActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".worker.JobApplyActivity"></activity>
+        <activity
+            android:name=".worker.SpecializationsActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".leader.LeaderActivity" />
         <activity android:name=".worker.WorkerActivity" />
         <activity android:name=".organizer.OrganizerActivity" />

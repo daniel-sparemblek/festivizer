@@ -154,6 +154,7 @@ public class SpecializationsController {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(specializationsActivity, "Specialization successfully bound to worker!", Toast.LENGTH_SHORT).show();
+                    getSpecializationsByUsername();
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
