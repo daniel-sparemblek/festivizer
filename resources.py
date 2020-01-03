@@ -9,6 +9,7 @@ from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, Fes
                     WorkerSpecializations, OrganizerSchema)
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+import sys
 
 
 class UserRegistration(Resource):
@@ -245,6 +246,8 @@ class Festivals(Resource):
 
 
 class Festival(Resource):
+    #user ne upisuje sam status
+    #print("message", file=sys.stderr)
     @jwt_required
     @permission_required(1)
     def post(self):
@@ -262,8 +265,8 @@ class Festival(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
-        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
-        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
+        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
         if end_time < start_time:
             return {"msg": "End time can't be before start time."}
@@ -273,8 +276,8 @@ class Festival(Resource):
             name=data['name'],
             desc=data['desc'],
             logo=data['logo'],
-            start_time=datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ'),
-            end_time=datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ'),
+            start_time=start_time,
+            end_time=end_time,
             status=data['status']
         )
 
@@ -356,8 +359,8 @@ class Event(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
-        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
-        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
+        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
         if end_time < start_time:
             return {"msg": "End time can't be before start time."}
@@ -368,8 +371,8 @@ class Event(Resource):
             name=data['name'],
             desc=data['desc'],
             location=data['location'],
-            start_time=datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ'),
-            end_time=datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+            start_time=start_time,
+            end_time=end_time
         )
 
         try:
@@ -402,7 +405,7 @@ class Job(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
-        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
         new_job = JobModel(
             name=data['name'],
@@ -445,8 +448,8 @@ class Auction(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
-        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
-        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
+        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
         if end_time < start_time:
             return {"msg": "End time can't be before start time."}
@@ -519,6 +522,16 @@ class Applications(Resource):
         except Exception as e:
             raise e
             return {'msg': 'Internal server error'}, 500
+
+    @jwt_required
+    def get(self):
+        application_id = request.args.get('application_id')
+        job_id = request.args.get('job_id')
+
+        if application_id:
+            return Application.find_by_application_id(application_id=application_id)
+
+        return Application.find_all()
 
 
 class UserLogoutRefresh(Resource):
