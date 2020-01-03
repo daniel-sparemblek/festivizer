@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.leader.Leader;
+import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import java.io.ByteArrayOutputStream;
 
@@ -35,6 +37,8 @@ public class CreateFastivalActivity extends AppCompatActivity {
     private EditText etEndTime;
     private Button btCreate;
 
+    private Festival festival;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +54,12 @@ public class CreateFastivalActivity extends AppCompatActivity {
             if (checkEntry() == false){
                 return;
             }
-            Festival festival = new Festival(etName.getText().toString(),
+            festival = new Festival(etName.getText().toString(),
                     etDescription.getText().toString(),
                     getPictureString(),
                     Integer.parseInt(etDuration.getText().toString()));
             controller.createFestival(festival, accessToken);
+            returnToLeaderActivity();
         });
 
         ivLogo.setOnClickListener(v -> {
@@ -62,6 +67,11 @@ public class CreateFastivalActivity extends AppCompatActivity {
                     MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent1, PICK_IMAGE_REQUEST);
         });
+    }
+
+    private void returnToLeaderActivity() {
+        Intent intent = new Intent(CreateFastivalActivity.this, LeaderActivity.class);
+        startActivity(intent);
     }
 
     private void findViews() {

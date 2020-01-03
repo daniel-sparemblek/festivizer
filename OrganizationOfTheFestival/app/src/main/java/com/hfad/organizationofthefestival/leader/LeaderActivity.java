@@ -39,6 +39,8 @@ public class LeaderActivity extends AppCompatActivity {
 
     private LeaderController controller;
 
+    private Leader leader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +97,7 @@ public class LeaderActivity extends AppCompatActivity {
     }
 
     public void fillInActivity(Leader leader){
+        this.leader = leader;
         tvLeaderName.setText(leader.getUsername());
         tvLeaderEmail.setText(leader.getEmail());
         setProfilePicture(leader.getPicture());

@@ -3,7 +3,6 @@ package com.hfad.organizationofthefestival.leader;
 import com.google.gson.annotations.SerializedName;
 import com.hfad.organizationofthefestival.festival.Festival;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,8 +22,7 @@ public class Leader {
 
     private List<Festival> festivals;
 
-    public Leader(int id, String username, String password, String firstName, String lastName,
-                  String picture, String phone, String email, int permission, List<Festival> festivals) {
+    public Leader(int id, String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission, List<Festival> festivals) {
         this.id = id;
         this.username = username;
         this.password = password;
