@@ -1,12 +1,16 @@
 package com.hfad.organizationofthefestival.organizer;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +27,7 @@ public class OrganizerActivity extends AppCompatActivity {
     private TextView tvEmail;
     private TextView tvPhone;
     private ListView lvFestivals;
+    private ImageView ivProfilePicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +79,11 @@ public class OrganizerActivity extends AppCompatActivity {
         tvName = findViewById(R.id.orgName);
         tvPhone = findViewById(R.id.orgPhone);
         tvEmail = findViewById(R.id.orgEmail);
+        ivProfilePicture = findViewById(R.id.profile_picture);
 
         System.out.println("kurcic " + organizer);
 
+        setProfilePicture(organizer.getPicture());
         tvName.setText(organizer.getUsername());
         tvPhone.setText(organizer.getPhone());
         tvEmail.setText(organizer.getEmail());
@@ -85,5 +92,11 @@ public class OrganizerActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, organizer.getFestivals());
         lvFestivals.setAdapter(specializationArrayAdapter);
+    }
+
+    private void setProfilePicture(String picture){
+        byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
+        ivProfilePicture.setImageBitmap(bitmap);
     }
 }
