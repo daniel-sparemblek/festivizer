@@ -97,8 +97,6 @@ public class LeaderActivity extends AppCompatActivity {
     public void fillInActivity(Leader leader){
         tvLeaderName.setText(leader.getUsername());
         tvLeaderEmail.setText(leader.getEmail());
-
-        // TODO import picture to image view
         setProfilePicture(leader.getPicture());
         tvPhone.setText(leader.getPhone());
         lvFestivalList = findViewById(R.id.festivalList);
