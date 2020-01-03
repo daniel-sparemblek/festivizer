@@ -3,6 +3,9 @@ package com.hfad.organizationofthefestival.worker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,10 +28,11 @@ public class WorkerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("WORKER");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.worker_profile);
+
+        Toolbar toolbar = findViewById(R.id.worker_toolbar);
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
@@ -39,6 +43,30 @@ public class WorkerActivity extends AppCompatActivity {
         workerController = new WorkerController(this);
 
         workerController.getWorker(accessToken, username, worker);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.worker_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.myEvents) {
+            System.out.println("Stisnuo sam evente");
+        } else if(id == R.id.myProfile) {
+            System.out.println("Stisnuo sam profil");
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void fillInActivity(Worker worker) {
