@@ -38,6 +38,7 @@ public class LoginController {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
+                    loginActivity.getBtnLogin().setEnabled(true);
                     switchActivity(login.getUsername(), response.body().getAccess_token(),
                             response.body().getRefresh_token(), response.body().getPermission());
                 } else {
