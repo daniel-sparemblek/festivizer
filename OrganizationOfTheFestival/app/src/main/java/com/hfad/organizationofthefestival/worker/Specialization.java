@@ -1,6 +1,11 @@
 package com.hfad.organizationofthefestival.worker;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Specialization {
+
+    @SerializedName("specialization_id")
+    private int specializationId;
 
     private String name;
 
@@ -14,6 +19,14 @@ public class Specialization {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getSpecializationId() {
+        return specializationId;
+    }
+
+    public void setSpecializationId(int specializationId) {
+        this.specializationId = specializationId;
     }
 
     @Override

@@ -7,6 +7,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface WorkerClient {
@@ -22,4 +23,7 @@ public interface WorkerClient {
 
     @POST("search/specializations")
     Call<Specialization[]> searchSpecialization(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
+
+    @POST("specializations/{specId}/add")
+    Call<Void> addSpecialization(@Path("specId") String specId, @Header("Authorization") String authorization);
 }

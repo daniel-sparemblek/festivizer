@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.hfad.organizationofthefestival.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -30,6 +32,8 @@ public class SpecializationsActivity extends AppCompatActivity {
     private TextView tvCreateSpec;
     private Button btnCreateSpec;
 
+    private List<Specialization> specializations;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,7 @@ public class SpecializationsActivity extends AppCompatActivity {
     }
 
     public void fillInActivity(Specialization[] specializations) {
+        this.specializations = Arrays.asList(specializations);
         lvSpecializations = findViewById(R.id.worker_search_specialization);
         tvSearch = findViewById(R.id.worker_searchTxt);
         btnSearch = findViewById(R.id.worker_searchBtn);
@@ -54,6 +59,13 @@ public class SpecializationsActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, specializationsToString(specializations));
         lvSpecializations.setAdapter(specializationArrayAdapter);
+
+        lvSpecializations.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                specializationsController.addSpecializationToWorker(SpecializationsActivity.this.specializations.get(position));
+            }
+        });
 
     }
 

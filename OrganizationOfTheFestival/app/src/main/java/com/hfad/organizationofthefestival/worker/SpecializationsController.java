@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival.worker;
 
+import android.widget.GridLayout;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -20,6 +21,8 @@ public class SpecializationsController {
     private String username;
     private String refreshToken;
     private Worker worker;
+
+
 
     public SpecializationsController(SpecializationsActivity specializationsActivity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
@@ -116,6 +119,32 @@ public class SpecializationsController {
 
             @Override
             public void onFailure(Call<Specialization[]> call, Throwable t) {
+                Toast.makeText(specializationsActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void addSpecializationToWorker(Specialization specialization) {
+        Call<Void> call = api.addSpecialization(String.valueOf(specialization.getSpecializationId()), "Bearer " + accessToken);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(specializationsActivity, "Specialization successfully bound to worker!", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(specializationsActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(specializationsActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(specializationsActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });
