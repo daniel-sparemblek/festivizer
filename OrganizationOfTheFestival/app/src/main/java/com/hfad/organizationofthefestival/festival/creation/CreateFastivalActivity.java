@@ -20,6 +20,7 @@ import com.hfad.organizationofthefestival.leader.Leader;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.time.ZonedDateTime;
 
 public class CreateFastivalActivity extends AppCompatActivity {
 
@@ -50,22 +51,29 @@ public class CreateFastivalActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
 
-        btCreate.setOnClickListener(v -> {
-            if (checkEntry() == false){
-                return;
+        btCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (CreateFastivalActivity.this.checkEntry() == false) {
+                    return;
+                }
+                festival = new Festival(etName.getText().toString(),
+                        etDescription.getText().toString(),
+                        CreateFastivalActivity.this.getPictureString(),
+                        ZonedDateTime.parse(etStartTime.getText().toString()),
+                        ZonedDateTime.parse(etEndTime.getText().toString()));
+                controller.createFestival(festival, accessToken);
+                CreateFastivalActivity.this.returnToLeaderActivity();
             }
-            festival = new Festival(etName.getText().toString(),
-                    etDescription.getText().toString(),
-                    getPictureString(),
-                    Integer.parseInt(etDuration.getText().toString()));
-            controller.createFestival(festival, accessToken);
-            returnToLeaderActivity();
         });
 
-        ivLogo.setOnClickListener(v -> {
-            Intent intent1 = new Intent(Intent.ACTION_PICK,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(intent1, PICK_IMAGE_REQUEST);
+        ivLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                CreateFastivalActivity.this.startActivityForResult(intent1, PICK_IMAGE_REQUEST);
+            }
         });
     }
 
