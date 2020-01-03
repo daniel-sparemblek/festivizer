@@ -91,4 +91,34 @@ public class SpecializationsController {
             }
         });
     }
+
+    public void searchSpecialization(String searched) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("search", searched);
+        Call<Specialization[]> call = api.searchSpecialization(body, "Bearer " + accessToken);
+
+        call.enqueue(new Callback<Specialization[]>() {
+            @Override
+            public void onResponse(Call<Specialization[]> call, Response<Specialization[]> response) {
+                if (response.isSuccessful()) {
+                    specializationsActivity.fillInActivity(response.body());
+
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(specializationsActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(specializationsActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Specialization[]> call, Throwable t) {
+                Toast.makeText(specializationsActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 }

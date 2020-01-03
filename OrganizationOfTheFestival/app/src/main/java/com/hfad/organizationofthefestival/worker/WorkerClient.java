@@ -20,4 +20,6 @@ public interface WorkerClient {
     @POST("specializations")
     Call<Void> createSpecialization(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
 
+    @POST("search/specializations")
+    Call<Specialization[]> searchSpecialization(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
 }

@@ -77,4 +77,10 @@ public class SpecializationsActivity extends AppCompatActivity {
         specializationsController.addSpecialization(specName);
     }
 
+    public void searchSpecialization(View view) {
+        String searched = tvSearch.getText().toString();
+
+        specializationsController.searchSpecialization(searched);
+    }
+
 }

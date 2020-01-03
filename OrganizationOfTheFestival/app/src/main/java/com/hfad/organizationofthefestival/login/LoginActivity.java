@@ -73,5 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         twRegisterLink.setClickable(true);
     }
 
-
+    public Button getBtnLogin() {
+        return btnLogin;
+    }
 }
