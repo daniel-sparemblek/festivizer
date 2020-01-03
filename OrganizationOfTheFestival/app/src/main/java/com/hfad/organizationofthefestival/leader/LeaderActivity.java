@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.festival.creation.CreateFastivalActivity;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
 
 import java.util.ArrayList;
@@ -82,6 +84,11 @@ public class LeaderActivity extends AppCompatActivity {
             System.out.println("Stisnuo sam evente");
         } else if(id == R.id.myProfile) {
             System.out.println("Stisnuo sam profil");
+        } else if (id == R.id.createNewFest){
+            Intent intent = new Intent(LeaderActivity.this, CreateFastivalActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

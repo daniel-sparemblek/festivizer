@@ -17,6 +17,7 @@
         <activity android:name=".organizer.OrganizerActivity" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".signup.SignupActivity" />
+        <activity android:name=".festival.creation.CreateFastivalActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
