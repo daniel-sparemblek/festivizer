@@ -5,6 +5,7 @@ import com.hfad.organizationofthefestival.festival.Festival;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Leader {
 
@@ -20,7 +21,21 @@ public class Leader {
     private String email;
     private int permission;
 
-    private Festival[] festivals;
+    private List<Festival> festivals;
+
+    public Leader(int id, String username, String password, String firstName, String lastName,
+                  String picture, String phone, String email, int permission, List<Festival> festivals) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.picture = picture;
+        this.phone = phone;
+        this.email = email;
+        this.permission = permission;
+        this.festivals = festivals;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -94,27 +109,7 @@ public class Leader {
         return permission;
     }
 
-    public Leader(int id, String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission, Festival[] festivals) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.picture = picture;
-        this.phone = phone;
-        this.email = email;
-        this.permission = permission;
-        this.festivals = festivals;
-    }
-
-
     public List<String> getFestivalNames() {
-        List<String> fests = new ArrayList<>();
-
-        for (Festival fest : festivals) {
-            fests.add(fest.toString());
-        }
-
-        return fests;
+        return festivals.stream().map(t -> t.getName()).collect(Collectors.toList());
     }
 }
