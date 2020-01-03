@@ -4,6 +4,8 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,6 +57,36 @@ public class SpecializationsController {
 
             @Override
             public void onFailure(Call<Specialization[]> call, Throwable t) {
+                Toast.makeText(specializationsActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void addSpecialization(String specName) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("name", specName);
+        Call<Void> call = api.createSpecialization(body, "Bearer " + accessToken);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(specializationsActivity, "Successfully created specialization!", Toast.LENGTH_SHORT).show();
+                    getSpecializations();
+
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(specializationsActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(specializationsActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(specializationsActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });

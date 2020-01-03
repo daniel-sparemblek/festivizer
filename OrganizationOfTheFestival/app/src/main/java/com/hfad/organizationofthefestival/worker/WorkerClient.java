@@ -1,6 +1,9 @@
 package com.hfad.organizationofthefestival.worker;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -13,4 +16,8 @@ public interface WorkerClient {
 
     @GET("specializations")
     Call<Specialization[]> getSpecializations(@Header("Authorization") String authorization);
+
+    @POST("specializations")
+    Call<Void> createSpecialization(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
+
 }

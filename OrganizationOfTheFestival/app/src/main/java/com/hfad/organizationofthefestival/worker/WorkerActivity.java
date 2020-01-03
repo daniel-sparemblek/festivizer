@@ -72,19 +72,15 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("username", username);
             this.startActivity(intent);
 
-        } else if(id == R.id.applyForJob) {
+        } else if (id == R.id.applyForJob) {
             System.out.println("Stisnuo sam profil");
-        }
-        else if (id == R.id.activeJobs) {
+        } else if (id == R.id.activeJobs) {
 
-        }
-        else if (id == R.id.myApplications) {
+        } else if (id == R.id.myApplications) {
 
-        }
-        else if (id == R.id.printPass) {
+        } else if (id == R.id.printPass) {
 
-        }
-        else if (id == R.id.search) {
+        } else if (id == R.id.search) {
 
         }
 
@@ -114,7 +110,7 @@ public class WorkerActivity extends AppCompatActivity {
         lvSpecializations.setAdapter(specializationArrayAdapter);
     }
 
-    private void setProfilePicture(String picture){
+    private void setProfilePicture(String picture) {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
         ivProfilePicture.setImageBitmap(bitmap);
