@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.view.View;
+import android.util.Base64;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.Role;
 import com.hfad.organizationofthefestival.login.LoginActivity;
+import com.hfad.organizationofthefestival.utility.Role;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -38,7 +38,6 @@ public class SignupActivity extends AppCompatActivity {
     private TextView tvLogin;
     private Spinner sRoleChooserDropDown;
 
-    private byte[] profilePictureInBytes;
     private Role role;
     private SignupController signupController;
     private Signup signup;
@@ -56,14 +55,13 @@ public class SignupActivity extends AppCompatActivity {
         setupRoleChooser();
 
         apbRegister.setOnClickListener(v -> {
-            profilePictureInBytes = pictureToByteArray(((BitmapDrawable) ivProfilePicture.getDrawable()).getBitmap());
             role = getRoleEnum(sRoleChooserDropDown.getSelectedItem().toString());
 
             signup = new Signup(etUsername.getText().toString(),
                     etInputPassword.getText().toString(),
                     etFirstName.getText().toString(),
                     etLastName.getText().toString(),
-                    profilePictureInBytes.toString(),
+                    getPictureString(),
                     etPhone.getText().toString(),
                     etEmail.getText().toString(),
                     role.getValue());
@@ -149,5 +147,13 @@ public class SignupActivity extends AppCompatActivity {
         String[] items = new String[]{Role.LEADER.toString(), Role.ORGANIZER.toString(), Role.WORKER.toString()}; //Leader, Organizer, Worker
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         sRoleChooserDropDown.setAdapter(adapter);
+    }
+
+    private String getPictureString() {
+        Bitmap bitmap = ((BitmapDrawable) ivProfilePicture.getDrawable()).getBitmap();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        byte[] pictureByte = bos.toByteArray();
+        return Base64.encodeToString(pictureByte, Base64.DEFAULT);
     }
 }

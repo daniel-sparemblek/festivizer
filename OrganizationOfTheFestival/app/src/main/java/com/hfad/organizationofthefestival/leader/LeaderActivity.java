@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
 
+import java.io.ByteArrayOutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
@@ -92,7 +94,7 @@ public class LeaderActivity extends AppCompatActivity {
         tvLeaderEmail.setText(leader.getEmail());
 
         // TODO import picture to image view
-
+        setImage(leader.getPicture());
         tvPhone.setText(leader.getPhone());
         lvFestivalList = findViewById(R.id.festivalList);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
@@ -122,5 +124,8 @@ public class LeaderActivity extends AppCompatActivity {
     }
 
     private void setImage(String picture){
+        byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
+        ivProfilePicture.setImageBitmap(bitmap);
     }
 }
