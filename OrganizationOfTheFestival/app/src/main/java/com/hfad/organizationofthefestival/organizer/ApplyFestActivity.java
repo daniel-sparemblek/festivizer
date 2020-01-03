@@ -1,42 +1,38 @@
 package com.hfad.organizationofthefestival.organizer;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.leader.LeaderActivity;
+import com.hfad.organizationofthefestival.festival.Festival;
 
-public class OrganizerActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
-    private OrganizerController organizerController;
+public class ApplyFestActivity extends AppCompatActivity {
+
+    private ApplyFestController applyFestController;
     private String accessToken;
     private String refreshToken;
     private String username;
-
-    private TextView tvName;
-    private TextView tvEmail;
-    private TextView tvPhone;
     private ListView lvFestivals;
-    private ImageView ivProfilePicture;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("WORKER");
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.organizer_profile);
+        setContentView(R.layout.organizer_screen_apply_for_festival);
 
+        lvFestivals = findViewById(R.id.orgFestivalList);
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,9 +43,16 @@ public class OrganizerActivity extends AppCompatActivity {
         username = intent.getStringExtra("username");
 
 
-        organizerController = new OrganizerController(this, accessToken, username, refreshToken);
+        applyFestController = new ApplyFestController(this, accessToken, username, refreshToken);
 
-        organizerController.getOrganizer();
+        applyFestController.fetchFestivals();
+
+        lvFestivals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                name  = (String) parent.getItemAtPosition(position);
+            }
+        });
     }
 
     @Override
@@ -68,13 +71,13 @@ public class OrganizerActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.myProfile) {
-
-        } else if (id == R.id.applyForFest) {
-            Intent intent = new Intent(this, ApplyFestActivity.class);
+            Intent intent = new Intent(this, OrganizerActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             this.startActivity(intent);
+        } else if (id == R.id.applyForFest) {
+
         } else if (id == R.id.myEvents) {
             System.out.println("Stisnuo sam profil");
         } else if (id == R.id.myJobs) {
@@ -88,28 +91,20 @@ public class OrganizerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void fillInActivity(Organizer organizer) {
-        tvName = findViewById(R.id.orgName);
-        tvPhone = findViewById(R.id.orgPhone);
-        tvEmail = findViewById(R.id.orgEmail);
-        ivProfilePicture = findViewById(R.id.profile_picture);
 
-        System.out.println("kurcic " + organizer);
-
-        setProfilePicture(organizer.getPicture());
-        tvName.setText(organizer.getUsername());
-        tvPhone.setText(organizer.getPhone());
-        tvEmail.setText(organizer.getEmail());
-
-        lvFestivals = findViewById(R.id.orgFestivalList);
-        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, organizer.getFestivals());
-        lvFestivals.setAdapter(specializationArrayAdapter);
+    public void fillInActivity(Festival[] festivals) {
+        ArrayAdapter<String> festivalsArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, festivalsAsList(festivals));
+        lvFestivals.setAdapter(festivalsArrayAdapter);
     }
 
-    private void setProfilePicture(String picture) {
-        byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
-        ivProfilePicture.setImageBitmap(bitmap);
+    private List<String> festivalsAsList(Festival[] festivals) {
+        List<String> result = new ArrayList<>();
+
+        for(Festival festival : festivals) {
+            result.add(festival.toString());
+        }
+
+        return result;
     }
 }

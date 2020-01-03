@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginController.login(login);
                 } else {
                     Toast.makeText(getApplicationContext(), "No fields should be empty!", Toast.LENGTH_SHORT).show();
-                    btnLogin.setEnabled(true);
+                    btnLogin.setEnabled(true    );
                     return;
                 }
             }

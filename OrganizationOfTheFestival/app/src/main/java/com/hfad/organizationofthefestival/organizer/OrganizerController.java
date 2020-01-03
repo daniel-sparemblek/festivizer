@@ -1,13 +1,6 @@
 package com.hfad.organizationofthefestival.organizer;
 
-import android.app.Activity;
 import android.widget.Toast;
-
-import com.hfad.organizationofthefestival.leader.Leader;
-import com.hfad.organizationofthefestival.leader.LeaderActivity;
-import com.hfad.organizationofthefestival.leader.LeaderClient;
-import com.hfad.organizationofthefestival.worker.WorkerActivity;
-import com.hfad.organizationofthefestival.worker.WorkerClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
