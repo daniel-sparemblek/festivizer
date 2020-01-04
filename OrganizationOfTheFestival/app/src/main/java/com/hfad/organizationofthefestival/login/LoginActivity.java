@@ -42,27 +42,21 @@ public class LoginActivity extends AppCompatActivity {
         twRegisterLink = findViewById(R.id.tw_register_link);
         btnLogin = findViewById(R.id.btn_login);
 
-        twRegisterLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                twRegisterLink.setClickable(false);
-                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
-            }
+        twRegisterLink.setOnClickListener(v -> {
+            twRegisterLink.setClickable(false);
+            startActivity(new Intent(LoginActivity.this, SignupActivity.class));
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnLogin.setEnabled(false);
+        btnLogin.setOnClickListener(v -> {
+            btnLogin.setEnabled(false);
 
-                Login login = new Login(etEmail.getText().toString(), etPassword.getText().toString());
-                if (login.isValid()) {
-                    loginController.login(login);
-                } else {
-                    Toast.makeText(getApplicationContext(), "No fields should be empty!", Toast.LENGTH_SHORT).show();
-                    btnLogin.setEnabled(true    );
-                    return;
-                }
+            Login login = new Login(etEmail.getText().toString(), etPassword.getText().toString());
+            if (login.isValid()) {
+                loginController.login(login);
+            } else {
+                Toast.makeText(getApplicationContext(), "No fields should be empty!", Toast.LENGTH_SHORT).show();
+                btnLogin.setEnabled(true    );
+                return;
             }
         });
     }

@@ -2,12 +2,11 @@ package com.hfad.organizationofthefestival.worker;
 
 import com.google.gson.annotations.SerializedName;
 import com.hfad.organizationofthefestival.utility.Job;
-import com.hfad.organizationofthefestival.utility.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Worker{
+public class Worker {
 
     private int id;
     private String username;
@@ -25,7 +24,7 @@ public class Worker{
     public List<String> getJobs() {
         List<String> result = new ArrayList<>();
 
-        for(Job job : jobs) {
+        for (Job job : jobs) {
             result.add(job.toString());
         }
 
@@ -33,7 +32,6 @@ public class Worker{
     }
 
     private List<Job> jobs;
-
 
     public int getId() {
         return id;
@@ -123,7 +121,7 @@ public class Worker{
     public List<String> getSpecializations() {
         List<String> result = new ArrayList<>();
 
-        for(Specialization spec : specializations) {
+        for (Specialization spec : specializations) {
             result.add(spec.toString());
         }
 
