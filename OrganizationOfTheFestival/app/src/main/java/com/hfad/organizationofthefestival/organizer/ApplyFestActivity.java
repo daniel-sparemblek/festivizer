@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -13,6 +14,7 @@ import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ApplyFestActivity extends AppCompatActivity {
@@ -23,6 +25,9 @@ public class ApplyFestActivity extends AppCompatActivity {
     private String username;
     private ListView lvFestivals;
     private String name;
+    private char c = 0x2714;
+    private Festival[] festivals;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,34 @@ public class ApplyFestActivity extends AppCompatActivity {
 
         applyFestController.fetchFestivals();
 
-        lvFestivals.setOnItemClickListener((parent, view, position, id) -> name  = (String) parent.getItemAtPosition(position));
+        lvFestivals.setOnItemClickListener((parent, view, position, id) -> {
+            name = (String) parent.getItemAtPosition(position);
+            int status = 1;
+
+            if(name.contains(" " + c)) {
+                name = name.replace(" " + c, "");
+                status = 0;
+            }
+
+            for(int i = 0; i < festivals.length; i++) {
+                if(name.equals(festivals[i].getName())) {
+                    festivals[i].setStatus(status);
+                    break;
+                }
+            }
+
+            fillInActivity(festivals);
+        });
+    }
+
+    private List<String> extractList(Adapter adapter) {
+        List<String> result = new ArrayList<>();
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            result.add((String) adapter.getItem(i));
+        }
+
+        return result;
     }
 
     @Override
@@ -89,6 +121,8 @@ public class ApplyFestActivity extends AppCompatActivity {
 
 
     public void fillInActivity(Festival[] festivals) {
+        this.festivals = festivals;
+
         ArrayAdapter<String> festivalsArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, formatFestivals(festivals));
         lvFestivals.setAdapter(festivalsArrayAdapter);
@@ -96,9 +130,8 @@ public class ApplyFestActivity extends AppCompatActivity {
 
     private List<String> formatFestivals(Festival[] festivals) {
         List<String> result = new ArrayList<>();
-        char c = 0x2714;
 
-        for(Festival festival : festivals) {
+        for (Festival festival : festivals) {
             if (festival.getStatus() == 1) {
                 result.add(festival.toString() + " " + c);
             } else if (festival.getStatus() == 0) {
