@@ -12,10 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
@@ -160,16 +158,7 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
 
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                    new DatePickerDialog.OnDateSetListener() {
-
-                        @Override
-                        public void onDateSet(DatePicker view, int year,
-                                              int monthOfYear, int dayOfMonth) {
-
-                            etStartDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                        }
-                    }, sYear, sMonth, sDay);
+                    (view, year, monthOfYear, dayOfMonth) -> etStartDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), sYear, sMonth, sDay);
             datePickerDialog.show();
         }
         if (v == btnStartTimePicker) {
@@ -181,15 +170,7 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
 
             // Launch Time Picker Dialog
             TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                    new TimePickerDialog.OnTimeSetListener() {
-
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay,
-                                              int minute) {
-
-                            etStartTime.setText(hourOfDay + ":" + minute);
-                        }
-                    }, sHour, sMinute, false);
+                    (view, hourOfDay, minute) -> etStartTime.setText(hourOfDay + ":" + minute), sHour, sMinute, false);
             timePickerDialog.show();
         }
 
@@ -204,16 +185,7 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
 
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                    new DatePickerDialog.OnDateSetListener() {
-
-                        @Override
-                        public void onDateSet(DatePicker view, int year,
-                                              int monthOfYear, int dayOfMonth) {
-
-                            etEndDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                        }
-                    }, eYear, eMonth, eDay);
+                    (view, year, monthOfYear, dayOfMonth) -> etEndDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), eYear, eMonth, eDay);
             datePickerDialog.show();
         }
         if (v == btnEndTimePicker) {
@@ -225,15 +197,7 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
 
             // Launch Time Picker Dialog
             TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                    new TimePickerDialog.OnTimeSetListener() {
-
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay,
-                                              int minute) {
-
-                            etEndTime.setText(hourOfDay + ":" + minute);
-                        }
-                    }, eHour, eMinute, false);
+                    (view, hourOfDay, minute) -> etEndTime.setText(hourOfDay + ":" + minute), eHour, eMinute, false);
             timePickerDialog.show();
         }
     }
