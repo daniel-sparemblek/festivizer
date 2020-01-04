@@ -34,7 +34,6 @@ public class CreateFestivalActivity extends AppCompatActivity {
     private ImageView ivLogo;
     private EditText etName;
     private EditText etDescription;
-    private EditText etDuration;
     private EditText etStartTime;
     private EditText etStartDate;
     private EditText etEndTime;
@@ -90,8 +89,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
         ivLogo = findViewById(R.id.festivalLogo);
         etName = findViewById(R.id.name);
         etDescription = findViewById(R.id.desc);
-        etDuration = findViewById(R.id.duration);
-        etStartTime = findViewById(R.id.startTime);
+        etStartTime = findViewById(R.id.start_time);
         etEndTime = findViewById(R.id.endTime);
         btCreate = findViewById(R.id.createBtn);
         etEndDate = findViewById(R.id.endDate);
@@ -112,9 +110,6 @@ public class CreateFestivalActivity extends AppCompatActivity {
             return false;
         } else if ("".equals(etDescription.getText().toString())) {
             Toast.makeText(this, "Description can't be empty", Toast.LENGTH_SHORT).show();
-            return false;
-        } else if ("".equals(etDuration.getText().toString())) {
-            Toast.makeText(this, "Duration can't be empty", Toast.LENGTH_SHORT).show();
             return false;
         } else if ("".equals(etStartTime.getText().toString()) || "".equals(etEndTime.getText().toString())) {
             Toast.makeText(this, "Start and and time must be specified", Toast.LENGTH_SHORT).show();
