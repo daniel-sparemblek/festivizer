@@ -76,24 +76,36 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/start_date"
+                android:id="@+id/start_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/start_date"
+                android:hint="@string/start_day"
                 android:importantForAutofill="no"
-                android:inputType="date" />
+                android:inputType="number" />
 
             <EditText
-                android:id="@+id/start_time"
+                android:id="@+id/start_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/start_time"
+                android:hint="@string/start_month"
                 android:importantForAutofill="no"
-                android:inputType="time" />
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/start_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/start_year"
+                android:importantForAutofill="no"
+                android:inputType="number" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -102,24 +114,88 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/end_date"
+                android:id="@+id/start_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/end_date"
+                android:hint="@string/start_hour"
                 android:importantForAutofill="no"
-                android:inputType="date" />
+                android:inputType="number" />
 
             <EditText
-                android:id="@+id/end_time"
+                android:id="@+id/start_minutes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/end_time"
+                android:hint="@string/start_minutes"
                 android:importantForAutofill="no"
-                android:inputType="time" />
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/end_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/end_day"
+                android:importantForAutofill="no"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/end_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/end_month"
+                android:importantForAutofill="no"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/end_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/end_year"
+                android:importantForAutofill="no"
+                android:inputType="number" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/end_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/end_hour"
+                android:importantForAutofill="no"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/end_minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/end_minutes"
+                android:importantForAutofill="no"
+                android:inputType="number" />
         </LinearLayout>
 
         <Button
