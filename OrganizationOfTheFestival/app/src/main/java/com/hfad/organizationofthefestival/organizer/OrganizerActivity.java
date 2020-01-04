@@ -32,8 +32,6 @@ public class OrganizerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("WORKER");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.organizer_profile);
 
@@ -68,15 +66,11 @@ public class OrganizerActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.myProfile) {
-
+            // do nothing
         } else if (id == R.id.applyForFest) {
-            Intent intent = new Intent(this, ApplyFestActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            this.startActivity(intent);
+            switchActivity(ApplyFestActivity.class);
         } else if (id == R.id.myEvents) {
-            System.out.println("Stisnuo sam profil");
+            switchActivity(EventsActivity.class);
         } else if (id == R.id.myJobs) {
             System.out.println("Stisnuo sam profil");
         } else if (id == R.id.printPass) {
@@ -86,6 +80,14 @@ public class OrganizerActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void switchActivity(Class<?> destination) {
+        Intent intent = new Intent(this, destination);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        this.startActivity(intent);
     }
 
     public void fillInActivity(Organizer organizer) {

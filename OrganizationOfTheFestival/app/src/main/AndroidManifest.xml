@@ -20,6 +20,7 @@
         <activity android:name=".leader.LeaderActivity" />
         <activity android:name=".worker.WorkerActivity" />
         <activity android:name=".organizer.OrganizerActivity" />
+        <activity android:name=".organizer.EventsActivity" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".organizer.ApplyFestActivity" />
         <activity android:name=".signup.SignupActivity" />
