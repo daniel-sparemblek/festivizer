@@ -102,5 +102,7 @@
     <string name="start_year">Start Year</string>
     <string name="start_hour">Start Hour</string>
     <string name="start_minutes">Start Minutes</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Time</string>
 
 </resources>

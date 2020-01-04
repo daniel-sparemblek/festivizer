@@ -30,7 +30,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="379dp"
+        android:layout_height="407dp"
         android:orientation="vertical"
         android:paddingLeft="25dp"
         android:paddingTop="10dp"
@@ -67,35 +67,21 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/start_day"
+                android:id="@+id/startDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/start_day"
+                android:hint="@string/start_date"
                 android:importantForAutofill="no"
-                android:inputType="number" />
+                android:inputType="date" />
 
-            <EditText
-                android:id="@+id/start_month"
+            <Button
+                android:id="@+id/startDatebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/start_month"
-                android:importantForAutofill="no"
-                android:inputType="number" />
-
-            <EditText
-                android:id="@+id/start_year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/start_year"
-                android:importantForAutofill="no"
-                android:inputType="number" />
-
+                android:text="@string/select_date" />
 
         </LinearLayout>
 
@@ -105,24 +91,21 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/start_hour"
+                android:id="@+id/startTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/start_hour"
+                android:hint="@string/start_time"
                 android:importantForAutofill="no"
-                android:inputType="number" />
+                android:inputType="time" />
 
-            <EditText
-                android:id="@+id/start_minutes"
+            <Button
+                android:id="@+id/startTimebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/start_minutes"
-                android:importantForAutofill="no"
-                android:inputType="number" />
+                android:text="@string/select_time" />
         </LinearLayout>
 
         <LinearLayout
@@ -131,35 +114,21 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/end_day"
+                android:id="@+id/endDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/end_day"
+                android:hint="@string/end_date"
                 android:importantForAutofill="no"
-                android:inputType="number" />
+                android:inputType="date" />
 
-            <EditText
-                android:id="@+id/end_month"
+            <Button
+                android:id="@+id/endDatebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/end_month"
-                android:importantForAutofill="no"
-                android:inputType="number" />
-
-            <EditText
-                android:id="@+id/end_year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/end_year"
-                android:importantForAutofill="no"
-                android:inputType="number" />
-
+                android:text="@string/select_date" />
 
         </LinearLayout>
 
@@ -169,30 +138,27 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/end_hour"
-                android:layout_width="178dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/end_hour"
-                android:importantForAutofill="no"
-                android:inputType="number" />
-
-            <EditText
-                android:id="@+id/end_minutes"
+                android:id="@+id/endTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/end_minutes"
+                android:hint="@string/end_time"
                 android:importantForAutofill="no"
-                android:inputType="number" />
+                android:inputType="time" />
+
+            <Button
+                android:id="@+id/endTimebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/select_time" />
         </LinearLayout>
 
         <Spinner
             android:id="@+id/selOrganizerIn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="40dp" />
 
     </LinearLayout>
 
