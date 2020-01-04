@@ -36,7 +36,9 @@ public class CreateFestivalActivity extends AppCompatActivity {
     private EditText etDescription;
     private EditText etDuration;
     private EditText etStartTime;
+    private EditText etStartDate;
     private EditText etEndTime;
+    private EditText etEndDate;
     private Button btCreate;
 
     private Festival festival;
@@ -56,12 +58,19 @@ public class CreateFestivalActivity extends AppCompatActivity {
             if (!checkEntry()) {
                 return;
             }
+
+            String startDateTime = convertTime(etStartTime.getText().toString(),
+                    etStartDate.getText().toString());
+            String endDateTime = convertTime(etEndTime.getText().toString(),
+                    etEndDate.getText().toString());
+
             festival = new Festival(etName.getText().toString(),
                     etDescription.getText().toString(),
                     getPictureString(),
-                    etStartTime.getText().toString(),
-                    etEndTime.getText().toString());
+                    startDateTime,
+                    endDateTime);
             controller.createFestival(festival, accessToken);
+
             returnToLeaderActivity();
         });
 
@@ -85,6 +94,8 @@ public class CreateFestivalActivity extends AppCompatActivity {
         etStartTime = findViewById(R.id.startTime);
         etEndTime = findViewById(R.id.endTime);
         btCreate = findViewById(R.id.createBtn);
+        etEndDate = findViewById(R.id.endDate);
+        etStartDate = findViewById(R.id.start_date);
     }
 
     private String getPictureString() {
@@ -95,26 +106,26 @@ public class CreateFestivalActivity extends AppCompatActivity {
         return Base64.encodeToString(pictureByte, Base64.DEFAULT);
     }
 
-    private boolean checkEntry(){
-        if ("".equals(etName.getText().toString())){
+    private boolean checkEntry() {
+        if ("".equals(etName.getText().toString())) {
             Toast.makeText(this, "Name can't be empty", Toast.LENGTH_SHORT).show();
             return false;
-        } else if ("".equals(etDescription.getText().toString())){
+        } else if ("".equals(etDescription.getText().toString())) {
             Toast.makeText(this, "Description can't be empty", Toast.LENGTH_SHORT).show();
             return false;
-        } else if ("".equals(etDuration.getText().toString())){
+        } else if ("".equals(etDuration.getText().toString())) {
             Toast.makeText(this, "Duration can't be empty", Toast.LENGTH_SHORT).show();
             return false;
-        } else if ("".equals(etStartTime.getText().toString()) || "".equals(etEndTime.getText().toString())){
+        } else if ("".equals(etStartTime.getText().toString()) || "".equals(etEndTime.getText().toString())) {
             Toast.makeText(this, "Start and and time must be specified", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
     }
 
-    public String convertTime(String time){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a z");
-        ZonedDateTime dateTime = ZonedDateTime.parse(time, formatter);
+    public String convertTime(String time, String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+        ZonedDateTime dateTime = ZonedDateTime.parse(date + " " + time, formatter);
         return dateTime.toString();
     }
 }

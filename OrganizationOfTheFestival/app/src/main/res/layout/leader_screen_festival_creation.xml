@@ -102,7 +102,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/endDate"
+                android:id="@+id/end_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -112,7 +112,7 @@
                 android:inputType="date" />
 
             <EditText
-                android:id="@+id/endTime"
+                android:id="@+id/end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
