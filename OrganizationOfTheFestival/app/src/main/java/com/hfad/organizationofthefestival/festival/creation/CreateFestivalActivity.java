@@ -20,6 +20,8 @@ import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Formatter;
 
 public class CreateFestivalActivity extends AppCompatActivity {
 
@@ -108,5 +110,11 @@ public class CreateFestivalActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public String convertTime(String time){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a z");
+        ZonedDateTime dateTime = ZonedDateTime.parse(time, formatter);
+        return dateTime.toString();
     }
 }
