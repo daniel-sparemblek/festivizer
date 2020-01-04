@@ -1,6 +1,8 @@
-from flask_jwt_extended import get_jwt_identity
-from models import UserModel
 from functools import wraps
+
+from flask_jwt_extended import get_jwt_identity
+
+from models import UserModel
 
 
 def permission_required(permission):

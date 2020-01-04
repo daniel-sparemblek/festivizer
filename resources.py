@@ -6,9 +6,10 @@ from decorators import permission_required
 from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalOrganizers, FestivalSchema,
                     EventModel, EventSchema, JobModel, JobSchema, AuctionModel, AuctionSchema, LeaderSchema,
                     Application, ApplicationSchema, WorkerSchema, SpecializationSchema, SpecializationModel,
-                    WorkerSpecializations, OrganizerSchema)
+                    WorkerSpecializations, OrganizerSchema, JobApplySchema)
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+import sys
 
 
 class UserRegistration(Resource):
@@ -205,10 +206,10 @@ class Specializations(Resource):
 
     @jwt_required
     def get(self):
-        worker_id = request.args.get('worker_id')
+        username = request.args.get('username')
 
-        if worker_id:
-            specializations = SpecializationModel.find_by_worker_id(worker_id=worker_id)
+        if username:
+            specializations = SpecializationModel.find_by_username(username=username)
             return SpecializationSchema.to_json(specializations)
 
         return SpecializationSchema(many=True).dump(SpecializationModel.find_all()), 200
@@ -245,6 +246,8 @@ class Festivals(Resource):
 
 
 class Festival(Resource):
+    #user ne upisuje sam status
+    #print("message", file=sys.stderr)
     @jwt_required
     @permission_required(1)
     def post(self):
@@ -262,8 +265,8 @@ class Festival(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
-        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
-        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
+        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
         if end_time < start_time:
             return {"msg": "End time can't be before start time."}
@@ -273,15 +276,16 @@ class Festival(Resource):
             name=data['name'],
             desc=data['desc'],
             logo=data['logo'],
-            start_time=datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ'),
-            end_time=datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ'),
+            start_time=start_time,
+            end_time=end_time,
             status=data['status']
         )
 
         try:
             new_festival.save_to_db()
             return {'msg': 'Festival {} was successfully created!'.format(data['name'])}, 200
-        except IntegrityError:
+        except IntegrityError as e:
+            print(e)
             return {'msg': 'Bad request'}, 400
         except:
             return {'msg': 'Internal server error'}, 500
@@ -331,6 +335,13 @@ class SearchUsers(Resource):
         users = UserModel.find_by_username_start(search)
         return UserSchema.to_json(users)
 
+class SearchSpecializations(Resource):
+    @jwt_required
+    def post(self):
+        data = request.get_json()
+        search = data['search']
+        specializations = SpecializationModel.find_by_specialization_start(search)
+        return SpecializationSchema.to_json(specializations)
 
 class Events(Resource):
     @jwt_required
@@ -356,8 +367,8 @@ class Event(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
-        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
-        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
+        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
         if end_time < start_time:
             return {"msg": "End time can't be before start time."}
@@ -368,14 +379,15 @@ class Event(Resource):
             name=data['name'],
             desc=data['desc'],
             location=data['location'],
-            start_time=datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ'),
-            end_time=datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+            start_time=start_time,
+            end_time=end_time
         )
 
         try:
             new_event.save_to_db()
             return {'msg': 'Event {} was successfully created!'.format(data['name'])}, 200
-        except IntegrityError:
+        except IntegrityError as e:
+            print(e)
             return {'msg': 'Bad request'}, 400
         except Exception as e:
             return {'msg': 'Internal server error'}, 500
@@ -402,10 +414,11 @@ class Job(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
-        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
         new_job = JobModel(
             name=data['name'],
+            description=data['description'],
             event_id=data['event_id'],
             worker_id=data['worker_id'],
             start_time=start_time,
@@ -415,7 +428,8 @@ class Job(Resource):
         try:
             new_job.save_to_db()
             return {'msg': 'Job {} was successfully created!'.format(data['name'])}, 200
-        except IntegrityError:
+        except IntegrityError as e:
+            print(e)
             return {'msg': 'Bad request'}, 400
         except Exception as e:
             raise e
@@ -425,12 +439,22 @@ class Job(Resource):
 class Jobs(Resource):
     def get(self):
         leader_id = request.args.get('leader_id')
+        job_id = request.args.get('job_id')
 
-        if leader_id:
+        if leader_id and not job_id:
             return JobSchema.to_json(JobModel.find_jobs_on_auction_by_leader_id(leader_id=leader_id))
+
+        if job_id and not leader_id:
+            return JobApplySchema.to_json(JobModel.find_by_job_id(job_id=job_id))
 
         jobs = JobModel.get_all()
         return JobSchema.to_json(jobs)
+
+
+class AvailableJobs(Resource):
+    @jwt_required
+    def get(self):
+        return JobSchema.to_json(JobModel.find_jobs_on_auction())
 
 
 class Auction(Resource):
@@ -445,8 +469,8 @@ class Auction(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
-        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
-        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%fZ')
+        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
+        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
         if end_time < start_time:
             return {"msg": "End time can't be before start time."}
@@ -491,18 +515,15 @@ class UserLogoutAccess(Resource):
 class Applications(Resource):
     @jwt_required
     def post(self):
+        username = get_jwt_identity()
+        user = UserModel.find_by_username(username)
         data = request.get_json()
-
-        application_schema = ApplicationSchema()
-        validate = application_schema.validate(data)
-
-        if bool(validate):
-            value = list(validate.values())[0]
-            return {"msg": value[0]}, 422
+        job_id = data['job_id']
+        auction = AuctionModel.find_by_job_id(job_id)
 
         new_application = Application(
-            auction_id=data['auction_id'],
-            worker_id=data['worker_id'],
+            auction_id=auction.auction_id,
+            worker_id=user.id,
             price=data['price'],
             comment=data['comment'],
             duration=data['duration'],
@@ -511,14 +532,25 @@ class Applications(Resource):
 
         try:
             new_application.save_to_db()
-            auction = AuctionModel.find_by_auction_id(data['auction_id'])
+            auction = AuctionModel.find_by_auction_id(auction.auction_id)
             job = JobModel.find_by_job_id(auction.job_id)
             return {'msg': 'Application for {} was successfully created!'.format(job.name)}, 200
-        except IntegrityError:
+        except IntegrityError as e:
+            print(e)
             return {'msg': 'Bad request'}, 400
         except Exception as e:
             raise e
             return {'msg': 'Internal server error'}, 500
+
+    @jwt_required
+    def get(self):
+        application_id = request.args.get('application_id')
+        job_id = request.args.get('job_id')
+
+        if application_id:
+            return Application.find_by_application_id(application_id=application_id)
+
+        return Application.find_all()
 
 
 class UserLogoutRefresh(Resource):

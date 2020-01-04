@@ -1,9 +1,11 @@
-from marshmallow import validates, ValidationError, fields, validates_schema
+import re
+
+from marshmallow import validates, ValidationError, fields
+from passlib.hash import pbkdf2_sha256 as sha256
+
 from run import db
 from run import ma
-import re
-from passlib.hash import pbkdf2_sha256 as sha256
-import json
+from datetime import datetime
 
 
 # MODELS
@@ -106,7 +108,7 @@ class FestivalModel(db.Model):
 
     @classmethod
     def find_by_organizer_id(cls, organizer_id):
-        return db.session.query(cls).join(FestivalOrganizers, FestivalOrganizers.festival_id == cls.festival_id)\
+        return db.session.query(cls).join(FestivalOrganizers, FestivalOrganizers.festival_id == cls.festival_id) \
             .filter(FestivalOrganizers.organizer_id == organizer_id).all()
 
     def save_to_db(self):
@@ -169,6 +171,10 @@ class AuctionModel(db.Model):
         return cls.query.filter_by(auction_id=auction_id).first()
 
     @classmethod
+    def find_by_job_id(cls, job_id):
+        return cls.query.filter_by(job_id=job_id).first()
+
+    @classmethod
     def find_by_leader_id(cls, leader_id):
         return db.session.query(cls).join(JobModel, JobModel.job_id == cls.job_id) \
             .join(EventModel, EventModel.event_id == JobModel.event_id) \
@@ -185,6 +191,7 @@ class JobModel(db.Model):
 
     job_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
     event_id = db.Column(db.Integer, db.ForeignKey('events.event_id'))
     worker_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     start_time = db.Column(db.DateTime, nullable=False)
@@ -213,6 +220,10 @@ class JobModel(db.Model):
     def get_all(cls):
         return cls.query.all()
 
+    @classmethod
+    def find_jobs_on_auction(cls):
+        return db.session.query(cls).join(AuctionModel, AuctionModel.job_id == cls.job_id).all()
+
 
 class Application(db.Model):
     __tablename__ = 'application'
@@ -230,6 +241,14 @@ class Application(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    @classmethod
+    def find_by_application_id(cls, application_id):
+        return cls.query.filter_by(application_id=application_id).one()
+
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
+
 
 class SpecializationModel(db.Model):
     __tablename__ = 'specializations'
@@ -244,8 +263,14 @@ class SpecializationModel(db.Model):
     @classmethod
     def find_by_worker_id(cls, worker_id):
         return db.session.query(cls) \
-            .join(WorkerSpecializations, WorkerSpecializations.specialization_id == cls.specialization_id) \
-            .filter(WorkerSpecializations.worker_id == worker_id).all()
+            .join(WorkerSpecializations, WorkerSpecializations.specialization_id == cls.specialization_id).filter(
+            WorkerSpecializations.worker_id == worker_id).all()
+
+    @classmethod
+    def find_by_username(cls, username):
+        return db.session.query(cls) \
+            .join(WorkerSpecializations, WorkerSpecializations.specialization_id == cls.specialization_id).join(
+            UserModel, UserModel.id == WorkerSpecializations.worker_id).filter(UserModel.username == username).all()
 
     @classmethod
     def find_all(cls):
@@ -254,6 +279,17 @@ class SpecializationModel(db.Model):
     @classmethod
     def find_by_specialization_id(cls, specialization_id):
         return cls.query.filter_by(specialization_id=specialization_id).one()
+
+    @classmethod
+    def find_by_specialization_start(cls, start):
+        search = "{}%".format(start)
+        return cls.query.filter(cls.name.like(search)).all()
+
+    @classmethod
+    def find_by_job_id(cls, job_id):
+        return db.session.query(cls) \
+            .join(JobSpecializations, JobSpecializations.specialization_id == cls.specialization_id) \
+            .filter(JobSpecializations.job_id == job_id).all()
 
 
 class WorkerSpecializations(db.Model):
@@ -448,6 +484,7 @@ class AuctionSchema(ma.ModelSchema):
 class JobSchema(ma.ModelSchema):
     job_id = fields.Integer(required=False)
     name = fields.String(required=True, error_messages={"required": "Missing name."})
+    description = fields.String(required=True, error_messages={"required": "Missing description."})
     event_id = fields.Integer(required=True, error_messages={"required": "Missing event id."})
     worker_id = fields.Integer(required=True, error_messages={"required": "Missing worker id."})
     start_time = fields.DateTime(required=True, error_messages={"required": "Missing start time"})
@@ -466,8 +503,8 @@ class JobSchema(ma.ModelSchema):
 
 class ApplicationSchema(ma.ModelSchema):
     application_id = fields.Integer(required=False)
-    auction_id = fields.Integer(required=True, error_messages={"required": "Missing auction id"})
-    worker_id = fields.Integer(required=True, error_messages={"required": "Missing worker id"})
+    auction_id = fields.Integer(required=False)
+    worker_id = fields.Integer(required=False)
     price = fields.Float(required=True, error_messages={"required": "Missing price"})
     comment = fields.String(required=False)
     duration = fields.Integer(required=True, error_messages={"required": "Missing duration"})
@@ -667,3 +704,153 @@ class OrganizerSchema(ma.Schema):
             festivals=festivals
         )
         return cls().dump(organizer)
+
+
+class JobApply(object):
+    def __init__(self, job_id, name, description, event, worker, start_time, is_completed, specializations):
+        self.job_id = job_id
+        self.name = name
+        self.description = description
+        self.event = event
+        self.worker = worker
+        self.start_time = start_time
+        self.is_completed = is_completed
+        self.specializations = specializations
+
+
+class EventApply(object):
+    def __init__(self, event_id, festival, organizer, name, desc, location, start_time, end_time):
+        self.event_id = event_id
+        self.festival = festival
+        self.organizer = organizer
+        self.name = name
+        self.desc = desc
+        self.location = location
+        self.start_time = start_time
+        self.end_time = end_time
+
+
+class EventApplySchema(ma.Schema):
+    event_id = fields.Integer(required=False)
+    festival = fields.Nested(FestivalSchema, required=True, error_messages={"required": "Missing festival."})
+    organizer = fields.Nested(OrganizerSchema, required=True, error_messages={"required": "Missing organizer's id."})
+    name = fields.Str(required=True, error_messages={"required": "Missing name."})
+    desc = fields.Str(required=True, error_messages={"required": "Missing description."})
+    location = fields.Str(required=True, error_messages={"required": "Missing location."})
+    start_time = fields.DateTime(required=True, error_messages={"required": "Missing start time."})
+    end_time = fields.DateTime(required=True, error_messages={"required": "Missing end time."})
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            events = []
+            for event in value:
+                festival = FestivalModel.find_by_festival_id(event.festival_id)
+                user = UserModel.find_by_id(event.organizer_id)
+                festivals = FestivalModel.find_by_organizer_id(user.id)
+                organizer = Organizer(user.id, user.username, user.password, user.first_name,
+                                      user.last_name, user.picture, user.phone, user.email,
+                                      user.permission, user.is_pending, festivals)
+                event = EventApply(event.event_id, festival, organizer, event.name, event.desc, event.location,
+                                   event.start_time, event.end_time)
+                events.append(event)
+            return cls(many=True).dump(events)
+        festival = FestivalModel.find_by_festival_id(value.festival_id)
+        user = UserModel.find_by_id(value.organizer_id)
+        festivals = FestivalModel.find_by_organizer_id(user.id)
+        organizer = Organizer(user.id, user.username, user.password, user.first_name,
+                              user.last_name, user.picture, user.phone, user.email,
+                              user.permission, user.is_pending, festivals)
+        event = EventApply(value.event_id, festival, organizer, value.name, value.desc, value.location,
+                           value.start_time, value.end_time)
+        return cls().dump(event)
+
+
+class JobApplySchema(ma.Schema):
+    job_id = fields.Integer(required=False)
+    name = fields.String(required=True, error_messages={"required": "Missing name."})
+    description = fields.String(required=True, error_messages={"required": "Missing name."})
+    event = fields.Nested(EventApplySchema, required=True, error_messages={"required": "Missing event."})
+    worker = fields.Nested(WorkerSchema, required=True, error_messages={"required": "Missing worker id."})
+    start_time = fields.DateTime(required=True, error_messages={"required": "Missing start time"})
+    is_completed = fields.Boolean(required=True, error_messages={"required": "Missing completion"})
+    specializations = fields.List(fields.Nested(SpecializationSchema))
+
+    @classmethod
+    def to_json(cls, value):
+        if type(value) is list:
+            jobs = []
+            for job in value:
+                event = EventModel.find_by_event_id(event_id=job.event_id)
+                festival = FestivalModel.find_by_festival_id(event.festival_id)
+                user = UserModel.find_by_id(event.organizer_id)
+                festivals = FestivalModel.find_by_organizer_id(user.id)
+                organizer = Organizer(user.id, user.username, user.password, user.first_name,
+                                      user.last_name, user.picture, user.phone, user.email,
+                                      user.permission, user.is_pending, festivals)
+                event_apply = EventApply(event.event_id, festival, organizer, event.name, event.desc, event.location,
+                                   event.start_time, event.end_time)
+                new_worker = None
+                if job.worker_id is not None:
+                    worker = UserModel.find_by_id(job.worker_id)
+                    specializations = SpecializationModel.find_by_worker_id(worker_id=job.worker_id)
+                    jobs = JobModel.find_completed_by_worker_id(worker_id=job.worker_id)
+                    new_worker = Worker(
+                        user_id=worker.id,
+                        username=worker.username,
+                        password=worker.password,
+                        first_name=worker.first_name,
+                        last_name=worker.last_name,
+                        picture=worker.picture,
+                        phone=worker.phone,
+                        email=worker.email,
+                        permission=worker.permission,
+                        is_pending=worker.is_pending,
+                        specializations=specializations,
+                        jobs=jobs
+                    )
+                specializations = SpecializationModel.find_by_job_id(job_id=job.job_id)
+                new_job = JobApply(
+                    job_id=job.job_id,
+                    name=job.name,
+                    description=job.description,
+                    event=event_apply,
+                    worker=new_worker,
+                    start_time=job.start_time,
+                    is_completed=job.is_completed,
+                    specializations=specializations
+                )
+                jobs.append(new_job)
+            return cls(many=True).dump(jobs)
+        event = EventModel.find_by_event_id(event_id=value.event_id)
+        festival = FestivalModel.find_by_festival_id(event.festival_id)
+        user = UserModel.find_by_id(event.organizer_id)
+        festivals = FestivalModel.find_by_organizer_id(user.id)
+        organizer = Organizer(user.id, user.username, user.password, user.first_name,
+                              user.last_name, user.picture, user.phone, user.email,
+                              user.permission, user.is_pending, festivals)
+        event_apply = EventApply(event.event_id, festival, organizer, event.name, event.desc, event.location,
+                                 event.start_time, event.end_time)
+        new_worker = None
+        if value.worker_id is not None:
+            worker = UserModel.find_by_id(value.worker_id)
+            specializations = SpecializationModel.find_by_worker_id(worker_id=value.worker_id)
+            jobs = JobModel.find_completed_by_worker_id(worker_id=value.worker_id)
+            new_worker = Worker(
+                user_id=worker.id,
+                username=worker.username,
+                password=worker.password,
+                first_name=worker.first_name,
+                last_name=worker.last_name,
+                picture=worker.picture,
+                phone=worker.phone,
+                email=worker.email,
+                permission=worker.permission,
+                is_pending=worker.is_pending,
+                specializations=specializations,
+                jobs=jobs
+            )
+        specializations = SpecializationModel.find_by_job_id(job_id=value.job_id)
+        new_job = JobApply(value.job_id, value.name, value.description, event_apply, new_worker,
+                           value.start_time, value.is_completed, specializations)
+        return cls().dump(new_job)
