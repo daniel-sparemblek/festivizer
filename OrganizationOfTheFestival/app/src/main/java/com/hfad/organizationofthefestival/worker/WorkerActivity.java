@@ -68,7 +68,7 @@ public class WorkerActivity extends AppCompatActivity {
             this.startActivity(intent);
 
         } else if (id == R.id.applyForJob) {
-            Intent intent = new Intent(this, JobApplyActivity.class);
+            Intent intent = new Intent(this, JobOffersActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);

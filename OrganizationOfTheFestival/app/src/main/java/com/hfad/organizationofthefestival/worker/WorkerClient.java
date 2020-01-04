@@ -34,4 +34,7 @@ public interface WorkerClient {
 
     @GET("jobs/on_auction")
     Call<Job[]> getJobs(@Header("Authorization") String authorization);
+
+    @GET("festival/{festivalId}")
+    Call<Job> getJob(@Path("festivalId") String festivalId, @Header("Authorization") String authorization);
 }

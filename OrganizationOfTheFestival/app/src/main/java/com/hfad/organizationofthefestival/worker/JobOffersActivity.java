@@ -15,13 +15,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class JobApplyActivity extends AppCompatActivity {
+public class JobOffersActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
     private String username;
 
-    private JobApplyController jobApplyController;
+    private JobOffersController jobApplyController;
 
     private ListView jobOffers;
 
@@ -35,7 +35,7 @@ public class JobApplyActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
 
-        jobApplyController = new JobApplyController(this, accessToken, username, refreshToken);
+        jobApplyController = new JobOffersController(this, accessToken, username, refreshToken);
 
         jobOffers = findViewById(R.id.workerJobList);
 
