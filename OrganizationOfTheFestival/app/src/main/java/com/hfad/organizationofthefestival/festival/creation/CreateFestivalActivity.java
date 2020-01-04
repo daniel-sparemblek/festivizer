@@ -51,16 +51,16 @@ public class CreateFestivalActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
 
         btCreate.setOnClickListener(v -> {
-            if (!CreateFestivalActivity.this.checkEntry()) {
+            if (!checkEntry()) {
                 return;
             }
             festival = new Festival(etName.getText().toString(),
                     etDescription.getText().toString(),
-                    CreateFestivalActivity.this.getPictureString(),
+                    getPictureString(),
                     etStartTime.getText().toString(),
                     etEndTime.getText().toString());
             controller.createFestival(festival, accessToken);
-            CreateFestivalActivity.this.returnToLeaderActivity();
+            returnToLeaderActivity();
         });
 
         ivLogo.setOnClickListener(v -> {
