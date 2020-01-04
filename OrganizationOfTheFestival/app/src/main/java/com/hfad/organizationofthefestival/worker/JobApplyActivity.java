@@ -11,6 +11,11 @@ import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,13 +57,14 @@ public class JobApplyActivity extends AppCompatActivity {
         specializations = findViewById(R.id.specializationList);
 
         jobApplyController.getJobApplication(jobId);
-        System.out.println("ID2: " + jobId);
     }
 
     public void fillInActivity(JobApply body) {
         name.setText(body.getName());
         description.setText(body.getDescription());
-        startTime.setText(body.getStartTime());
+        startTime.setText(parseDateTime(body.getStartTime())
+                .truncatedTo(ChronoUnit.MINUTES)
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         festivalName.setText(body.getEvent().getFestivalId()+"");
         eventName.setText(body.getEvent().getName());
 
@@ -70,5 +76,17 @@ public class JobApplyActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, specStrings);
         specializations.setAdapter(specializationArrayAdapter);
 
+    }
+
+    public ZonedDateTime parseDateTime(String dateTime) {
+        System.out.println(dateTime);
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
     }
 }
