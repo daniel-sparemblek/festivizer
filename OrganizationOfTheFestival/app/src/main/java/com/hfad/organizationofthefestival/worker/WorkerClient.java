@@ -1,6 +1,7 @@
 package com.hfad.organizationofthefestival.worker;
 
 import com.hfad.organizationofthefestival.utility.Job;
+import com.hfad.organizationofthefestival.utility.JobApply;
 
 import java.util.HashMap;
 
@@ -35,6 +36,6 @@ public interface WorkerClient {
     @GET("jobs/on_auction")
     Call<Job[]> getJobs(@Header("Authorization") String authorization);
 
-    @GET("festival/{festivalId}")
-    Call<Job> getJob(@Path("festivalId") String festivalId, @Header("Authorization") String authorization);
+    @GET("jobs")
+    Call<JobApply> getJob(@Query("job_id") String jobId, @Header("Authorization") String authorization);
 }

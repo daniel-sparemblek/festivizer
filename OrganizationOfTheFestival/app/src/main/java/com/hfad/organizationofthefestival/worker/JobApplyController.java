@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.worker;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.utility.Job;
+import com.hfad.organizationofthefestival.utility.JobApply;
 
 import org.json.JSONObject;
 
@@ -35,15 +36,16 @@ public class JobApplyController {
 
 
     public void getJobApplication(int jobId) {
-        Call<Job> call = api.getJob(String.valueOf(jobId), "Bearer " + accessToken);
+        Call<JobApply> call = api.getJob(String.valueOf(jobId), "Bearer " + accessToken);
 
-        call.enqueue(new Callback<Job>() {
+        call.enqueue(new Callback<JobApply>() {
             @Override
-            public void onResponse(Call<Job> call, Response<Job> response) {
+            public void onResponse(Call<JobApply> call, Response<JobApply> response) {
                 if (response.isSuccessful()) {
                     jobApplyActivity.fillInActivity(response.body());
                 } else {
                     try {
+                        System.out.println(response.errorBody());
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
                         Toast.makeText(jobApplyActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
@@ -54,7 +56,8 @@ public class JobApplyController {
             }
 
             @Override
-            public void onFailure(Call<Job> call, Throwable t) {
+            public void onFailure(Call<JobApply> call, Throwable t) {
+                System.out.println(t.getMessage());
                 Toast.makeText(jobApplyActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });

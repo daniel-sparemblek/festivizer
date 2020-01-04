@@ -24,6 +24,7 @@ public class JobOffersActivity extends AppCompatActivity {
     private JobOffersController jobApplyController;
 
     private ListView jobOffers;
+    private List<Job> jobList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +40,18 @@ public class JobOffersActivity extends AppCompatActivity {
 
         jobOffers = findViewById(R.id.workerJobList);
 
-        jobOffers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TO DO
-            }
+        jobOffers.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent1 = new Intent(JobOffersActivity.this, JobApplyActivity.class);
+            intent1.putExtra("accessToken", accessToken);
+            intent1.putExtra("refreshToken", refreshToken);
+            intent1.putExtra("username", username);
+            intent1.putExtra("job_id", jobList.get(position).getId());
+            System.out.println("ID: " + jobList.get(position).getId());
+            System.out.println("NAME: " + jobList.get(position).getName());
+            System.out.println("DESC: " + jobList.get(position).getDescription());
+            System.out.println("START_TIME: " + jobList.get(position).getStartTime());
+            System.out.println("EVENT: " + jobList.get(position).getEventId());
+            JobOffersActivity.this.startActivity(intent1);
         });
 
         jobApplyController.getJobs();
@@ -56,7 +64,7 @@ public class JobOffersActivity extends AppCompatActivity {
     }
 
     public List<String> jobsToStrings(Job[] jobs) {
-        List<Job> jobList = Arrays.asList(jobs);
+        jobList = Arrays.asList(jobs);
 
         List<String> stringList = jobList.stream()
                 .map(t -> t.toString())

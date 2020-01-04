@@ -11,13 +11,13 @@ public class Event {
     private long organizerId;
     private String name;
     private String desc;
-    private Integer location;
+    private String location;
     @SerializedName("start_time")
     private String startTime;
     @SerializedName("end_time")
     private String endTime;
 
-    public Event(String name, String desc, Integer location, String startTime, String endTime) {
+    public Event(String name, String desc, String location, String startTime, String endTime) {
         this.name = name;
         this.desc = desc;
         this.location = location;
@@ -70,11 +70,11 @@ public class Event {
         this.desc = desc;
     }
 
-    public Integer getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Integer location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 

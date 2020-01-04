@@ -89,7 +89,7 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
             }
             event = new Event(etName.getText().toString(),
                     etDescription.getText().toString(),
-                    Integer.parseInt(etLocation.getText().toString()),
+                    etLocation.getText().toString(),
                     startDateTime,
                     endDateTime);
             controller.createEvent(event, accessToken);
