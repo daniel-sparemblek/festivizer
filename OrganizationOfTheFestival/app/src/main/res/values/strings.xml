@@ -90,6 +90,10 @@
     <string name="my_applications">My applications</string>
     <string name="create_new_festival">Create New Festival</string>
     <string name="add_specialization">Add Specialization</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+
+
 
 
 </resources>
