@@ -8,7 +8,7 @@ import com.hfad.organizationofthefestival.worker.Worker;
 import java.util.List;
 
 public class JobApply {
-    Event event;
+    EventApply event;
     Worker worker;
     @SerializedName("start_time")
     String startTime;
@@ -20,11 +20,11 @@ public class JobApply {
     @SerializedName("is_completed")
     boolean isCompleted;
 
-    public Event getEvent() {
+    public EventApply getEvent() {
         return event;
     }
 
-    public void setEvent(Event event) {
+    public void setEvent(EventApply event) {
         this.event = event;
     }
 

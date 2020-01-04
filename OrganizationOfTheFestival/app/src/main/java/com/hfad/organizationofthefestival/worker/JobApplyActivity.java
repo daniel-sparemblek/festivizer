@@ -65,7 +65,7 @@ public class JobApplyActivity extends AppCompatActivity {
         startTime.setText(parseDateTime(body.getStartTime())
                 .truncatedTo(ChronoUnit.MINUTES)
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
-        festivalName.setText(body.getEvent().getFestivalId()+"");
+        festivalName.setText(body.getEvent().getFestival().getName());
         eventName.setText(body.getEvent().getName());
 
         List<String> specStrings = body.getSpecializations().stream()
