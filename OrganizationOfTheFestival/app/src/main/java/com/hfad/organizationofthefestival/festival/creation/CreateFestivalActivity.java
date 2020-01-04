@@ -21,9 +21,11 @@ import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-public class CreateFestivalActivity extends AppCompatActivity implements View.OnClickListener{
+public class CreateFestivalActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -62,20 +64,20 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
         refreshToken = intent.getStringExtra("refreshToken");
 
         // start time
-        btnStartDatePicker =(Button)findViewById(R.id.startDatebtn);
-        btnStartTimePicker =(Button)findViewById(R.id.startTimebtn);
-        etStartDate=(EditText)findViewById(R.id.startDate);
-        etStartTime=(EditText)findViewById(R.id.startTime);
+        btnStartDatePicker = (Button) findViewById(R.id.startDatebtn);
+        btnStartTimePicker = (Button) findViewById(R.id.startTimebtn);
+        etStartDate = (EditText) findViewById(R.id.startDate);
+        etStartTime = (EditText) findViewById(R.id.startTime);
 
         btnStartDatePicker.setOnClickListener(this);
         btnStartTimePicker.setOnClickListener(this);
 
         // end time
 
-        btnEndDatePicker =(Button)findViewById(R.id.endDatebtn);
-        btnEndTimePicker =(Button)findViewById(R.id.endTimebtn);
-        etEndDate=(EditText)findViewById(R.id.endDate);
-        etEndTime=(EditText)findViewById(R.id.endTime);
+        btnEndDatePicker = (Button) findViewById(R.id.endDatebtn);
+        btnEndTimePicker = (Button) findViewById(R.id.endTimebtn);
+        etEndDate = (EditText) findViewById(R.id.endDate);
+        etEndTime = (EditText) findViewById(R.id.endTime);
 
         btnEndDatePicker.setOnClickListener(this);
         btnEndTimePicker.setOnClickListener(this);
@@ -85,9 +87,10 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
                 return;
             }
 
-            String startDateTime = etStartDate.toString() + "+" + etStartTime.toString();
-            String endDateTime = etEndDate.toString() + "+" + etEndTime.toString();
-
+            String startDateTime = convertTime(etStartTime.getText().toString(),
+                    etStartDate.getText().toString());
+            String endDateTime = convertTime(etEndTime.getText().toString(),
+                    etEndDate.getText().toString());
 
             festival = new Festival(etName.getText().toString(),
                     etDescription.getText().toString(),
@@ -136,13 +139,12 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
         } else if ("".equals(etStartTime.getText().toString()) || "".equals(etEndTime.getText().toString())) {
             Toast.makeText(this, "Start and and time must be specified", Toast.LENGTH_SHORT).show();
             return false;
-        } else if ("".equals(etStartDate.getText().toString()) || "".equals(etEndDate.getText().toString())){
+        } else if ("".equals(etStartDate.getText().toString()) || "".equals(etEndDate.getText().toString())) {
             Toast.makeText(this, "Start and end date must be specified", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
     }
-
 
 
     @Override
@@ -200,5 +202,13 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
                     (view, hourOfDay, minute) -> etEndTime.setText(hourOfDay + ":" + minute), eHour, eMinute, false);
             timePickerDialog.show();
         }
+    }
+
+
+    public String convertTime(String time, String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+        ZonedDateTime dateTime = ZonedDateTime.parse(date + " " + time, formatter);
+        return dateTime.toString();
+
     }
 }

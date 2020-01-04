@@ -16,6 +16,8 @@ import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.event.Event;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class CreateEventActivity extends AppCompatActivity implements View.OnClickListener{
@@ -74,6 +76,13 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         btnEndTimePicker.setOnClickListener(this);
 
 
+
+
+        String startDateTime = convertTime(etStartTime.getText().toString(),
+                etStartDate.getText().toString());
+        String endDateTime = convertTime(etEndTime.getText().toString(),
+                etEndDate.getText().toString());
+
         btCreate.setOnClickListener(v -> {
             if (!CreateEventActivity.this.checkEntry()) {
                 return;
@@ -81,8 +90,8 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
             event = new Event(etName.getText().toString(),
                     etDescription.getText().toString(),
                     Integer.parseInt(etLocation.getText().toString()),
-                    etStartDate.toString() + "+" + etStartTime.toString(),
-                    etEndDate.toString() + "+" + etEndTime.toString());
+                    startDateTime,
+                    endDateTime);
             controller.createEvent(event, accessToken);
             CreateEventActivity.this.returnToLeaderActivity();
         });
@@ -188,6 +197,14 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
                     (view, hourOfDay, minute) -> etEndTime.setText(hourOfDay + ":" + minute), eHour, eMinute, false);
             timePickerDialog.show();
         }
+    }
+
+
+    public String convertTime(String time, String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+        ZonedDateTime dateTime = ZonedDateTime.parse(date + " " + time, formatter);
+        return dateTime.toString();
+
     }
 
 }
