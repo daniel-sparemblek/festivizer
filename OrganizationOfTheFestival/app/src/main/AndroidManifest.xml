@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".worker.JobApplicationActivity"></activity>
+        <activity android:name=".worker.SearchActivity"></activity>
+        <activity android:name=".worker.JobApplicationActivity" />
         <activity android:name=".worker.JobApplyActivity" />
         <activity android:name=".worker.JobOffersActivity" />
         <activity

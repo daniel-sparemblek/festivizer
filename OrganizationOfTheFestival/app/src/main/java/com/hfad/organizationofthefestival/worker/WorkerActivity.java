@@ -80,7 +80,11 @@ public class WorkerActivity extends AppCompatActivity {
         } else if (id == R.id.printPass) {
 
         } else if (id == R.id.search) {
-
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            this.startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

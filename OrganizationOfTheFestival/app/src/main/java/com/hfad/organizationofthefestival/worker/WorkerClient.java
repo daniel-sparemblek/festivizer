@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.worker;
 import com.hfad.organizationofthefestival.utility.Application;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
+import com.hfad.organizationofthefestival.utility.User;
 
 import java.util.HashMap;
 
@@ -42,4 +43,7 @@ public interface WorkerClient {
 
     @POST("applications")
     Call<Void> createApplication(@Body Application application, @Header("Authorization") String authorization);
+
+    @POST("search/users")
+    Call<User[]> searchUsers(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
 }
