@@ -69,11 +69,11 @@ public class ApplyFestActivity extends AppCompatActivity {
         } else if (id == R.id.myEvents) {
             switchActivity(EventsActivity.class);
         } else if (id == R.id.myJobs) {
-            System.out.println("Stisnuo sam profil");
+            switchActivity(JobsActivity.class);
         } else if (id == R.id.printPass) {
-            System.out.println("Stisnuo sam profil");
+            switchActivity(PrintPassActivity.class);
         } else if (id == R.id.search) {
-            System.out.println("Stisnuo sam profil");
+            switchActivity(SearchActivity.class);
         }
 
         return super.onOptionsItemSelected(item);

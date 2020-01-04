@@ -2,15 +2,15 @@ package com.hfad.organizationofthefestival.organizer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.hfad.organizationofthefestival.R;
 
-public class EventsActivity extends ApplyFestActivity {
+public class PrintPassActivity extends AppCompatActivity {
 
-    // private EventsController eventsController;
     private String accessToken;
     private String refreshToken;
     private String username;
@@ -18,7 +18,7 @@ public class EventsActivity extends ApplyFestActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.organizer_screen_my_events);
+        setContentView(R.layout.organizer_screen_prt_pass);
 
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
         setSupportActionBar(toolbar);
@@ -50,11 +50,11 @@ public class EventsActivity extends ApplyFestActivity {
         } else if (id == R.id.applyForFest) {
             switchActivity(ApplyFestActivity.class);
         } else if (id == R.id.myEvents) {
-            // do nothing
+            switchActivity(EventsActivity.class);
         } else if (id == R.id.myJobs) {
             switchActivity(JobsActivity.class);
         } else if (id == R.id.printPass) {
-            switchActivity(PrintPassActivity.class);
+            // do nothing
         } else if (id == R.id.search) {
             switchActivity(SearchActivity.class);
         }
