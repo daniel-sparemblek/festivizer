@@ -88,6 +88,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:onClick="applyForJob"
             android:text="@string/apply" />
     </LinearLayout>
 

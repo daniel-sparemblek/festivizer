@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival.worker;
 
+import com.hfad.organizationofthefestival.utility.Application;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 
@@ -38,4 +39,7 @@ public interface WorkerClient {
 
     @GET("jobs")
     Call<JobApply> getJob(@Query("job_id") String jobId, @Header("Authorization") String authorization);
+
+    @POST("applications")
+    Call<Void> createApplication(@Body Application application, @Header("Authorization") String authorization);
 }

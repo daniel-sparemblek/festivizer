@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.worker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -88,5 +89,14 @@ public class JobApplyActivity extends AppCompatActivity {
         int second = Integer.parseInt(dateTime.substring(17, 19));
 
         return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+    }
+
+    public void applyForJob(View view) {
+        Intent intent = new Intent(this, JobApplicationActivity.class);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        intent.putExtra("job_id", jobId);
+        this.startActivity(intent);
     }
 }
