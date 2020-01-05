@@ -3,12 +3,14 @@ package com.hfad.organizationofthefestival.utility;
 import com.google.gson.annotations.SerializedName;
 
 public class Job {
+    @SerializedName("job_id")
     private int id;
     @SerializedName("event_id")
     private int eventId;
     @SerializedName("worker_id")
     private int workerId;
     private String name;
+    private String description;
     @SerializedName("start_time")
     private String startTime;
     @SerializedName("is_completed")
@@ -53,6 +55,14 @@ public class Job {
 
     public String getStartTime() {
         return startTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setStartTime(String startTime) {

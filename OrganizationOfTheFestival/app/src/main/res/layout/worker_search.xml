@@ -37,7 +37,7 @@
         android:paddingEnd="24dp">
 
         <EditText
-            android:id="@+id/org_searchTxt"
+            android:id="@+id/worker_tv_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/search_here"
@@ -45,10 +45,11 @@
             android:autofillHints="" tools:targetApi="o" />
 
         <Button
-            android:id="@+id/org_searchBtn"
+            android:id="@+id/worker_btn_search"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:onClick="search"
             android:text="@string/search" />
     </LinearLayout>
 
@@ -62,7 +63,7 @@
         android:paddingBottom="10dp">
 
         <ListView
-            android:id="@+id/org_searchList"
+            android:id="@+id/worker_lv_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

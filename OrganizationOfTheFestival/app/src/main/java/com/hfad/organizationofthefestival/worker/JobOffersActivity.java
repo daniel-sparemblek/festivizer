@@ -3,8 +3,6 @@ package com.hfad.organizationofthefestival.worker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,6 +22,7 @@ public class JobOffersActivity extends AppCompatActivity {
     private JobOffersController jobApplyController;
 
     private ListView jobOffers;
+    private List<Job> jobList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +38,13 @@ public class JobOffersActivity extends AppCompatActivity {
 
         jobOffers = findViewById(R.id.workerJobList);
 
-        jobOffers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TO DO
-            }
+        jobOffers.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent1 = new Intent(JobOffersActivity.this, JobApplyActivity.class);
+            intent1.putExtra("accessToken", accessToken);
+            intent1.putExtra("refreshToken", refreshToken);
+            intent1.putExtra("username", username);
+            intent1.putExtra("job_id", jobList.get(position).getId());
+            JobOffersActivity.this.startActivity(intent1);
         });
 
         jobApplyController.getJobs();
@@ -56,7 +57,7 @@ public class JobOffersActivity extends AppCompatActivity {
     }
 
     public List<String> jobsToStrings(Job[] jobs) {
-        List<Job> jobList = Arrays.asList(jobs);
+        jobList = Arrays.asList(jobs);
 
         List<String> stringList = jobList.stream()
                 .map(t -> t.toString())

@@ -1,18 +1,28 @@
 package com.hfad.organizationofthefestival.worker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.Job;
+import com.hfad.organizationofthefestival.utility.JobApply;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class JobApplyActivity extends AppCompatActivity {
     private String accessToken;
     private String refreshToken;
     private String username;
+    private int jobId;
 
     private JobApplyController jobApplyController;
 
@@ -32,6 +42,8 @@ public class JobApplyActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
+        jobId = intent.getIntExtra("job_id", 0);
+
 
         this.jobApplyController = new JobApplyController(this, accessToken,
                 username, refreshToken);
@@ -43,11 +55,45 @@ public class JobApplyActivity extends AppCompatActivity {
         eventName = findViewById(R.id.event);
         specializations = findViewById(R.id.specializationList);
 
-        jobApplyController.getJobApplication(4);
+        jobApplyController.getJobApplication(jobId);
     }
 
-    public void fillInActivity(Job body) {
+    public void fillInActivity(JobApply body) {
         name.setText(body.getName());
-        description.setText("");
+        description.setText(body.getDescription());
+        startTime.setText(parseDateTime(body.getStartTime())
+                .truncatedTo(ChronoUnit.MINUTES)
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+        festivalName.setText(body.getEvent().getFestival().getName());
+        eventName.setText(body.getEvent().getName());
+
+        List<String> specStrings = body.getSpecializations().stream()
+                .map(t -> t.toString())
+                .collect(Collectors.toList());
+
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, specStrings);
+        specializations.setAdapter(specializationArrayAdapter);
+
+    }
+
+    public ZonedDateTime parseDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+    }
+
+    public void applyForJob(View view) {
+        Intent intent = new Intent(this, JobApplicationActivity.class);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        intent.putExtra("job_id", jobId);
+        this.startActivity(intent);
     }
 }

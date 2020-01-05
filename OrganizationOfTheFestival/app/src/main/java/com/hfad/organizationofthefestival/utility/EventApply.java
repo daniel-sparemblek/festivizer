@@ -1,14 +1,14 @@
-package com.hfad.organizationofthefestival.event;
+package com.hfad.organizationofthefestival.utility;
 
 import com.google.gson.annotations.SerializedName;
+import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.organizer.Organizer;
 
-public class Event {
+public class EventApply {
     @SerializedName("event_id")
     private long eventId;
-    @SerializedName("festival_id")
-    private long festivalId;
-    @SerializedName("organizer_id")
-    private long organizerId;
+    private Festival festival;
+    private Organizer organizer;
     private String name;
     private String desc;
     private String location;
@@ -16,19 +16,6 @@ public class Event {
     private String startTime;
     @SerializedName("end_time")
     private String endTime;
-
-    public Event(String name, String desc, String location, String startTime, String endTime) {
-        this.name = name;
-        this.desc = desc;
-        this.location = location;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
 
     public long getEventId() {
         return eventId;
@@ -38,20 +25,20 @@ public class Event {
         this.eventId = eventId;
     }
 
-    public long getFestivalId() {
-        return festivalId;
+    public Festival getFestival() {
+        return festival;
     }
 
-    public void setFestivalId(long festivalId) {
-        this.festivalId = festivalId;
+    public void setFestival(Festival festival) {
+        this.festival = festival;
     }
 
-    public long getOrganizerId() {
-        return organizerId;
+    public Organizer getOrganizer() {
+        return organizer;
     }
 
-    public void setOrganizerId(long organizerId) {
-        this.organizerId = organizerId;
+    public void setOrganizer(Organizer organizer) {
+        this.organizer = organizer;
     }
 
     public String getName() {
