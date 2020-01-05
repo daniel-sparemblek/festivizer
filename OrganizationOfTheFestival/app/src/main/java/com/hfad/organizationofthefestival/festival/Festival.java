@@ -81,8 +81,11 @@ public class Festival {
         this.name = name;
         this.desc = desc;
         this.logo = logo;
+
+        // Here we need to handle the dates and times
         this.startTime = startTime;
         this.endTime = endTime;
+
         this.status = 0;
     }
 

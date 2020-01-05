@@ -71,7 +71,6 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
         btnStartTimePicker.setOnClickListener(this);
 
         // end time
-
         btnEndDatePicker =(Button)findViewById(R.id.endDatebtn);
         btnEndTimePicker =(Button)findViewById(R.id.endTimebtn);
         etEndDate=(EditText)findViewById(R.id.endDate);
@@ -85,9 +84,8 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
                 return;
             }
 
-            String startDateTime = etStartDate.toString() + "+" + etStartTime.toString();
-            String endDateTime = etEndDate.toString() + "+" + etEndTime.toString();
-
+            String startDateTime = etStartDate.getText() + "+" + etStartTime.getText();
+            String endDateTime = etEndDate.getText() + "+" + etEndTime.getText();
 
             festival = new Festival(etName.getText().toString(),
                     etDescription.getText().toString(),
