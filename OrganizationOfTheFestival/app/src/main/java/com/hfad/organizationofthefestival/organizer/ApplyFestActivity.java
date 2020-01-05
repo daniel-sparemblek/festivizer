@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -14,7 +13,6 @@ import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ApplyFestActivity extends AppCompatActivity {
@@ -67,16 +65,6 @@ public class ApplyFestActivity extends AppCompatActivity {
 
             fillInActivity(festivals);
         });
-    }
-
-    private List<String> extractList(Adapter adapter) {
-        List<String> result = new ArrayList<>();
-
-        for (int i = 0; i < adapter.getCount(); i++) {
-            result.add((String) adapter.getItem(i));
-        }
-
-        return result;
     }
 
     @Override
