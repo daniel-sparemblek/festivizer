@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,15 +20,13 @@ import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import java.io.ByteArrayOutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 
-public class CreateFestivalActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateFestivalActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -49,8 +46,8 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
     private Festival festival;
 
 
-    Button btnStartDatePicker, btnStartTimePicker;
-    Button btnEndDatePicker, btnEndTimePicker;
+    private Button btnStartDatePicker, btnStartTimePicker;
+    private Button btnEndDatePicker, btnEndTimePicker;
 
 
     private int sYear, sMonth, sDay, sHour, sMinute;
@@ -67,43 +64,65 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
 
-        // start time
-        btnStartDatePicker = (Button) findViewById(R.id.startDatebtn);
-        btnStartTimePicker = (Button) findViewById(R.id.startTimebtn);
-        etStartDate = (EditText) findViewById(R.id.startDate);
-        etStartTime = (EditText) findViewById(R.id.startTime);
+        btnStartDatePicker.setOnClickListener(v -> {
+            final Calendar c = Calendar.getInstance();
+            sYear = c.get(Calendar.YEAR);
+            sMonth = c.get(Calendar.MONTH);
+            sDay = c.get(Calendar.DAY_OF_MONTH);
 
-        btnStartDatePicker.setOnClickListener(this);
-        btnStartTimePicker.setOnClickListener(this);
+            DatePickerDialog datePickerDialog;
+            datePickerDialog = new DatePickerDialog(CreateFestivalActivity.this,
+                    (view, year, month, day) -> showPickedDate(etStartDate, day, month, year), sYear, sMonth, sDay);
+            datePickerDialog.show();
+        });
 
-        // end time
-        btnEndDatePicker =(Button)findViewById(R.id.endDatebtn);
-        btnEndTimePicker =(Button)findViewById(R.id.endTimebtn);
-        etEndDate=(EditText)findViewById(R.id.endDate);
-        etEndTime=(EditText)findViewById(R.id.endTime);
+        btnStartTimePicker.setOnClickListener(v -> {
+            final Calendar c = Calendar.getInstance();
+            sHour = c.get(Calendar.HOUR_OF_DAY);
+            sMinute = c.get(Calendar.MINUTE);
 
-        btnEndDatePicker.setOnClickListener(this);
-        btnEndTimePicker.setOnClickListener(this);
+            TimePickerDialog timePickerDialog;
+            timePickerDialog = new TimePickerDialog(this,
+                    (view, hour, minute) -> showPickedTime(etStartTime, hour, minute), eHour, eMinute, false);
+            timePickerDialog.show();
+        });
+
+        btnEndDatePicker.setOnClickListener(v -> {
+            final Calendar c = Calendar.getInstance();
+            eYear = c.get(Calendar.YEAR);
+            eMonth = c.get(Calendar.MONTH);
+            eDay = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog;
+            datePickerDialog = new DatePickerDialog(CreateFestivalActivity.this, (view, year, month, day)
+                    -> showPickedDate(etEndDate, day, month, year), sYear, sMonth, sDay);
+            datePickerDialog.show();
+        });
+
+        btnEndTimePicker.setOnClickListener(v -> {
+            final Calendar c = Calendar.getInstance();
+            eHour = c.get(Calendar.HOUR_OF_DAY);
+            eMinute = c.get(Calendar.MINUTE);
+
+            TimePickerDialog timePickerDialog;
+            timePickerDialog = new TimePickerDialog(this,
+                    (view, hour, minute) -> showPickedTime(etEndTime, hour, minute), eHour, eMinute, false);
+            timePickerDialog.show();
+        });
+
+        ivLogo.setOnClickListener(v -> {
+            Intent intent1 = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            CreateFestivalActivity.this.startActivityForResult(intent1, PICK_IMAGE_REQUEST);
+        });
 
         btCreate.setOnClickListener(v -> {
             if (!checkEntry()) {
                 return;
             }
 
-
-            String startDateTime = null;
-            String endDateTime = null;
-            try {
-                startDateTime = convertTime(etStartTime.getText().toString(),
-                        etStartDate.getText().toString());
-                endDateTime = convertTime(etEndTime.getText().toString(),
-                        etEndDate.getText().toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            // Everything must be two-numberred
-            // LIke 5-1-2020 should be 05-01-2020
+            String startDateTime = convertTime(etStartTime.getText().toString(), etStartDate.getText().toString());
+            String endDateTime = convertTime(etEndTime.getText().toString(), etEndDate.getText().toString());
 
             festival = new Festival(etName.getText().toString(),
                     etDescription.getText().toString(),
@@ -114,12 +133,31 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
 
             returnToLeaderActivity();
         });
+    }
 
-        ivLogo.setOnClickListener(v -> {
-            Intent intent1 = new Intent(Intent.ACTION_PICK,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            CreateFestivalActivity.this.startActivityForResult(intent1, PICK_IMAGE_REQUEST);
-        });
+    private void showPickedDate(EditText et, int day, int month, int year) {
+        month++;
+        if (day < 10 && month < 10) {
+            et.setText("0" + day + "." + "0" + month + "." + year + ".");
+        } else if (day < 10) {
+            et.setText("0" + day + "." + month + "." + year + ".");
+        } else if (month < 10) {
+            et.setText(day + "." + "0" + month + "." + year + ".");
+        } else {
+            et.setText(day + "." + month + "." + year + ".");
+        }
+    }
+
+    private void showPickedTime(EditText et, int hour, int minutes) {
+        if (hour < 10 && minutes < 10) {
+            et.setText("0" + hour + ":" + "0" + minutes);
+        } else if (hour < 10) {
+            et.setText("0" + hour + ":" + minutes);
+        } else if (minutes < 10) {
+            et.setText(hour + ":" + "0" + minutes);
+        } else {
+            et.setText(hour + ":" + minutes);
+        }
     }
 
     private void returnToLeaderActivity() {
@@ -132,6 +170,16 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
         etName = findViewById(R.id.name);
         etDescription = findViewById(R.id.desc);
         btCreate = findViewById(R.id.createBtn);
+
+        btnStartDatePicker = findViewById(R.id.startDatebtn);
+        btnStartTimePicker = findViewById(R.id.startTimebtn);
+        etStartDate = findViewById(R.id.startDate);
+        etStartTime = findViewById(R.id.startTime);
+
+        btnEndDatePicker = findViewById(R.id.endDatebtn);
+        btnEndTimePicker = findViewById(R.id.endTimebtn);
+        etEndDate = findViewById(R.id.endDate);
+        etEndTime = findViewById(R.id.endTime);
     }
 
     private String getPictureString() {
@@ -160,112 +208,12 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
     }
 
 
-    @Override
-    public void onClick(View v) {
-// start time
-        if (v == btnStartDatePicker) {
-
-            // Get Current Date
-            final Calendar c = Calendar.getInstance();
-            sYear = c.get(Calendar.YEAR);
-            sMonth = c.get(Calendar.MONTH);
-            sDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                    (view, year, monthOfYear, dayOfMonth) -> etStartDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), sYear, sMonth, sDay);
-            datePickerDialog.show();
-        }
-        if (v == btnStartTimePicker) {
-
-            // Get Current Time
-            final Calendar c = Calendar.getInstance();
-            sHour = c.get(Calendar.HOUR_OF_DAY);
-            sMinute = c.get(Calendar.MINUTE);
-
-            // Launch Time Picker Dialog
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                    (view, hourOfDay, minute) -> etStartTime.setText(hourOfDay + ":" + minute), sHour, sMinute, false);
-            timePickerDialog.show();
-        }
-
-        // end time
-        if (v == btnEndDatePicker) {
-
-            // Get Current Date
-            final Calendar c = Calendar.getInstance();
-            eYear = c.get(Calendar.YEAR);
-            eMonth = c.get(Calendar.MONTH);
-            eDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                    (view, year, monthOfYear, dayOfMonth) -> etEndDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), eYear, eMonth, eDay);
-            datePickerDialog.show();
-        }
-        if (v == btnEndTimePicker) {
-
-            // Get Current Time
-            final Calendar c = Calendar.getInstance();
-            eHour = c.get(Calendar.HOUR_OF_DAY);
-            eMinute = c.get(Calendar.MINUTE);
-
-            // Launch Time Picker Dialog
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                    (view, hourOfDay, minute) -> etEndTime.setText(hourOfDay + ":" + minute), eHour, eMinute, false);
-            timePickerDialog.show();
-        }
-    }
-
-
-    public String convertTime(String time, String date) throws ParseException {
-//        // First check if there are 2 numbers, and not only 1
-//        String[] parts = date.split("-");
-//        if(parts[0].length() == 1){
-//            // have to add a leading 0
-//            parts[0] = "0" + parts[0];
-//        }
-//
-//        // Now check the months part
-//        if(parts[1].length() == 1){
-//            parts[1] = "0" + parts[1];
-//        }
-//
-//        // Let's do the same for years
-//        if(parts[2].length()!=4){
-//            // Stop right there criminal scum! You've violated the law!
-//            // Yeah I'm really bored
-//            Toast.makeText(this, "Unallowed year entered!", Toast.LENGTH_SHORT).show();
-//            throw new IllegalArgumentException("Unallowed year entered!");
-//        }
-//
-//        // Re-assemble the new date
-//        date = parts[0] + "." + parts[1] + "." + parts[2] + ".";
-//
-//        // Repeat for the time as well
-//        parts = time.split(":");
-//        if(parts[0].length()==1){
-//            // have to add a leading 0
-//            parts[0] = "0" + parts[0];
-//        }
-//
-//        // Now check the minutes part
-//        if(parts[1].length()==1){
-//            parts[1] = "0" + parts[1];
-//        }
-//        time = parts[0] + ":" + parts[1];
-
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
-//        DateTime dateTime = DateTime.parse(date + " " + time, formatter);
-
-        // Replace the - with .
-        date.replaceAll("-", ".");
-        date += ".";
-
-        String format = "dd.MM.yyyy. HH:mm";
-        SimpleDateFormat formatter = new SimpleDateFormat(format);
-        Date dateTime = formatter.parse(date + " " + time);
-        return dateTime.toString();
-
+    public String convertTime(String time, String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. kk:mm");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'kk:mm:ss.SSS+0000");
+        String dateTimeString = date + " " + time;
+        LocalDate localDate = LocalDate.parse(dateTimeString, formatter);
+        ZonedDateTime dateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        return dateTime.format(dateTimeFormatter);
     }
 }
