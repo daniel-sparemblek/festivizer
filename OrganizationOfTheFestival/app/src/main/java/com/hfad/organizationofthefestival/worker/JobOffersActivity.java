@@ -3,8 +3,6 @@ package com.hfad.organizationofthefestival.worker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -46,11 +44,6 @@ public class JobOffersActivity extends AppCompatActivity {
             intent1.putExtra("refreshToken", refreshToken);
             intent1.putExtra("username", username);
             intent1.putExtra("job_id", jobList.get(position).getId());
-            System.out.println("ID: " + jobList.get(position).getId());
-            System.out.println("NAME: " + jobList.get(position).getName());
-            System.out.println("DESC: " + jobList.get(position).getDescription());
-            System.out.println("START_TIME: " + jobList.get(position).getStartTime());
-            System.out.println("EVENT: " + jobList.get(position).getEventId());
             JobOffersActivity.this.startActivity(intent1);
         });
 

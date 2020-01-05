@@ -1,16 +1,16 @@
 package com.hfad.organizationofthefestival.worker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.User;
 
 import java.util.Arrays;
@@ -46,6 +46,13 @@ public class SearchActivity extends AppCompatActivity {
         username = intent.getStringExtra("username");
 
         searchController = new SearchController(this, accessToken, username, refreshToken);
+
+        searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //POSJETI PROFIL, NEZ DI JE TO
+            }
+        });
     }
 
     public void search(View view) {

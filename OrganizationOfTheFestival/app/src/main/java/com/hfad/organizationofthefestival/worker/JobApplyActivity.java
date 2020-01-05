@@ -1,22 +1,20 @@
 package com.hfad.organizationofthefestival.worker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,7 +78,6 @@ public class JobApplyActivity extends AppCompatActivity {
     }
 
     public ZonedDateTime parseDateTime(String dateTime) {
-        System.out.println(dateTime);
         int year = Integer.parseInt(dateTime.substring(0, 4));
         int month = Integer.parseInt(dateTime.substring(5, 7));
         int day = Integer.parseInt(dateTime.substring(8, 10));

@@ -2,7 +2,6 @@ package com.hfad.organizationofthefestival.worker;
 
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.User;
 
 import org.json.JSONObject;

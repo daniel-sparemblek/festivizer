@@ -12,15 +12,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class JobApplicationController {
+class MyApplicationsController {
 
-    private JobApplicationActivity jobApplicationActivity;
+    private MyApplicationsActivity myApplicationsActivity;
     private WorkerClient api;
     private String accessToken;
     private String username;
     private String refreshToken;
 
-    public JobApplicationController(JobApplicationActivity jobApplicationActivity, String accessToken, String username, String refreshToken) {
+    public MyApplicationsController(MyApplicationsActivity myApplicationsActivity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -29,33 +29,32 @@ public class JobApplicationController {
 
         this.accessToken = accessToken;
         this.username = username;
-        this.jobApplicationActivity = jobApplicationActivity;
+        this.myApplicationsActivity = myApplicationsActivity;
         this.refreshToken = refreshToken;
     }
 
+    public void getWorkerApplications() {
+        Call<Application[]> call = api.getWorkerApplications(username, "Bearer " + accessToken);
 
-    public void createJobApplication(Application application) {
-        Call<Void> call = api.createApplication(application, "Bearer " + accessToken);
-
-        call.enqueue(new Callback<Void>() {
+        call.enqueue(new Callback<Application[]>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<Application[]> call, Response<Application[]> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(jobApplicationActivity, "Application successfully created!", Toast.LENGTH_SHORT).show();
+                    myApplicationsActivity.fillInActivity(response.body());
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(jobApplicationActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(myApplicationsActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Toast.makeText(jobApplicationActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(myApplicationsActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(jobApplicationActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Application[]> call, Throwable t) {
+                Toast.makeText(myApplicationsActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -2,13 +2,9 @@ package com.hfad.organizationofthefestival.worker;
 
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.utility.Application;
-import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 
 import org.json.JSONObject;
-
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,7 +44,6 @@ public class JobApplyController {
                     jobApplyActivity.fillInActivity(response.body());
                 } else {
                     try {
-                        System.out.println(response.errorBody());
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
                         Toast.makeText(jobApplyActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
@@ -60,7 +55,6 @@ public class JobApplyController {
 
             @Override
             public void onFailure(Call<JobApply> call, Throwable t) {
-                System.out.println(t.getMessage());
                 Toast.makeText(jobApplyActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });

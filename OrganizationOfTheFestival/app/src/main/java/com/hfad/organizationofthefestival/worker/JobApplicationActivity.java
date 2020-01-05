@@ -1,8 +1,8 @@
 package com.hfad.organizationofthefestival.worker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -52,24 +52,21 @@ public class JobApplicationActivity extends AppCompatActivity {
 
         try {
             price = Double.parseDouble(tvPrice.getText().toString());
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             Toast.makeText(this, "Please provide correct input for price, e.g. 8997.65", Toast.LENGTH_SHORT).show();
             return;
         }
 
         try {
             numberOfPeople = Integer.parseInt(tvNumberOfPeople.getText().toString());
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             Toast.makeText(this, "Please provide correct input for number of people, e.g. 7", Toast.LENGTH_SHORT).show();
             return;
         }
 
         try {
             time = Integer.parseInt(tvTime.getText().toString());
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             Toast.makeText(this, "Please provide correct input for time, e.g. 7", Toast.LENGTH_SHORT).show();
             return;
         }
