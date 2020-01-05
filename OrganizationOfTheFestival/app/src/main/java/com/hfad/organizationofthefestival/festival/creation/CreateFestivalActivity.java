@@ -21,9 +21,13 @@ import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreateFestivalActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -87,10 +91,19 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
             }
 
 
-            String startDateTime = convertTime(etStartTime.getText().toString(),
-                    etStartDate.getText().toString());
-            String endDateTime = convertTime(etEndTime.getText().toString(),
-                    etEndDate.getText().toString());
+            String startDateTime = null;
+            String endDateTime = null;
+            try {
+                startDateTime = convertTime(etStartTime.getText().toString(),
+                        etStartDate.getText().toString());
+                endDateTime = convertTime(etEndTime.getText().toString(),
+                        etEndDate.getText().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            // Everything must be two-numberred
+            // LIke 5-1-2020 should be 05-01-2020
 
             festival = new Festival(etName.getText().toString(),
                     etDescription.getText().toString(),
@@ -205,9 +218,53 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
     }
 
 
-    public String convertTime(String time, String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
-        ZonedDateTime dateTime = ZonedDateTime.parse(date + " " + time, formatter);
+    public String convertTime(String time, String date) throws ParseException {
+//        // First check if there are 2 numbers, and not only 1
+//        String[] parts = date.split("-");
+//        if(parts[0].length() == 1){
+//            // have to add a leading 0
+//            parts[0] = "0" + parts[0];
+//        }
+//
+//        // Now check the months part
+//        if(parts[1].length() == 1){
+//            parts[1] = "0" + parts[1];
+//        }
+//
+//        // Let's do the same for years
+//        if(parts[2].length()!=4){
+//            // Stop right there criminal scum! You've violated the law!
+//            // Yeah I'm really bored
+//            Toast.makeText(this, "Unallowed year entered!", Toast.LENGTH_SHORT).show();
+//            throw new IllegalArgumentException("Unallowed year entered!");
+//        }
+//
+//        // Re-assemble the new date
+//        date = parts[0] + "." + parts[1] + "." + parts[2] + ".";
+//
+//        // Repeat for the time as well
+//        parts = time.split(":");
+//        if(parts[0].length()==1){
+//            // have to add a leading 0
+//            parts[0] = "0" + parts[0];
+//        }
+//
+//        // Now check the minutes part
+//        if(parts[1].length()==1){
+//            parts[1] = "0" + parts[1];
+//        }
+//        time = parts[0] + ":" + parts[1];
+
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+//        DateTime dateTime = DateTime.parse(date + " " + time, formatter);
+
+        // Replace the - with .
+        date.replaceAll("-", ".");
+        date += ".";
+
+        String format = "dd.MM.yyyy. HH:mm";
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
+        Date dateTime = formatter.parse(date + " " + time);
         return dateTime.toString();
 
     }
