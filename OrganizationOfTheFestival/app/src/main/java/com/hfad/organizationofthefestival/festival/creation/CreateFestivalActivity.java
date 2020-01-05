@@ -13,6 +13,7 @@ import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
@@ -37,10 +38,10 @@ public class CreateFestivalActivity extends AppCompatActivity {
     private ImageView ivLogo;
     private EditText etName;
     private EditText etDescription;
-    private EditText etStartTime;
-    private EditText etStartDate;
-    private EditText etEndTime;
-    private EditText etEndDate;
+    private TextView etStartTime;
+    private TextView etStartDate;
+    private TextView etEndTime;
+    private TextView etEndDate;
     private Button btCreate;
 
     private Festival festival;
@@ -135,7 +136,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
         });
     }
 
-    private void showPickedDate(EditText et, int day, int month, int year) {
+    private void showPickedDate(TextView et, int day, int month, int year) {
         month++;
         if (day < 10 && month < 10) {
             et.setText("0" + day + "." + "0" + month + "." + year + ".");
@@ -148,7 +149,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
         }
     }
 
-    private void showPickedTime(EditText et, int hour, int minutes) {
+    private void showPickedTime(TextView et, int hour, int minutes) {
         if (hour < 10 && minutes < 10) {
             et.setText("0" + hour + ":" + "0" + minutes);
         } else if (hour < 10) {
@@ -206,7 +207,6 @@ public class CreateFestivalActivity extends AppCompatActivity {
         }
         return true;
     }
-
 
     public String convertTime(String time, String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. kk:mm");
