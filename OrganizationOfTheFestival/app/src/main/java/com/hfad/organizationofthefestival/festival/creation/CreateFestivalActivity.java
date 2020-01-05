@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
@@ -40,10 +41,10 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
     private ImageView ivLogo;
     private EditText etName;
     private EditText etDescription;
-    private EditText etStartTime;
-    private EditText etStartDate;
-    private EditText etEndTime;
-    private EditText etEndDate;
+    private TextView etStartTime;
+    private TextView etStartDate;
+    private TextView etEndTime;
+    private TextView etEndDate;
     private Button btCreate;
 
     private Festival festival;
@@ -70,8 +71,8 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
         // start time
         btnStartDatePicker = (Button) findViewById(R.id.startDatebtn);
         btnStartTimePicker = (Button) findViewById(R.id.startTimebtn);
-        etStartDate = (EditText) findViewById(R.id.startDate);
-        etStartTime = (EditText) findViewById(R.id.startTime);
+        etStartDate = (TextView) findViewById(R.id.startDate);
+        etStartTime = (TextView) findViewById(R.id.startTime);
 
         btnStartDatePicker.setOnClickListener(this);
         btnStartTimePicker.setOnClickListener(this);
@@ -79,8 +80,8 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
         // end time
         btnEndDatePicker =(Button)findViewById(R.id.endDatebtn);
         btnEndTimePicker =(Button)findViewById(R.id.endTimebtn);
-        etEndDate=(EditText)findViewById(R.id.endDate);
-        etEndTime=(EditText)findViewById(R.id.endTime);
+        etEndDate=(TextView)findViewById(R.id.endDate);
+        etEndTime=(TextView)findViewById(R.id.endTime);
 
         btnEndDatePicker.setOnClickListener(this);
         btnEndTimePicker.setOnClickListener(this);
@@ -259,13 +260,12 @@ public class CreateFestivalActivity extends AppCompatActivity implements View.On
 //        DateTime dateTime = DateTime.parse(date + " " + time, formatter);
 
         // Replace the - with .
-        date.replaceAll("-", ".");
+        date = date.replaceAll("-", ".");
         date += ".";
 
         String format = "dd.MM.yyyy. HH:mm";
         SimpleDateFormat formatter = new SimpleDateFormat(format);
         Date dateTime = formatter.parse(date + " " + time);
         return dateTime.toString();
-
     }
 }

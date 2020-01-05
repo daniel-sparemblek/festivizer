@@ -75,15 +75,16 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:id="@+id/startDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:editable="false"
                 android:ems="10"
-                android:inputType="date"
                 android:hint="@string/start_date"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="date" />
 
             <Button
                 android:id="@+id/startDatebtn"
@@ -99,15 +100,16 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:id="@+id/startTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:editable="false"
                 android:ems="10"
-                android:inputType="time"
                 android:hint="@string/start_time"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="time" />
 
             <Button
                 android:id="@+id/startTimebtn"
@@ -122,15 +124,16 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:id="@+id/endDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:editable="false"
                 android:ems="10"
-                android:inputType="date"
                 android:hint="@string/end_date"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="date" />
 
             <Button
                 android:id="@+id/endDatebtn"
@@ -146,15 +149,16 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:id="@+id/endTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:editable="false"
                 android:ems="10"
-                android:inputType="time"
                 android:hint="@string/end_time"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="time" />
 
             <Button
                 android:id="@+id/endTimebtn"
