@@ -56,7 +56,7 @@ public class LeaderActivity extends AppCompatActivity {
         // change festival logo to profile picture when activity is changed
         ivProfilePicture = findViewById(R.id.profile_picture);
 
-        approvalList = findViewById(R.id.leaderList);
+        approvalList = findViewById(R.id.festivalList);
         username = getIntent().getStringExtra("username");
         accessToken = getIntent().getStringExtra("accessToken");
         refreshToken = getIntent().getStringExtra("refreshToken");
