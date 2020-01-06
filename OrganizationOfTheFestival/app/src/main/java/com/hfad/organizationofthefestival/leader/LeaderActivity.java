@@ -90,6 +90,7 @@ public class LeaderActivity extends AppCompatActivity {
             Intent intent = new Intent(LeaderActivity.this, CreateFestivalActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
             startActivity(intent);
         }
 

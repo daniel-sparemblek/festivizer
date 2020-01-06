@@ -34,6 +34,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
     private FestivalCreationController controller;
     private String accessToken;
     private String refreshToken;
+    private String username;
 
     private ImageView ivLogo;
     private EditText etName;
@@ -64,6 +65,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
+        username = intent.getStringExtra("username");
 
         btnStartDatePicker.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
@@ -163,6 +165,9 @@ public class CreateFestivalActivity extends AppCompatActivity {
 
     private void returnToLeaderActivity() {
         Intent intent = new Intent(CreateFestivalActivity.this, LeaderActivity.class);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 
