@@ -208,12 +208,13 @@ public class CreateFestivalActivity extends AppCompatActivity {
         return true;
     }
 
+    // this is shit but it works (kinda :))
     public String convertTime(String time, String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. kk:mm");
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'kk:mm:ss.SSS+0000");
-        String dateTimeString = date + " " + time;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateTimeString = date;
         LocalDate localDate = LocalDate.parse(dateTimeString, formatter);
         ZonedDateTime dateTime = localDate.atStartOfDay(ZoneId.systemDefault());
-        return dateTime.format(dateTimeFormatter);
+        return dateTime.format(dateTimeFormatter) + "T" + time + ":00.000+0000";
     }
 }
