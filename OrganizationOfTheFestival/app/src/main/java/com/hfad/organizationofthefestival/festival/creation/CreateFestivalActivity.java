@@ -84,7 +84,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
 
             TimePickerDialog timePickerDialog;
             timePickerDialog = new TimePickerDialog(this,
-                    (view, hour, minute) -> showPickedTime(etStartTime, hour, minute), eHour, eMinute, false);
+                    (view, hour, minute) -> showPickedTime(etStartTime, hour, minute), eHour, eMinute, true);
             timePickerDialog.show();
         });
 
@@ -107,7 +107,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
 
             TimePickerDialog timePickerDialog;
             timePickerDialog = new TimePickerDialog(this,
-                    (view, hour, minute) -> showPickedTime(etEndTime, hour, minute), eHour, eMinute, false);
+                    (view, hour, minute) -> showPickedTime(etEndTime, hour, minute), eHour, eMinute, true);
             timePickerDialog.show();
         });
 
@@ -212,8 +212,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
     public String convertTime(String time, String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String dateTimeString = date;
-        LocalDate localDate = LocalDate.parse(dateTimeString, formatter);
+        LocalDate localDate = LocalDate.parse(date, formatter);
         ZonedDateTime dateTime = localDate.atStartOfDay(ZoneId.systemDefault());
         return dateTime.format(dateTimeFormatter) + "T" + time + ":00.000+0000";
     }
