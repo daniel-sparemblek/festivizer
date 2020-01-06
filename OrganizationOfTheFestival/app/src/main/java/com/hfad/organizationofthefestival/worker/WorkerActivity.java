@@ -74,6 +74,11 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("username", username);
             this.startActivity(intent);
         } else if (id == R.id.activeJobs) {
+            Intent intent = new Intent(this, ActiveJobsActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            this.startActivity(intent);
 
         } else if (id == R.id.myApplications) {
             Intent intent = new Intent(this, MyApplicationsActivity.class);
