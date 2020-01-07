@@ -3,6 +3,8 @@ package com.hfad.organizationofthefestival.utility;
 import com.google.gson.annotations.SerializedName;
 
 public class WorkersApplication {
+    @SerializedName("application_id")
+    private int applicationId;
     @SerializedName("auction")
     private WorkersAuction auction;
     private double price;
@@ -11,12 +13,21 @@ public class WorkersApplication {
     @SerializedName("people_number")
     private int peopleNumber;
 
-    public WorkersApplication(WorkersAuction auction, double price, String comment, int duration, int peopleNumber) {
+    public WorkersApplication(int applicationId, WorkersAuction auction, double price, String comment, int duration, int peopleNumber) {
+        this.applicationId = applicationId;
         this.auction = auction;
         this.price = price;
         this.comment = comment;
         this.duration = duration;
         this.peopleNumber = peopleNumber;
+    }
+
+    public int getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(int applicationId) {
+        this.applicationId = applicationId;
     }
 
     public WorkersAuction getAuction() {

@@ -54,4 +54,7 @@ public interface WorkerClient {
     @GET("jobs")
     Call<JobApply[]> getActiveJobs(@Query("username") String username, @Query("is_completed") String isCompleted,
                               @Header("Authorization") String authorization);
+
+    @GET("applications")
+    Call<Application> getApplication(@Query("application_id") String applicationId, @Header("Authorization") String authorization);
 }
