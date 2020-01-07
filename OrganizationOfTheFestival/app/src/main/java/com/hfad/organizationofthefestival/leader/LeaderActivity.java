@@ -89,7 +89,10 @@ public class LeaderActivity extends AppCompatActivity {
             startActivity(getIntent());
         } else if (id == R.id.myFests) {
             Intent intent = new Intent(this, MyFestivalsActivity.class);
-            intent.putExtra("leader_id", leader.getId());
+            intent.putExtra("leader_id", Integer.toString(leader.getId()));
+            System.out.println("++++ " + leader.getId());
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
             startActivity(intent);
         } else if (id == R.id.createNewFest) {
             Intent intent = new Intent(this, CreateFestivalActivity.class);

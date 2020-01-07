@@ -18,11 +18,10 @@ class MyFestivalsController {
     private MyFestivalsActivity myFestivalsActivity;
     private LeaderClient api;
     private String accessToken;
-    private String username;
+    private String leaderID;
     private String refreshToken;
-    private Leader leader;
 
-    public MyFestivalsController(MyFestivalsActivity myFestivalsActivity, String accessToken, String username, String refreshToken) {
+    public MyFestivalsController(MyFestivalsActivity myFestivalsActivity, String accessToken, String leaderID, String refreshToken) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -30,13 +29,13 @@ class MyFestivalsController {
                 .create(LeaderClient.class);
 
         this.accessToken = accessToken;
-        this.username = username;
+        this.leaderID = leaderID;
         this.myFestivalsActivity = myFestivalsActivity;
         this.refreshToken = refreshToken;
     }
 
-    public void getCompletedFestivals(int leaderId) {
-        Call<Festivals> leaderCall = api.getCompletedFestivals(String.valueOf(leaderId), "Bearer " + accessToken);
+    public void getCompletedFestivals() {
+        Call<Festivals> leaderCall = api.getCompletedFestivals(leaderID, "Bearer " + accessToken);
 
         leaderCall.enqueue(new Callback<Festivals>() {
             @Override

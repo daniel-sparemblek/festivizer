@@ -108,6 +108,6 @@ public class Leader {
     }
 
     public List<String> getFestivalNames() {
-        return festivals.stream().map(t -> t.getName()).collect(Collectors.toList());
+        return festivals.stream().map(Festival::getName).collect(Collectors.toList());
     }
 }

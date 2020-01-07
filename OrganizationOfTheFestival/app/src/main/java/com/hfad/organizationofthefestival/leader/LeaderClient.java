@@ -9,9 +9,10 @@ import retrofit2.http.Query;
 
 public interface LeaderClient {
     @GET("leaders")
-    Call<Leader> getAll(@Query("username") String username,
-                        @Header("Authorization") String authorization);
+    Call<Leader> getLeaderData(@Query("username") String username,
+                               @Header("Authorization") String authorization);
 
-    @GET
-    Call<Festivals> getCompletedFestivals(@Query("leader_id") String leaderId, @Header("Authorization") String authorization);
+    @GET("festivals")
+    Call<Festivals> getCompletedFestivals(@Query("leader_id") String leader_id,
+                                          @Header("Authorization") String authorization);
 }

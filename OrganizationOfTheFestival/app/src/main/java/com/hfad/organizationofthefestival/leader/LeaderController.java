@@ -33,7 +33,7 @@ public class LeaderController {
     }
 
     public void getData() {
-        Call<Leader> leaderCall = api.getAll(username, "Bearer " + accessToken);
+        Call<Leader> leaderCall = api.getLeaderData(username, "Bearer " + accessToken);
 
         leaderCall.enqueue(new Callback<Leader>() {
             @Override
