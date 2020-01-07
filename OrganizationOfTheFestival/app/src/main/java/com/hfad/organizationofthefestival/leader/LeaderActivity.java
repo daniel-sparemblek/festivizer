@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
+import com.hfad.organizationofthefestival.organizer.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -99,7 +100,11 @@ public class LeaderActivity extends AppCompatActivity {
             intent.putExtra("leader_id", leader.getId());
             startActivity(intent);
         } else if (id == R.id.search) {
-
+            Intent intent = new Intent(LeaderActivity.this, SearchActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
