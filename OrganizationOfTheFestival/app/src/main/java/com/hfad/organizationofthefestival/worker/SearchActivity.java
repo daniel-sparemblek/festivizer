@@ -47,11 +47,8 @@ public class SearchActivity extends AppCompatActivity {
 
         searchController = new SearchController(this, accessToken, username, refreshToken);
 
-        searchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //POSJETI PROFIL, NEZ DI JE TO
-            }
+        searchResults.setOnItemClickListener((parent, view, position, id) -> {
+            //POSJETI PROFIL, NEZ DI JE TO
         });
     }
 
