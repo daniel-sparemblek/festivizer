@@ -1,6 +1,12 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.widget.Toast;
+
 import com.hfad.organizationofthefestival.utility.EventApply;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,13 +42,35 @@ class EventsController {
         eventsCall.enqueue(new Callback<EventApply[]>() {
             @Override
             public void onResponse(Call<EventApply[]> call, Response<EventApply[]> response) {
-
+                if(response.isSuccessful()) {
+                    if(response.body() == null) {
+                        System.out.println("AAAAAAAAAAAAA");
+                        return;
+                    }
+                    eventsActivity.fillInActivity(response.body());
+                } else {
+                    try {
+                        Toast.makeText(eventsActivity, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        Toast.makeText(eventsActivity, "Unable to display error message 8=D", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<EventApply[]> call, Throwable t) {
-
+                Toast.makeText(eventsActivity, "Something went terribly wrong :(", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public List<String> format(EventApply[] events) {
+        List<String> result = new ArrayList<>();
+
+        for(EventApply event : events) {
+            result.add(event.getName());
+        }
+
+        return result;
     }
 }
