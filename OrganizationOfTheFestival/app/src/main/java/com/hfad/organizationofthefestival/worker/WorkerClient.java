@@ -45,9 +45,6 @@ public interface WorkerClient {
     @POST("applications")
     Call<Void> createApplication(@Body Application application, @Header("Authorization") String authorization);
 
-    @POST("search/users")
-    Call<User[]> searchUsers(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
-
     @GET("applications")
     Call<WorkersApplication[]> getWorkerApplications(@Query("username") String username, @Header("Authorization") String authorization);
 

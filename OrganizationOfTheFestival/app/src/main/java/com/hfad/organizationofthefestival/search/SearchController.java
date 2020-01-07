@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchController {
     private SearchActivity searchActivity;
-    private WorkerClient api;
+    private SearchApi api;
     private String accessToken;
     private String username;
     private String refreshToken;
@@ -28,7 +28,7 @@ public class SearchController {
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(WorkerClient.class);
+                .create(SearchApi.class);
 
         this.accessToken = accessToken;
         this.username = username;

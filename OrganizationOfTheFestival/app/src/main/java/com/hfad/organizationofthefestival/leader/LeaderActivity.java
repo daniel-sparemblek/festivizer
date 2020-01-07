@@ -84,29 +84,28 @@ public class LeaderActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.myEvents) {
             System.out.println("Stisnuo sam evente");
-        } else if(id == R.id.myProfile) {
+        } else if (id == R.id.myProfile) {
             finish();
             startActivity(getIntent());
-        } else if (id == R.id.createNewFest){
+        } else if (id == R.id.createNewFest) {
             Intent intent = new Intent(LeaderActivity.this, CreateFestivalActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             startActivity(intent);
-        }
-        else if(id == R.id.myFests) {
+        } else if (id == R.id.myFests) {
             Intent intent = new Intent(LeaderActivity.this, MyFestivalsActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
+
             intent.putExtra("leader_id", leader.getId());
             startActivity(intent);
+        } else if (id == R.id.search) {
+
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void fillInActivity(Leader leader){
+    public void fillInActivity(Leader leader) {
         this.leader = leader;
         tvLeaderName.setText(leader.getUsername());
         tvLeaderEmail.setText(leader.getEmail());
@@ -139,7 +138,7 @@ public class LeaderActivity extends AppCompatActivity {
 
     }
 
-    private void setProfilePicture(String picture){
+    private void setProfilePicture(String picture) {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
         ivProfilePicture.setImageBitmap(bitmap);
