@@ -117,6 +117,7 @@ public class LeaderActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("leader_id", leader.getId());
             startActivity(intent);
         }
 

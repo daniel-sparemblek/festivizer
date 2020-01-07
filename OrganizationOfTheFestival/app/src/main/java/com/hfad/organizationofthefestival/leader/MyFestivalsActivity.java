@@ -41,11 +41,12 @@ public class MyFestivalsActivity extends AppCompatActivity {
         myFestivalsController.getCompletedFestivals();
     }
 
-    public void fillInActivity(Festivals festivals) {
+    public void fillInActivity(Festival[] festivals) {
+        List<Festival> festivalList = Arrays.asList(festivals);
         ArrayAdapter<String> specializationArrayAdapter =
                 new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
-                festivals.getFestivals().stream()
+                festivalList.stream()
                         .map(Festival::getName)
                         .collect(Collectors.toList()));
 

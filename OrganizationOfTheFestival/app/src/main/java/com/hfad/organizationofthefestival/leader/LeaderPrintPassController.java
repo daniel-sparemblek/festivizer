@@ -3,7 +3,6 @@ package com.hfad.organizationofthefestival.leader;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.festival.Festivals;
 
 import org.json.JSONObject;
 
@@ -13,15 +12,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class MyFestivalsController {
+class LeaderPrintPassController {
 
-    private MyFestivalsActivity myFestivalsActivity;
+    private LeaderPrintPassActivity leaderPrintPassActivity;
     private LeaderClient api;
     private String accessToken;
-    private String leaderID;
+    private String username;
     private String refreshToken;
+    private Leader leader;
 
-    public MyFestivalsController(MyFestivalsActivity myFestivalsActivity, String accessToken, String leaderID, String refreshToken) {
+    public LeaderPrintPassController(LeaderPrintPassActivity leaderPrintPassActivity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -29,25 +29,25 @@ class MyFestivalsController {
                 .create(LeaderClient.class);
 
         this.accessToken = accessToken;
-        this.leaderID = leaderID;
-        this.myFestivalsActivity = myFestivalsActivity;
+        this.username = username;
+        this.leaderPrintPassActivity = leaderPrintPassActivity;
         this.refreshToken = refreshToken;
     }
 
-    public void getCompletedFestivals() {
-        Call<Festival[]> leaderCall = api.getCompletedFestivals(leaderID, "Bearer " + accessToken);
+    public void getLeaderFestivals(int leaderId) {
+        Call<Festival[]> leaderCall = api.getLeaderFestivals(String.valueOf(leaderId), "Bearer " + accessToken);
 
         leaderCall.enqueue(new Callback<Festival[]>() {
             @Override
             public void onResponse(Call<Festival[]> call, Response<Festival[]> response) {
                 if (response.isSuccessful()) {
-                    myFestivalsActivity.fillInActivity(response.body());
+                    leaderPrintPassActivity.fillInActivity(response.body());
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(myFestivalsActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(leaderPrintPassActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Toast.makeText(myFestivalsActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(leaderPrintPassActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
                 }
@@ -55,8 +55,10 @@ class MyFestivalsController {
 
             @Override
             public void onFailure(Call<Festival[]> call, Throwable t) {
-                Toast.makeText(myFestivalsActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
+                Toast.makeText(leaderPrintPassActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
 }

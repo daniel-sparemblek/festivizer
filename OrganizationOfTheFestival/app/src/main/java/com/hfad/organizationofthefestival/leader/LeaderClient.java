@@ -14,7 +14,7 @@ public interface LeaderClient {
                                @Header("Authorization") String authorization);
 
     @GET("festivals/complete")
-    Call<Festivals> getCompletedFestivals(@Query("leader_id") String leader_id,
+    Call<Festival[]> getCompletedFestivals(@Query("leader_id") String leader_id,
                                           @Header("Authorization") String authorization);
 
     @GET("festivals")
