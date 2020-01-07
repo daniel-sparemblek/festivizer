@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Worker {
 
-    @SerializedName("leader_id")
     private int id;
     private String username;
     private String password;
