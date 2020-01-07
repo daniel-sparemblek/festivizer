@@ -57,7 +57,14 @@ public class ApplyFestActivity extends AppCompatActivity {
             for(int i = 0; i < festivals.length; i++) {
                 if(name.equals(festivals[i].getName())) {
                     festivals[i].setOrgStatus(status);
-                    applyFestController.apply(festivals[i].getFestivalId());
+
+                    if(status == 1) {
+                        applyFestController.apply(festivals[i].getFestivalId());
+                    } else {
+                        applyFestController.revoke(festivals[i].getFestivalId());
+
+                    }
+
                     break;
                 }
             }
