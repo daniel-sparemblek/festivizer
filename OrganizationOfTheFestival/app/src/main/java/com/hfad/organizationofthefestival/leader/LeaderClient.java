@@ -5,6 +5,7 @@ import com.hfad.organizationofthefestival.festival.Festival;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface LeaderClient {
@@ -12,13 +13,10 @@ public interface LeaderClient {
     Call<Leader> getLeaderData(@Query("username") String username,
                                @Header("Authorization") String authorization);
 
-    @GET("festivals/complete")
-    Call<Festival[]> getCompletedFestivals(@Query("leader_id") String leader_id,
-                                          @Header("Authorization") String authorization);
-
-    @GET("festivals/active")
-    Call<Festival[]> getActiveFestivals(@Query("leader_id") String leader_id,
-                                        @Header("Authorization") String authorization);
+    @GET("festivals/{type}")
+    Call<Festival[]> getFestivals(@Path("type") String type,
+                                  @Query("leader_id") String leader_id,
+                                  @Header("Authorization") String authorization);
 
     @GET("festivals")
     Call<Festival[]> getLeaderFestivals(@Query("leader_id") String leaderId,

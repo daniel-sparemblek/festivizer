@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.leader;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -20,7 +21,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
     private String refreshToken;
     private String leaderId;
 
-    private MyFestivalsController myFestivalsController;
+    private MyFestivalsController controller;
 
     private ListView lvFestivals;
     private Button btnActive;
@@ -43,8 +44,31 @@ public class MyFestivalsActivity extends AppCompatActivity {
 
         lvFestivals = findViewById(R.id.festivalList);
 
-        myFestivalsController = new MyFestivalsController(this, accessToken, leaderId, refreshToken);
-        myFestivalsController.getActiveFestivals();
+        controller = new MyFestivalsController(this, accessToken, leaderId, refreshToken);
+        controller.getFestivals("active");
+        btnActive.setEnabled(false);
+
+
+        btnPending.setOnClickListener(v -> {
+            controller.getFestivals("pending");
+            btnPending.setEnabled(false);
+            btnActive.setEnabled(true);
+            btnCompleted.setEnabled(true);
+        });
+
+        btnActive.setOnClickListener(v -> {
+            controller.getFestivals("active");
+            btnPending.setEnabled(true);
+            btnActive.setEnabled(false);
+            btnCompleted.setEnabled(true);
+        });
+
+        btnCompleted.setOnClickListener(v -> {
+            controller.getFestivals("complete");
+            btnPending.setEnabled(true);
+            btnActive.setEnabled(true);
+            btnCompleted.setEnabled(false);
+        });
 
     }
 
@@ -56,7 +80,6 @@ public class MyFestivalsActivity extends AppCompatActivity {
                 festivalList.stream()
                         .map(Festival::getName)
                         .collect(Collectors.toList()));
-        btnActive.setEnabled(false);
 
         lvFestivals.setAdapter(specializationArrayAdapter);
     }
