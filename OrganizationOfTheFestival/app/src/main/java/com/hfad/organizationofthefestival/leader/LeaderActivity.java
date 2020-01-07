@@ -93,6 +93,13 @@ public class LeaderActivity extends AppCompatActivity {
             intent.putExtra("username", username);
             startActivity(intent);
         }
+        else if(id == R.id.myFests) {
+            Intent intent = new Intent(LeaderActivity.this, MyFestivalsActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
