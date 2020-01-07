@@ -49,27 +49,22 @@ public class SearchActivity extends AppCompatActivity {
         searchResults.setOnItemClickListener((parent, view, position, id) -> {
             //POSJETI PROFIL, NEZ DI JE TO
         });
+
+        btnSearch.setOnClickListener(v -> {
+          search();
+        });
     }
 
-    public void search(View view) {
+    public void search() {
         String searched = tvSearch.getText().toString();
         searchController.search(searched);
     }
 
-    public void fillResults(User[] body) {
+    public void fillResults(List<User> users) {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, usersToStrings(body));
+                android.R.layout.simple_list_item_1, users.stream().map(User::getUsername).collect(Collectors.toList()));
         searchResults.setAdapter(specializationArrayAdapter);
 
-    }
-
-    public List<String> usersToStrings(User[] jobs) {
-        userList = Arrays.asList(jobs);
-
-        List<String> stringList = userList.stream()
-                .map(t -> t.getUsername())
-                .collect(Collectors.toList());
-        return stringList;
     }
 
     @Override
