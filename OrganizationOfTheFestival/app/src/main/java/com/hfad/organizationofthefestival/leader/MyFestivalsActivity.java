@@ -18,6 +18,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
     private String username;
     private String accessToken;
     private String refreshToken;
+    private int leaderId;
 
     private MyFestivalsController myFestivalsController;
 
@@ -32,11 +33,12 @@ public class MyFestivalsActivity extends AppCompatActivity {
         username = getIntent().getStringExtra("username");
         accessToken = getIntent().getStringExtra("accessToken");
         refreshToken = getIntent().getStringExtra("refreshToken");
+        leaderId = getIntent().getIntExtra("leader_id", 0);
 
         lvFestivals = findViewById(R.id.festivalList);
 
         myFestivalsController = new MyFestivalsController(this, accessToken, username, refreshToken);
-        myFestivalsController.getCompletedFestivals();
+        myFestivalsController.getCompletedFestivals(leaderId);
     }
 
     public void fillInActivity(Festival[] body) {
