@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 public class OrganizerActivity extends AppCompatActivity {
 

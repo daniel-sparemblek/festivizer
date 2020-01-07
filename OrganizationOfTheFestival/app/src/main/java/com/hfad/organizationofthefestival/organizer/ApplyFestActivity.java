@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;

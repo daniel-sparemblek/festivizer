@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 public class EventsActivity extends ApplyFestActivity {
 

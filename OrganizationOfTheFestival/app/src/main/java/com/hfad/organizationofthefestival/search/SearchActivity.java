@@ -3,7 +3,6 @@ package com.hfad.organizationofthefestival.search;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.User;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,11 +31,11 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.worker_search);
+        setContentView(R.layout.search);
 
-        tvSearch = findViewById(R.id.worker_tv_search);
-        btnSearch = findViewById(R.id.worker_btn_search);
-        searchResults = findViewById(R.id.worker_lv_search);
+        tvSearch = findViewById(R.id.tv_search);
+        btnSearch = findViewById(R.id.btn_search);
+        searchResults = findViewById(R.id.lv_search);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
