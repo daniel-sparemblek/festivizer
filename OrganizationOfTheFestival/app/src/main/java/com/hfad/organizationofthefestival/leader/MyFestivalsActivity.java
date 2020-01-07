@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.festival.Festivals;
-import com.hfad.organizationofthefestival.utility.Job;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +23,9 @@ public class MyFestivalsActivity extends AppCompatActivity {
     private MyFestivalsController myFestivalsController;
 
     private ListView lvFestivals;
+    private Button btnActive;
+    private Button btnPending;
+    private Button btnCompleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,15 @@ public class MyFestivalsActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         leaderId = intent.getStringExtra("leader_id");
 
+        btnActive = findViewById(R.id.btnActive);
+        btnPending = findViewById(R.id.btnPending);
+        btnCompleted = findViewById(R.id.btnCompleted);
+
         lvFestivals = findViewById(R.id.festivalList);
 
         myFestivalsController = new MyFestivalsController(this, accessToken, leaderId, refreshToken);
-        myFestivalsController.getCompletedFestivals();
+        myFestivalsController.getActiveFestivals();
+
     }
 
     public void fillInActivity(Festival[] festivals) {
@@ -49,6 +56,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
                 festivalList.stream()
                         .map(Festival::getName)
                         .collect(Collectors.toList()));
+        btnActive.setEnabled(false);
 
         lvFestivals.setAdapter(specializationArrayAdapter);
     }
