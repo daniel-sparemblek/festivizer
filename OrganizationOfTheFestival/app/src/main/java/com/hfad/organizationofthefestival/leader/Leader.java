@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Leader {
 
-    @SerializedName("leader_id")
+    @SerializedName("user_id")
     private int id;
     private String username;
     private String password;

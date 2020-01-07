@@ -12,5 +12,6 @@ import retrofit2.http.POST;
 
 public interface SearchApi {
     @POST("search/users")
-    Call<List<User>> searchUsers(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
+    Call<List<User>> searchUsers(@Body HashMap<String, String> body,
+                                 @Header("Authorization") String authorization);
 }
