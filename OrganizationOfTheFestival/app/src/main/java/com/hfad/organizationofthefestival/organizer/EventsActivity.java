@@ -5,15 +5,19 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.utility.EventApply;
 
 public class EventsActivity extends ApplyFestActivity {
 
-    // private EventsController eventsController;
+    private EventsController eventsController;
     private String accessToken;
     private String refreshToken;
     private String username;
+    private ListView lvEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,4 +73,5 @@ public class EventsActivity extends ApplyFestActivity {
         intent.putExtra("username", username);
         this.startActivity(intent);
     }
+
 }

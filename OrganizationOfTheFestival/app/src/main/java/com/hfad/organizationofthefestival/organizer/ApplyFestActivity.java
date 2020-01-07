@@ -10,10 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.festival.Festival;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.hfad.organizationofthefestival.festival.FestivalsResponse;
 
 public class ApplyFestActivity extends AppCompatActivity {
 
@@ -24,7 +21,7 @@ public class ApplyFestActivity extends AppCompatActivity {
     private ListView lvFestivals;
     private String name;
     private char c = 0x2714;
-    private Festival[] festivals;
+    private FestivalsResponse[] festivals;
 
 
     @Override
@@ -58,7 +55,8 @@ public class ApplyFestActivity extends AppCompatActivity {
 
             for(int i = 0; i < festivals.length; i++) {
                 if(name.equals(festivals[i].getName())) {
-                    festivals[i].setStatus(status);
+                    festivals[i].setOrgStatus(status);
+                    applyFestController.apply(festivals[i].getFestivalId());
                     break;
                 }
             }
@@ -108,25 +106,11 @@ public class ApplyFestActivity extends AppCompatActivity {
     }
 
 
-    public void fillInActivity(Festival[] festivals) {
+    public void fillInActivity(FestivalsResponse[] festivals) {
         this.festivals = festivals;
 
         ArrayAdapter<String> festivalsArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, formatFestivals(festivals));
+                android.R.layout.simple_list_item_1, applyFestController.formatFestivals(festivals));
         lvFestivals.setAdapter(festivalsArrayAdapter);
-    }
-
-    private List<String> formatFestivals(Festival[] festivals) {
-        List<String> result = new ArrayList<>();
-
-        for (Festival festival : festivals) {
-            if (festival.getStatus() == 1) {
-                result.add(festival.toString() + " " + c);
-            } else if (festival.getStatus() == 0) {
-                result.add(festival.toString());
-            }
-        }
-
-        return result;
     }
 }

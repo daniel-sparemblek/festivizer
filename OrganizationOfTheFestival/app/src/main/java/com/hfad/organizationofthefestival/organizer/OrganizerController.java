@@ -45,7 +45,7 @@ public class OrganizerController {
 
             @Override
             public void onFailure(Call<Organizer> call, Throwable t) {
-                Toast.makeText(organizerActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
+                Toast.makeText(organizerActivity, t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

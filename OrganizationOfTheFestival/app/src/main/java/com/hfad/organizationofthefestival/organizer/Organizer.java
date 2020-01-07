@@ -1,8 +1,10 @@
 package com.hfad.organizationofthefestival.organizer;
 
 import com.google.gson.annotations.SerializedName;
+import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.utility.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Organizer {
@@ -18,9 +20,9 @@ public class Organizer {
     private String phone;
     private String email;
     private int permission;
-    private List<String> festivals;
+    private List<Festival> festivals;
 
-    public Organizer(int id, String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission, List<String> festivals) {
+    public Organizer(int id, String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission, List<Festival> festivals) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -106,10 +108,16 @@ public class Organizer {
     }
 
     public List<String> getFestivals() {
-        return festivals;
+        List<String> result = new ArrayList<>();
+
+        for(Festival festival : festivals) {
+            result.add(festival.toString());
+        }
+
+        return result;
     }
 
-    public void setFestivals(List<String> festivals) {
+    public void setFestivals(List<Festival> festivals) {
         this.festivals = festivals;
     }
 }
