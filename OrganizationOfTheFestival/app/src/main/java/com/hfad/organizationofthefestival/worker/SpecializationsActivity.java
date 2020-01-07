@@ -114,4 +114,9 @@ public class SpecializationsActivity extends AppCompatActivity {
     public void setMySpecializations(Specialization[] specializations) {
         this.mySpecializations = Arrays.asList(specializations);
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

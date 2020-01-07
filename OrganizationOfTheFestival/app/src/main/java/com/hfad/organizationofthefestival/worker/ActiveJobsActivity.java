@@ -59,4 +59,9 @@ public class ActiveJobsActivity extends AppCompatActivity {
 
         activeJobs.setAdapter(specializationArrayAdapter);
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

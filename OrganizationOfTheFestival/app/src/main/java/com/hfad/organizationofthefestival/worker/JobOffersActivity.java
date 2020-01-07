@@ -64,4 +64,9 @@ public class JobOffersActivity extends AppCompatActivity {
                 .collect(Collectors.toList());
         return stringList;
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }
