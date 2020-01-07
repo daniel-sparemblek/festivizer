@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
+import com.hfad.organizationofthefestival.organizer.PrintPassActivity;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 
 import java.util.ArrayList;
@@ -103,6 +104,13 @@ public class LeaderActivity extends AppCompatActivity {
             startActivity(intent);
         } else if (id == R.id.search) {
             Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            startActivity(intent);
+        }
+        else if(id == R.id.printPass) {
+            Intent intent = new Intent(this, LeaderPrintPassActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);

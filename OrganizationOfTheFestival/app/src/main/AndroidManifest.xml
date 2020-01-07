@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".leader.MyFestivalsActivity"></activity>
+        <activity android:name=".leader.LeaderPrintPassActivity"></activity>
+        <activity android:name=".leader.MyFestivalsActivity" />
         <activity android:name=".worker.JobProfileActivity" />
         <activity android:name=".worker.ViewApplicationActivity" />
         <activity android:name=".worker.ActiveJobsActivity" />
