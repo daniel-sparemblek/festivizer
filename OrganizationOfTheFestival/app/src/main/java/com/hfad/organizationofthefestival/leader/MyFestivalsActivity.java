@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.festival.Festivals;
 import com.hfad.organizationofthefestival.utility.Job;
 
 import java.util.Arrays;
@@ -41,18 +42,14 @@ public class MyFestivalsActivity extends AppCompatActivity {
         myFestivalsController.getCompletedFestivals(leaderId);
     }
 
-    public void fillInActivity(Festival[] body) {
-        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, festivalsToStrings(body));
+    public void fillInActivity(Festivals festivals) {
+        ArrayAdapter<String> specializationArrayAdapter =
+                new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                festivals.getFestivals()
+                .stream().map(t -> t.getName())
+                .collect(Collectors.toList()));
+
         lvFestivals.setAdapter(specializationArrayAdapter);
-    }
-
-    public List<String> festivalsToStrings(Festival[] festivals) {
-        festivalsList = Arrays.asList(festivals);
-
-        List<String> stringList = festivalsList.stream()
-                .map(Festival::getName)
-                .collect(Collectors.toList());
-        return stringList;
     }
 }

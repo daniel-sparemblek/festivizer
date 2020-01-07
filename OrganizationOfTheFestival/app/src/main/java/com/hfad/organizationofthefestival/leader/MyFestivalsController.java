@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.leader;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.festival.Festivals;
 
 import org.json.JSONObject;
 
@@ -35,11 +36,11 @@ class MyFestivalsController {
     }
 
     public void getCompletedFestivals(int leaderId) {
-        Call<Festival[]> leaderCall = api.getCompletedFestivals(String.valueOf(leaderId), "Bearer " + accessToken);
+        Call<Festivals> leaderCall = api.getCompletedFestivals(String.valueOf(leaderId), "Bearer " + accessToken);
 
-        leaderCall.enqueue(new Callback<Festival[]>() {
+        leaderCall.enqueue(new Callback<Festivals>() {
             @Override
-            public void onResponse(Call<Festival[]> call, Response<Festival[]> response) {
+            public void onResponse(Call<Festivals> call, Response<Festivals> response) {
                 if (response.isSuccessful()) {
                     myFestivalsActivity.fillInActivity(response.body());
                 } else {
@@ -54,7 +55,7 @@ class MyFestivalsController {
             }
 
             @Override
-            public void onFailure(Call<Festival[]> call, Throwable t) {
+            public void onFailure(Call<Festivals> call, Throwable t) {
                 Toast.makeText(myFestivalsActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });

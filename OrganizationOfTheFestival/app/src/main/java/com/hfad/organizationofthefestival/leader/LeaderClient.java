@@ -1,6 +1,6 @@
 package com.hfad.organizationofthefestival.leader;
 
-import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.festival.Festivals;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,5 +12,6 @@ public interface LeaderClient {
     Call<Leader> getAll(@Query("username") String username,
                         @Header("Authorization") String authorization);
 
-    Call<Festival[]> getCompletedFestivals(@Query("leader_id") String leaderId, @Header("Authorization") String authorization);
+    @GET
+    Call<Festivals> getCompletedFestivals(@Query("leader_id") String leaderId, @Header("Authorization") String authorization);
 }
