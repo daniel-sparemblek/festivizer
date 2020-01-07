@@ -1,6 +1,5 @@
 package com.hfad.organizationofthefestival.organizer;
 
-import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.festival.FestivalsResponse;
 import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.JobApply;
@@ -23,6 +22,10 @@ public interface OrganizerClient {
     @POST("festival/{festivalId}/apply")
     Call<Void> apply(@Header("Authorization") String authorization,
                      @Path("festivalId") String festivalId);
+
+    @POST("festival/{festivalId}/revoke")
+    Call<Void> revoke(@Header("Authorization") String authorization,
+                      @Path("festivalId") String festivalId);
 
     @GET("events")
     Call<EventApply[]> getAllEvents(@Query("username") String username,

@@ -92,4 +92,28 @@ public class ApplyFestController {
             }
         });
     }
+
+    public void revoke(Long festId) {
+        Call<Void> revokeCall = api.revoke("Bearer " + accessToken, festId.toString());
+
+        revokeCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()) {
+                    Toast.makeText(applyFestActivity, "You have withdrawn your application!", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        Toast.makeText(applyFestActivity, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        Toast.makeText(applyFestActivity, "Unable to show error message", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(applyFestActivity, "Something went terribly wrong!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
