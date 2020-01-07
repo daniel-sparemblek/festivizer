@@ -20,6 +20,7 @@ public class ActiveJobsActivity extends AppCompatActivity {
     private String username;
 
     private ListView activeJobs;
+    private List<JobApply> jobs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +33,22 @@ public class ActiveJobsActivity extends AppCompatActivity {
         username = intent.getStringExtra("username");
         activeJobs = findViewById(R.id.activeJobsList);
 
+
         ActiveJobsController activeJobsController = new ActiveJobsController(this, accessToken, username, refreshToken);
 
+        activeJobs.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent1 = new Intent(ActiveJobsActivity.this, JobProfileActivity.class);
+            intent1.putExtra("accessToken", accessToken);
+            intent1.putExtra("refreshToken", refreshToken);
+            intent1.putExtra("username", username);
+            intent1.putExtra("job_id", jobs.get(position).getJobId());
+            ActiveJobsActivity.this.startActivity(intent1);
+        });
         activeJobsController.getActiveJobs(username);
     }
 
     public void fillInActivity(JobApply[] body) {
-        List<JobApply> jobs = Arrays.asList(body);
+        jobs = Arrays.asList(body);
 
         List<String> specStrings = jobs.stream()
                 .map(JobApply::getName)
