@@ -2,13 +2,7 @@ package com.hfad.organizationofthefestival.leader;
 
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.festival.Festivals;
-import com.hfad.organizationofthefestival.utility.User;
-
 import org.json.JSONObject;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +19,7 @@ public class LeaderController {
     private String refreshToken;
     private Leader leader;
 
-    public LeaderController(LeaderActivity leaderActivity, String accessToken, String username, String refreshToken) {
+    public LeaderController(LeaderActivity activity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -34,7 +28,7 @@ public class LeaderController {
 
         this.accessToken = accessToken;
         this.username = username;
-        this.leaderActivity = leaderActivity;
+        this.leaderActivity = activity;
         this.refreshToken = refreshToken;
     }
 

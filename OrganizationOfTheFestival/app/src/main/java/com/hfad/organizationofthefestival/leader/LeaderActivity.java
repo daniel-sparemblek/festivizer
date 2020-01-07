@@ -83,21 +83,23 @@ public class LeaderActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.myEvents) {
-            System.out.println("Stisnuo sam evente");
-        } else if (id == R.id.myProfile) {
+        if (id == R.id.myProfile) {
             finish();
             startActivity(getIntent());
+        } else if (id == R.id.myFests) {
+            Intent intent = new Intent(this, MyFestivalsActivity.class);
+            intent.putExtra("leader_id", leader.getId());
+            startActivity(intent);
         } else if (id == R.id.createNewFest) {
             Intent intent = new Intent(this, CreateFestivalActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             startActivity(intent);
-        } else if (id == R.id.myFests) {
-            Intent intent = new Intent(this, MyFestivalsActivity.class);
-
-            intent.putExtra("leader_id", leader.getId());
+        } else if (id == R.id.jobAuctns){
+            Intent intent = new Intent(this, LeaderJobAuctionsActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
             startActivity(intent);
         } else if (id == R.id.search) {
             Intent intent = new Intent(this, SearchActivity.class);
