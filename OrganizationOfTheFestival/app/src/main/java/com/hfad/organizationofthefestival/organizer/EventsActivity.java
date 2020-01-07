@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.utility.EventApply;
 
 public class EventsActivity extends ApplyFestActivity {
 
@@ -31,6 +33,10 @@ public class EventsActivity extends ApplyFestActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
+
+        eventsController = new EventsController(this, accessToken, username, refreshToken);
+
+        eventsController.fetchEvents();
     }
 
     @Override
@@ -71,6 +77,14 @@ public class EventsActivity extends ApplyFestActivity {
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("username", username);
         this.startActivity(intent);
+    }
+
+    public void fillInActivity(EventApply[] events) {
+        lvEvents = findViewById(R.id.orgEventList);
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, eventsController.format(events));
+        lvEvents.setAdapter(specializationArrayAdapter);
+
     }
 
 }

@@ -19,7 +19,7 @@ public class ApplyFestActivity extends AppCompatActivity {
     private String accessToken;
     private String refreshToken;
     private String username;
-    private ListView lvFestivals;
+    private ListView lvEvents;
     private String name;
     private char c = 0x2714;
     private FestivalsResponse[] festivals;
@@ -30,7 +30,7 @@ public class ApplyFestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.organizer_screen_apply_for_festival);
 
-        lvFestivals = findViewById(R.id.orgFestivalList);
+        lvEvents = findViewById(R.id.orgFestivalList);
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
         setSupportActionBar(toolbar);
 
@@ -45,7 +45,7 @@ public class ApplyFestActivity extends AppCompatActivity {
 
         applyFestController.fetchFestivals();
 
-        lvFestivals.setOnItemClickListener((parent, view, position, id) -> {
+        lvEvents.setOnItemClickListener((parent, view, position, id) -> {
             name = (String) parent.getItemAtPosition(position);
             int status = 1;
 
@@ -112,6 +112,6 @@ public class ApplyFestActivity extends AppCompatActivity {
 
         ArrayAdapter<String> festivalsArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, applyFestController.formatFestivals(festivals));
-        lvFestivals.setAdapter(festivalsArrayAdapter);
+        lvEvents.setAdapter(festivalsArrayAdapter);
     }
 }
