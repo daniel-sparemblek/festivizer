@@ -85,7 +85,8 @@ public class LeaderActivity extends AppCompatActivity {
         if (id == R.id.myEvents) {
             System.out.println("Stisnuo sam evente");
         } else if(id == R.id.myProfile) {
-            System.out.println("Stisnuo sam profil");
+            finish();
+            startActivity(getIntent());
         } else if (id == R.id.createNewFest){
             Intent intent = new Intent(LeaderActivity.this, CreateFestivalActivity.class);
             intent.putExtra("accessToken", accessToken);
