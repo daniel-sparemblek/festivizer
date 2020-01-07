@@ -86,7 +86,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
 
             TimePickerDialog timePickerDialog;
             timePickerDialog = new TimePickerDialog(this,
-                    (view, hour, minute) -> showPickedTime(etStartTime, hour, minute), eHour, eMinute, true);
+                    (view, hour, minute) -> showPickedTime(etStartTime, hour, minute), sHour, sMinute, true);
             timePickerDialog.show();
         });
 
@@ -98,7 +98,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
 
             DatePickerDialog datePickerDialog;
             datePickerDialog = new DatePickerDialog(CreateFestivalActivity.this, (view, year, month, day)
-                    -> showPickedDate(etEndDate, day, month, year), sYear, sMonth, sDay);
+                    -> showPickedDate(etEndDate, day, month, year), eYear, eMonth, eDay);
             datePickerDialog.show();
         });
 
