@@ -1,6 +1,7 @@
 package com.hfad.organizationofthefestival.leader;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,15 +20,22 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import com.google.zxing.WriterException;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import androidmads.library.qrgenearator.QRGContents;
+import androidmads.library.qrgenearator.QRGEncoder;
 
 public class LeaderPrintPassActivity extends AppCompatActivity {
 
@@ -86,16 +94,26 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
 
     }
 
-    private void createPdf(String leaderName, String leaderLastName, Festival festival) {
+    private void createPdf(String leaderFirstName, String leaderLastName, Festival festival) {
         PdfDocument document = new PdfDocument();
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
         PdfDocument.Page page = document.startPage(pageInfo);
         Canvas canvas = page.getCanvas();
-        Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setTextSize(40);
-        paint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText("PASS", 150, 70, paint);
+        Paint titlePaint = new Paint();
+        titlePaint.setColor(Color.BLACK);
+        titlePaint.setTextSize(40);
+        titlePaint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("PASS", 150, 90, titlePaint);
+
+        Paint infoPaint = new Paint();
+        infoPaint.setColor(Color.BLACK);
+        infoPaint.setTextSize(18);
+        infoPaint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("First name: " + leaderFirstName, 10, 150, infoPaint);
+        canvas.drawText("Last name: " + leaderLastName, 10, 180, infoPaint);
+        canvas.drawText("Festival name: " + festival.getName(), 10, 210, infoPaint);
+        canvas.drawBitmap(createQRCodeImage(username, festival.getName()), 75, 300, titlePaint);
+
         document.finishPage(page);
 
         String directory_path = Environment.getExternalStorageDirectory().getPath() + "/mypdf/";
@@ -114,5 +132,35 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         }
         // close the document
         document.close();
+    }
+
+    public Bitmap createQRCodeImage(String username, String festival) {
+        String usernameHash = getMd5Hash(username);
+        String festivalHash = getMd5Hash(festival);
+
+        QRGEncoder qrgEncoder = new QRGEncoder(usernameHash + " " + festivalHash,
+                null, QRGContents.Type.TEXT, 150);
+        try {
+            return qrgEncoder.encodeAsBitmap();
+        } catch (WriterException e) {
+            return null;
+        }
+    }
+
+    public String getMd5Hash(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String md5 = number.toString(16);
+
+            while (md5.length() < 32)
+                md5 = "0" + md5;
+
+            return md5;
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("MD5", e.getLocalizedMessage());
+            return null;
+        }
     }
 }
