@@ -6,15 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.utility.JobApply;
 
 public class JobsActivity extends AppCompatActivity {
 
+    private JobsController jobsController;
     private String accessToken;
     private String refreshToken;
     private String username;
+    private ListView lvJobs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,10 @@ public class JobsActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
+
+        jobsController = new JobsController(this, accessToken, username, refreshToken);
+
+        jobsController.getJobs();
     }
 
     @Override
@@ -69,5 +78,12 @@ public class JobsActivity extends AppCompatActivity {
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("username", username);
         this.startActivity(intent);
+    }
+
+    public void fillInActivity(JobApply[] jobs) {
+        lvJobs = findViewById(R.id.orgJobsList);
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, jobsController.format(jobs));
+        lvJobs.setAdapter(specializationArrayAdapter);
     }
 }
