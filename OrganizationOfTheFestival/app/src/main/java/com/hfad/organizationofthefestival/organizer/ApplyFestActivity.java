@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.FestivalsResponse;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 public class ApplyFestActivity extends AppCompatActivity {
 

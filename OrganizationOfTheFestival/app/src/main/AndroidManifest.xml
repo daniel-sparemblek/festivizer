@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".worker.ActiveJobsActivity"></activity>
+        <activity android:name=".leader.MyFestivalsActivity"></activity>
+        <activity android:name=".worker.JobProfileActivity" />
+        <activity android:name=".worker.ViewApplicationActivity" />
+        <activity android:name=".worker.ActiveJobsActivity" />
         <activity android:name=".worker.MyApplicationsActivity" />
-        <activity android:name=".worker.SearchActivity" />
+        <activity android:name=".search.SearchActivity" />
         <activity android:name=".worker.JobApplicationActivity" />
         <activity android:name=".worker.JobApplyActivity" />
         <activity android:name=".worker.JobOffersActivity" />
@@ -26,7 +29,6 @@
         <activity android:name=".organizer.OrganizerActivity" />
         <activity android:name=".organizer.EventsActivity" />
         <activity android:name=".organizer.JobsActivity" />
-        <activity android:name=".organizer.SearchActivity" />
         <activity android:name=".organizer.PrintPassActivity" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".organizer.ApplyFestActivity" />

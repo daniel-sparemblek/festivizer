@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -84,10 +85,22 @@ public class LeaderActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.myEvents) {
             System.out.println("Stisnuo sam evente");
-        } else if(id == R.id.myProfile) {
-            System.out.println("Stisnuo sam profil");
-        } else if (id == R.id.createNewFest){
-            Intent intent = new Intent(LeaderActivity.this, CreateFestivalActivity.class);
+        } else if (id == R.id.myProfile) {
+            finish();
+            startActivity(getIntent());
+        } else if (id == R.id.createNewFest) {
+            Intent intent = new Intent(this, CreateFestivalActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            startActivity(intent);
+        } else if (id == R.id.myFests) {
+            Intent intent = new Intent(this, MyFestivalsActivity.class);
+
+            intent.putExtra("leader_id", leader.getId());
+            startActivity(intent);
+        } else if (id == R.id.search) {
+            Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
@@ -97,7 +110,7 @@ public class LeaderActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void fillInActivity(Leader leader){
+    public void fillInActivity(Leader leader) {
         this.leader = leader;
         tvLeaderName.setText(leader.getUsername());
         tvLeaderEmail.setText(leader.getEmail());
@@ -130,7 +143,7 @@ public class LeaderActivity extends AppCompatActivity {
 
     }
 
-    private void setProfilePicture(String picture){
+    private void setProfilePicture(String picture) {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
         ivProfilePicture.setImageBitmap(bitmap);

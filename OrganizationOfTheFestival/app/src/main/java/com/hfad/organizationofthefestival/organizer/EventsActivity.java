@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.EventApply;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 public class EventsActivity extends ApplyFestActivity {
 
