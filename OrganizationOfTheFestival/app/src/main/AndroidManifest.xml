@@ -17,7 +17,7 @@
         <activity android:name=".worker.ViewApplicationActivity" />
         <activity android:name=".worker.ActiveJobsActivity" />
         <activity android:name=".worker.MyApplicationsActivity" />
-        <activity android:name=".worker.SearchActivity" />
+        <activity android:name=".search.SearchActivity" />
         <activity android:name=".worker.JobApplicationActivity" />
         <activity android:name=".worker.JobApplyActivity" />
         <activity android:name=".worker.JobOffersActivity" />

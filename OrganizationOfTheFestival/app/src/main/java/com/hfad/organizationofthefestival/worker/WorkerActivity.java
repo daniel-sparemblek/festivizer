@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 import java.io.IOException;
 

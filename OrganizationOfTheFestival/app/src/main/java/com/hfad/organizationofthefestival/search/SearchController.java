@@ -1,8 +1,10 @@
-package com.hfad.organizationofthefestival.worker;
+package com.hfad.organizationofthefestival.search;
 
 import android.widget.Toast;
 
+import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.User;
+import com.hfad.organizationofthefestival.worker.WorkerClient;
 
 import org.json.JSONObject;
 
