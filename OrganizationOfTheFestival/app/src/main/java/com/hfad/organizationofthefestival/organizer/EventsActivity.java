@@ -2,6 +2,8 @@ package com.hfad.organizationofthefestival.organizer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.organizer.FragmentAdapters.EventAdapter;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.EventApply;
 
@@ -23,10 +26,17 @@ public class EventsActivity extends ApplyFestActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.organizer_screen_my_events);
+        setContentView(R.layout.organizer_screen_my_jobs); //Using the same layout as jobs
 
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
         setSupportActionBar(toolbar);
+
+        EventAdapter eventAdapter = new EventAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(eventAdapter);
+
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
 
 
         Intent intent = getIntent();
@@ -37,6 +47,20 @@ public class EventsActivity extends ApplyFestActivity {
         eventsController = new EventsController(this, accessToken, username, refreshToken);
 
         eventsController.fetchEvents();
+
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0) {
+                    eventsController.fetchEvents();
+                    System.out.println("I ovdje sam uhvatio 1.");
+                }
+                if(position == 1) {
+                    eventsController.fetchCompletedEvents();
+                    System.out.println("I ovdje sam uhvatio 2.");
+                }
+            }
+        });
     }
 
     @Override
@@ -80,7 +104,15 @@ public class EventsActivity extends ApplyFestActivity {
     }
 
     public void fillInActivity(EventApply[] events) {
-        lvEvents = findViewById(R.id.orgEventList);
+        lvEvents = findViewById(R.id.orgJobsList); //Using the same layout as jobs
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, eventsController.format(events));
+        lvEvents.setAdapter(specializationArrayAdapter);
+
+    }
+
+    public void fillInCompletedActivity(EventApply[] events) {
+        lvEvents = findViewById(R.id.orgEventList); //Using the same layout as jobs
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, eventsController.format(events));
         lvEvents.setAdapter(specializationArrayAdapter);

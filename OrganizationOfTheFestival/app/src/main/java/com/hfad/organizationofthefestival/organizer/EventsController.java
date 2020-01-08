@@ -14,7 +14,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class EventsController {
+public class EventsController {
 
     private EventsActivity eventsActivity;
     private OrganizerClient api;
@@ -37,6 +37,7 @@ class EventsController {
     }
 
     public void fetchEvents() {
+        System.out.println("Usao sam u fetchEvents");
         Call<EventApply[]> eventsCall = api.getAllEvents(username, "Bearer " + accessToken);
 
         eventsCall.enqueue(new Callback<EventApply[]>() {
@@ -48,6 +49,35 @@ class EventsController {
                         return;
                     }
                     eventsActivity.fillInActivity(response.body());
+                } else {
+                    try {
+                        Toast.makeText(eventsActivity, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        Toast.makeText(eventsActivity, "Unable to display error message 8=D", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventApply[]> call, Throwable t) {
+                Toast.makeText(eventsActivity, "Something went terribly wrong :(", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void fetchCompletedEvents() {
+        System.out.println("Usao sam u fetchCompletedEvents");
+        Call<EventApply[]> eventsCall = api.getAllEvents(username, "Bearer " + accessToken);
+
+        eventsCall.enqueue(new Callback<EventApply[]>() {
+            @Override
+            public void onResponse(Call<EventApply[]> call, Response<EventApply[]> response) {
+                if(response.isSuccessful()) {
+                    if(response.body() == null) {
+                        System.out.println("AAAAAAAAAAAAA");
+                        return;
+                    }
+                    eventsActivity.fillInCompletedActivity(response.body());
                 } else {
                     try {
                         Toast.makeText(eventsActivity, response.errorBody().string(), Toast.LENGTH_SHORT).show();

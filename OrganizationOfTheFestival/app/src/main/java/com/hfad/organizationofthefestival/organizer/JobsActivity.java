@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.organizer.FragmentAdapters.SectionsPagerAdapter;
+import com.hfad.organizationofthefestival.organizer.FragmentAdapters.JobsAdapter;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.WorkersAuction;
@@ -33,9 +33,9 @@ public class JobsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
         setSupportActionBar(toolbar);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), getIntent(), this);
+        JobsAdapter jobsAdapter = new JobsAdapter(this, getSupportFragmentManager(), getIntent(), this);
         ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.setAdapter(jobsAdapter);
 
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
