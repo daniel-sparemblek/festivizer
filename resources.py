@@ -6,10 +6,11 @@ from decorators import permission_required
 from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalOrganizers, FestivalSchema,
                     EventModel, EventSchema, JobModel, JobSchema, AuctionModel, AuctionSchema, LeaderSchema,
                     Application, ApplicationSchema, WorkerSchema, SpecializationSchema, SpecializationModel,
-                    WorkerSpecializations, OrganizerSchema, JobApplySchema)
+                    WorkerSpecializations, OrganizerSchema, JobApplySchema, EventApplySchema, FestivalOrg,
+                    FestivalOrgSchema, AuctionWorker, ApplicationWorker, ApplicationWorkerSchema, AuctionWorkerSchema,
+                    Admin, AdminSchema)
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-import sys
 
 
 class UserRegistration(Resource):
@@ -23,7 +24,7 @@ class UserRegistration(Resource):
             value = list(validate.values())[0]
             return {"msg": value[0]}, 422
 
-        if data['permission'] == '1':
+        if data['permission'] == 1:
             data['is_pending'] = 1
         else:
             data['is_pending'] = None
@@ -43,7 +44,7 @@ class UserRegistration(Resource):
                        'msg': 'User {} already exists'.format(data['email'])
                    }, 422
 
-        if data['permission'] == '1':
+        if data['permission'] == 1:
             new_user = UserModel(
                 username=data['username'],
                 password=UserModel.generate_hash(data['password']),
@@ -133,6 +134,14 @@ class Users(Resource):
         else:
             return redirect("https://kaogrupa.pythonanywhere.com/users")
 
+    @jwt_required
+    def put(self):
+        data = request.get_json()
+        username = data['username']
+        decision = data['decision']
+        UserModel.update_is_pending(username, decision)
+        return {'msg': 'Successfully updated!'}, 200
+
 
 class Leaders(Resource):
     @jwt_required
@@ -157,8 +166,15 @@ class Workers(Resource):
             return WorkerSchema.to_json(workers)
 
         username = request.args.get('username')
+        worker_id = request.args.get('worker_id')
+
         if username:
             worker = UserModel.find_by_username(username=username)
+            if worker is not None and worker.permission == 3:
+                return WorkerSchema.to_json(worker)
+
+        if worker_id:
+            worker = UserModel.find_by_id(worker_id)
             if worker is not None and worker.permission == 3:
                 return WorkerSchema.to_json(worker)
         return {}, 200
@@ -172,11 +188,29 @@ class Organizers(Resource):
             return OrganizerSchema.to_json(organizers)
 
         username = request.args.get('username')
+        festival_id = request.args.get('festival_id')
+
         if username:
             organizer = UserModel.find_by_username(username=username)
             if organizer is not None and organizer.permission == 2:
                 return OrganizerSchema.to_json(organizer)
+
+        if festival_id:
+            organizers = UserModel.find_by_organizing_festival_id(festival_id)
+            if organizers is not None:
+                return OrganizerSchema.to_json(organizers)
         return {}, 200
+
+
+class Admins(Resource):
+    @jwt_required
+    @permission_required(0)
+    def get(self):
+        username = get_jwt_identity()
+
+        admin = UserModel.find_by_username(username)
+        real_admin = Admin(admin)
+        return AdminSchema.to_json(real_admin)
 
 
 class Specializations(Resource):
@@ -245,9 +279,46 @@ class Festivals(Resource):
         return FestivalSchema(many=True).dump(festivals)
 
 
+class FestivalsComplete(Resource):
+    @jwt_required
+    def get(self):
+        leader_id = request.args.get('leader_id')
+
+        if len(list(request.args)) == 1 and leader_id:
+            festivals = FestivalModel.find_completed_by_leader_id(leader_id)
+            return FestivalSchema(many=True).dump(festivals)
+
+        festivals = FestivalModel.return_all()
+        return FestivalSchema(many=True).dump(festivals)
+
+
+class FestivalsActive(Resource):
+    @jwt_required
+    def get(self):
+        leader_id = request.args.get('leader_id')
+
+        if len(list(request.args)) == 1 and leader_id:
+            festivals = FestivalModel.find_active_by_leader_id(leader_id)
+            return FestivalSchema(many=True).dump(festivals)
+
+        festivals = FestivalModel.return_all()
+        return FestivalSchema(many=True).dump(festivals)
+
+
+class FestivalsPending(Resource):
+    @jwt_required
+    def get(self):
+        leader_id = request.args.get('leader_id')
+
+        if len(list(request.args)) == 1 and leader_id:
+            festivals = FestivalModel.find_pending_by_leader_id(leader_id)
+            return FestivalSchema(many=True).dump(festivals)
+
+        festivals = FestivalModel.return_all()
+        return FestivalSchema(many=True).dump(festivals)
+
+
 class Festival(Resource):
-    #user ne upisuje sam status
-    #print("message", file=sys.stderr)
     @jwt_required
     @permission_required(1)
     def post(self):
@@ -285,7 +356,6 @@ class Festival(Resource):
             new_festival.save_to_db()
             return {'msg': 'Festival {} was successfully created!'.format(data['name'])}, 200
         except IntegrityError as e:
-            print(e)
             return {'msg': 'Bad request'}, 400
         except:
             return {'msg': 'Internal server error'}, 500
@@ -303,14 +373,29 @@ class FestivalApply(Resource):
     def post(self, festival_id):
         username = get_jwt_identity()
         user = UserModel.find_by_username(username=username)
-        festival_organizers = FestivalOrganizersPending(
+        festival_organizers = FestivalOrganizers(
             festival_id=festival_id,
             organizer_id=user.id,
             status=1
         )
-        FestivalOrganizersPending.save_to_db(festival_organizers)
+        FestivalOrganizers.save_to_db(festival_organizers)
         festival = FestivalModel.find_by_festival_id(festival_id=festival_id)
         return {'msg': '{} successfully applied to {} festival.'.format(username, festival.name)}
+
+
+class FestivalRevoke(Resource):
+    @jwt_required
+    def post(self, festival_id):
+        username = get_jwt_identity()
+        user = UserModel.find_by_username(username=username)
+        fest_org = FestivalOrganizers.find_by_festival_id_and_organizer_id(festival_id, user.id)
+
+        if fest_org.status == 1:
+            FestivalOrganizers.delete_from_db(fest_org.festival_organizers_id)
+            festival = FestivalModel.find_by_festival_id(festival_id=festival_id)
+            return {'msg': '{} successfully revoked application to {} festival.'.format(username, festival.name)}
+
+        return {'msg': 'Can\'t revoke. You have already been accepted as organizer!!'}
 
 
 class FestivalOrganizersPending(Resource):
@@ -335,6 +420,7 @@ class SearchUsers(Resource):
         users = UserModel.find_by_username_start(search)
         return UserSchema.to_json(users)
 
+
 class SearchSpecializations(Resource):
     @jwt_required
     def post(self):
@@ -343,14 +429,20 @@ class SearchSpecializations(Resource):
         specializations = SpecializationModel.find_by_specialization_start(search)
         return SpecializationSchema.to_json(specializations)
 
+
 class Events(Resource):
     @jwt_required
     def get(self):
         festival_id = request.args.get('festival_id')
+        username = request.args.get('username')
 
         if len(list(request.args)) == 1 and festival_id:
             events = EventModel.find_by_festival_id(festival_id)
             return EventSchema(many=True).dump(events)
+
+        if len(list(request.args)) == 1 and username:
+            organizer = UserModel.find_by_username(username)
+            return EventApplySchema.to_json(EventModel.find_by_organizer_id(organizer.id))
 
         return {'msg:': 'Bad request'}, 400
 
@@ -387,7 +479,6 @@ class Event(Resource):
             new_event.save_to_db()
             return {'msg': 'Event {} was successfully created!'.format(data['name'])}, 200
         except IntegrityError as e:
-            print(e)
             return {'msg': 'Bad request'}, 400
         except Exception as e:
             return {'msg': 'Internal server error'}, 500
@@ -406,6 +497,7 @@ class Job(Resource):
         data = request.get_json()
 
         data['is_completed'] = False
+        data['worker_id'] = None
 
         job_schema = JobSchema()
         validate = job_schema.validate(data)
@@ -429,7 +521,6 @@ class Job(Resource):
             new_job.save_to_db()
             return {'msg': 'Job {} was successfully created!'.format(data['name'])}, 200
         except IntegrityError as e:
-            print(e)
             return {'msg': 'Bad request'}, 400
         except Exception as e:
             raise e
@@ -440,6 +531,9 @@ class Jobs(Resource):
     def get(self):
         leader_id = request.args.get('leader_id')
         job_id = request.args.get('job_id')
+        username = request.args.get('username')
+        is_completed = request.args.get('is_completed')
+        organizer = request.args.get('organizer')
 
         if leader_id and not job_id:
             return JobSchema.to_json(JobModel.find_jobs_on_auction_by_leader_id(leader_id=leader_id))
@@ -447,8 +541,28 @@ class Jobs(Resource):
         if job_id and not leader_id:
             return JobApplySchema.to_json(JobModel.find_by_job_id(job_id=job_id))
 
+        if username is not None and is_completed == "0":
+            user = UserModel.find_by_username(username)
+            return JobApplySchema.to_json(JobModel.find_active_by_worker_id(user.id))
+
+        if username is not None and is_completed == "1":
+            user = UserModel.find_by_username(username)
+            return JobApplySchema.to_json(JobModel.find_completed_by_worker_id(user.id))
+
+        if organizer:
+            user = UserModel.find_by_username(organizer)
+            return JobApplySchema.to_json(JobModel.find_by_organizer_id(user.id))
+
         jobs = JobModel.get_all()
         return JobSchema.to_json(jobs)
+
+
+class JobsNotOnAuction(Resource):
+    @jwt_required
+    def get(self):
+        organizer = request.args.get('organizer')
+        user = UserModel.find_by_username(organizer)
+        return JobApplySchema.to_json(JobModel.find_jobs_not_on_auction_by_organizer_id(user.id))
 
 
 class AvailableJobs(Resource):
@@ -492,12 +606,48 @@ class Auction(Resource):
             return {'msg': 'Internal server error'}, 500
 
 
+class OrganizersFestivals(Resource):
+    @jwt_required
+    def get(self):
+        username = get_jwt_identity()
+        user = UserModel.find_by_username(username)
+        festivals = FestivalModel.return_all()
+
+        org_festivals = []
+        for festival in festivals:
+            org_festivals.append(FestivalOrg(festival, user.id))
+
+        return FestivalOrgSchema().to_json(org_festivals)
+
+
 class Auctions(Resource):
     @jwt_required
     def get(self):
         leader_id = request.args.get('leader_id')
-        auctions = AuctionModel.find_by_leader_id(leader_id=leader_id)
-        return AuctionSchema.to_json(auctions)
+        organizer = request.args.get('organizer')
+
+        if leader_id:
+            auctions = AuctionModel.find_by_leader_id(leader_id=leader_id)
+            real_auctions = []
+            for auction in auctions:
+                real_auctions.append(AuctionWorker(auction))
+            return AuctionWorkerSchema.to_json(real_auctions)
+
+        if organizer:
+            user = UserModel.find_by_username(organizer)
+            auctions = AuctionModel.find_by_organizer_id(user.id)
+
+            real_auctions = []
+            for auction in auctions:
+                real_auctions.append(AuctionWorker(auction))
+
+            return AuctionWorkerSchema.to_json(real_auctions)
+
+        auctions = AuctionModel.find_all()
+        real_auctions = []
+        for auction in auctions:
+            real_auctions.append(AuctionWorker(auction))
+        return AuctionWorkerSchema.to_json(real_auctions)
 
 
 class UserLogoutAccess(Resource):
@@ -536,7 +686,6 @@ class Applications(Resource):
             job = JobModel.find_by_job_id(auction.job_id)
             return {'msg': 'Application for {} was successfully created!'.format(job.name)}, 200
         except IntegrityError as e:
-            print(e)
             return {'msg': 'Bad request'}, 400
         except Exception as e:
             raise e
@@ -545,12 +694,32 @@ class Applications(Resource):
     @jwt_required
     def get(self):
         application_id = request.args.get('application_id')
-        job_id = request.args.get('job_id')
+        username = request.args.get('username')
+        leader_id = request.args.get('leader_id')
 
         if application_id:
-            return Application.find_by_application_id(application_id=application_id)
+            return ApplicationSchema.to_json(Application.find_by_application_id(application_id=application_id))
 
-        return Application.find_all()
+        if username:
+            user = UserModel.find_by_username(username)
+            applications = Application.find_by_worker_id(user.id)
+
+            worker_apps = []
+            for app in applications:
+                worker_apps.append(ApplicationWorker(app))
+
+            return ApplicationWorkerSchema.to_json(worker_apps)
+
+        if leader_id:
+            applications = Application.find_by_leader_id(leader_id)
+
+            worker_apps = []
+            for app in applications:
+                worker_apps.append(ApplicationWorker(app))
+
+            return ApplicationWorkerSchema.to_json(worker_apps)
+
+        return ApplicationSchema().to_json(Application.find_all())
 
 
 class UserLogoutRefresh(Resource):
