@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.event.creation.CreateEventActivity;
+import com.hfad.organizationofthefestival.festival.Event.CreateEventActivity;
 import com.hfad.organizationofthefestival.festival.Festival;
 
 public class LeaderFestivalActivity extends AppCompatActivity {
@@ -55,6 +55,7 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         Intent intent = new Intent(this, destination);
         intent.putExtra("accessToken", accessToken);
         intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("id", festivalId);
         this.startActivity(intent);
     }
 
