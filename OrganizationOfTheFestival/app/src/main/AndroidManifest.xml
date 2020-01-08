@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".leader.PrintPassActivity"></activity>
         <activity android:name=".leader.MyFestivalsActivity" />
+        <activity android:name=".leader.LeaderFestivalActivity" />
         <activity android:name=".worker.JobProfileActivity" />
         <activity android:name=".worker.ViewApplicationActivity" />
         <activity android:name=".worker.ActiveJobsActivity" />
@@ -45,6 +46,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".defaultUser.DefaultUserActivity" />
+        <activity android:name=".festival.Event.CreateEventActivity" />
+        <activity android:name=".event.creation.CreateEventActivity" />
     </application>
 
 </manifest>
