@@ -106,7 +106,7 @@ public class LeaderActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LeaderJobAuctionsActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("leaderID", leader.getId());
+            intent.putExtra("leaderID", String.valueOf(leader.getId()));
             startActivity(intent);
         } else if (id == R.id.search) {
             Intent intent = new Intent(this, SearchActivity.class);

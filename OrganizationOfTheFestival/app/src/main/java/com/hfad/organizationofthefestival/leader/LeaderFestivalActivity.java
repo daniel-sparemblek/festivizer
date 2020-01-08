@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.leader;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class LeaderFestivalActivity extends AppCompatActivity {
     private TextView tvEnd;
     private Button btnEvents;
     private Button btnAddEvent;
+    private Button btnApproveOrganizers;
 
     private LeaderFestivalController controller;
 
@@ -41,6 +43,7 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         tvEnd = findViewById(R.id.endTime);
         btnEvents = findViewById(R.id.events);
         btnAddEvent = findViewById(R.id.btnAddEvent);
+        btnApproveOrganizers = findViewById(R.id.btn_approve_organizers);
 
         controller = new LeaderFestivalController(this, accessToken, festivalId, refreshToken);
 
@@ -64,5 +67,13 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         tvDesc.setText(festival.getDesc());
         tvStart.setText(festival.getStartTime());
         tvEnd.setText(festival.getEndTime());
+    }
+
+    public void approveOrganizers(View view) {
+        Intent intent = new Intent(this, ApproveOrganizersActivity.class);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("festival_id", festivalId);
+        this.startActivity(intent);
     }
 }
