@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".leader.LeaderPrintPassActivity"></activity>
         <activity android:name=".leader.MyFestivalsActivity" />
+        <activity android:name=".leader.LeaderFestivalActivity" />
         <activity android:name=".worker.JobProfileActivity" />
         <activity android:name=".worker.ViewApplicationActivity" />
         <activity android:name=".worker.ActiveJobsActivity" />
