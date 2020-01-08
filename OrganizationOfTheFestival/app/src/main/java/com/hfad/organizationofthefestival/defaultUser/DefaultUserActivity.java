@@ -49,7 +49,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         tvEmail.setText(leader.getEmail());
         tvPhone.setText(leader.getPhone());
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                R.layout.default_user_show_row, leader.getFestivalNames());
+                android.R.layout.simple_list_item_1, leader.getFestivalNames());
         lv.setAdapter(arrayAdapter);
     }
 
@@ -62,7 +62,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         tvPhone.setText(organizer.getPhone());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                R.layout.default_user_show_row, organizer.getFestivals());
+                android.R.layout.simple_list_item_1, organizer.getFestivals());
         lv.setAdapter(arrayAdapter);
     }
 
@@ -75,7 +75,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         tvPhone.setText(worker.getPhone());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                R.layout.default_user_show_row, worker.getJobs());
+                android.R.layout.simple_list_item_1, worker.getJobs());
         lv.setAdapter(arrayAdapter);
     }
 
