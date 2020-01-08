@@ -9,21 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
-import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
-import com.hfad.organizationofthefestival.organizer.PrintPassActivity;
 import com.hfad.organizationofthefestival.search.SearchActivity;
-
-import java.util.ArrayList;
 
 public class LeaderActivity extends AppCompatActivity {
 
@@ -33,7 +26,6 @@ public class LeaderActivity extends AppCompatActivity {
     private ImageView ivProfilePicture;
     private ListView lvFestivalList;
 
-    ArrayList<PendingOrganizer> pendingOrganizers = new ArrayList<>();
     private ListView approvalList;
 
     private String username;
@@ -100,7 +92,7 @@ public class LeaderActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             startActivity(intent);
-        } else if (id == R.id.jobAuctns){
+        } else if (id == R.id.jobAuctns) {
             Intent intent = new Intent(this, LeaderJobAuctionsActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
@@ -112,8 +104,7 @@ public class LeaderActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             startActivity(intent);
-        }
-        else if(id == R.id.printPass) {
+        } else if (id == R.id.printPass) {
             Intent intent = new Intent(this, LeaderPrintPassActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
@@ -135,26 +126,6 @@ public class LeaderActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, leader.getFestivalNames());
         lvFestivalList.setAdapter(arrayAdapter);
-
-    }
-
-    // Decisions need to be fixed when JSONs get here
-    public void onClickAccept(View view) {
-        final int position = approvalList.getPositionForView((LinearLayout) view.getParent());
-
-        String organizerUsername = pendingOrganizers.get(position).getUsername();
-        int festivalId = pendingOrganizers.get(position).getFestivalId();
-
-        // LeaderController.sendDecision(username, password, organizerUsername, Integer.toString(festivalId), Decision.ACCEPT, this);
-    }
-
-    public void onClickDecline(View view) {
-        final int position = approvalList.getPositionForView((LinearLayout) view.getParent());
-
-        String organizerUsername = pendingOrganizers.get(position).getUsername();
-        int festivalId = pendingOrganizers.get(position).getFestivalId();
-
-        //  LeaderController.sendDecision(username, password,organizerUsername, Integer.toString(festivalId), Decision.DECLINE, this);
 
     }
 

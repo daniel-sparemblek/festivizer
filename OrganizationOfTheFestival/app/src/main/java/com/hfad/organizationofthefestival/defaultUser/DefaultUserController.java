@@ -17,8 +17,8 @@ public class DefaultUserController {
         this.activity = activity;
     }
 
-    public void showUserProfile(int permission, String username, String accessToken){
-        switch (permission){
+    public void showUserProfile(int permission, String username, String accessToken) {
+        switch (permission) {
             case 1:
                 api.getLeader(username, "Bearer " + accessToken);
         }

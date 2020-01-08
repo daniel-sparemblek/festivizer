@@ -3,8 +3,6 @@ package com.hfad.organizationofthefestival.search;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -48,7 +46,7 @@ public class SearchActivity extends AppCompatActivity {
         searchController = new SearchController(this, accessToken, username, refreshToken);
 
         btnSearch.setOnClickListener(v -> {
-          search();
+            search();
         });
 
         lvSearchResults.setOnItemClickListener((parent, view, position, id) -> {
