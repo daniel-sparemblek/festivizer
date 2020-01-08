@@ -9,6 +9,8 @@ import com.hfad.organizationofthefestival.leader.LeaderClient;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,6 +59,45 @@ public class AdminController {
 
             @Override
             public void onFailure(Call<Admin> call, Throwable t) {
+                Toast.makeText(adminActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void putDecision(String username, int decision) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("username", username);
+        body.put("decision", String.valueOf(decision));
+
+        Call<Void> leaderCall = api.putDecision(body, "Bearer " + accessToken);
+
+        leaderCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    String dec;
+                    if(decision == 0) {
+                        dec = "accepted";
+                    }
+                    else {
+                        dec = "declined";
+                    }
+                    Toast.makeText(adminActivity, username + " has been " + dec, Toast.LENGTH_SHORT).show();
+                    getData();
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(adminActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(adminActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(adminActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
