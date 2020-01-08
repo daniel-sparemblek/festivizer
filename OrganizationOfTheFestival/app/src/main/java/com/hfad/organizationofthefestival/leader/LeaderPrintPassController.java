@@ -14,14 +14,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 class LeaderPrintPassController {
 
-    private LeaderPrintPassActivity leaderPrintPassActivity;
+    private PrintPassActivity printPassActivity;
     private LeaderClient api;
     private String accessToken;
     private String username;
     private String refreshToken;
     private Leader leader;
 
-    public LeaderPrintPassController(LeaderPrintPassActivity leaderPrintPassActivity, String accessToken, String username, String refreshToken) {
+    public LeaderPrintPassController(PrintPassActivity printPassActivity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -30,7 +30,7 @@ class LeaderPrintPassController {
 
         this.accessToken = accessToken;
         this.username = username;
-        this.leaderPrintPassActivity = leaderPrintPassActivity;
+        this.printPassActivity = printPassActivity;
         this.refreshToken = refreshToken;
     }
 
@@ -41,14 +41,14 @@ class LeaderPrintPassController {
             @Override
             public void onResponse(Call<Festival[]> call, Response<Festival[]> response) {
                 if (response.isSuccessful()) {
-                    leaderPrintPassActivity.fillInActivity(response.body());
+                    printPassActivity.fillInActivity(response.body());
                     getLeader();
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(leaderPrintPassActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(printPassActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Toast.makeText(leaderPrintPassActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(printPassActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
                 }
@@ -56,7 +56,7 @@ class LeaderPrintPassController {
 
             @Override
             public void onFailure(Call<Festival[]> call, Throwable t) {
-                Toast.makeText(leaderPrintPassActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
+                Toast.makeText(printPassActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -69,13 +69,13 @@ class LeaderPrintPassController {
             public void onResponse(Call<Leader> call, Response<Leader> response) {
                 if (response.isSuccessful()) {
                     leader = response.body();
-                    leaderPrintPassActivity.fillInLeader(leader);
+                    printPassActivity.fillInLeader(leader);
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(leaderPrintPassActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(printPassActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Toast.makeText(leaderPrintPassActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(printPassActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
                 }
@@ -83,7 +83,7 @@ class LeaderPrintPassController {
 
             @Override
             public void onFailure(Call<Leader> call, Throwable t) {
-                Toast.makeText(leaderPrintPassActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
+                Toast.makeText(printPassActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
     }
