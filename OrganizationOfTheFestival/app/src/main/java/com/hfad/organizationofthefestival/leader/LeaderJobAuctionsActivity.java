@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.adapters.ApplicationAdapter;
+import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LeaderJobAuctionsActivity extends AppCompatActivity {
@@ -18,6 +21,8 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
     private LeaderJobAuctionsController controller;
 
     private ListView jobAuctionsList;
+
+    private List<ApplicationResponse> applicationList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +41,12 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         controller.getJobAuctions();
     }
 
-    public void fillInActivity(List<Application> applications){
+    public void fillInActivity(ApplicationResponse[] applications){
+        applicationList = Arrays.asList(applications);
+
+        ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, R.layout.application_row_layout, applicationList);
+
+        jobAuctionsList.setAdapter(applicationAdapter);
 
     }
 }

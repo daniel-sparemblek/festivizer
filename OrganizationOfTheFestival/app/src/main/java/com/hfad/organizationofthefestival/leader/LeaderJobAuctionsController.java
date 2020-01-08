@@ -1,5 +1,7 @@
 package com.hfad.organizationofthefestival.leader;
 
+import com.hfad.organizationofthefestival.utility.ApplicationResponse;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,19 +32,19 @@ public class LeaderJobAuctionsController {
     }
 
     public void getJobAuctions() {
-        Call<Application[]> call = api.getAuctions(leaderID, "Bearer " + accessToken);
+        System.out.println("kurva:" +leaderID);
+        Call<ApplicationResponse[]> call = api.getAuctions(leaderID, "Bearer " + accessToken);
 
-        call.enqueue(new Callback<Application[]>() {
+        call.enqueue(new Callback<ApplicationResponse[]>() {
             @Override
-            public void onResponse(Call<Application[]> call, Response<Application[]> response) {
+            public void onResponse(Call<ApplicationResponse[]> call, Response<ApplicationResponse[]> response) {
                 if (response.isSuccessful()) {
-                    List<Application> applications = Arrays.asList(response.body());
-                    activity.fillInActivity(applications);
+                    activity.fillInActivity(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<Application[]> call, Throwable t) {
+            public void onFailure(Call<ApplicationResponse[]> call, Throwable t) {
 
             }
         });
