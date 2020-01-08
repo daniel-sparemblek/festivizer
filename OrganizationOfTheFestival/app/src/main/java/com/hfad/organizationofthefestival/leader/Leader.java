@@ -20,10 +20,12 @@ public class Leader {
     private String phone;
     private String email;
     private int permission;
+    @SerializedName("is_pending")
+    private int isPending;
 
     private List<Festival> festivals;
 
-    public Leader(int id, String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission, List<Festival> festivals) {
+    public Leader(int id, String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission, int isPending) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -33,7 +35,15 @@ public class Leader {
         this.phone = phone;
         this.email = email;
         this.permission = permission;
-        this.festivals = festivals;
+        this.isPending = isPending;
+    }
+
+    public int getIsPending() {
+        return isPending;
+    }
+
+    public void setIsPending(int isPending) {
+        this.isPending = isPending;
     }
 
     public void setId(int id) {
