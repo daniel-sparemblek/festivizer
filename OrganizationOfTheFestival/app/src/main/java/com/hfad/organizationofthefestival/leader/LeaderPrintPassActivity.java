@@ -2,22 +2,20 @@ package com.hfad.organizationofthefestival.leader;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
-import android.print.PrintAttributes;
-import android.print.pdf.PrintedPdfDocument;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.google.zxing.WriterException;
@@ -41,8 +39,9 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
-    private String username;
     private int leaderId;
+    private String username;
+    private Leader leader;
 
     private Spinner spFestivalPicker;
     private Button btnGeneratePass;
@@ -60,8 +59,8 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        username = intent.getStringExtra("username");
         leaderId = intent.getIntExtra("leader_id", 0);
+        username = intent.getStringExtra("username");
 
         spFestivalPicker = findViewById(R.id.leader_sp_festival_picker);
         btnGeneratePass = findViewById(R.id.leader_btn_generate_pass);
@@ -78,6 +77,10 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         spFestivalPicker.setAdapter(festivalsArrayAdapter);
     }
 
+    public void fillInLeader(Leader leader) {
+        this.leader = leader;
+    }
+
     public List<String> festivalsToStrings(Festival[] festivals) {
         festivalList = Arrays.asList(festivals);
 
@@ -90,29 +93,34 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         int position = spFestivalPicker.getSelectedItemPosition();
 
         Festival festival = festivalList.get(position);
-        createPdf("Marko", "Markić", festival);
+        createPdf(leader.getFirstName(), leader.getLastName(), festival);
 
     }
 
     private void createPdf(String leaderFirstName, String leaderLastName, Festival festival) {
         PdfDocument document = new PdfDocument();
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(199, 284, 1).create();
         PdfDocument.Page page = document.startPage(pageInfo);
         Canvas canvas = page.getCanvas();
+        canvas.drawColor(Color.BLACK);
         Paint titlePaint = new Paint();
-        titlePaint.setColor(Color.BLACK);
-        titlePaint.setTextSize(40);
+        titlePaint.setColor(Color.parseColor("#dfb23d"));
+        titlePaint.setTextSize(25);
         titlePaint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText("PASS", 150, 90, titlePaint);
+        titlePaint.setFakeBoldText(true);
+        canvas.drawText("VIP PASS", 99.5F, 40, titlePaint);
 
         Paint infoPaint = new Paint();
-        infoPaint.setColor(Color.BLACK);
-        infoPaint.setTextSize(18);
-        infoPaint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("First name: " + leaderFirstName, 10, 150, infoPaint);
-        canvas.drawText("Last name: " + leaderLastName, 10, 180, infoPaint);
-        canvas.drawText("Festival name: " + festival.getName(), 10, 210, infoPaint);
-        canvas.drawBitmap(createQRCodeImage(username, festival.getName()), 75, 300, titlePaint);
+        infoPaint.setColor(Color.parseColor("#dfb23d"));
+        infoPaint.setTextSize(15);
+        infoPaint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(leaderFirstName, 99.5F, 80, infoPaint);
+        canvas.drawText(leaderLastName, 99.5F, 100, infoPaint);
+        canvas.drawText(festival.getName(), 99.5F, 120, infoPaint);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(pictureStringToBitmap(leader.getPicture()), 100, 100, false),
+                49.5f, 140, titlePaint);
+        canvas.drawBitmap(createQRCodeImage(leader.getUsername(), festival.getName()), 159, 244, titlePaint);
+
 
         document.finishPage(page);
 
@@ -139,7 +147,7 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         String festivalHash = getMd5Hash(festival);
 
         QRGEncoder qrgEncoder = new QRGEncoder(usernameHash + " " + festivalHash,
-                null, QRGContents.Type.TEXT, 150);
+                null, QRGContents.Type.TEXT, 30);
         try {
             return qrgEncoder.encodeAsBitmap();
         } catch (WriterException e) {
@@ -163,4 +171,10 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
             return null;
         }
     }
+
+    private Bitmap pictureStringToBitmap(String picture) {
+        byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
+    }
+
 }

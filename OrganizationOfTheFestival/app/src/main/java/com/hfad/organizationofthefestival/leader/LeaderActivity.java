@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
 import com.hfad.organizationofthefestival.organizer.PendingOrganizer;
@@ -116,8 +117,8 @@ public class LeaderActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LeaderPrintPassActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
             intent.putExtra("leader_id", leader.getId());
+            intent.putExtra("username", leader.getUsername());
             startActivity(intent);
         }
 
