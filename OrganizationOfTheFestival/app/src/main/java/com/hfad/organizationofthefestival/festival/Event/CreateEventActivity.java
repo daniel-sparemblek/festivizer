@@ -29,8 +29,6 @@ import java.util.Calendar;
 
 public class CreateEventActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE_REQUEST = 1;
-
     private EventCreationController controller;
     private String accessToken;
     private String refreshToken;
@@ -50,14 +48,13 @@ public class CreateEventActivity extends AppCompatActivity {
     private Button btnStartDatePicker, btnStartTimePicker;
     private Button btnEndDatePicker, btnEndTimePicker;
 
-
     private int sYear, sMonth, sDay, sHour, sMinute;
     private int eYear, eMonth, eDay, eHour, eMinute;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.leader_screen_festival_creation);
+        setContentView(R.layout.leader_screen_create_event);
 
         findViews();
         controller = new EventCreationController(this);
@@ -112,12 +109,6 @@ public class CreateEventActivity extends AppCompatActivity {
             timePickerDialog.show();
         });
 
-        ivLogo.setOnClickListener(v -> {
-            Intent intent1 = new Intent(Intent.ACTION_PICK,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            CreateEventActivity.this.startActivityForResult(intent1, PICK_IMAGE_REQUEST);
-        });
-
         btCreate.setOnClickListener(v -> {
             if (!checkEntry()) {
                 return;
@@ -126,12 +117,13 @@ public class CreateEventActivity extends AppCompatActivity {
             String startDateTime = convertTime(etStartTime.getText().toString(), etStartDate.getText().toString());
             String endDateTime = convertTime(etEndTime.getText().toString(), etEndDate.getText().toString());
 
-            festival = new Festival(etName.getText().toString(),
+            event = new Event(etName.getText().toString(),
                     etDescription.getText().toString(),
-                    getPictureString(),
+                    etLocation.getText().toString(),
                     startDateTime,
-                    endDateTime);
-            controller.createFestival(festival, accessToken);
+                    endDateTime
+                    );
+            controller.createEvent(event, accessToken);
 
             returnToLeaderActivity();
         });
@@ -171,7 +163,7 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        ivLogo = findViewById(R.id.festivalLogo);
+        etLocation = findViewById(R.id.location);
         etName = findViewById(R.id.name);
         etDescription = findViewById(R.id.desc);
         btCreate = findViewById(R.id.createBtn);
@@ -187,20 +179,15 @@ public class CreateEventActivity extends AppCompatActivity {
         etEndTime = findViewById(R.id.endTime);
     }
 
-    private String getPictureString() {
-        Bitmap bitmap = ((BitmapDrawable) ivLogo.getDrawable()).getBitmap();
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
-        byte[] pictureByte = bos.toByteArray();
-        return Base64.encodeToString(pictureByte, Base64.DEFAULT);
-    }
-
     private boolean checkEntry() {
         if ("".equals(etName.getText().toString())) {
             Toast.makeText(this, "Name can't be empty", Toast.LENGTH_SHORT).show();
             return false;
         } else if ("".equals(etDescription.getText().toString())) {
             Toast.makeText(this, "Description can't be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if("".equals(etLocation.getText().toString())) {
+            Toast.makeText(this, "Location can't be empty", Toast.LENGTH_SHORT).show();
             return false;
         } else if ("".equals(etStartTime.getText().toString()) || "".equals(etEndTime.getText().toString())) {
             Toast.makeText(this, "Start and and time must be specified", Toast.LENGTH_SHORT).show();

@@ -26,9 +26,9 @@ public class EventCreationController {
         this.activity = activity;
     }
 
-    public void createFestival(Festival festival, String accessToken) {
+    public void createEvent(Event event, String accessToken) {
         Call<CreateEventResponse> call =
-                api.createFestival("Bearer " + accessToken, festival);
+                api.createEvent("Bearer " + accessToken, event);
 
         call.enqueue(new Callback<CreateEventResponse>() {
             @Override
