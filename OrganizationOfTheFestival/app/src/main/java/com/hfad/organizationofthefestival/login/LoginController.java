@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.hfad.organizationofthefestival.admin.AdminActivity;
 import com.hfad.organizationofthefestival.organizer.OrganizerActivity;
 import com.hfad.organizationofthefestival.worker.WorkerActivity;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
@@ -65,6 +66,13 @@ public class LoginController {
         Intent intent;
 
         switch (permission) {
+            case 0:
+                intent = new Intent(loginActivity, AdminActivity.class);
+                intent.putExtra("accessToken", accessToken);
+                intent.putExtra("refreshToken", refreshToken);
+                intent.putExtra("username", username);
+                loginActivity.startActivity(intent);
+                break;
             case 1:
                 intent = new Intent(loginActivity, LeaderActivity.class);
                 intent.putExtra("accessToken", accessToken);

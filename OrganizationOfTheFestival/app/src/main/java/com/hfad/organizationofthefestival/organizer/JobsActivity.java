@@ -15,7 +15,7 @@ import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.JobsAdapter;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.JobApply;
-import com.hfad.organizationofthefestival.utility.WorkersAuction;
+import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
 public class JobsActivity extends AppCompatActivity {
 
@@ -111,7 +111,7 @@ public class JobsActivity extends AppCompatActivity {
         lvJobs.setAdapter(specializationArrayAdapter);
     }
 
-    public void fillInAuctions(WorkersAuction[] jobs) {
+    public void fillInAuctions(ApplicationAuction[] jobs) {
         lvJobs = findViewById(R.id.orgJobsList);
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, jobsController.formatAuctions(jobs));

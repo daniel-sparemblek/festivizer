@@ -15,7 +15,7 @@ public class Signup {
     private String email;
     private int permission;
 
-    public Signup(String username, String password, String firstName, String lastName, String picture, String phone, String email, int premission) {
+    public Signup(String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -23,7 +23,7 @@ public class Signup {
         this.picture = picture;
         this.phone = phone;
         this.email = email;
-        this.permission = premission;
+        this.permission = permission;
     }
 
     public String checkInput(String verifyPassword) {

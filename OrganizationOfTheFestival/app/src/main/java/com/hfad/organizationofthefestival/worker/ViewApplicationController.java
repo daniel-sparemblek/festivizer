@@ -3,7 +3,6 @@ package com.hfad.organizationofthefestival.worker;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.utility.Application;
-import com.hfad.organizationofthefestival.utility.WorkersApplication;
 
 import org.json.JSONObject;
 

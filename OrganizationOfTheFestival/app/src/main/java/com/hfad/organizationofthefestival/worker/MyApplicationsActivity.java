@@ -3,14 +3,11 @@ package com.hfad.organizationofthefestival.worker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.Application;
-import com.hfad.organizationofthefestival.utility.WorkersApplication;
+import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +20,7 @@ public class MyApplicationsActivity extends AppCompatActivity {
     private String username;
 
     private ListView myApplications;
-    private List<WorkersApplication> applicationList;
+    private List<ApplicationResponse> applicationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +50,13 @@ public class MyApplicationsActivity extends AppCompatActivity {
     }
 
 
-    public void fillInActivity(WorkersApplication[] body) {
+    public void fillInActivity(ApplicationResponse[] body) {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, applicationsToStrings(body));
         myApplications.setAdapter(specializationArrayAdapter);
     }
 
-    public List<String> applicationsToStrings(WorkersApplication[] applications) {
+    public List<String> applicationsToStrings(ApplicationResponse[] applications) {
         applicationList = Arrays.asList(applications);
 
         List<String> stringList = applicationList.stream()

@@ -3,8 +3,7 @@ package com.hfad.organizationofthefestival.worker;
 import com.hfad.organizationofthefestival.utility.Application;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
-import com.hfad.organizationofthefestival.utility.User;
-import com.hfad.organizationofthefestival.utility.WorkersApplication;
+import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
 import java.util.HashMap;
 
@@ -46,7 +45,7 @@ public interface WorkerClient {
     Call<Void> createApplication(@Body Application application, @Header("Authorization") String authorization);
 
     @GET("applications")
-    Call<WorkersApplication[]> getWorkerApplications(@Query("username") String username, @Header("Authorization") String authorization);
+    Call<ApplicationResponse[]> getWorkerApplications(@Query("username") String username, @Header("Authorization") String authorization);
 
     @GET("jobs")
     Call<JobApply[]> getActiveJobs(@Query("username") String username, @Query("is_completed") String isCompleted,

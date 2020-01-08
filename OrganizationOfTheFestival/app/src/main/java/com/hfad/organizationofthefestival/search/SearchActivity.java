@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.defaultUser.DefaultUserActivity;
 import com.hfad.organizationofthefestival.utility.User;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private TextView tvSearch;
     private Button btnSearch;
-    private ListView searchResults;
+    private ListView lvSearchResults;
 
     private List<User> userList;
 
@@ -35,7 +36,7 @@ public class SearchActivity extends AppCompatActivity {
 
         tvSearch = findViewById(R.id.tv_search);
         btnSearch = findViewById(R.id.btn_search);
-        searchResults = findViewById(R.id.lv_search);
+        lvSearchResults = findViewById(R.id.lv_search);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
@@ -44,12 +45,14 @@ public class SearchActivity extends AppCompatActivity {
 
         searchController = new SearchController(this, accessToken, username, refreshToken);
 
-        searchResults.setOnItemClickListener((parent, view, position, id) -> {
-            //POSJETI PROFIL, NEZ DI JE TO
+        btnSearch.setOnClickListener(v -> {
+            search();
         });
 
-        btnSearch.setOnClickListener(v -> {
-          search();
+        lvSearchResults.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent1 = new Intent(SearchActivity.this, DefaultUserActivity.class);
+            intent1.putExtra("permission", userList.get(position).getRole());
+            startActivity(intent1);
         });
     }
 
@@ -59,9 +62,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void fillResults(List<User> users) {
+        userList = users;
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, users.stream().map(User::getUsername).collect(Collectors.toList()));
-        searchResults.setAdapter(specializationArrayAdapter);
+        lvSearchResults.setAdapter(specializationArrayAdapter);
 
     }
 
