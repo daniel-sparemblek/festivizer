@@ -13,7 +13,7 @@ import com.hfad.organizationofthefestival.organizer.Fragments.CompletedJobsFrag;
 import com.hfad.organizationofthefestival.organizer.JobsActivity;
 
 
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class JobsAdapter extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.auction, R.string.active, R.string.pending, R.string.completed};
@@ -24,7 +24,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private JobsActivity jobsActivity;
 
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm, Intent intent, JobsActivity jobsActivity) {
+    public JobsAdapter(Context context, FragmentManager fm, Intent intent, JobsActivity jobsActivity) {
         super(fm);
         mContext = context;
         accessToken = intent.getStringExtra("accessToken");

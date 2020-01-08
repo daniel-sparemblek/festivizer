@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
@@ -74,6 +75,15 @@ public class LeaderActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+        if(leader.getIsPending() == 1) {
+            Toast.makeText(this, "You have not yet been accepted as leader!", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        else if(leader.getIsPending() == 2) {
+            Toast.makeText(this, "Sorry, you have been revoked as leader...", Toast.LENGTH_SHORT).show();
+            return true;
+        }
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

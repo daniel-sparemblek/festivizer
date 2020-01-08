@@ -27,6 +27,8 @@ public class AdminActivity extends AppCompatActivity {
 
     private AdminController adminController;
 
+    private List<Leader> leaders;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,23 +48,22 @@ public class AdminActivity extends AppCompatActivity {
     public void adminOnClickAccept(View view) {
         final int position = approvalList.getPositionForView((LinearLayout) view.getParent());
 
-        String leaderUsername = data.get(position);
+        String username = leaders.get(position).getUsername();
 
-        //AdminConnector.sendDecision(username, password, leaderUsername, Decision.ACCEPT, this);
+        System.out.println(username);
+
+        adminController.putDecision(username, 0);
     }
 
     public void adminOnClickDecline(View view) {
         final int position = approvalList.getPositionForView((LinearLayout) view.getParent());
 
-        String leaderUsername = data.get(position);
-
-        //AdminConnector.sendDecision(username, password, leaderUsername, Decision.DECLINE, this);
+        String username = leaders.get(position).getUsername();
+        adminController.putDecision(username, 2);
     }
 
     public void fillInActivity(Admin admin) {
-        List<Leader> leaders = admin.getLeaders();
-
-        System.out.println(leaders);
+        leaders = admin.getLeaders();
 
         List<String> stringList = leadersToStrings(leaders);
 
