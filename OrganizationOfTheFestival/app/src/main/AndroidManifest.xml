@@ -35,6 +35,7 @@
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".organizer.ApplyFestActivity" />
         <activity android:name=".signup.SignupActivity" />
+        <activity android:name=".leader.LeaderJobAuctionsActivity" />
         <activity android:name=".festival.creation.CreateFestivalActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>

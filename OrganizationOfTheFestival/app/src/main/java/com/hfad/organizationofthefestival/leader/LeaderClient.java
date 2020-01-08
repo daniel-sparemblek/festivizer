@@ -22,4 +22,8 @@ public interface LeaderClient {
     Call<Festival[]> getLeaderFestivals(@Query("leader_id") String leaderId,
                                         @Header("Authorization") String authorization);
 
+    @GET("auctions")
+    Call<Auction[]> getAuctions(@Query("leader_id") String leaderID,
+                                @Header("Authorization") String authorization);
+
 }

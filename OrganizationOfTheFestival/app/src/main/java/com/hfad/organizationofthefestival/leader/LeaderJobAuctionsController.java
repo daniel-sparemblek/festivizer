@@ -1,5 +1,11 @@
 package com.hfad.organizationofthefestival.leader;
 
+import java.util.Arrays;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -7,9 +13,10 @@ public class LeaderJobAuctionsController {
     private LeaderJobAuctionsActivity activity;
     private String accessToken;
     private String refreshToken;
+    private String leaderID;
     private LeaderClient api;
 
-    public LeaderJobAuctionsController(LeaderJobAuctionsActivity activity, String accessToken, String refreshToken) {
+    public LeaderJobAuctionsController(LeaderJobAuctionsActivity activity, String accessToken, String refreshToken, String leaderID) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -19,9 +26,25 @@ public class LeaderJobAuctionsController {
         this.activity = activity;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
+        this.leaderID = leaderID;
     }
 
-    public void getJobAuctions(){
+    public void getJobAuctions() {
+        Call<Auction[]> call = api.getAuctions(leaderID, "Bearer " + accessToken);
 
+        call.enqueue(new Callback<Auction[]>() {
+            @Override
+            public void onResponse(Call<Auction[]> call, Response<Auction[]> response) {
+                if (response.isSuccessful()) {
+                    List<Auction> auctions = Arrays.asList(response.body());
+                    activity.fillInActivity(auctions);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Auction[]> call, Throwable t) {
+
+            }
+        });
     }
 }
