@@ -3,7 +3,7 @@ package com.hfad.organizationofthefestival.leader;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Auction {
+public class Application {
     @SerializedName("auction_id")
     private String auctionID;
 
@@ -13,7 +13,7 @@ public class Auction {
     @SerializedName("end_time")
     private String endTime;
 
-    private JobAuction job;
+    private JobApplication job;
 
     public String getAuctionID() {
         return auctionID;
@@ -27,7 +27,7 @@ public class Auction {
         return endTime;
     }
 
-    public JobAuction getJob() {
+    public JobApplication getJob() {
         return job;
     }
 }

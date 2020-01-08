@@ -30,19 +30,19 @@ public class LeaderJobAuctionsController {
     }
 
     public void getJobAuctions() {
-        Call<Auction[]> call = api.getAuctions(leaderID, "Bearer " + accessToken);
+        Call<Application[]> call = api.getAuctions(leaderID, "Bearer " + accessToken);
 
-        call.enqueue(new Callback<Auction[]>() {
+        call.enqueue(new Callback<Application[]>() {
             @Override
-            public void onResponse(Call<Auction[]> call, Response<Auction[]> response) {
+            public void onResponse(Call<Application[]> call, Response<Application[]> response) {
                 if (response.isSuccessful()) {
-                    List<Auction> auctions = Arrays.asList(response.body());
-                    activity.fillInActivity(auctions);
+                    List<Application> applications = Arrays.asList(response.body());
+                    activity.fillInActivity(applications);
                 }
             }
 
             @Override
-            public void onFailure(Call<Auction[]> call, Throwable t) {
+            public void onFailure(Call<Application[]> call, Throwable t) {
 
             }
         });
