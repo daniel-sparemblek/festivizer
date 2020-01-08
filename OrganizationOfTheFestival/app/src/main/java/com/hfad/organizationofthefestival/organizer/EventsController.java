@@ -65,40 +65,42 @@ public class EventsController {
         });
     }
 
-    public void fetchCompletedEvents() {
-        System.out.println("Usao sam u fetchCompletedEvents");
-        Call<EventApply[]> eventsCall = api.getAllEvents(username, "Bearer " + accessToken);
-
-        eventsCall.enqueue(new Callback<EventApply[]>() {
-            @Override
-            public void onResponse(Call<EventApply[]> call, Response<EventApply[]> response) {
-                if(response.isSuccessful()) {
-                    if(response.body() == null) {
-                        System.out.println("AAAAAAAAAAAAA");
-                        return;
-                    }
-                    eventsActivity.fillInCompletedActivity(response.body());
-                } else {
-                    try {
-                        Toast.makeText(eventsActivity, response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        Toast.makeText(eventsActivity, "Unable to display error message 8=D", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<EventApply[]> call, Throwable t) {
-                Toast.makeText(eventsActivity, "Something went terribly wrong :(", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    public void fetchCompletedEvents() {
+//        System.out.println("Usao sam u fetchCompletedEvents");
+//        Call<EventApply[]> eventsCall = api.getAllEvents(username, "Bearer " + accessToken);
+//
+//        eventsCall.enqueue(new Callback<EventApply[]>() {
+//            @Override
+//            public void onResponse(Call<EventApply[]> call, Response<EventApply[]> response) {
+//                if(response.isSuccessful()) {
+//                    if(response.body() == null) {
+//                        System.out.println("AAAAAAAAAAAAA");
+//                        return;
+//                    }
+//                    eventsActivity.fillInCompletedActivity(response.body());
+//                } else {
+//                    try {
+//                        Toast.makeText(eventsActivity, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+//                    } catch (IOException e) {
+//                        Toast.makeText(eventsActivity, "Unable to display error message 8=D", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<EventApply[]> call, Throwable t) {
+//                Toast.makeText(eventsActivity, "Something went terribly wrong :(", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     public List<String> format(EventApply[] events) {
         List<String> result = new ArrayList<>();
 
         for(EventApply event : events) {
             result.add(event.getName());
+            System.out.println("POZIV");
+            System.out.println(event.getName());
         }
 
         return result;
