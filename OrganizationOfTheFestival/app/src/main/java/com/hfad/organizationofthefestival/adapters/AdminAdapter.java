@@ -18,7 +18,7 @@ public class AdminAdapter extends ArrayAdapter<String> {
     private int resource;
     private List<String> leaderList;
 
-    public AdminAdapter(Context context, int resource, ArrayList<String> leaderList) {
+    public AdminAdapter(Context context, int resource, List<String> leaderList) {
         super(context, resource, leaderList);
         this.context = context;
         this.leaderList = leaderList;
