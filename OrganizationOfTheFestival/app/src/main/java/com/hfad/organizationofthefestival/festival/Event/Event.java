@@ -17,12 +17,12 @@ public class Event {
     private String endTime;
     private int status;
 
-    public long getFestivalId() {
-        return festivalId;
+    public long getEventId() {
+        return eventId;
     }
 
-    public void setFestivalId(long festivalId) {
-        this.festivalId = festivalId;
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
     }
 
     public long getLeaderId() {
@@ -49,14 +49,6 @@ public class Event {
         this.desc = desc;
     }
 
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
     public String getStartTime() {
         return startTime;
     }
@@ -66,7 +58,6 @@ public class Event {
         return endTime;
     }
 
-
     public int getStatus() {
         return status;
     }
@@ -75,10 +66,26 @@ public class Event {
         this.status = status;
     }
 
-    public Event(String name, String desc, String logo, String startTime, String endTime) {
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public Event(String name, String desc, String location, String startTime, String endTime) {
         this.name = name;
         this.desc = desc;
-        this.logo = logo;
+        this.location = location;
         this.startTime = startTime;
         this.endTime = endTime;
         this.status = 0;
