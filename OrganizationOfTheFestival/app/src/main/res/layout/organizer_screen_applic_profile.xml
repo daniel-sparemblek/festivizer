@@ -74,12 +74,27 @@
             android:text="@string/number_of_people"
             android:textSize="25sp" />
         <TextView
-            android:id="@+id/org_time"
+            android:id="@+id/startTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="@string/time"
+            android:text="@string/start_time"
             android:textSize="25sp" />
+        <TextView
+            android:id="@+id/endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/end_time"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/org_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="@string/duration" />
+
         <TextView
             android:id="@+id/org_comment"
             android:layout_width="wrap_content"
