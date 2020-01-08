@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival.event;
+package com.hfad.organizationofthefestival.event_older_backup;
 
 import java.util.List;
 

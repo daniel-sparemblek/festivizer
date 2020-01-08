@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
@@ -69,6 +70,25 @@ public class MyFestivalsActivity extends AppCompatActivity {
             btnActive.setEnabled(true);
             btnCompleted.setEnabled(false);
         });
+
+
+        /*
+        // Lets add a listener to list items
+        lvFestivals.setOnItemClickListener((parent, view, position, id) -> {
+            // Need to open the screen to that Festival's info
+
+            // First get that Festival's id
+            Festival clickedFest = (Festival)parent.getItemAtPosition(position);
+            // Now want to display that Festival's screen
+
+            // Will need to make an Intent
+            Intent intent1 = new Intent(this, LeaderActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("leader_id", leaderId);
+            this.startActivity(intent);
+        });
+         */
 
     }
 

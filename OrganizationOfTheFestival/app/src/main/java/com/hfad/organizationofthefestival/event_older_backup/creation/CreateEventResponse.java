@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival.event.creation;
+package com.hfad.organizationofthefestival.event_older_backup.creation;
 
 public class CreateEventResponse {
 
