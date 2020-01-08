@@ -48,19 +48,19 @@ public class EventsActivity extends ApplyFestActivity {
 
         eventsController.fetchEvents();
 
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                if(position == 0) {
-                    eventsController.fetchEvents();
-                    System.out.println("I ovdje sam uhvatio 1.");
-                }
-                if(position == 1) {
-                    eventsController.fetchCompletedEvents();
-                    System.out.println("I ovdje sam uhvatio 2.");
-                }
-            }
-        });
+//        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                if(position == 0) {
+//                    //eventsController.fetchEvents();
+//                    System.out.println("I ovdje sam uhvatio 1.");
+//                }
+//                if(position == 1) {
+//                    //eventsController.fetchCompletedEvents();
+//                    System.out.println("I ovdje sam uhvatio 2.");
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -109,14 +109,22 @@ public class EventsActivity extends ApplyFestActivity {
                 android.R.layout.simple_list_item_1, eventsController.format(events));
         lvEvents.setAdapter(specializationArrayAdapter);
 
-    }
-
-    public void fillInCompletedActivity(EventApply[] events) {
         lvEvents = findViewById(R.id.orgEventList); //Using the same layout as jobs
-        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+        ArrayAdapter<String> test = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, eventsController.format(events));
-        lvEvents.setAdapter(specializationArrayAdapter);
+        lvEvents.setAdapter(test);
 
     }
+
+//    public void fillInCompletedActivity(EventApply[] events) {
+//        for(EventApply event : events) {
+//            System.out.println(event);
+//        }
+//        lvEvents = findViewById(R.id.orgEventList); //Using the same layout as jobs
+//        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_list_item_1, eventsController.format(events));
+//        lvEvents.setAdapter(specializationArrayAdapter);
+//
+//    }
 
 }

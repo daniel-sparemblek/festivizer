@@ -9,6 +9,7 @@ public class ApplicationResponse {
     private double price;
     private String comment;
     private int duration;
+    private User worker;
     @SerializedName("people_number")
     private int peopleNumber;
 

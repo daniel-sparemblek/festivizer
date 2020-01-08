@@ -3,7 +3,6 @@ package com.hfad.organizationofthefestival.leader;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.festival.Festivals;
 
 import org.json.JSONObject;
 
@@ -16,13 +15,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 class MyFestivalsController {
 
     private MyFestivalsActivity myFestivalsActivity;
-    private LeaderClient api;
+    private LeaderClient leaderApi;
     private String accessToken;
     private String leaderID;
     private String refreshToken;
 
     public MyFestivalsController(MyFestivalsActivity myFestivalsActivity, String accessToken, String leaderID, String refreshToken) {
-        api = new Retrofit.Builder()
+        leaderApi = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -35,7 +34,7 @@ class MyFestivalsController {
     }
 
     public void getFestivals(String type) {
-        Call<Festival[]> leaderCall = api.getFestivals(type, leaderID, "Bearer " + accessToken);
+        Call<Festival[]> leaderCall = leaderApi.getFestivals(type, leaderID, "Bearer " + accessToken);
 
         leaderCall.enqueue(new Callback<Festival[]>() {
             @Override

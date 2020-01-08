@@ -10,12 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.event_older_backup.Event;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -34,12 +37,11 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
 
     private Event event;
 
-
     Button btnStartDatePicker, btnStartTimePicker;
     Button btnEndDatePicker, btnEndTimePicker;
 
-    EditText etStartDate, etStartTime;
-    EditText etEndDate, etEndTime;
+    TextView etStartDate, etStartTime;
+    TextView etEndDate, etEndTime;
 
     private int sYear, sMonth, sDay, sHour, sMinute;
     private int eYear, eMonth, eDay, eHour, eMinute;
@@ -59,8 +61,8 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         // start time
         btnStartDatePicker =(Button)findViewById(R.id.startDatebtn);
         btnStartTimePicker =(Button)findViewById(R.id.startTimebtn);
-        etStartDate=(EditText)findViewById(R.id.startDate);
-        etStartTime=(EditText)findViewById(R.id.startTime);
+        etStartDate=findViewById(R.id.startDate);
+        etStartTime=findViewById(R.id.startTime);
 
         btnStartDatePicker.setOnClickListener(this);
         btnStartTimePicker.setOnClickListener(this);
@@ -69,21 +71,20 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
 
         btnEndDatePicker =(Button)findViewById(R.id.endDatebtn);
         btnEndTimePicker =(Button)findViewById(R.id.endTimebtn);
-        etEndDate=(EditText)findViewById(R.id.endDate);
-        etEndTime=(EditText)findViewById(R.id.endTime);
+        etEndDate=findViewById(R.id.endDate);
+        etEndTime=findViewById(R.id.endTime);
 
         btnEndDatePicker.setOnClickListener(this);
         btnEndTimePicker.setOnClickListener(this);
 
-
-
-
-        String startDateTime = convertTime(etStartTime.getText().toString(),
-                etStartDate.getText().toString());
-        String endDateTime = convertTime(etEndTime.getText().toString(),
-                etEndDate.getText().toString());
+        btCreate = findViewById(R.id.createEvent);
 
         btCreate.setOnClickListener(v -> {
+            String startDateTime = convertTime(etStartTime.getText().toString(),
+                    etStartDate.getText().toString());
+            String endDateTime = convertTime(etEndTime.getText().toString(),
+                    etEndDate.getText().toString());
+
             if (!CreateEventActivity.this.checkEntry()) {
                 return;
             }
@@ -201,10 +202,11 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
 
 
     public String convertTime(String time, String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
-        ZonedDateTime dateTime = ZonedDateTime.parse(date + " " + time, formatter);
-        return dateTime.toString();
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        ZonedDateTime dateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        return dateTime.format(dateTimeFormatter) + "T" + time + ":00.000+0000";
     }
 
 }
