@@ -1,9 +1,12 @@
 package com.hfad.organizationofthefestival.defaultUser;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,7 +21,7 @@ public class DefaultUserActivity extends AppCompatActivity {
     private DefaultUserController controller;
 
     private TextView tvUsername;
-    private ImageView imProfilePicture;
+    private ImageView ivProfilePicture;
     private TextView tvRole;
     private TextView tvName;
     private TextView tvSurname;
@@ -49,8 +52,9 @@ public class DefaultUserActivity extends AppCompatActivity {
         tvEmail.setText(leader.getEmail());
         tvPhone.setText(leader.getPhone());
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                R.layout.default_user_show_row, leader.getFestivalNames());
+                android.R.layout.simple_list_item_1, leader.getFestivalNames());
         lv.setAdapter(arrayAdapter);
+        setProfilePicture(leader.getPicture());
     }
 
     public void fillInActivityOrganizer(Organizer organizer){
@@ -62,8 +66,9 @@ public class DefaultUserActivity extends AppCompatActivity {
         tvPhone.setText(organizer.getPhone());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                R.layout.default_user_show_row, organizer.getFestivals());
+                android.R.layout.simple_list_item_1, organizer.getFestivals());
         lv.setAdapter(arrayAdapter);
+        setProfilePicture(organizer.getPicture());
     }
 
     public void fillInActivityWorker(Worker worker){
@@ -75,13 +80,14 @@ public class DefaultUserActivity extends AppCompatActivity {
         tvPhone.setText(worker.getPhone());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                R.layout.default_user_show_row, worker.getJobs());
+                android.R.layout.simple_list_item_1, worker.getJobs());
         lv.setAdapter(arrayAdapter);
+        setProfilePicture(worker.getPicture());
     }
 
     private void getViewIds(){
         tvUsername = findViewById(R.id.user_name);
-        imProfilePicture = findViewById(R.id.default_profile_picture);
+        ivProfilePicture = findViewById(R.id.default_profile_picture);
         tvRole = findViewById(R.id.default_role);
         tvName = findViewById(R.id.default_name);
         tvSurname = findViewById(R.id.default_surname);
@@ -89,5 +95,11 @@ public class DefaultUserActivity extends AppCompatActivity {
         tvPhone = findViewById(R.id.default_phone);
         lv = findViewById(R.id.my_stuffs_list);
 
+    }
+
+    private void setProfilePicture(String picture) {
+        byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
+        ivProfilePicture.setImageBitmap(bitmap);
     }
 }

@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
-public class LeaderPrintPassActivity extends AppCompatActivity {
+public class PrintPassActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
