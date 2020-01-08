@@ -34,8 +34,8 @@ class MyFestivalsController {
         this.refreshToken = refreshToken;
     }
 
-    public void getCompletedFestivals() {
-        Call<Festival[]> leaderCall = api.getCompletedFestivals(leaderID, "Bearer " + accessToken);
+    public void getFestivals(String type) {
+        Call<Festival[]> leaderCall = api.getFestivals(type, leaderID, "Bearer " + accessToken);
 
         leaderCall.enqueue(new Callback<Festival[]>() {
             @Override

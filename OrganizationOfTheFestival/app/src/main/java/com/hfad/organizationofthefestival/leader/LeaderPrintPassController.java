@@ -42,6 +42,7 @@ class LeaderPrintPassController {
             public void onResponse(Call<Festival[]> call, Response<Festival[]> response) {
                 if (response.isSuccessful()) {
                     leaderPrintPassActivity.fillInActivity(response.body());
+                    getLeader();
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
@@ -55,6 +56,33 @@ class LeaderPrintPassController {
 
             @Override
             public void onFailure(Call<Festival[]> call, Throwable t) {
+                Toast.makeText(leaderPrintPassActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getLeader() {
+        Call<Leader> leaderCall = api.getLeaderData(username, "Bearer " + accessToken);
+
+        leaderCall.enqueue(new Callback<Leader>() {
+            @Override
+            public void onResponse(Call<Leader> call, Response<Leader> response) {
+                if (response.isSuccessful()) {
+                    leader = response.body();
+                    leaderPrintPassActivity.fillInLeader(leader);
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(leaderPrintPassActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(leaderPrintPassActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Leader> call, Throwable t) {
                 Toast.makeText(leaderPrintPassActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });

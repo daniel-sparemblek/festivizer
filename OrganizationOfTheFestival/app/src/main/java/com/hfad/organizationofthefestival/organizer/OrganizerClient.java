@@ -25,6 +25,10 @@ public interface OrganizerClient {
     Call<Void> apply(@Header("Authorization") String authorization,
                      @Path("festivalId") String festivalId);
 
+    @POST("festival/{festivalId}/revoke")
+    Call<Void> revoke(@Header("Authorization") String authorization,
+                      @Path("festivalId") String festivalId);
+
     @GET("events")
     Call<EventApply[]> getAllEvents(@Query("username") String username,
                                     @Header("Authorization") String authorization);

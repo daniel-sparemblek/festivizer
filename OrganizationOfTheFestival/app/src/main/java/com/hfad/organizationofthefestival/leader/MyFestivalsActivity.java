@@ -3,13 +3,13 @@ package com.hfad.organizationofthefestival.leader;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.festival.Festivals;
-import com.hfad.organizationofthefestival.utility.Job;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,9 +21,12 @@ public class MyFestivalsActivity extends AppCompatActivity {
     private String refreshToken;
     private String leaderId;
 
-    private MyFestivalsController myFestivalsController;
+    private MyFestivalsController controller;
 
     private ListView lvFestivals;
+    private Button btnActive;
+    private Button btnPending;
+    private Button btnCompleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,38 @@ public class MyFestivalsActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         leaderId = intent.getStringExtra("leader_id");
 
+        btnActive = findViewById(R.id.btnActive);
+        btnPending = findViewById(R.id.btnPending);
+        btnCompleted = findViewById(R.id.btnCompleted);
+
         lvFestivals = findViewById(R.id.festivalList);
 
-        myFestivalsController = new MyFestivalsController(this, accessToken, leaderId, refreshToken);
-        myFestivalsController.getCompletedFestivals();
+        controller = new MyFestivalsController(this, accessToken, leaderId, refreshToken);
+        controller.getFestivals("active");
+        btnActive.setEnabled(false);
+
+
+        btnPending.setOnClickListener(v -> {
+            controller.getFestivals("pending");
+            btnPending.setEnabled(false);
+            btnActive.setEnabled(true);
+            btnCompleted.setEnabled(true);
+        });
+
+        btnActive.setOnClickListener(v -> {
+            controller.getFestivals("active");
+            btnPending.setEnabled(true);
+            btnActive.setEnabled(false);
+            btnCompleted.setEnabled(true);
+        });
+
+        btnCompleted.setOnClickListener(v -> {
+            controller.getFestivals("complete");
+            btnPending.setEnabled(true);
+            btnActive.setEnabled(true);
+            btnCompleted.setEnabled(false);
+        });
+
     }
 
     public void fillInActivity(Festival[] festivals) {
