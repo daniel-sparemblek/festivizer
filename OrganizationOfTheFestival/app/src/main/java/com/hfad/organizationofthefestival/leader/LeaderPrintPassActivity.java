@@ -119,6 +119,8 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         canvas.drawText(festival.getName(), 99.5F, 120, infoPaint);
         canvas.drawBitmap(Bitmap.createScaledBitmap(pictureStringToBitmap(leader.getPicture()), 100, 100, false),
                 49.5f, 140, titlePaint);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(pictureStringToBitmap(festival.getLogo()), 30, 30, false),
+                10, 244, titlePaint);
         canvas.drawBitmap(createQRCodeImage(leader.getUsername(), festival.getName()), 159, 244, titlePaint);
 
 
@@ -176,5 +178,4 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
     }
-
 }

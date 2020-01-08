@@ -191,7 +191,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
     private String getPictureString() {
         Bitmap bitmap = ((BitmapDrawable) ivLogo.getDrawable()).getBitmap();
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
         byte[] pictureByte = bos.toByteArray();
         return Base64.encodeToString(pictureByte, Base64.DEFAULT);
     }
