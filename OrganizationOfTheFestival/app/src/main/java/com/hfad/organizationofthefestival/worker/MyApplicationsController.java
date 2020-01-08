@@ -2,8 +2,7 @@ package com.hfad.organizationofthefestival.worker;
 
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.utility.Application;
-import com.hfad.organizationofthefestival.utility.WorkersApplication;
+import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
 import org.json.JSONObject;
 
@@ -35,11 +34,11 @@ class MyApplicationsController {
     }
 
     public void getWorkerApplications() {
-        Call<WorkersApplication[]> call = api.getWorkerApplications(username, "Bearer " + accessToken);
+        Call<ApplicationResponse[]> call = api.getWorkerApplications(username, "Bearer " + accessToken);
 
-        call.enqueue(new Callback<WorkersApplication[]>() {
+        call.enqueue(new Callback<ApplicationResponse[]>() {
             @Override
-            public void onResponse(Call<WorkersApplication[]> call, Response<WorkersApplication[]> response) {
+            public void onResponse(Call<ApplicationResponse[]> call, Response<ApplicationResponse[]> response) {
                 if (response.isSuccessful()) {
                     myApplicationsActivity.fillInActivity(response.body());
                 } else {
@@ -54,7 +53,7 @@ class MyApplicationsController {
             }
 
             @Override
-            public void onFailure(Call<WorkersApplication[]> call, Throwable t) {
+            public void onFailure(Call<ApplicationResponse[]> call, Throwable t) {
                 Toast.makeText(myApplicationsActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });
