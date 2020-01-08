@@ -46,6 +46,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".defaultUser.DefaultUserActivity" />
+        <activity android:name=".festival.Event.CreateEventActivity" />
+        <activity android:name=".event.creation.CreateEventActivity" />
     </application>
 
 </manifest>

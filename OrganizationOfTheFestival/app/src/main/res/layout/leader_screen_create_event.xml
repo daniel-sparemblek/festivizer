@@ -171,7 +171,7 @@
         android:paddingEnd="24dp">
 
         <Button
-            android:id="@+id/createJob"
+            android:id="@+id/createEvent"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"

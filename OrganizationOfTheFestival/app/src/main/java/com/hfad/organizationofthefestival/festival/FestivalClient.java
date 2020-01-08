@@ -8,6 +8,6 @@ import retrofit2.http.Path;
 public interface FestivalClient {
 
     @GET("/festival/{festivalId}")
-    Call<Festival> getFestivalInfo(@Path("festivalId") long festivalId,
+    Call<Festival> getFestivalInfo(@Path("festivalId") String festivalId,
                                    @Header("Authorization") String authorization);
 }
