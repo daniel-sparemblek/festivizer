@@ -2,6 +2,8 @@ package com.hfad.organizationofthefestival.organizer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,8 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.organizer.FragmentAdapters.SectionsPagerAdapter;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.JobApply;
+import com.hfad.organizationofthefestival.utility.WorkersAuction;
 
 public class JobsActivity extends AppCompatActivity {
 
@@ -29,6 +33,12 @@ public class JobsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
         setSupportActionBar(toolbar);
 
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), getIntent(), this);
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
+
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
@@ -37,7 +47,21 @@ public class JobsActivity extends AppCompatActivity {
 
         jobsController = new JobsController(this, accessToken, username, refreshToken);
 
-        jobsController.getJobs();
+        jobsController.getAuctionedJobs();
+
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0) {
+                    jobsController.getAuctionedJobs();
+                    System.out.println("I ovdje sam uhvatio 1.");
+                }
+                if(position == 1) {
+                    jobsController.getJobs();
+                    System.out.println("I ovdje sam uhvatio 2.");
+                }
+            }
+        });
     }
 
     @Override
@@ -80,10 +104,17 @@ public class JobsActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void fillInActivity(JobApply[] jobs) {
+    public void fillInJobs(JobApply[] jobs) {
         lvJobs = findViewById(R.id.orgJobsList);
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsController.format(jobs));
+                android.R.layout.simple_list_item_1, jobsController.formatJobs(jobs));
+        lvJobs.setAdapter(specializationArrayAdapter);
+    }
+
+    public void fillInAuctions(WorkersAuction[] jobs) {
+        lvJobs = findViewById(R.id.orgJobsList);
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, jobsController.formatAuctions(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
     }
 }

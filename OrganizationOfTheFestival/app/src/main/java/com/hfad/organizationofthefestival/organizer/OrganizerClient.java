@@ -1,9 +1,10 @@
 package com.hfad.organizationofthefestival.organizer;
 
-import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.festival.FestivalsResponse;
 import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.JobApply;
+import com.hfad.organizationofthefestival.utility.WorkersAuction;
+
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -31,4 +32,8 @@ public interface OrganizerClient {
     @GET("jobs")
     Call<JobApply[]> getAllJobs(@Query("username") String username,
                                 @Header("Authorization") String authorization);
+
+    @GET("auctions")
+    Call<WorkersAuction[]> getAuctionedJobs(@Query("username") String username,
+                                         @Header("Authorization") String authorization);
 }

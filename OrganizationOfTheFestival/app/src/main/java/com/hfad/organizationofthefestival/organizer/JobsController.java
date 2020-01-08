@@ -1,6 +1,7 @@
 package com.hfad.organizationofthefestival.organizer;
 
 import com.hfad.organizationofthefestival.utility.JobApply;
+import com.hfad.organizationofthefestival.utility.WorkersAuction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class JobsController {
             @Override
             public void onResponse(Call<JobApply[]> call, Response<JobApply[]> response) {
                 if(response.isSuccessful()) {
-                    jobsActivity.fillInActivity(response.body());
+                    jobsActivity.fillInJobs(response.body());
                 }
             }
 
@@ -51,11 +52,39 @@ public class JobsController {
         });
     }
 
-    public List<String> format(JobApply[] jobs) {
+    public void getAuctionedJobs() {
+        Call<WorkersAuction[]> jobsCall = api.getAuctionedJobs(username, "Bearer " + accessToken);
+
+        jobsCall.enqueue(new Callback<WorkersAuction[]>() {
+            @Override
+            public void onResponse(Call<WorkersAuction[]> call, Response<WorkersAuction[]> response) {
+                if(response.isSuccessful()) {
+                    jobsActivity.fillInAuctions(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WorkersAuction[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public List<String> formatJobs(JobApply[] jobs) {
         List<String> result = new ArrayList<>();
 
         for(JobApply job : jobs) {
             result.add(job.getName());
+        }
+
+        return result;
+    }
+
+    public List<String> formatAuctions(WorkersAuction[] workersAuctions) {
+        List<String> result = new ArrayList<>();
+
+        for(WorkersAuction workersAuction : workersAuctions) {
+            result.add(workersAuction.getJob().getName());
         }
 
         return result;
