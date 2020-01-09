@@ -7,8 +7,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.EventAdapter;
@@ -123,7 +126,14 @@ public class EventsActivity extends ApplyFestActivity {
 
         eventApplies = events;
 
-
+        lvEvents.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(EventsActivity.this, ViewEventActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("event_id", eventApplies[position].getEventId());
+            EventsActivity.this.startActivity(intent);
+        });
 
 
     }

@@ -4,6 +4,7 @@ import com.hfad.organizationofthefestival.festival.FestivalsResponse;
 import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
+import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 
 import retrofit2.Call;
@@ -40,4 +41,7 @@ public interface OrganizerClient {
     @GET("auctions")
     Call<ApplicationAuction[]> getAuctionedJobs(@Query("username") String username,
                                                 @Header("Authorization") String authorization);
+
+    @GET("event/{event_id}")
+    Call<WorkingEvent> getEvent(@Path("event_id") String eventId, @Header("Authorization") String authorization);
 }
