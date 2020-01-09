@@ -44,17 +44,10 @@
 
         <ImageView
             android:id="@+id/profile_picture"
-<<<<<<< HEAD
             android:layout_width="178dp"
             android:layout_height="178dp"
             android:layout_gravity="start|top"
             android:layout_marginBottom="10dp"
-=======
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="chooseImage"
->>>>>>> cc5633dfb34a6abe1bf56bf4b8db78a5b24ed6b1
             android:contentDescription="@string/profile_picture"
             android:src="@drawable/default_profile_picture" />
 
