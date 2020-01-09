@@ -43,5 +43,6 @@ public interface OrganizerClient {
                                                 @Header("Authorization") String authorization);
 
     @GET("event/{event_id}")
-    Call<EventApply> getEvent(@Path("event_id") String eventId, @Header("Authorization") String authorization);
+    Call<EventApply> getEvent(@Path("event_id") String eventId,
+                              @Header("Authorization") String authorization);
 }

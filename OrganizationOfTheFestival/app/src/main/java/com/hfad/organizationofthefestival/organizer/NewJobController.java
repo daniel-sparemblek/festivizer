@@ -21,8 +21,10 @@ class NewJobController {
     private String username;
     private String refreshToken;
     private Organizer organizer;
+    private String festivalName;
+    private String eventName;
 
-    public NewJobController(NewJobActivity newJobActivity, String accessToken, String username, String refreshToken) {
+    public NewJobController(NewJobActivity newJobActivity, String accessToken, String username, String refreshToken, String eventName, String festivalName) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -33,31 +35,11 @@ class NewJobController {
         this.username = username;
         this.newJobActivity = newJobActivity;
         this.refreshToken = refreshToken;
+        this.festivalName = festivalName;
+        this.eventName = eventName;
     }
 
-    public void getEvent(int eventId) {
-        Call<EventApply> eventCall = api.getEvent(String.valueOf(eventId), "Bearer " + accessToken);
+    public void createNewJob(){
 
-        eventCall.enqueue(new Callback<EventApply>() {
-            @Override
-            public void onResponse(Call<EventApply> call, Response<EventApply> response) {
-                if (response.isSuccessful()) {
-                    newJobActivity.fillInActivity(response.body());
-                } else {
-                    try {
-                        JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(newJobActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        Toast.makeText(newJobActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<EventApply> call, Throwable t) {
-                Toast.makeText(newJobActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

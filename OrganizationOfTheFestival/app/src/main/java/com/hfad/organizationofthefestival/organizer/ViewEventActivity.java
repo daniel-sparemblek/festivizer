@@ -30,6 +30,8 @@ public class ViewEventActivity extends AppCompatActivity {
     private String refreshToken;
     private String username;
     private long eventId;
+    private String festivalName;
+    private EventApply event;
 
     private ViewEventController viewEventController;
 
@@ -46,6 +48,7 @@ public class ViewEventActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
         eventId = intent.getLongExtra("event_id", 0);
+        festivalName = intent.getStringExtra("festivalName");
 
         tvName = findViewById(R.id.org_event_name);
         tvFestivalName = findViewById(R.id.org_festival);
@@ -59,15 +62,16 @@ public class ViewEventActivity extends AppCompatActivity {
         viewEventController.getEvent((int) eventId);
     }
 
-    public void fillInActivity(EventApply body) {
-        tvName.setText(body.getName());
-        tvFestivalName.setText(String.valueOf(body.getFestival().getName()));
-        tvDesc.setText(body.getDesc());
-        tvLocation.setText(body.getLocation());
-        tvStartTime.setText(parseDateTime(body.getStartTime())
+    public void fillInActivity(EventApply event) {
+        this.event = event;
+        tvName.setText(event.getName());
+        tvFestivalName.setText(String.valueOf(event.getFestival().getName()));
+        tvDesc.setText(event.getDesc());
+        tvLocation.setText(event.getLocation());
+        tvStartTime.setText(parseDateTime(event.getStartTime())
                 .truncatedTo(ChronoUnit.MINUTES)
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
-        tvEndTime.setText(parseDateTime(body.getEndTime())
+        tvEndTime.setText(parseDateTime(event.getEndTime())
                 .truncatedTo(ChronoUnit.MINUTES)
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
     }
@@ -89,6 +93,8 @@ public class ViewEventActivity extends AppCompatActivity {
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("username", username);
         intent.putExtra("event_id", eventId);
+        intent.putExtra("festivalName", festivalName);
+        intent.putExtra("eventName", event.getName());
         this.startActivity(intent);
     }
 }

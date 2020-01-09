@@ -125,7 +125,8 @@ public class EventsActivity extends ApplyFestActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("event_id", gotEvents[position].getEventId());
-            EventsActivity.this.startActivity(intent);
+            intent.putExtra("festivalName", gotEvents[position].getFestival().getName());
+            startActivity(intent);
         });
 
         LinkedList<EventApply> newList = new LinkedList<>();
