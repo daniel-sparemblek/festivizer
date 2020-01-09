@@ -78,7 +78,7 @@ class NewJobController {
             @Override
             public void onResponse(Call<List<Specialization>> call, Response<List<Specialization>> response) {
                 if (response.isSuccessful()){
-                    activity.fillInSpinners(response.body());
+                    activity.fillInFirstSpinner(response.body());
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
