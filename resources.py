@@ -4,14 +4,14 @@ from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from decorators import permission_required
 from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalOrganizers, FestivalSchema,
-                    EventModel, EventSchema, JobModel, JobSchema, AuctionModel, AuctionSchema, LeaderSchema,
+                    EventModel, EventSchema, JobModel, JobSchema, AuctionModel, JobSpecializations, AuctionSchema, LeaderSchema,
                     Application, ApplicationSchema, WorkerSchema, SpecializationSchema, SpecializationModel,
                     WorkerSpecializations, OrganizerSchema, JobApplySchema, EventApplySchema, FestivalOrg,
                     FestivalOrgSchema, AuctionWorker, ApplicationWorker, ApplicationWorkerSchema, AuctionWorkerSchema,
                     Admin, AdminSchema)
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-
+import sys
 
 class UserRegistration(Resource):
     @staticmethod
@@ -189,6 +189,7 @@ class Organizers(Resource):
 
         username = request.args.get('username')
         festival_id = request.args.get('festival_id')
+        festival_id_all = request.args.get('festival_id_all')
 
         if username:
             organizer = UserModel.find_by_username(username=username)
@@ -196,7 +197,12 @@ class Organizers(Resource):
                 return OrganizerSchema.to_json(organizer)
 
         if festival_id:
-            organizers = UserModel.find_by_organizing_festival_id(festival_id)
+            organizers = UserModel.find_by_approved_organizing_festival_id(festival_id)
+            if organizers is not None:
+                return OrganizerSchema.to_json(organizers)
+
+        if festival_id_all:
+            organizers = UserModel.find_by_not_approved_organizing_festival_id(festival_id_all)
             if organizers is not None:
                 return OrganizerSchema.to_json(organizers)
         return {}, 200
@@ -231,7 +237,11 @@ class Specializations(Resource):
         )
 
         try:
-            new_specialization.save_to_db()
+            id = new_specialization.save_to_db()
+            print(str(id), file=sys.stderr)
+
+
+
             return {'msg': 'Specialization {} was successfully created!'.format(data['name'])}, 200
         except IntegrityError:
             return {'msg': 'Bad request'}, 400
@@ -270,9 +280,15 @@ class Festivals(Resource):
     @jwt_required
     def get(self):
         leader_id = request.args.get('leader_id')
+        organizer_id = request.args.get('organizer_id')
+        organizer_id_all = request.args.get('organizer_id_all')
 
         if len(list(request.args)) == 1 and leader_id:
             festivals = FestivalModel.find_by_leader_id(leader_id)
+            return FestivalSchema(many=True).dump(festivals)
+
+        if organizer_id:
+            festivals = FestivalModel.find_by_organizer_id(organizer_id)
             return FestivalSchema(many=True).dump(festivals)
 
         festivals = FestivalModel.return_all()
@@ -412,6 +428,16 @@ class FestivalOrganizersAccepted(Resource):
         return UserSchema.to_json(users)
 
 
+class FestivalOrganizersResource(Resource):
+    @jwt_required
+    def put(self, festival_id):
+        data = request.get_json()
+        decision = data['decision']
+        organizer_id = data['organizer_id']
+        FestivalOrganizers.update_status(festival_id, organizer_id, decision)
+        return {'msg': 'Success!'}
+
+
 class SearchUsers(Resource):
     @jwt_required
     def post(self):
@@ -445,6 +471,36 @@ class Events(Resource):
             return EventApplySchema.to_json(EventModel.find_by_organizer_id(organizer.id))
 
         return {'msg:': 'Bad request'}, 400
+
+
+class EventsComplete(Resource):
+    @jwt_required
+    def get(self):
+        festival_id = request.args.get('festival_id')
+
+        if festival_id:
+            events = EventModel.find_completed_by_festival_id(festival_id)
+            return EventSchema.to_json(events)
+
+
+class EventsPending(Resource):
+    @jwt_required
+    def get(self):
+        festival_id = request.args.get('festival_id')
+
+        if festival_id:
+            events = EventModel.find_pending_by_festival_id(festival_id)
+            return EventSchema.to_json(events)
+
+
+class EventsActive(Resource):
+    @jwt_required
+    def get(self):
+        festival_id = request.args.get('festival_id')
+
+        if festival_id:
+            events = EventModel.find_active_by_festival_id(festival_id)
+            return EventSchema.to_json(events)
 
 
 class Event(Resource):
@@ -488,10 +544,11 @@ class EventUnique(Resource):
     @jwt_required
     def get(self, event_id):
         event = EventModel.find_by_event_id(event_id)
-        return EventSchema.to_json(event)
+        return EventApplySchema.to_json(event)
 
 
 class Job(Resource):
+    #Kada duration na Application + start_time od posla je prosao onda je posao Completed
     @jwt_required
     def post(self):
         data = request.get_json()
@@ -499,12 +556,20 @@ class Job(Resource):
         data['is_completed'] = False
         data['worker_id'] = None
 
-        job_schema = JobSchema()
-        validate = job_schema.validate(data)
+        spec1 = data['spec1']
+        spec2 = data['spec2']
+        spec3 = data['spec3']
 
-        if bool(validate):
-            value = list(validate.values())[0]
-            return {"msg": value[0]}, 422
+        spec1_id = SpecializationModel.find_by_name(spec1).specialization_id
+        spec2_id = SpecializationModel.find_by_name(spec2).specialization_id
+        spec3_id = SpecializationModel.find_by_name(spec3).specialization_id
+
+        #job_schema = JobSchema()
+        #validate = job_schema.validate(data)
+
+        #if bool(validate):
+        #    value = list(validate.values())[0]
+        #    return {"msg": value[0]}, 422
 
         start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
@@ -518,7 +583,30 @@ class Job(Resource):
         )
 
         try:
-            new_job.save_to_db()
+            job_id1 = new_job.save_to_db()
+            print(str(job_id1), file=sys.stderr)
+            print(str(spec1_id), file=sys.stderr)
+
+            new_spec1 = JobSpecializations(
+                job_id=job_id1,
+                specialization_id=spec1_id
+            )
+            new_spec1.save_to_db()
+
+            new_spec2 = JobSpecializations(
+                job_id=job_id1,
+                specialization_id=spec2_id
+            )
+            new_spec2.save_to_db()
+
+            new_spec3 = JobSpecializations(
+                job_id=job_id1,
+                specialization_id=spec3_id
+            )
+            new_spec3.save_to_db()
+
+
+
             return {'msg': 'Job {} was successfully created!'.format(data['name'])}, 200
         except IntegrityError as e:
             return {'msg': 'Bad request'}, 400
@@ -562,7 +650,8 @@ class JobsNotOnAuction(Resource):
     def get(self):
         organizer = request.args.get('organizer')
         user = UserModel.find_by_username(organizer)
-        return JobApplySchema.to_json(JobModel.find_jobs_not_on_auction_by_organizer_id(user.id))
+        print("Ja doso do ovdje", file=sys.stderr)
+        return JobSchema.to_json(JobModel.find_jobs_not_on_auction_by_organizer_id(user.id))
 
 
 class AvailableJobs(Resource):
