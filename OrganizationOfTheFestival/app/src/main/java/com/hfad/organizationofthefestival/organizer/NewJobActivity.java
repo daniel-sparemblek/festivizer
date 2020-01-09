@@ -51,7 +51,6 @@ public class NewJobActivity extends AppCompatActivity {
         tvFestivalName.setText(festivalName);
 
         controller = new NewJobController(this, accessToken, username, refreshToken, eventName, festivalName);
-        controller.createNewJob();
     }
 
 
