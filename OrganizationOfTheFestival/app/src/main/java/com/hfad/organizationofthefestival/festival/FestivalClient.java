@@ -15,6 +15,6 @@ public interface FestivalClient {
                                    @Header("Authorization") String authorization);
 
     @GET("organizers")
-    Call<Organizer[]> getOrganizers(@Query("festivalId") String festivalId,
+    Call<Organizer[]> getOrganizers(@Query("festival_id") String festivalId,
                                     @Header("Authorization") String authorization);
 }

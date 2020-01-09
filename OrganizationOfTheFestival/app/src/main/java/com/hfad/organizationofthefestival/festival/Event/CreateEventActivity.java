@@ -45,6 +45,8 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private Event event;
 
+    Organizer[] organizers;
+
     private Button btnStartDatePicker, btnStartTimePicker;
     private Button btnEndDatePicker, btnEndTimePicker;
 
@@ -128,6 +130,9 @@ public class CreateEventActivity extends AppCompatActivity {
                     startDateTime,
                     endDateTime
                     );
+            String aggaerg = intent.getStringExtra("leaderId");
+            System.out.println("NEMEREN " + aggaerg);
+            event.setLeaderId(Long.parseLong(intent.getStringExtra("leaderId")));
             controller.createEvent(event, accessToken);
 
             returnToLeaderActivity();
@@ -135,7 +140,7 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     public void setupSpinner(Organizer[] organizers) {
-        System.out.println("AAAAAAAAAAAA");
+        this.organizers = organizers;
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, getOrganizers(organizers));
         spinner.setAdapter(adapter);
     }
