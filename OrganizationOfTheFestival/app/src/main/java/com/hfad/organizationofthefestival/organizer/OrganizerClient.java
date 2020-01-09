@@ -5,6 +5,7 @@ import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.NewJob;
+import com.hfad.organizationofthefestival.utility.Specialization;
 
 import org.json.JSONObject;
 
@@ -55,5 +56,5 @@ public interface OrganizerClient {
                                   @Header("Authorization") String authorization);
 
     @GET("specializations")
-    Call<List<String>> getSpecializations(@Header("Authorization") String authorization);
+    Call<List<Specialization>> getSpecializations(@Header("Authorization") String authorization);
 }
