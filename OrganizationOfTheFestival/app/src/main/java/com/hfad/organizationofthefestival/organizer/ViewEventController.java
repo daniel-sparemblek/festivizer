@@ -2,6 +2,7 @@ package com.hfad.organizationofthefestival.organizer;
 
 import android.widget.Toast;
 
+import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import org.json.JSONObject;
@@ -35,11 +36,11 @@ public class ViewEventController {
     }
 
     public void getEvent(int eventId) {
-        Call<WorkingEvent> eventCall = api.getEvent(String.valueOf(eventId), "Bearer " + accessToken);
+        Call<EventApply> eventCall = api.getEvent(String.valueOf(eventId), "Bearer " + accessToken);
 
-        eventCall.enqueue(new Callback<WorkingEvent>() {
+        eventCall.enqueue(new Callback<EventApply>() {
             @Override
-            public void onResponse(Call<WorkingEvent> call, Response<WorkingEvent> response) {
+            public void onResponse(Call<EventApply> call, Response<EventApply> response) {
                 if (response.isSuccessful()) {
                     viewEventActivity.fillInActivity(response.body());
                 } else {
@@ -54,7 +55,7 @@ public class ViewEventController {
             }
 
             @Override
-            public void onFailure(Call<WorkingEvent> call, Throwable t) {
+            public void onFailure(Call<EventApply> call, Throwable t) {
                 Toast.makeText(viewEventActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });

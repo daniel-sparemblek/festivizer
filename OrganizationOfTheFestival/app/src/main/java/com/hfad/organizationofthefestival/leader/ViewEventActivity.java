@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 public class ViewEventActivity extends AppCompatActivity {
@@ -50,12 +51,12 @@ public class ViewEventActivity extends AppCompatActivity {
         viewEventController.getEvent((int)eventId);
     }
 
-    public void fillInActivity(WorkingEvent body) {
+    public void fillInActivity(EventApply body) {
         tvName.setText(body.getName());
         tvDesc.setText(body.getDesc());
         tvLocation.setText(body.getLocation());
         tvStartTime.setText(body.getStartTime());
         tvEndTime.setText(body.getEndTime());
-        tvOrganizerName.setText(String.valueOf(body.getOrganizerId()));
+        tvOrganizerName.setText(String.valueOf(body.getOrganizer().getUsername()));
     }
 }
