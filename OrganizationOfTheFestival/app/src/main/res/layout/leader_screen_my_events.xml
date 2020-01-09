@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/active"
+            android:onClick="getActiveEvents"
             style="?android:attr/buttonBarStyle"/>
         <Button
             android:id="@+id/btnPending"
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/pending"
+            android:onClick="getPendingEvents"
             style="?android:attr/buttonBarStyle"/>
 
         <Button
@@ -58,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/completed"
+            android:onClick="getCompletedEvents"
             style="?android:attr/buttonBarStyle"/>
 
     </LinearLayout>
@@ -72,7 +75,7 @@
         android:paddingBottom="100dp">
 
         <ListView
-            android:id="@+id/specializationsList"
+            android:id="@+id/lv_leader_events"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival.leader;
 
+import com.hfad.organizationofthefestival.event.Event;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
@@ -39,4 +40,13 @@ public interface LeaderClient {
     @PUT("festivals/{festival_id}")
     Call<Void> putDecision(@Path("festival_id") String festivalId, @Body HashMap<String, String> body,
                            @Header("Authorization") String authorization);
+
+    @GET("events/active")
+    Call<Event[]> getActiveEvents(@Query("festival_id") String festivalId, @Header("Authorization") String authorization);
+
+    @GET("events/complete")
+    Call<Event[]> getCompletedEvents(@Query("festival_id") String festivalId, @Header("Authorization") String authorization);
+
+    @GET("events/pending")
+    Call<Event[]> getPendingEvents(@Query("festival_id") String festivalId, @Header("Authorization") String authorization);
 }
