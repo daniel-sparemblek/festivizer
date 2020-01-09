@@ -72,6 +72,7 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ApproveOrganizersActivity.class);
         intent.putExtra("accessToken", accessToken);
         intent.putExtra("refreshToken", refreshToken);
+        System.out.println("FESTIVAL_ID: " + festivalId);
         intent.putExtra("festival_id", festivalId);
         this.startActivity(intent);
     }
