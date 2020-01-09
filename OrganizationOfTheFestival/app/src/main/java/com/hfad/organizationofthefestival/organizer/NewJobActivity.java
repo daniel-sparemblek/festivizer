@@ -16,9 +16,11 @@ public class NewJobActivity extends AppCompatActivity {
     private String refreshToken;
     private String username;
     private long eventId;
+    private String eventName;
+    private String festivalName;
 
-    private TextView festivalName;
-    private TextView eventName;
+    private TextView tvFestivalName;
+    private TextView tvEventName;
 
     private EditText etName;
     private EditText etDescription;
@@ -28,7 +30,7 @@ public class NewJobActivity extends AppCompatActivity {
     private Spinner spSecondSpecialization;
     private Spinner spThirdSpecialization;
 
-    private NewJobController newJobController;
+    private NewJobController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,24 +42,31 @@ public class NewJobActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
         eventId = intent.getLongExtra("event_id", 0);
+        eventName = intent.getStringExtra("eventName");
+        festivalName = intent.getStringExtra("festivalName");
 
-        festivalName = findViewById(R.id.festName);
-        eventName = findViewById(R.id.eventName);
+        findViews();
+
+        tvEventName.setText(eventName);
+        tvFestivalName.setText(festivalName);
+
+        controller = new NewJobController(this, accessToken, username, refreshToken, eventName, festivalName);
+        controller.createNewJob();
+    }
+
+
+    public void fillInActivity(EventApply body) {
+
+    }
+
+    private void findViews(){
+        tvFestivalName = findViewById(R.id.festName);
+        tvEventName = findViewById(R.id.eventName);
         etName = findViewById(R.id.jobName);
         etDescription = findViewById(R.id.jobDesc);
         etStartTime = findViewById(R.id.startTime);
         spFirstSpecialization = findViewById(R.id.spec1);
         spSecondSpecialization = findViewById(R.id.spec2);
         spThirdSpecialization = findViewById(R.id.spec3);
-        newJobController = new NewJobController(this, accessToken, username, refreshToken);
-        newJobController.getEvent((int)eventId);
-
-
-    }
-
-
-    public void fillInActivity(EventApply body) {
-        festivalName.setText(body.getFestival().getName());
-        eventName.setText(body.getName());
     }
 }
