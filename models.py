@@ -6,6 +6,7 @@ from passlib.hash import pbkdf2_sha256 as sha256
 from run import db
 from run import ma
 from datetime import datetime
+import sys
 
 
 # MODELS
@@ -66,6 +67,16 @@ class UserModel(db.Model):
     def find_by_organizing_festival_id(cls, festival_id):
         return db.session.query(cls).join(FestivalOrganizers, FestivalOrganizers.organizer_id == cls.id) \
             .filter(FestivalOrganizers.festival_id == festival_id).all()
+
+    @classmethod
+    def find_by_approved_organizing_festival_id(cls, festival_id):
+        return db.session.query(cls).join(FestivalOrganizers, FestivalOrganizers.organizer_id == cls.id) \
+            .filter(FestivalOrganizers.festival_id == festival_id, FestivalOrganizers.status == 2).all()
+
+    @classmethod
+    def find_by_not_approved_organizing_festival_id(cls, festival_id):
+        return db.session.query(cls).join(FestivalOrganizers, FestivalOrganizers.organizer_id == cls.id) \
+            .filter(FestivalOrganizers.festival_id == festival_id, FestivalOrganizers.status == 1).all()
 
     @classmethod
     def find_by_permission(cls, value):
@@ -169,6 +180,12 @@ class FestivalOrganizers(db.Model):
         db.session.query(cls).filter(cls.festival_organizers_id == festival_organizers_id).delete()
         db.session.commit()
 
+    @classmethod
+    def update_status(cls, festival_id, organizer_id, status):
+        fest_org = FestivalOrganizers.find_by_festival_id_and_organizer_id(festival_id, organizer_id)
+        fest_org.status = status
+        db.session.commit()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
@@ -192,6 +209,21 @@ class EventModel(db.Model):
     @classmethod
     def find_by_festival_id(cls, festival_id):
         return cls.query.filter_by(festival_id=festival_id)
+
+    @classmethod
+    def find_completed_by_festival_id(cls, festival_id):
+        now = datetime.now()
+        return db.session.query(cls).filter(cls.festival_id == festival_id, cls.end_time < now).all()
+
+    @classmethod
+    def find_pending_by_festival_id(cls, festival_id):
+        now = datetime.now()
+        return db.session.query(cls).filter(cls.festival_id == festival_id, cls.start_time > now).all()
+
+    @classmethod
+    def find_active_by_festival_id(cls, festival_id):
+        now = datetime.now()
+        return db.session.query(cls).filter(cls.festival_id == festival_id, cls.end_time > now, cls.start_time < now).all()
 
     @classmethod
     def find_by_event_id(cls, event_id):
@@ -282,6 +314,7 @@ class JobModel(db.Model):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+        return self.job_id
 
     @classmethod
     def get_all(cls):
@@ -293,8 +326,18 @@ class JobModel(db.Model):
 
     @classmethod
     def find_jobs_not_on_auction_by_organizer_id(cls, organizer_id):
-        return db.session.query(cls).join(EventModel, EventModel.event_id == cls.event_id).outerjoin(AuctionModel, AuctionModel.job_id == cls.job_id)\
-            .filter(AuctionModel.auction_id is None, EventModel.organizer_id == organizer_id).all()
+        job_auc_tuple = db.session.query(cls, AuctionModel).join(EventModel, EventModel.event_id == cls.event_id)\
+            .outerjoin(AuctionModel, AuctionModel.job_id == cls.job_id)\
+            .filter(EventModel.organizer_id == organizer_id).all()
+        print("Ja doso do drugdje", file=sys.stderr)
+        jobs = []
+        for job_auc in job_auc_tuple:
+            print("Ja se vrtim", file=sys.stderr)
+            if job_auc[1] is None:
+                print("Ja nemam aukciju", file=sys.stderr)
+                jobs.append(job_auc[0])
+        print("Ja se vise ne vrtim", file=sys.stderr)
+        return jobs
 
 
 class Application(db.Model):
@@ -361,6 +404,10 @@ class SpecializationModel(db.Model):
         return cls.query.all()
 
     @classmethod
+    def find_by_name(cls, name):
+        return cls.query.filter_by(name=name).one()
+
+    @classmethod
     def find_by_specialization_id(cls, specialization_id):
         return cls.query.filter_by(specialization_id=specialization_id).one()
 
@@ -394,6 +441,10 @@ class JobSpecializations(db.Model):
     job_specializations_id = db.Column(db.Integer, primary_key=True)
     job_id = db.Column(db.Integer, db.ForeignKey('jobs.job_id'))
     specialization_id = db.Column(db.Integer, db.ForeignKey('specializations.specialization_id'))
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 class RevokedTokenModel(db.Model):
@@ -695,7 +746,7 @@ class LeaderSchema(ma.Schema):
         if type(value) is list:
             leaders = []
             for leader in value:
-                festivals = FestivalModel.find_by_leader_id(leader.id)
+                festivals = FestivalModel.find_completed_by_leader_id(leader.id)
                 new_leader = Leader(
                     user_id=leader.id,
                     username=leader.username,
@@ -711,7 +762,7 @@ class LeaderSchema(ma.Schema):
                 )
                 leaders.append(new_leader)
             return cls(many=True).dump(leaders)
-        festivals = FestivalModel.find_by_leader_id(value.id)
+        festivals = FestivalModel.find_completed_by_leader_id(value.id)
         leader = Leader(
             user_id=value.id,
             username=value.username,
@@ -1032,7 +1083,7 @@ class ApplicationWorker(object):
     def __init__(self, application):
         self.application_id = application.application_id
         self.auction = AuctionWorker(AuctionModel.find_by_auction_id(application.auction_id))
-        self.worker_id = application.worker_id
+        self.worker = UserModel.find_by_id(application.worker_id)
         self.price = application.price
         self.comment = application.comment
         self.duration = application.duration
@@ -1055,7 +1106,7 @@ class AuctionWorkerSchema(ma.Schema):
 class ApplicationWorkerSchema(ma.Schema):
     application_id = fields.Integer(required=False)
     auction = fields.Nested(AuctionWorkerSchema, required=False)
-    worker_id = fields.Integer(required=False)
+    worker = fields.Nested(UserSchema, required=False)
     price = fields.Float(required=True, error_messages={"required": "Missing price"})
     comment = fields.String(required=False)
     duration = fields.Integer(required=True, error_messages={"required": "Missing duration"})
