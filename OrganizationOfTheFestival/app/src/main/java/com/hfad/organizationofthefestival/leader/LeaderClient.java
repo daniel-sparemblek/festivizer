@@ -4,6 +4,7 @@ import com.hfad.organizationofthefestival.event.Event;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
+import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import java.util.HashMap;
 
@@ -49,4 +50,7 @@ public interface LeaderClient {
 
     @GET("events/pending")
     Call<Event[]> getPendingEvents(@Query("festival_id") String festivalId, @Header("Authorization") String authorization);
+
+    @GET("event/{event_id}")
+    Call<WorkingEvent> getEvent(@Path("event_id") String eventId, @Header("Authorization") String authorization);
 }

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
@@ -150,7 +149,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private List<String> getOrganizers(Organizer[] organizers) {
         List<String> result = new ArrayList<>();
 
-        for(Organizer organizer : organizers) {
+        for (Organizer organizer : organizers) {
             result.add(organizer.getUsername());
         }
 
@@ -208,7 +207,7 @@ public class CreateEventActivity extends AppCompatActivity {
         } else if ("".equals(etDescription.getText().toString())) {
             Toast.makeText(this, "Description can't be empty", Toast.LENGTH_SHORT).show();
             return false;
-        } else if("".equals(etLocation.getText().toString())) {
+        } else if ("".equals(etLocation.getText().toString())) {
             Toast.makeText(this, "Location can't be empty", Toast.LENGTH_SHORT).show();
             return false;
         } else if ("".equals(etStartTime.getText().toString()) || "".equals(etEndTime.getText().toString())) {

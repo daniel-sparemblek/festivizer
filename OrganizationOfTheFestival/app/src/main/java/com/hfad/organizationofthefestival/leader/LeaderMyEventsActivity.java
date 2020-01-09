@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -27,6 +28,7 @@ public class LeaderMyEventsActivity extends AppCompatActivity {
     private String accessToken;
     private String refreshToken;
     private String festivalId;
+    private String leaderId;
 
     private LeaderMyEventsController leaderMyEventsController;
     private List<Event> eventList;
@@ -39,7 +41,7 @@ public class LeaderMyEventsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        festivalId = intent.getStringExtra("id");
+        leaderId = intent.getStringExtra("id");
         festivalId = intent.getStringExtra("festival_id");
 
         btnActiveEvents = findViewById(R.id.btnActive);
@@ -51,6 +53,16 @@ public class LeaderMyEventsActivity extends AppCompatActivity {
 
         btnActiveEvents.setBackgroundColor(Color.WHITE);
         leaderMyEventsController.getActiveEvents(festivalId);
+
+        lvEvents.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent1 = new Intent(LeaderMyEventsActivity.this, ViewEventActivity.class);
+            intent1.putExtra("accessToken", accessToken);
+            intent1.putExtra("refreshToken", refreshToken);
+            intent1.putExtra("leader_id", leaderId);
+            intent1.putExtra("festival_id", festivalId);
+            intent1.putExtra("event_id", eventList.get(position).getEventId());
+            startActivity(intent1);
+        });
     }
 
 
