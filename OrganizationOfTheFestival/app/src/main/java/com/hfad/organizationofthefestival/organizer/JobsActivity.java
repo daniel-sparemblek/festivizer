@@ -17,6 +17,8 @@ import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
+import java.util.LinkedList;
+
 public class JobsActivity extends AppCompatActivity {
 
     private JobsController jobsController;
@@ -24,6 +26,7 @@ public class JobsActivity extends AppCompatActivity {
     private String refreshToken;
     private String username;
     private ListView lvJobs;
+    private JobApply[] gotJobs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +36,10 @@ public class JobsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
         setSupportActionBar(toolbar);
 
-        JobsAdapter jobsAdapter = new JobsAdapter(this, getSupportFragmentManager(), getIntent(), this);
+        JobsAdapter jobsAdapter = new JobsAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(jobsAdapter);
+        viewPager.setOffscreenPageLimit(4);
 
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
@@ -52,13 +56,32 @@ public class JobsActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if(position == 0) {
-                    jobsController.getAuctionedJobs();
-                    System.out.println("I ovdje sam uhvatio 1.");
+                if(position == 0) { //Auction
                 }
-                if(position == 1) {
-                    jobsController.getJobs();
-                    System.out.println("I ovdje sam uhvatio 2.");
+
+                if(position == 1) { //Active
+                    if(gotJobs == null) {
+                        jobsController.getActiveJobs();
+                    } else {
+                        fillInActiveJobs(gotJobs);
+                    }
+
+                }
+
+                if(position == 2) { //Pending
+                    if(gotJobs == null) {
+                        jobsController.getPendingJobs();
+                    } else {
+                        fillInPendingJobs(gotJobs);
+                    }
+                }
+
+                if(position == 3) { //Completed
+                    if(gotJobs == null) {
+                        jobsController.getCompletedJobs();
+                    } else {
+                        fillInCompletedJobs(gotJobs);
+                    }
                 }
             }
         });
@@ -104,17 +127,67 @@ public class JobsActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void fillInJobs(JobApply[] jobs) {
-        lvJobs = findViewById(R.id.orgJobsList);
-        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsController.formatJobs(jobs));
-        lvJobs.setAdapter(specializationArrayAdapter);
-    }
-
     public void fillInAuctions(ApplicationAuction[] jobs) {
         lvJobs = findViewById(R.id.orgJobsList);
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, jobsController.formatAuctions(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
+    }
+
+    public void fillInActiveJobs(JobApply[] jobs) {
+        lvJobs = findViewById(R.id.orgActiveJobList);
+        JobApply[] newList = new JobApply[30];
+
+        for(JobApply job : jobs) {
+            System.out.println(job.getName() + " " + job.isCompleted());
+            System.out.println("Worker: " + job.getWorker());
+            if(!job.isCompleted() && job.getWorker() != null)
+                System.out.println("I'll add this one");
+
+        }
+
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, jobsController.formatJobs(jobs));
+        lvJobs.setAdapter(specializationArrayAdapter);
+    }
+
+    public void fillInPendingJobs(JobApply[] jobs) {
+        lvJobs = findViewById(R.id.orgPendingJobList);
+
+        JobApply[] newList = new JobApply[30];
+
+        for(JobApply job : jobs) {
+            System.out.println(job.getName() + " " + job.isCompleted());
+            System.out.println("Worker: " + job.getWorker());
+            if(!job.isCompleted() && job.getWorker() == null)
+                System.out.println("I'll add this one");
+
+        }
+
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, jobsController.formatJobs(jobs));
+        lvJobs.setAdapter(specializationArrayAdapter);
+    }
+
+    public void fillInCompletedJobs(JobApply[] jobs) {
+        lvJobs = findViewById(R.id.orgCompletedJobList);
+
+        LinkedList<JobApply> newList = new LinkedList<>();
+
+        for(JobApply job : jobs) {
+            if(job.isCompleted())
+                newList.add(job);
+        }
+
+        JobApply[] filteredArray = new JobApply[newList.size()];
+        filteredArray = newList.toArray(filteredArray);
+
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, jobsController.formatJobs(filteredArray));
+        lvJobs.setAdapter(specializationArrayAdapter);
+    }
+
+    public void saveJobs(JobApply[] jobs) {
+        gotJobs = jobs;
     }
 }

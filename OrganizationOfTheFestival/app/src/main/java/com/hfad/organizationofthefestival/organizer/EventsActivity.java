@@ -22,6 +22,8 @@ public class EventsActivity extends ApplyFestActivity {
     private String refreshToken;
     private String username;
     private ListView lvEvents;
+    private ListView thisIsATest;
+    EventApply[] eventApplies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,19 +50,29 @@ public class EventsActivity extends ApplyFestActivity {
 
         eventsController.fetchEvents();
 
-//        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-//            @Override
-//            public void onPageSelected(int position) {
-//                if(position == 0) {
-//                    //eventsController.fetchEvents();
-//                    System.out.println("I ovdje sam uhvatio 1.");
-//                }
-//                if(position == 1) {
-//                    //eventsController.fetchCompletedEvents();
-//                    System.out.println("I ovdje sam uhvatio 2.");
-//                }
-//            }
-//        });
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0) {
+                    //eventsController.fetchEvents();
+                    System.out.println("I ovdje sam uhvatio 1.");
+                }
+                if(position == 1) {
+                    System.out.println("pocinjem ispis:");
+                    for(EventApply e : eventApplies) {
+                        System.out.println(e.getName());
+                    }
+
+                    thisIsATest = findViewById(R.id.orgJobsList); //Using the same layout as jobs
+                    ArrayAdapter<String> testAdapter = new ArrayAdapter<>(EventsActivity.this,
+                            android.R.layout.simple_list_item_1, eventsController.format(eventApplies));
+                    System.out.println(thisIsATest);
+                    System.out.println(testAdapter);
+                    thisIsATest.setAdapter(testAdapter);
+                    System.out.println("I ovdje sam uhvatio 2.");
+                }
+            }
+        });
     }
 
     @Override
@@ -109,10 +121,10 @@ public class EventsActivity extends ApplyFestActivity {
                 android.R.layout.simple_list_item_1, eventsController.format(events));
         lvEvents.setAdapter(specializationArrayAdapter);
 
-        lvEvents = findViewById(R.id.orgEventList); //Using the same layout as jobs
-        ArrayAdapter<String> test = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, eventsController.format(events));
-        lvEvents.setAdapter(test);
+        eventApplies = events;
+
+
+
 
     }
 

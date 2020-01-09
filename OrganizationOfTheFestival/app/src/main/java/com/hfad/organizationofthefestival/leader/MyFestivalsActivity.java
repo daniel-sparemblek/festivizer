@@ -88,6 +88,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
         intent.putExtra("accessToken", accessToken);
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("id", id.toString());
+        intent.putExtra("leaderId", leaderId);
         this.startActivity(intent);
     }
 
