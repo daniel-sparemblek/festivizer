@@ -52,6 +52,8 @@ public class SearchActivity extends AppCompatActivity {
         lvSearchResults.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent1 = new Intent(SearchActivity.this, DefaultUserActivity.class);
             intent1.putExtra("permission", userList.get(position).getRole());
+            intent1.putExtra("username", userList.get(position).getUsername());
+            intent1.putExtra("accessToken", accessToken);
             startActivity(intent1);
         });
     }

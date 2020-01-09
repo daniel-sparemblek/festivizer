@@ -9,16 +9,26 @@ public class ApplicationResponse {
     private double price;
     private String comment;
     private int duration;
+    private User worker;
     @SerializedName("people_number")
     private int peopleNumber;
 
-    public ApplicationResponse(int applicationId, ApplicationAuction auction, double price, String comment, int duration, int peopleNumber) {
+    public ApplicationResponse(int applicationId, ApplicationAuction auction, double price, String comment, int duration, User worker, int peopleNumber) {
         this.applicationId = applicationId;
         this.auction = auction;
         this.price = price;
         this.comment = comment;
         this.duration = duration;
+        this.worker = worker;
         this.peopleNumber = peopleNumber;
+    }
+
+    public User getWorker() {
+        return worker;
+    }
+
+    public void setWorker(User worker) {
+        this.worker = worker;
     }
 
     public int getApplicationId() {

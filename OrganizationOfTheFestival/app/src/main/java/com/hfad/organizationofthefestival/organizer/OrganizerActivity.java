@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.leader.LeaderActivity;
+import com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 
 public class OrganizerActivity extends AppCompatActivity {
@@ -30,6 +30,8 @@ public class OrganizerActivity extends AppCompatActivity {
     private TextView tvPhone;
     private ListView lvFestivals;
     private ImageView ivProfilePicture;
+
+    private Organizer organizer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,8 @@ public class OrganizerActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.myProfile) {
-            // do nothing
+            finish();
+            startActivity(getIntent());
         } else if (id == R.id.applyForFest) {
             switchActivity(ApplyFestActivity.class);
         } else if (id == R.id.myEvents) {
@@ -75,7 +78,12 @@ public class OrganizerActivity extends AppCompatActivity {
         } else if (id == R.id.myJobs) {
             switchActivity(JobsActivity.class);
         } else if (id == R.id.printPass) {
-            switchActivity(PrintPassActivity.class);
+            Intent intent = new Intent(this, LeaderPrintPassActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("leader_id", organizer.getId());
+            intent.putExtra("username", organizer.getUsername());
+            startActivity(intent);
         } else if (id == R.id.search) {
             switchActivity(SearchActivity.class);
         }
@@ -92,12 +100,11 @@ public class OrganizerActivity extends AppCompatActivity {
     }
 
     public void fillInActivity(Organizer organizer) {
+        this.organizer = organizer;
         tvName = findViewById(R.id.orgName);
         tvPhone = findViewById(R.id.orgPhone);
         tvEmail = findViewById(R.id.orgEmail);
         ivProfilePicture = findViewById(R.id.profile_picture);
-
-        System.out.println("kurcic " + organizer);
 
         setProfilePicture(organizer.getPicture());
         tvName.setText(organizer.getUsername());

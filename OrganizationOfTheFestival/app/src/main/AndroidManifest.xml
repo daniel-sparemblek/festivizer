@@ -3,7 +3,7 @@
     package="com.hfad.organizationofthefestival">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".leader.LeaderPrintPassActivity"></activity>
+        <activity android:name=".leader.ApproveOrganizersActivity"></activity>
+        <activity android:name=".leader.LeaderPrintPassActivity" />
         <activity android:name=".leader.MyFestivalsActivity" />
+        <activity android:name=".leader.LeaderFestivalActivity" />
         <activity android:name=".worker.JobProfileActivity" />
         <activity android:name=".worker.ViewApplicationActivity" />
         <activity android:name=".worker.ActiveJobsActivity" />
@@ -45,6 +47,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".defaultUser.DefaultUserActivity" />
+        <activity android:name=".festival.Event.CreateEventActivity" />
+        <activity android:name=".event.creation.CreateEventActivity" />
     </application>
 
 </manifest>

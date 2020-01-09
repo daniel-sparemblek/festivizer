@@ -20,6 +20,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
     private String accessToken;
     private String refreshToken;
     private String leaderId;
+    private Festival[] festivals;
 
     private MyFestivalsController controller;
 
@@ -70,9 +71,30 @@ public class MyFestivalsActivity extends AppCompatActivity {
             btnCompleted.setEnabled(false);
         });
 
+        lvFestivals.setOnItemClickListener(((parent, view, position, id) -> {
+            String name = (String) parent.getItemAtPosition(position);
+
+            for (Festival festival : festivals) {
+                if (name.equals(festival.getName())) {
+                    switchActivity(LeaderFestivalActivity.class, festival.getFestivalId());
+                }
+            }
+        }));
+
+    }
+
+    private void switchActivity(Class<?> destination, Long id) {
+        Intent intent = new Intent(this, destination);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("id", id.toString());
+        intent.putExtra("leaderId", leaderId);
+        this.startActivity(intent);
     }
 
     public void fillInActivity(Festival[] festivals) {
+        this.festivals = festivals;
+
         List<Festival> festivalList = Arrays.asList(festivals);
         ArrayAdapter<String> specializationArrayAdapter =
                 new ArrayAdapter<>(this,
