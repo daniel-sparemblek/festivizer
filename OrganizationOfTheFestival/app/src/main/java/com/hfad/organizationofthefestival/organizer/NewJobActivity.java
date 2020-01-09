@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.EventApply;
+import com.hfad.organizationofthefestival.utility.Specialization;
+
+import java.util.List;
 
 public class NewJobActivity extends AppCompatActivity {
 
@@ -67,5 +70,9 @@ public class NewJobActivity extends AppCompatActivity {
         spFirstSpecialization = findViewById(R.id.spec1);
         spSecondSpecialization = findViewById(R.id.spec2);
         spThirdSpecialization = findViewById(R.id.spec3);
+    }
+
+    public void fillInSpinners(List<Specialization> specs){
+
     }
 }

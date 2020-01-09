@@ -3,8 +3,11 @@ package com.hfad.organizationofthefestival.organizer;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.utility.NewJob;
+import com.hfad.organizationofthefestival.utility.Specialization;
 
 import org.json.JSONObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,6 +66,32 @@ class NewJobController {
 
             @Override
             public void onFailure(Call<JSONObject> call, Throwable t) {
+                Toast.makeText(activity, "unable to connect :(", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getSpecializations(){
+        Call<List<Specialization>> call = api.getSpecializations("Bearer " + accessToken);
+
+        call.enqueue(new Callback<List<Specialization>>() {
+            @Override
+            public void onResponse(Call<List<Specialization>> call, Response<List<Specialization>> response) {
+                if (response.isSuccessful()){
+                    activity.fillInSpinners(response.body());
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(activity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(activity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Specialization>> call, Throwable t) {
                 Toast.makeText(activity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
