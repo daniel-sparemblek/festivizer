@@ -8,9 +8,9 @@ public class NewJob {
     private String desc;
     @SerializedName("start_time")
     private String startTime;
-    private String event_id;
+    private long event_id;
 
-    public NewJob(String name, String desc, String startTime, String event_id) {
+    public NewJob(String name, String desc, String startTime, long event_id) {
         this.name = name;
         this.desc = desc;
         this.startTime = startTime;

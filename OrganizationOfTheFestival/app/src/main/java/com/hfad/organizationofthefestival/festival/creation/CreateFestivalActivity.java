@@ -214,7 +214,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
     }
 
     // this is shit but it works (kinda :))
-    public String convertTime(String time, String date) {
+    private String convertTime(String time, String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
