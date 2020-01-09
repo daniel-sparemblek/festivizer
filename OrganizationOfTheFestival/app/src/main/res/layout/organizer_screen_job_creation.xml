@@ -17,7 +17,7 @@
             android:id="@+id/organizer_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="#ff9360"
             app:popupTheme="@style/AppTheme" />
 
     </android.support.design.widget.AppBarLayout>
@@ -43,7 +43,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingTop="28dp"
         android:paddingRight="24dp">
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/festival_name"
-            android:textSize="21sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/eventName"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/event_name"
-            android:textSize="21sp" />
+            android:textSize="25sp" />
 
     </LinearLayout>
 
@@ -79,19 +79,21 @@
             android:id="@+id/jobName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
+            android:importantForAutofill="no"
             android:inputType="text"
             android:text="@string/name"
-            android:textSize="25sp" />
+            android:textSize="23sp"
+            android:hint="@string/name"/>
 
         <EditText
             android:id="@+id/jobDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:inputType="text"
             android:text="@string/description"
-            android:textSize="25sp" />
+            android:textSize="23sp"
+            android:importantForAutofill="no"
+            android:hint="@string/description"/>
 
         <EditText
             android:id="@+id/startTime"
@@ -100,33 +102,27 @@
             android:layout_gravity="start"
             android:inputType="text"
             android:text="@string/start_time"
-            android:textSize="25sp" />
+            android:textSize="23sp"
+            android:importantForAutofill="no"
+            android:hint="@string/start_time"/>
 
         <Spinner
             android:id="@+id/spec1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30sp"
             android:spinnerMode="dropdown" />
 
         <Spinner
             android:id="@+id/spec2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30sp"
             android:spinnerMode="dropdown" />
 
         <Spinner
             android:id="@+id/spec3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30sp"
             android:spinnerMode="dropdown" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text=""
-            android:textSize="25sp" />
 
 
         <Button
