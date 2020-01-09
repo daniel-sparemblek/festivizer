@@ -29,12 +29,10 @@ public class EventAdapter extends FragmentPagerAdapter {
         Fragment fragment = new Fragment();
         switch (position) {
             case 0:
-                System.out.println("Ovdje sam usao 1");
                 fragment = ActiveEventFrag.newInstance();
                 break;
             case 1:
-                System.out.println("Ovdje sam usao 2");
-                fragment = CompletedEventFrag.newInstance(mContext);
+                fragment = CompletedEventFrag.newInstance();
                 break;
         }
         return fragment;

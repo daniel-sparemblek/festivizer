@@ -18,6 +18,8 @@ import com.hfad.organizationofthefestival.organizer.FragmentAdapters.EventAdapte
 import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.EventApply;
 
+import java.util.LinkedList;
+
 public class EventsActivity extends ApplyFestActivity {
 
     private EventsController eventsController;
@@ -26,12 +28,12 @@ public class EventsActivity extends ApplyFestActivity {
     private String username;
     private ListView lvEvents;
     private ListView thisIsATest;
-    EventApply[] eventApplies;
+    EventApply[] gotEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.organizer_screen_my_jobs); //Using the same layout as jobs
+        setContentView(R.layout.organizer_screen_my_events); //Using the same layout as jobs
 
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
         setSupportActionBar(toolbar);
@@ -39,8 +41,9 @@ public class EventsActivity extends ApplyFestActivity {
         EventAdapter eventAdapter = new EventAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(eventAdapter);
+        viewPager.setOffscreenPageLimit(2);
 
-        TabLayout tabs = findViewById(R.id.tabs);
+        TabLayout tabs = findViewById(R.id.event_tabs);
         tabs.setupWithViewPager(viewPager);
 
 
@@ -51,28 +54,20 @@ public class EventsActivity extends ApplyFestActivity {
 
         eventsController = new EventsController(this, accessToken, username, refreshToken);
 
-        eventsController.fetchEvents();
+        eventsController.fetchActiveEvents();
 
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 if(position == 0) {
-                    //eventsController.fetchEvents();
-                    System.out.println("I ovdje sam uhvatio 1.");
+
                 }
                 if(position == 1) {
-                    System.out.println("pocinjem ispis:");
-                    for(EventApply e : eventApplies) {
-                        System.out.println(e.getName());
+                    if(gotEvents == null) {
+                        eventsController.fetchCompletedEvents();
+                    } else {
+                        fillInCompletedEvents(gotEvents);
                     }
-
-                    thisIsATest = findViewById(R.id.orgJobsList); //Using the same layout as jobs
-                    ArrayAdapter<String> testAdapter = new ArrayAdapter<>(EventsActivity.this,
-                            android.R.layout.simple_list_item_1, eventsController.format(eventApplies));
-                    System.out.println(thisIsATest);
-                    System.out.println(testAdapter);
-                    thisIsATest.setAdapter(testAdapter);
-                    System.out.println("I ovdje sam uhvatio 2.");
                 }
             }
         });
@@ -118,35 +113,72 @@ public class EventsActivity extends ApplyFestActivity {
         this.startActivity(intent);
     }
 
-    public void fillInActivity(EventApply[] events) {
-        lvEvents = findViewById(R.id.orgJobsList); //Using the same layout as jobs
-        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, eventsController.format(events));
-        lvEvents.setAdapter(specializationArrayAdapter);
+    public void fillInActiveEvents(EventApply[] events) {
+        lvEvents = findViewById(R.id.orgActiveEventList);
 
-        eventApplies = events;
+        //bartol
+        gotEvents = events;
 
         lvEvents.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(EventsActivity.this, ViewEventActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
-            intent.putExtra("event_id", eventApplies[position].getEventId());
+            intent.putExtra("event_id", gotEvents[position].getEventId());
+            EventsActivity.this.startActivity(intent);
+        });
+
+        LinkedList<EventApply> newList = new LinkedList<>();
+
+        for(EventApply event : events) {
+            System.out.println(event.getEndTime());
+            if(event.getEndTime() == "b") //je li veci
+                newList.add(event);
+        }
+
+        EventApply[] filteredArray = new EventApply[newList.size()];
+        filteredArray = newList.toArray(filteredArray);
+
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, eventsController.format(events));
+        lvEvents.setAdapter(specializationArrayAdapter);
+    }
+
+    public void fillInCompletedEvents(EventApply[] events) {
+        lvEvents = findViewById(R.id.orgCompletedEventList);
+
+        //bartol
+        gotEvents = events;
+
+        lvEvents.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(EventsActivity.this, ViewEventActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("event_id", gotEvents[position].getEventId());
             EventsActivity.this.startActivity(intent);
         });
 
 
+        LinkedList<EventApply> newList = new LinkedList<>();
+
+        for(EventApply event : events) {
+            if(event.getEndTime() == "b") //je li manji
+                newList.add(event);
+        }
+
+        EventApply[] filteredArray = new EventApply[newList.size()];
+        filteredArray = newList.toArray(filteredArray);
+
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, eventsController.format(events));
+        lvEvents.setAdapter(specializationArrayAdapter);
+
     }
 
-//    public void fillInCompletedActivity(EventApply[] events) {
-//        for(EventApply event : events) {
-//            System.out.println(event);
-//        }
-//        lvEvents = findViewById(R.id.orgEventList); //Using the same layout as jobs
-//        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-//                android.R.layout.simple_list_item_1, eventsController.format(events));
-//        lvEvents.setAdapter(specializationArrayAdapter);
-//
-//    }
+
+    public void saveEvents(EventApply[] events) {
+        gotEvents = events;
+    }
 
 }
