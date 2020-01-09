@@ -8,6 +8,8 @@ import com.hfad.organizationofthefestival.utility.NewJob;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -48,7 +50,10 @@ public interface OrganizerClient {
     Call<EventApply> getEvent(@Path("event_id") String eventId,
                               @Header("Authorization") String authorization);
 
-    @GET
+    @POST("job")
     Call<JSONObject> createNewJob(@Body NewJob newJob,
                                   @Header("Authorization") String authorization);
+
+    @GET("specializations")
+    Call<List<String>> getSpecializations(@Header("Authorization") String authorization);
 }
