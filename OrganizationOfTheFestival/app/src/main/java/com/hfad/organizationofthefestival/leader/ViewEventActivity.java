@@ -9,6 +9,11 @@ import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class ViewEventActivity extends AppCompatActivity {
 
     private String accessToken;
@@ -55,8 +60,23 @@ public class ViewEventActivity extends AppCompatActivity {
         tvName.setText(body.getName());
         tvDesc.setText(body.getDesc());
         tvLocation.setText(body.getLocation());
-        tvStartTime.setText(body.getStartTime());
-        tvEndTime.setText(body.getEndTime());
+        tvStartTime.setText(parseDateTime(body.getStartTime())
+                .truncatedTo(ChronoUnit.MINUTES)
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+        tvEndTime.setText(parseDateTime(body.getEndTime())
+                .truncatedTo(ChronoUnit.MINUTES)
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         tvOrganizerName.setText(String.valueOf(body.getOrganizer().getUsername()));
+    }
+
+    public ZonedDateTime parseDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
     }
 }
