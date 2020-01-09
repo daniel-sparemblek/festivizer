@@ -16,66 +16,79 @@
         android:theme="@style/ToolbarTheme"
         app:titleTextColor="#FFFFFF"/>
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:layout_marginStart="8dp"
-        android:layout_gravity="start"
-        android:text="@string/my_profile"
-        android:textSize="25sp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/my_profile"
+            android:textSize="21sp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:paddingTop="28dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
 
         <ImageView
             android:id="@+id/profile_picture"
+<<<<<<< HEAD
+            android:layout_width="178dp"
+            android:layout_height="178dp"
+            android:layout_gravity="start|top"
+            android:layout_marginBottom="10dp"
+=======
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="chooseImage"
+>>>>>>> cc5633dfb34a6abe1bf56bf4b8db78a5b24ed6b1
             android:contentDescription="@string/profile_picture"
             android:src="@drawable/default_profile_picture" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="28dp"
+            android:paddingStart="3dp"
+            android:paddingEnd="24dp">
 
             <TextView
                 android:id="@+id/workerName"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_marginStart="8dp"
                 android:text="@string/name"
-                android:textSize="21sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/workerEmail"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_marginStart="8dp"
                 android:text="@string/e_mail"
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/workerPhone"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:text="@string/phone"
-                android:textSize="21sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -85,8 +98,7 @@
     <TextView
         android:id="@+id/specializations"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
+        android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="8dp"
         android:text="@string/specializations"
