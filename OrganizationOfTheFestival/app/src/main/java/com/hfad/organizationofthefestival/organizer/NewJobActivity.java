@@ -114,11 +114,6 @@ public class NewJobActivity extends AppCompatActivity {
         });
     }
 
-
-    public void fillInActivity(EventApply body) {
-
-    }
-
     private void findViews() {
         tvFestivalName = findViewById(R.id.festName);
         tvEventName = findViewById(R.id.eventName);
