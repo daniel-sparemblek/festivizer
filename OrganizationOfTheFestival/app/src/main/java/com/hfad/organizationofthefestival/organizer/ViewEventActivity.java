@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.EventApply;
-import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -56,7 +56,7 @@ public class ViewEventActivity extends AppCompatActivity {
         createJob = findViewById(R.id.org_newJob);
 
         viewEventController = new ViewEventController(this, accessToken, username, refreshToken);
-        viewEventController.getEvent((int)eventId);
+        viewEventController.getEvent((int) eventId);
     }
 
     public void fillInActivity(EventApply body) {
@@ -81,5 +81,14 @@ public class ViewEventActivity extends AppCompatActivity {
         int second = Integer.parseInt(dateTime.substring(17, 19));
 
         return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+    }
+
+    public void createNewJob(View view) {
+        Intent intent = new Intent(this, NewJobActivity.class);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        intent.putExtra("event_id", eventId);
+        this.startActivity(intent);
     }
 }
