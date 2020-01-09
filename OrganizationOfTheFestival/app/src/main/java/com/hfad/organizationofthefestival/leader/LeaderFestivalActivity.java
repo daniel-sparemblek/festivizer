@@ -17,6 +17,7 @@ public class LeaderFestivalActivity extends AppCompatActivity {
     private String refreshToken;
     private String festivalId;
     private String leaderId;
+    private String username;
 
     private TextView tvName;
     private TextView tvDesc;
@@ -38,6 +39,7 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         festivalId = intent.getStringExtra("id");
         leaderId = intent.getStringExtra("leaderId");
+        username = intent.getStringExtra("username");
 
         tvName = findViewById(R.id.festName);
         tvDesc = findViewById(R.id.desc);

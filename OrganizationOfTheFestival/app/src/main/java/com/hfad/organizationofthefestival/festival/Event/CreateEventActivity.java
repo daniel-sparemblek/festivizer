@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.organizer.Organizer;
+import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -121,21 +122,22 @@ public class CreateEventActivity extends AppCompatActivity {
                 return;
             }
 
+            String name = etName.getText().toString();
+            String desc = etDescription.getText().toString();
+            String location = etLocation.getText().toString();
             String startDateTime = convertTime(etStartTime.getText().toString(), etStartDate.getText().toString());
             String endDateTime = convertTime(etEndTime.getText().toString(), etEndDate.getText().toString());
 
-            event = new Event(etName.getText().toString(),
-                    etDescription.getText().toString(),
-                    etLocation.getText().toString(),
-                    startDateTime,
-                    endDateTime
-                    );
-            String aggaerg = intent.getStringExtra("leaderId");
-            System.out.println("NEMEREN " + aggaerg);
-            event.setLeaderId(Long.parseLong(intent.getStringExtra("leaderId")));
+
+            int position = spinner.getSelectedItemPosition();
+            Organizer organizer = organizers[position];
+
+            WorkingEvent event = new WorkingEvent(Integer.parseInt(festivalId), organizer.getId(),
+                    name, desc, location, startDateTime, endDateTime);
+
             controller.createEvent(event, accessToken);
 
-            returnToLeaderActivity();
+            finish();
         });
     }
 
@@ -178,14 +180,6 @@ public class CreateEventActivity extends AppCompatActivity {
         } else {
             et.setText(hour + ":" + minutes);
         }
-    }
-
-    private void returnToLeaderActivity() {
-        Intent intent = new Intent(CreateEventActivity.this, LeaderActivity.class);
-        intent.putExtra("accessToken", accessToken);
-        intent.putExtra("refreshToken", refreshToken);
-        intent.putExtra("festivalId", festivalId);
-        startActivity(intent);
     }
 
     private void findViews() {

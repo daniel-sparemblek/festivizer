@@ -7,6 +7,7 @@ import com.hfad.organizationofthefestival.festival.FestivalClient;
 import com.hfad.organizationofthefestival.organizer.EventsActivity;
 import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.organizer.OrganizerClient;
+import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import org.json.JSONObject;
 
@@ -47,7 +48,7 @@ public class EventCreationController {
                 .create(FestivalClient.class);
     }
 
-    public void createEvent(Event event, String accessToken) {
+    public void createEvent(WorkingEvent event, String accessToken) {
         Call<CreateEventResponse> call =
                 api.createEvent("Bearer " + accessToken, event);
 
@@ -55,15 +56,9 @@ public class EventCreationController {
             @Override
             public void onResponse(Call<CreateEventResponse> call, Response<CreateEventResponse> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(activity, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, "Successfully created event!", Toast.LENGTH_SHORT).show();
                 } else {
-                    try {
-                        JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(activity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        Toast.makeText(activity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    }
+
                 }
             }
 
