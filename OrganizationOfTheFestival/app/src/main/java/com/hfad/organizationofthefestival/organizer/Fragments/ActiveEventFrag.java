@@ -14,8 +14,8 @@ public class ActiveEventFrag extends Fragment {
     public ActiveEventFrag() {
         // Required empty public constructor
     }
-    public static CompletedJobsFrag newInstance() {
-        CompletedJobsFrag fragment = new CompletedJobsFrag();
+    public static AuctionJobsFrag newInstance() {
+        AuctionJobsFrag fragment = new AuctionJobsFrag();
         return fragment;
     }
 

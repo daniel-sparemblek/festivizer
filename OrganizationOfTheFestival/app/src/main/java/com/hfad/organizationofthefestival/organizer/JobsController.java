@@ -34,14 +34,53 @@ public class JobsController {
     }
 
 
-    public void getJobs() {
+    public void getActiveJobs() {
         Call<JobApply[]> jobsCall = api.getAllJobs(username, "Bearer " + accessToken);
 
         jobsCall.enqueue(new Callback<JobApply[]>() {
             @Override
             public void onResponse(Call<JobApply[]> call, Response<JobApply[]> response) {
                 if(response.isSuccessful()) {
-                    jobsActivity.fillInJobs(response.body());
+                    jobsActivity.fillInActiveJobs(response.body());
+                    jobsActivity.saveJobs(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobApply[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getPendingJobs() {
+        Call<JobApply[]> jobsCall = api.getAllJobs(username, "Bearer " + accessToken);
+
+        jobsCall.enqueue(new Callback<JobApply[]>() {
+            @Override
+            public void onResponse(Call<JobApply[]> call, Response<JobApply[]> response) {
+                if(response.isSuccessful()) {
+                    jobsActivity.fillInPendingJobs(response.body());
+                    jobsActivity.saveJobs(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobApply[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getCompletedJobs() {
+        Call<JobApply[]> jobsCall = api.getAllJobs(username, "Bearer " + accessToken);
+
+        jobsCall.enqueue(new Callback<JobApply[]>() {
+            @Override
+            public void onResponse(Call<JobApply[]> call, Response<JobApply[]> response) {
+                if(response.isSuccessful()) {
+                    jobsActivity.fillInCompletedJobs(response.body());
+                    jobsActivity.saveJobs(response.body());
                 }
             }
 
@@ -69,6 +108,9 @@ public class JobsController {
             }
         });
     }
+
+
+
 
     public List<String> formatJobs(JobApply[] jobs) {
         List<String> result = new ArrayList<>();

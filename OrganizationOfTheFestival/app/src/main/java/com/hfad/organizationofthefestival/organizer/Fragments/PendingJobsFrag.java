@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 
 import com.hfad.organizationofthefestival.R;
 
-public class CompletedJobsFrag extends Fragment {
+public class PendingJobsFrag extends Fragment {
 
-    public CompletedJobsFrag() {
+    public PendingJobsFrag() {
         // Required empty public constructor
     }
-    public static CompletedJobsFrag newInstance() {
-        CompletedJobsFrag fragment = new CompletedJobsFrag();
+    public static PendingJobsFrag newInstance() {
+        PendingJobsFrag fragment = new PendingJobsFrag();
         return fragment;
     }
 
@@ -26,6 +26,6 @@ public class CompletedJobsFrag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.organizer_fragment_completed_jobs, container, false);
+        return inflater.inflate(R.layout.organizer_fragment_pending_jobs, container, false);
     }
 }
