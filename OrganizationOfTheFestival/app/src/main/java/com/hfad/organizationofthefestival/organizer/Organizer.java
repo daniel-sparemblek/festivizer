@@ -118,6 +118,10 @@ public class Organizer {
         return result;
     }
 
+    public List<Festival> getFestivalList() {
+        return this.festivals;
+    }
+
     public void setFestivals(List<Festival> festivals) {
         this.festivals = festivals;
     }
