@@ -43,7 +43,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         setContentView(R.layout.default_user_show);
 
         Intent intent = getIntent();
-        int permission = intent.getIntExtra("permission", 0);
+        permission = intent.getIntExtra("permission", 0);
         String username = intent.getStringExtra("username");
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
