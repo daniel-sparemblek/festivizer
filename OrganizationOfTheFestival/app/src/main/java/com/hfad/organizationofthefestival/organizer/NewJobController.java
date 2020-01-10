@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.organizer;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.utility.NewJob;
+import com.hfad.organizationofthefestival.utility.SimpleServerResponse;
 import com.hfad.organizationofthefestival.utility.Specialization;
 
 import org.json.JSONObject;
@@ -42,19 +43,14 @@ class NewJobController {
     }
 
     public void createNewJob(NewJob newJob) {
-        Call<JSONObject> call = api.createNewJob(newJob, "Bearer " + accessToken);
+        Call<SimpleServerResponse> call = api.createNewJob(newJob, "Bearer " + accessToken);
 
-        call.enqueue(new Callback<JSONObject>() {
+        call.enqueue(new Callback<SimpleServerResponse>() {
             @Override
-            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+            public void onResponse(Call<SimpleServerResponse> call, Response<SimpleServerResponse> response) {
                 if (response.isSuccessful()) {
-                    try {
-                        Toast.makeText(activity, response.body().getString("msg"), Toast.LENGTH_SHORT).show();
-                        activity.finish();
-                    } catch (Exception e){
-                        Toast.makeText(activity, "Wrong serialization!", Toast.LENGTH_SHORT).show();
-                    }
-                } else{
+                    Toast.makeText(activity, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
                         Toast.makeText(activity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
@@ -66,19 +62,19 @@ class NewJobController {
             }
 
             @Override
-            public void onFailure(Call<JSONObject> call, Throwable t) {
+            public void onFailure(Call<SimpleServerResponse> call, Throwable t) {
                 Toast.makeText(activity, "unable to connect :(", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void getSpecializations(){
+    public void getSpecializations() {
         Call<List<Specialization>> call = api.getSpecializations("Bearer " + accessToken);
 
         call.enqueue(new Callback<List<Specialization>>() {
             @Override
             public void onResponse(Call<List<Specialization>> call, Response<List<Specialization>> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     activity.fillInFirstSpinner(response.body());
                 } else {
                     try {

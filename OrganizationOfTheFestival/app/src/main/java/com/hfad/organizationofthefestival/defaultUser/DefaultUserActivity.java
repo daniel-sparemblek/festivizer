@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -83,6 +85,13 @@ public class DefaultUserActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, worker.getJobs());
         lv.setAdapter(arrayAdapter);
         setProfilePicture(worker.getPicture());
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
     private void getViewIds(){

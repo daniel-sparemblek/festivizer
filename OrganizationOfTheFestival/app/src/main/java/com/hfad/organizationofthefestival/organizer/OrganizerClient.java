@@ -6,6 +6,7 @@ import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.NewJob;
+import com.hfad.organizationofthefestival.utility.SimpleServerResponse;
 import com.hfad.organizationofthefestival.utility.Specialization;
 
 import org.json.JSONObject;
@@ -53,8 +54,8 @@ public interface OrganizerClient {
                               @Header("Authorization") String authorization);
 
     @POST("job")
-    Call<JSONObject> createNewJob(@Body NewJob newJob,
-                                  @Header("Authorization") String authorization);
+    Call<SimpleServerResponse> createNewJob(@Body NewJob newJob,
+                                            @Header("Authorization") String authorization);
 
     @GET("specializations")
     Call<List<Specialization>> getSpecializations(@Header("Authorization") String authorization);
