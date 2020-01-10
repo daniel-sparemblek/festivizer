@@ -14,10 +14,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.leader.Leader;
 import com.hfad.organizationofthefestival.organizer.Organizer;
+import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.worker.Worker;
+import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class DefaultUserActivity extends AppCompatActivity {
     private DefaultUserController controller;
@@ -31,6 +38,8 @@ public class DefaultUserActivity extends AppCompatActivity {
     private TextView tvPhone;
     private ListView lv;
 
+    private int event;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +50,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         String username = intent.getStringExtra("username");
         String accessToken = intent.getStringExtra("accessToken");
         String refreshToken = intent.getStringExtra("refreshToken");
+        event = intent.getIntExtra("event", 0);
         getViewIds();
         controller = new DefaultUserController(DefaultUserActivity.this, accessToken, refreshToken, username);
         controller.showUserProfile(permission);
@@ -82,14 +92,19 @@ public class DefaultUserActivity extends AppCompatActivity {
         tvPhone.setText(worker.getPhone());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, worker.getJobs());
+                android.R.layout.simple_list_item_1, worker.getJobNames());
         lv.setAdapter(arrayAdapter);
         setProfilePicture(worker.getPicture());
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Job pickedJob = worker.getJob(lv.getItemAtPosition(position).toString());
+                Intent intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                String jsonPickedJob = gson.toJson(pickedJob);
+                intent.putExtra("jobs", jsonPickedJob);
+                startActivity(intent);
             }
         });
     }

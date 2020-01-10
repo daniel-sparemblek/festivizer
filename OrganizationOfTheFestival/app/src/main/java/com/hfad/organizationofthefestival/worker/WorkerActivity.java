@@ -121,7 +121,7 @@ public class WorkerActivity extends AppCompatActivity {
         setProfilePicture(worker.getPicture());
         lvJobs = findViewById(R.id.jobsList);
         ArrayAdapter<String> jobsArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, worker.getJobs());
+                android.R.layout.simple_list_item_1, worker.getJobNames());
         lvJobs.setAdapter(jobsArrayAdapter);
 
         lvSpecializations = findViewById(R.id.specializationList);

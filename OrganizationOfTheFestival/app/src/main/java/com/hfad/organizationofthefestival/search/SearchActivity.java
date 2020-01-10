@@ -20,6 +20,7 @@ public class SearchActivity extends AppCompatActivity {
     private String accessToken;
     private String refreshToken;
     private String username;
+    private int event;
 
     private SearchController searchController;
 
@@ -42,6 +43,7 @@ public class SearchActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
+        event = intent.getIntExtra("event", 0);
 
         searchController = new SearchController(this, accessToken, username, refreshToken);
 
@@ -54,6 +56,7 @@ public class SearchActivity extends AppCompatActivity {
             intent1.putExtra("permission", userList.get(position).getRole());
             intent1.putExtra("username", userList.get(position).getUsername());
             intent1.putExtra("accessToken", accessToken);
+            intent1.putExtra("event", event);
             startActivity(intent1);
         });
     }
