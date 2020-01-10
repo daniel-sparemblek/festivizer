@@ -99,9 +99,7 @@ public class Worker {
         Optional<Job> optionalJob = jobs.stream()
                 .filter(t -> t.getName().equals(jobName))
                 .findAny();
-        if (optionalJob.isPresent()){
-            return optionalJob.get();
-        }
+        return optionalJob.orElse(null);
     }
 
     public String getPhone() {

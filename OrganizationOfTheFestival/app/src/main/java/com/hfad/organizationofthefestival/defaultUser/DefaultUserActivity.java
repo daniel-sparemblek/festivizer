@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,9 +20,6 @@ import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.worker.Worker;
 import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class DefaultUserActivity extends AppCompatActivity {
     private DefaultUserController controller;
@@ -56,7 +51,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         controller.showUserProfile(permission);
     }
 
-    public void fillInActivityLeader(Leader leader){
+    public void fillInActivityLeader(Leader leader) {
         tvUsername.setText(leader.getUsername());
         tvRole.setText("LEADER");
         tvName.setText(leader.getFirstName());
@@ -69,7 +64,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         setProfilePicture(leader.getPicture());
     }
 
-    public void fillInActivityOrganizer(Organizer organizer){
+    public void fillInActivityOrganizer(Organizer organizer) {
         tvUsername.setText(organizer.getUsername());
         tvRole.setText("ORGANIZER");
         tvName.setText(organizer.getFirstName());
@@ -83,7 +78,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         setProfilePicture(organizer.getPicture());
     }
 
-    public void fillInActivityWorker(Worker worker){
+    public void fillInActivityWorker(Worker worker) {
         tvUsername.setText(worker.getUsername());
         tvRole.setText("WORKER");
         tvName.setText(worker.getFirstName());
@@ -96,20 +91,18 @@ public class DefaultUserActivity extends AppCompatActivity {
         lv.setAdapter(arrayAdapter);
         setProfilePicture(worker.getPicture());
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Job pickedJob = worker.getJob(lv.getItemAtPosition(position).toString());
-                Intent intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                String jsonPickedJob = gson.toJson(pickedJob);
-                intent.putExtra("jobs", jsonPickedJob);
-                startActivity(intent);
-            }
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            Job pickedJob = worker.getJob(lv.getItemAtPosition(position).toString());
+            Intent intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String jsonPickedJob = gson.toJson(pickedJob);
+            intent.putExtra("job", jsonPickedJob);
+            intent.putExtra("event", event);
+            startActivity(intent);
         });
     }
 
-    private void getViewIds(){
+    private void getViewIds() {
         tvUsername = findViewById(R.id.user_name);
         ivProfilePicture = findViewById(R.id.default_profile_picture);
         tvRole = findViewById(R.id.default_role);
