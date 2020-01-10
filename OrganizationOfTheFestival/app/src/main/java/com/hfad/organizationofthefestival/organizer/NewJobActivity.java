@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.NewJob;
 import com.hfad.organizationofthefestival.utility.Specialization;
 
@@ -85,7 +84,7 @@ public class NewJobActivity extends AppCompatActivity {
             NewJob newJob = new NewJob(etName.getText().toString(),
                     etDescription.getText().toString(),
                     convertTime(tvStartTime.getText().toString(), tvStartDate.getText().toString()),
-                    eventId);
+                    eventId, specialization1, specialization2, specialization3);
             return;
             // TODO call api
         });
