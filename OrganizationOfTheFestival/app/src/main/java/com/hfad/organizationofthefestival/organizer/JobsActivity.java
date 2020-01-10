@@ -45,6 +45,7 @@ public class JobsActivity extends AppCompatActivity {
         setContentView(R.layout.organizer_screen_my_jobs);
 
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
+        toolbar.setTitle("My jobs");
         setSupportActionBar(toolbar);
 
         JobsAdapter jobsAdapter = new JobsAdapter(this, getSupportFragmentManager());

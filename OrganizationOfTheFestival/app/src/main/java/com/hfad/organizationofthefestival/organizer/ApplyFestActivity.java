@@ -32,6 +32,7 @@ public class ApplyFestActivity extends AppCompatActivity {
 
         lvEvents = findViewById(R.id.orgFestivalList);
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
+        toolbar.setTitle("Apply for a festival");
         setSupportActionBar(toolbar);
 
 
