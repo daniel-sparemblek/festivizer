@@ -62,4 +62,8 @@ public interface OrganizerClient {
 
     @GET("jobs/auction-off")
     Call<Job[]> getNoneAuctionedJobs(@Query("organizer") String username, @Header("Authorization") String authorization);
+
+    @GET("job")
+    Call<JobApply> getJobInfo(@Query("job_id") int jobId,
+                              @Header("Authorization") String authorization);
 }

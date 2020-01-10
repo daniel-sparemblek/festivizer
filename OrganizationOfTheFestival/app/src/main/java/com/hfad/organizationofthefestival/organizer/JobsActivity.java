@@ -22,6 +22,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class JobsActivity extends AppCompatActivity {
@@ -72,15 +73,15 @@ public class JobsActivity extends AppCompatActivity {
                     jobsController.getAuctionedJobs();
                 }
 
-                if (position == 1) { //Active
+                if (position == 1) {
                     jobsController.getActiveJobs();
                 }
 
-                if (position == 2) { //Pending
+                if (position == 2) {
                     jobsController.getPendingJobs();
                 }
 
-                if (position == 3) { //Completed
+                if (position == 3) {
                     jobsController.getCompletedJobs();
                 }
             }
@@ -163,6 +164,28 @@ public class JobsActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
+
+        setupListViewListener(jobs);
+    }
+
+    private void setupListViewListener(Job[] jobs) {
+        lvJobs.setOnItemClickListener((parent, view, position, id) -> {
+            String name = (String) parent.getItemAtPosition(position);
+
+            Optional<Job> jobOptional = Arrays.stream(jobs)
+                    .filter(t -> name.equals(t.getName()))
+                    .findFirst();
+
+            if(jobOptional.isPresent()) {
+                Intent intent = new Intent(this, JobAuctionActivity.class);
+                intent.putExtra("accessToken", accessToken);
+                intent.putExtra("refreshToken", refreshToken);
+                intent.putExtra("username", username);
+                intent.putExtra("jobId", jobOptional.get().getId());
+                this.startActivity(intent);
+            }
+        });
+
     }
 
     public void fillInCompletedJobs(Job[] jobs) {
