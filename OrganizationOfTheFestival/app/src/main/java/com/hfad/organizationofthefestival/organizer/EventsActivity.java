@@ -7,11 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.EventAdapter;
@@ -97,7 +94,7 @@ public class EventsActivity extends ApplyFestActivity {
         } else if (id == R.id.myJobs) {
             switchActivity(JobsActivity.class);
         } else if (id == R.id.printPass) {
-            switchActivity(PrintPassActivity.class);
+            switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
             switchActivity(SearchActivity.class);
         }
@@ -116,7 +113,6 @@ public class EventsActivity extends ApplyFestActivity {
     public void fillInActiveEvents(EventApply[] events) {
         lvEvents = findViewById(R.id.orgActiveEventList);
 
-        //bartol
         gotEvents = events;
 
         lvEvents.setOnItemClickListener((parent, view, position, id) -> {

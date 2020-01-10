@@ -20,9 +20,7 @@ import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,19 +88,14 @@ public class JobsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.organizer_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.myProfile) {
             switchActivity(OrganizerActivity.class);
         } else if (id == R.id.applyForFest) {
@@ -112,7 +105,7 @@ public class JobsActivity extends AppCompatActivity {
         } else if (id == R.id.myJobs) {
             // do nothing
         } else if (id == R.id.printPass) {
-            switchActivity(PrintPassActivity.class);
+            switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
             switchActivity(SearchActivity.class);
         }
@@ -171,17 +164,17 @@ public class JobsActivity extends AppCompatActivity {
         lvJobs.setAdapter(specializationArrayAdapter);
     }
 
-    public void fillInCompletedJobs(ApplicationAuction[] auctions) {
-        List<ApplicationAuction> onAuctionsCompleted = Arrays.stream(auctions)
-                .filter(t -> parseDateTime(t.getEndTime()).isAfter(ZonedDateTime.now()))
+    public void fillInCompletedJobs(Job[] jobs) {
+        completedJobs = Arrays.stream(jobs)
+                .filter(Job::isCompleted)
                 .collect(Collectors.toList());
 
-        completedJobs = auctionsToJobs(onAuctionsCompleted.toArray(new ApplicationAuction[0]));
+        jobs = completedJobs.toArray(new Job[0]);
         lvJobs = findViewById(R.id.orgCompletedJobList);
 
-        /*ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsToStrings(auctions));
-        lvJobs.setAdapter(specializationArrayAdapter);*/
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
+        lvJobs.setAdapter(specializationArrayAdapter);
     }
 
     public List<String> jobsToStrings(Job[] jobs) {
