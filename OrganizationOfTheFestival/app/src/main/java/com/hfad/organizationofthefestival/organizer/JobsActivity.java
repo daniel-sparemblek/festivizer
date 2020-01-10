@@ -14,10 +14,17 @@ import android.widget.ListView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.JobsAdapter;
 import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class JobsActivity extends AppCompatActivity {
 
@@ -27,6 +34,12 @@ public class JobsActivity extends AppCompatActivity {
     private String username;
     private ListView lvJobs;
     private JobApply[] gotJobs = null;
+
+    private List<Job> auctionedJobs;
+    private List<Job> pendingJobs;
+    private List<Job> activeJobs;
+    private List<Job> completedJobs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,32 +69,20 @@ public class JobsActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if(position == 0) { //Auction
+                if (position == 0) {
+                    jobsController.getAuctionedJobs();
                 }
 
-                if(position == 1) { //Active
-                    if(gotJobs == null) {
-                        jobsController.getActiveJobs();
-                    } else {
-                        fillInActiveJobs(gotJobs);
-                    }
-
+                if (position == 1) { //Active
+                    jobsController.getActiveJobs();
                 }
 
-                if(position == 2) { //Pending
-                    if(gotJobs == null) {
-                        jobsController.getPendingJobs();
-                    } else {
-                        fillInPendingJobs(gotJobs);
-                    }
+                if (position == 2) { //Pending
+                    jobsController.getPendingJobs();
                 }
 
-                if(position == 3) { //Completed
-                    if(gotJobs == null) {
-                        jobsController.getCompletedJobs();
-                    } else {
-                        fillInCompletedJobs(gotJobs);
-                    }
+                if (position == 3) { //Completed
+                    jobsController.getCompletedJobs();
                 }
             }
         });
@@ -127,67 +128,83 @@ public class JobsActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void fillInAuctions(ApplicationAuction[] jobs) {
+    public void fillInAuctions(ApplicationAuction[] auctions) {
+        List<ApplicationAuction> onAuctions = Arrays.stream(auctions)
+                .filter(t -> parseDateTime(t.getEndTime()).isAfter(ZonedDateTime.now()))
+                .collect(Collectors.toList());
+
+        auctionedJobs = auctionsToJobs(onAuctions.toArray(new ApplicationAuction[0]));
         lvJobs = findViewById(R.id.orgJobsList);
+
+        Job[] jobs = auctionedJobs.toArray(new Job[0]);
+
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsController.formatAuctions(jobs));
+                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
     }
 
-    public void fillInActiveJobs(JobApply[] jobs) {
+    public void fillInActiveJobs(Job[] jobs) {
+        activeJobs = Arrays.stream(jobs)
+                .filter(t -> t.getWorkerId() != 0)
+                .filter(t -> !t.isCompleted())
+                .collect(Collectors.toList());
+
+        jobs = activeJobs.toArray(new Job[0]);
         lvJobs = findViewById(R.id.orgActiveJobList);
-        JobApply[] newList = new JobApply[30];
-
-        for(JobApply job : jobs) {
-            System.out.println(job.getName() + " " + job.isCompleted());
-            System.out.println("Worker: " + job.getWorker());
-            if(!job.isCompleted() && job.getWorker() != null)
-                System.out.println("I'll add this one");
-
-        }
 
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsController.formatJobs(jobs));
+                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
     }
 
-    public void fillInPendingJobs(JobApply[] jobs) {
+    public void fillInPendingJobs(Job[] jobs) {
+        pendingJobs = Arrays.stream(jobs)
+                .filter(t -> t.getWorkerId() == 0)
+                .filter(t -> !t.isCompleted())
+                .collect(Collectors.toList());
+
+        jobs = pendingJobs.toArray(new Job[0]);
         lvJobs = findViewById(R.id.orgPendingJobList);
 
-        JobApply[] newList = new JobApply[30];
-
-        for(JobApply job : jobs) {
-            System.out.println(job.getName() + " " + job.isCompleted());
-            System.out.println("Worker: " + job.getWorker());
-            if(!job.isCompleted() && job.getWorker() == null)
-                System.out.println("I'll add this one");
-
-        }
-
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsController.formatJobs(jobs));
+                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
     }
 
-    public void fillInCompletedJobs(JobApply[] jobs) {
+    public void fillInCompletedJobs(ApplicationAuction[] auctions) {
+        List<ApplicationAuction> onAuctionsCompleted = Arrays.stream(auctions)
+                .filter(t -> parseDateTime(t.getEndTime()).isAfter(ZonedDateTime.now()))
+                .collect(Collectors.toList());
+
+        completedJobs = auctionsToJobs(onAuctionsCompleted.toArray(new ApplicationAuction[0]));
         lvJobs = findViewById(R.id.orgCompletedJobList);
 
-        LinkedList<JobApply> newList = new LinkedList<>();
-
-        for(JobApply job : jobs) {
-            if(job.isCompleted())
-                newList.add(job);
-        }
-
-        JobApply[] filteredArray = new JobApply[newList.size()];
-        filteredArray = newList.toArray(filteredArray);
-
-        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsController.formatJobs(filteredArray));
-        lvJobs.setAdapter(specializationArrayAdapter);
+        /*ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, jobsToStrings(auctions));
+        lvJobs.setAdapter(specializationArrayAdapter);*/
     }
 
-    public void saveJobs(JobApply[] jobs) {
-        gotJobs = jobs;
+    public List<String> jobsToStrings(Job[] jobs) {
+        return Arrays.asList(jobs).stream()
+                .map(Job::getName)
+                .collect(Collectors.toList());
     }
+
+    public List<Job> auctionsToJobs(ApplicationAuction[] applicationAuctions) {
+        return Arrays.asList(applicationAuctions).stream()
+                .map(ApplicationAuction::getJob)
+                .collect(Collectors.toList());
+    }
+
+    public ZonedDateTime parseDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+    }
+
 }

@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.organizer;
 import com.hfad.organizationofthefestival.festival.FestivalsResponse;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 import com.hfad.organizationofthefestival.utility.EventApply;
+import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.NewJob;
 import com.hfad.organizationofthefestival.utility.Specialization;
@@ -57,4 +58,7 @@ public interface OrganizerClient {
 
     @GET("specializations")
     Call<List<Specialization>> getSpecializations(@Header("Authorization") String authorization);
+
+    @GET("jobs/auction-off")
+    Call<Job[]> getNoneAuctionedJobs(@Query("organizer") String username, @Header("Authorization") String authorization);
 }
