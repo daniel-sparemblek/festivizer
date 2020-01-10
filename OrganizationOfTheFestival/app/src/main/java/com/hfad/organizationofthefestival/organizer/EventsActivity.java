@@ -1,12 +1,15 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,8 +27,9 @@ public class EventsActivity extends ApplyFestActivity {
     private String refreshToken;
     private String username;
     private ListView lvEvents;
-    private ListView thisIsATest;
     EventApply[] gotEvents;
+
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,6 @@ public class EventsActivity extends ApplyFestActivity {
         TabLayout tabs = findViewById(R.id.event_tabs);
         tabs.setupWithViewPager(viewPager);
 
-
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
@@ -53,14 +56,19 @@ public class EventsActivity extends ApplyFestActivity {
 
         eventsController.fetchActiveEvents();
 
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big><b>Loading...</b></big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if(position == 0) {
+                if (position == 0) {
 
                 }
-                if(position == 1) {
-                    if(gotEvents == null) {
+                if (position == 1) {
+                    if (gotEvents == null) {
                         eventsController.fetchCompletedEvents();
                     } else {
                         fillInCompletedEvents(gotEvents);
@@ -127,9 +135,9 @@ public class EventsActivity extends ApplyFestActivity {
 
         LinkedList<EventApply> newList = new LinkedList<>();
 
-        for(EventApply event : events) {
+        for (EventApply event : events) {
             System.out.println(event.getEndTime());
-            if(event.getEndTime() == "b") //je li veci
+            if (event.getEndTime() == "b") //je li veci
                 newList.add(event);
         }
 
@@ -159,8 +167,8 @@ public class EventsActivity extends ApplyFestActivity {
 
         LinkedList<EventApply> newList = new LinkedList<>();
 
-        for(EventApply event : events) {
-            if(event.getEndTime() == "b") //je li manji
+        for (EventApply event : events) {
+            if (event.getEndTime() == "b") //je li manji
                 newList.add(event);
         }
 
@@ -176,6 +184,8 @@ public class EventsActivity extends ApplyFestActivity {
 
     public void saveEvents(EventApply[] events) {
         gotEvents = events;
+        dialog.dismiss();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
 }
