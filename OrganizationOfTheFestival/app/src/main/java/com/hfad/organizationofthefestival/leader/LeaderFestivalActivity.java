@@ -1,10 +1,14 @@
 package com.hfad.organizationofthefestival.leader;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
@@ -31,6 +35,7 @@ public class LeaderFestivalActivity extends AppCompatActivity {
     private Button btnEvents;
     private Button btnAddEvent;
     private Button btnApproveOrganizers;
+    private ImageView ivLogo;
 
     private LeaderFestivalController controller;
 
@@ -53,6 +58,7 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         btnEvents = findViewById(R.id.events);
         btnAddEvent = findViewById(R.id.btnAddEvent);
         btnApproveOrganizers = findViewById(R.id.btn_approve_organizers);
+        ivLogo = findViewById(R.id.festivalLogo);
 
         controller = new LeaderFestivalController(this, accessToken, festivalId, refreshToken);
 
@@ -81,6 +87,8 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         tvEnd.setText(parseDateTime(festival.getEndTime())
                 .truncatedTo(ChronoUnit.MINUTES)
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+
+        setProfilePicture(festival.getLogo());
     }
 
     public void approveOrganizers(View view) {
@@ -108,5 +116,11 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         int second = Integer.parseInt(dateTime.substring(17, 19));
 
         return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+    }
+
+    private void setProfilePicture(String picture) {
+        byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
+        ivLogo.setImageBitmap(bitmap);
     }
 }
