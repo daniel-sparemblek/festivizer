@@ -50,6 +50,7 @@ class NewJobController {
                 if (response.isSuccessful()) {
                     try {
                         Toast.makeText(activity, response.body().getString("msg"), Toast.LENGTH_SHORT).show();
+                        activity.finish();
                     } catch (Exception e){
                         Toast.makeText(activity, "Wrong serialization!", Toast.LENGTH_SHORT).show();
                     }
