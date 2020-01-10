@@ -74,18 +74,18 @@ public class JobsController {
     }
 
     public void getCompletedJobs() {
-        Call<ApplicationAuction[]> jobsCall = api.getAuctionedJobs(username, "Bearer " + accessToken);
+        Call<Job[]> jobsCall = api.getNoneAuctionedJobs(username, "Bearer " + accessToken);
 
-        jobsCall.enqueue(new Callback<ApplicationAuction[]>() {
+        jobsCall.enqueue(new Callback<Job[]>() {
             @Override
-            public void onResponse(Call<ApplicationAuction[]> call, Response<ApplicationAuction[]> response) {
+            public void onResponse(Call<Job[]> call, Response<Job[]> response) {
                 if(response.isSuccessful()) {
                     jobsActivity.fillInCompletedJobs(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<ApplicationAuction[]> call, Throwable t) {
+            public void onFailure(Call<Job[]> call, Throwable t) {
 
             }
         });

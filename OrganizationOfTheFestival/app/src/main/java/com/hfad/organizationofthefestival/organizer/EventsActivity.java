@@ -116,7 +116,6 @@ public class EventsActivity extends ApplyFestActivity {
     public void fillInActiveEvents(EventApply[] events) {
         lvEvents = findViewById(R.id.orgActiveEventList);
 
-        //bartol
         gotEvents = events;
 
         lvEvents.setOnItemClickListener((parent, view, position, id) -> {
