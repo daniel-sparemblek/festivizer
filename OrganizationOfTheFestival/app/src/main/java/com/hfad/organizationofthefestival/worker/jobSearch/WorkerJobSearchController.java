@@ -39,7 +39,7 @@ public class WorkerJobSearchController {
             @Override
             public void onResponse(Call<JobApply> call, Response<JobApply> response) {
                 if (response.isSuccessful()){
-                    activity.fillInActivity(response.body().getEvent().getFestival().getName());
+                    activity.fillInActivity(response.body());
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
