@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -52,6 +53,10 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         }
 
         controller = new WorkerJobSearchController(this, accessToken, refreshToken);
+
+        btnAddComment.setOnClickListener(v -> {
+            String comment = etComment.getText().toString();
+        });
     }
 
     private void findViews() {
@@ -70,7 +75,8 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvEvent.setText(jobApply.getEvent().getName());
         tvJobDescription.setText(jobApply.getDescription());
         tvWorkerName.setText(jobApply.getWorker().getUsername());
-
+        tvJobName.setText(jobApply.getName());
+        tvStartTime.setText(jobApply.getStartTime());
 
         if (event == job.getEventId()) {
             btnAddComment.setEnabled(true);
