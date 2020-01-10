@@ -84,7 +84,10 @@ public class NewJobActivity extends AppCompatActivity {
             NewJob newJob = new NewJob(etName.getText().toString(),
                     etDescription.getText().toString(),
                     convertTime(tvStartTime.getText().toString(), tvStartDate.getText().toString()),
-                    eventId, specialization1, specialization2, specialization3);
+                    eventId,
+                    spFirstSpecialization.getSelectedItem().toString(),
+                    spSecondSpecialization.getSelectedItem().toString(),
+                    spThirdSpecialization.getSelectedItem().toString());
             return;
             // TODO call api
         });
