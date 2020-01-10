@@ -88,8 +88,7 @@ public class NewJobActivity extends AppCompatActivity {
                     spFirstSpecialization.getSelectedItem().toString(),
                     spSecondSpecialization.getSelectedItem().toString(),
                     spThirdSpecialization.getSelectedItem().toString());
-            return;
-            // TODO call api
+            controller.createNewJob(newJob);
         });
 
         btnStartDate.setOnClickListener(v -> {
