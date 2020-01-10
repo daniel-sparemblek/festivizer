@@ -101,6 +101,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
         }
 

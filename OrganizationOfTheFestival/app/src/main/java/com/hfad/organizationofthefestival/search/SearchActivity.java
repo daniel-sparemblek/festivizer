@@ -30,6 +30,8 @@ public class SearchActivity extends AppCompatActivity {
 
     private List<User> userList;
 
+    private int permission;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +45,10 @@ public class SearchActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
-        event = intent.getIntExtra("event", 0);
-
+        permission = intent.getIntExtra("permission", 0);
+        if (permission == 2){
+            event = intent.getIntExtra("event", 0);
+        }
         searchController = new SearchController(this, accessToken, username, refreshToken);
 
         btnSearch.setOnClickListener(v -> {
@@ -56,7 +60,9 @@ public class SearchActivity extends AppCompatActivity {
             intent1.putExtra("permission", userList.get(position).getRole());
             intent1.putExtra("username", userList.get(position).getUsername());
             intent1.putExtra("accessToken", accessToken);
-            intent1.putExtra("event", event);
+            if (permission == 2){
+                intent1.putExtra("event", event);
+            }
             startActivity(intent1);
         });
     }

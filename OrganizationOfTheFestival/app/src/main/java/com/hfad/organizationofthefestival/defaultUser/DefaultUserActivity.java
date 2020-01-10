@@ -12,12 +12,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.leader.Leader;
 import com.hfad.organizationofthefestival.organizer.Organizer;
-import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.worker.Worker;
 import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
 
@@ -35,6 +32,11 @@ public class DefaultUserActivity extends AppCompatActivity {
 
     private int event;
 
+    private String accessToken;
+    private String refreshToken;
+    private int permission;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +45,11 @@ public class DefaultUserActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int permission = intent.getIntExtra("permission", 0);
         String username = intent.getStringExtra("username");
-        String accessToken = intent.getStringExtra("accessToken");
-        String refreshToken = intent.getStringExtra("refreshToken");
-        event = intent.getIntExtra("event", 0);
+        accessToken = intent.getStringExtra("accessToken");
+        refreshToken = intent.getStringExtra("refreshToken");
+        if (permission == 2){
+            event = intent.getIntExtra("event", 0);
+        }
         getViewIds();
         controller = new DefaultUserController(DefaultUserActivity.this, accessToken, refreshToken, username);
         controller.showUserProfile(permission);
@@ -92,12 +96,13 @@ public class DefaultUserActivity extends AppCompatActivity {
         setProfilePicture(worker.getPicture());
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
-            Job pickedJob = worker.getJob(lv.getItemAtPosition(position).toString());
             Intent intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String jsonPickedJob = gson.toJson(pickedJob);
-            intent.putExtra("job", jsonPickedJob);
-            intent.putExtra("event", event);
+            intent.putExtra("accessToken", accessToken);
+            if (permission == 2){
+                event = intent.getIntExtra("event", 0);
+            }
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("permission", permission);
             startActivity(intent);
         });
     }

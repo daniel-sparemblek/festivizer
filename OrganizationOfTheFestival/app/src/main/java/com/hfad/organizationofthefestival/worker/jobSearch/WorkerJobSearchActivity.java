@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.Job;
+import com.hfad.organizationofthefestival.utility.JobApply;
 
 public class WorkerJobSearchActivity extends AppCompatActivity {
 
@@ -27,21 +28,33 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
     private TextView tvStartTime;
     private TextView tvFestivalName;
 
+    private WorkerJobSearchController controller;
+
+    private int permission;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.organizer_screen_job2);
 
         findViews();
+        btnAddComment.setEnabled(false);
+        etComment.setEnabled(false);
         Intent intent = getIntent();
-        event = intent.getIntExtra("event", 0);
-        String jsonJob = intent.getStringExtra("job");
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        job = gson.fromJson(jsonJob, Job.class);
+        event = intent.getIntExtra("event", 0);
+        permission = intent.getIntExtra("permission", 0);
+        String accessToken = intent.getStringExtra("accessToken");
+        String refreshToken = intent.getStringExtra("refreshToken");
+
+        if (permission == 2){
+            event = intent.getIntExtra("event", 0);
+        }
+
+        controller = new WorkerJobSearchController(this, accessToken, refreshToken);
     }
 
-    private void findViews(){
+    private void findViews() {
         etComment = findViewById(R.id.org_searchTxt);
         btnAddComment = findViewById(R.id.add_comment);
         tvEvent = findViewById(R.id.org_event);
@@ -52,6 +65,16 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvFestivalName = findViewById(R.id.org_fest);
     }
 
-    public void fillInActivity(String festivalName) {
+    public void fillInActivity(JobApply jobApply) {
+        tvFestivalName.setText(jobApply.getEvent().getFestival().getName());
+        tvEvent.setText(jobApply.getEvent().getName());
+        tvJobDescription.setText(jobApply.getDescription());
+        tvWorkerName.setText(jobApply.getWorker().getUsername());
+
+
+        if (event == job.getEventId()) {
+            btnAddComment.setEnabled(true);
+            etComment.setEnabled(true);
+        }
     }
 }

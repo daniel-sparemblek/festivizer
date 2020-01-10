@@ -85,7 +85,12 @@ public class OrganizerActivity extends AppCompatActivity {
             intent.putExtra("username", organizer.getUsername());
             startActivity(intent);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("permission", organizer.getPermission());
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

@@ -114,6 +114,7 @@ public class LeaderActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", leader.getPermission());
             startActivity(intent);
         } else if (id == R.id.printPass) {
             Intent intent = new Intent(this, LeaderPrintPassActivity.class);
