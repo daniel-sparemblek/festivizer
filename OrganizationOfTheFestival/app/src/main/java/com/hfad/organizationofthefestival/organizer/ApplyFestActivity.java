@@ -97,7 +97,7 @@ public class ApplyFestActivity extends AppCompatActivity {
         } else if (id == R.id.myJobs) {
             switchActivity(JobsActivity.class);
         } else if (id == R.id.printPass) {
-            switchActivity(PrintPassActivity.class);
+            switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
             switchActivity(SearchActivity.class);
         }

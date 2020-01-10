@@ -20,9 +20,7 @@ import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -107,7 +105,7 @@ public class JobsActivity extends AppCompatActivity {
         } else if (id == R.id.myJobs) {
             // do nothing
         } else if (id == R.id.printPass) {
-            switchActivity(PrintPassActivity.class);
+            switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
             switchActivity(SearchActivity.class);
         }
