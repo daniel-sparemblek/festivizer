@@ -98,7 +98,6 @@ public class WorkerJobSearchController {
     }
 
     public void getOrganizerEvents(String username){
-        System.out.println("KURAC " + username);
         Call<EventApply[]> call = organizerClient.getAllEvents(username, "Bearer " + accessToken);
 
         call.enqueue(new Callback<EventApply[]>() {
