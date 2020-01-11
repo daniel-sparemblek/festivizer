@@ -2,10 +2,10 @@ package com.hfad.organizationofthefestival.organizer;
 
 import com.google.gson.annotations.SerializedName;
 import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.utility.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Organizer {
 
@@ -116,6 +116,13 @@ public class Organizer {
         }
 
         return result;
+    }
+
+    public Festival getFestival(String FestivalName){
+        Optional<Festival> optionalJob = festivals.stream()
+                .filter(t -> t.getName().equals(FestivalName))
+                .findAny();
+        return optionalJob.orElse(null);
     }
 
     public List<Festival> getFestivalList() {
