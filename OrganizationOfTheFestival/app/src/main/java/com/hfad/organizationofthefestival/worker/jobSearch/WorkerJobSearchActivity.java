@@ -80,7 +80,7 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvJobName.setText(jobApply.getName());
         tvStartTime.setText(jobApply.getStartTime());
 
-        if (event == job.getEventId()) {
+        if (event == job.getEventId() && job.isCompleted()) {
             btnAddComment.setEnabled(true);
             etComment.setEnabled(true);
         }
