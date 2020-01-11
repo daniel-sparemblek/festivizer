@@ -18,6 +18,9 @@ public class JobApply {
     int jobId;
     @SerializedName("is_completed")
     boolean isCompleted;
+    private String comment;
+    @SerializedName("order_number")
+    private String orderNumber;
 
     public EventApply getEvent() {
         return event;

@@ -15,6 +15,9 @@ public class Job {
     private String startTime;
     @SerializedName("is_completed")
     private boolean isCompleted;
+    private String comment;
+    @SerializedName("order_number")
+    private String orderNumber;
 
     @Override
     public String toString() {
