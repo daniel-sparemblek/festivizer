@@ -21,6 +21,7 @@ import com.hfad.organizationofthefestival.search.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -99,6 +100,7 @@ public class SpecializationsActivity extends AppCompatActivity {
                 specStrings.set(i, specStrings.get(i) + c);
             }
         }
+        specStrings.sort(String::compareTo);
 
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, specStrings);
