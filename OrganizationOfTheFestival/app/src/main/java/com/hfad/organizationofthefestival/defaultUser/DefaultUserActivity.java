@@ -32,12 +32,11 @@ public class DefaultUserActivity extends AppCompatActivity {
     private TextView tvPhone;
     private ListView lv;
 
-    private int event;
-
     private String accessToken;
     private String refreshToken;
     private int searcherPermission;
     private int permission;
+    private String searcherUsername;
 
 
     @Override
@@ -51,6 +50,8 @@ public class DefaultUserActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         permission = intent.getIntExtra("permission", 0);
+        searcherUsername = intent.getStringExtra("searcherUsername");
+        System.out.println("KURAC " + searcherUsername);
         getViewIds();
         controller = new DefaultUserController(DefaultUserActivity.this, accessToken, refreshToken, username);
         controller.showUserProfile(permission);
@@ -99,14 +100,12 @@ public class DefaultUserActivity extends AppCompatActivity {
         lv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
             intent.putExtra("accessToken", accessToken);
-            if (searcherPermission == 3){
-                event = intent.getIntExtra("event", 0);
-            }
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("searcherPermission", searcherPermission);
             Job job = worker.getJob(lv.getItemAtPosition(position).toString());
             Gson gson = new Gson();
             intent.putExtra("job", gson.toJson(job));
+            intent.putExtra("searcherUsername", searcherUsername);
             startActivity(intent);
         });
     }

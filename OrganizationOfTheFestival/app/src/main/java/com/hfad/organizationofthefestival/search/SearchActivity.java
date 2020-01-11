@@ -19,8 +19,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
-    private String username;
-    private int event;
+    private String searcherUsername;
 
     private SearchController searchController;
 
@@ -44,12 +43,9 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        username = intent.getStringExtra("username");
+        searcherUsername = intent.getStringExtra("searcherUsername");
         searcherPermission = intent.getIntExtra("searcherPermission", 0);
-        if (searcherPermission == 2){
-            event = intent.getIntExtra("event", 0);
-        }
-        searchController = new SearchController(this, accessToken, username, refreshToken);
+        searchController = new SearchController(this, accessToken, refreshToken);
 
         btnSearch.setOnClickListener(v -> {
             search();
@@ -59,12 +55,10 @@ public class SearchActivity extends AppCompatActivity {
             Intent intent1 = new Intent(SearchActivity.this, DefaultUserActivity.class);
 
             intent1.putExtra("searcherPermission", searcherPermission);
+            intent1.putExtra("searcherUsername", searcherUsername);
             intent1.putExtra("permission", userList.get(position).getRole());
-            intent1.putExtra("username", userList.get(position).getUsername());
             intent1.putExtra("accessToken", accessToken);
-            if (searcherPermission == 2){
-                intent1.putExtra("event", event);
-            }
+            intent1.putExtra("username", lvSearchResults.getItemAtPosition(position).toString());
             startActivity(intent1);
         });
     }

@@ -11,8 +11,13 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class WorkerJobSearchActivity extends AppCompatActivity {
 
@@ -31,6 +36,8 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
     private WorkerJobSearchController controller;
 
     private int permission;
+    private String searcherUsername;
+    private List<Long> eventIds;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,14 +54,15 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         String refreshToken = intent.getStringExtra("refreshToken");
         String jsonJob = intent.getStringExtra("job");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        searcherUsername = intent.getStringExtra("searcherUsername");
         job = gson.fromJson(jsonJob, Job.class);
-
-        if (permission == 2){
-            event = intent.getIntExtra("event", 0);
-        }
 
         controller = new WorkerJobSearchController(this, accessToken, refreshToken);
         controller.getFestivalName(job.getId());
+
+        if (permission == 2){
+            controller.getOrganizerEvents(searcherUsername);
+        }
 
         btnAddComment.setOnClickListener(v -> {
             String comment = etComment.getText().toString();
@@ -80,10 +88,18 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvWorkerName.setText(jobApply.getWorker().getUsername());
         tvJobName.setText(jobApply.getName());
         tvStartTime.setText(jobApply.getStartTime());
-        System.out.println("KURAC " + event + " " + job.getEventId() + " " + job.isCompleted());
-        if (event == job.getEventId() && job.isCompleted()) {
-            btnAddComment.setEnabled(true);
-            etComment.setEnabled(true);
+        System.out.println("KURAC " + permission + " " + eventIds + " " + jobApply.getEvent().getEventId());
+        if (permission == 2) {
+            if (eventIds.contains(jobApply.getEvent().getEventId())){
+                btnAddComment.setEnabled(true);
+                etComment.setEnabled(true);
+            }
         }
+    }
+
+    public void fillEventIds(EventApply[] events){
+        eventIds = Arrays.stream(events)
+                .map(EventApply::getEventId)
+                .collect(Collectors.toList());
     }
 }

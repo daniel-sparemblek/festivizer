@@ -21,10 +21,9 @@ public class SearchController {
     private SearchActivity searchActivity;
     private SearchApi api;
     private String accessToken;
-    private String username;
     private String refreshToken;
 
-    public SearchController(SearchActivity searchActivity, String accessToken, String username, String refreshToken) {
+    public SearchController(SearchActivity searchActivity, String accessToken, String refreshToken) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -32,7 +31,6 @@ public class SearchController {
                 .create(SearchApi.class);
 
         this.accessToken = accessToken;
-        this.username = username;
         this.searchActivity = searchActivity;
         this.refreshToken = refreshToken;
     }
