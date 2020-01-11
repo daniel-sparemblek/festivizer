@@ -1,70 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background_gradient"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:layout_weight="0.2"
-        android:text="@string/job"
-        android:textSize="21sp" />
+    <android.support.design.widget.AppBarLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/worker_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#ff9360"
+            app:popupTheme="@style/AppTheme" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <TextView
         android:id="@+id/jobName"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
         android:layout_weight="0.2"
-        android:text="@string/job_name"
-        android:textSize="25sp" />
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/jobDesc"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="start"
         android:layout_marginStart="8dp"
-        android:layout_weight="0.6"
-        android:text="@string/description"
-        android:textSize="25sp" />
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.12"
+        android:text="Description:"
+        android:textColor="#000000"
+        android:textSize="21sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/startTime"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:layout_weight="0.2"
-        android:text="@string/start_time"
-        android:textSize="25sp" />
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.6">
 
-    <TextView
-        android:id="@+id/fest"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:layout_weight="0.2"
-        android:text="@string/festival"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/jobDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:textColor="#000000"
+            android:textSize="21sp" />
 
-    <TextView
-        android:id="@+id/event"
-        android:layout_width="wrap_content"
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:layout_weight="0.2"
-        android:text="@string/event"
-        android:textSize="25sp" />
+        android:layout_weight="0.2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:text="Start time:"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:text="Festival:"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fest"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:textColor="#000000"
+            android:text="Event:"
+            android:textStyle="bold"
+            android:textSize="21sp" />
+
+        <TextView
+            android:id="@+id/event"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/specializations"
@@ -73,8 +148,10 @@
         android:layout_gravity="start"
         android:layout_marginStart="8dp"
         android:layout_weight="0.2"
-        android:text="@string/specializations"
-        android:textSize="25sp" />
+        android:text="Required specializations:"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="21sp" />
 
     <ListView
         android:id="@+id/specializationList"
@@ -89,8 +166,8 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:onClick="applyForJob"
         android:layout_weight="0.2"
+        android:onClick="applyForJob"
         android:text="@string/apply" />
 
 </LinearLayout>

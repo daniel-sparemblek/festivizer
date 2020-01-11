@@ -1,8 +1,11 @@
 package com.hfad.organizationofthefestival.worker;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -33,10 +36,17 @@ public class JobApplyActivity extends AppCompatActivity {
     private TextView eventName;
     private ListView specializations;
 
+    private Toolbar toolbar;
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.worker_apply_for_job);
+
+        toolbar = findViewById(R.id.worker_toolbar);
+        toolbar.setTitle("Apply for a Job");
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
@@ -54,6 +64,11 @@ public class JobApplyActivity extends AppCompatActivity {
         festivalName = findViewById(R.id.fest);
         eventName = findViewById(R.id.event);
         specializations = findViewById(R.id.specializationList);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         jobApplyController.getJobApplication(jobId);
     }
@@ -74,6 +89,7 @@ public class JobApplyActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, specStrings);
         specializations.setAdapter(specializationArrayAdapter);
+        dialog.dismiss();
 
     }
 
