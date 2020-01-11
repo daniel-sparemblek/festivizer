@@ -31,20 +31,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="15dp"
             android:layout_marginEnd="8dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_gravity="start"
+                android:layout_weight="1"
                 android:text="@string/price"
-                android:textSize="25sp"
-                android:textColor="#ffffff"/>
+                android:textColor="#8A000000"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/worker_tv_price"
@@ -58,20 +58,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="8dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_gravity="start"
+                android:layout_weight="1"
                 android:text="@string/number_of_people"
-                android:textSize="25sp"
-                android:textColor="#ffffff"/>
+                android:textColor="#8A000000"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/worker_tv_num_of_people"
@@ -85,20 +85,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="8dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_gravity="start"
+                android:layout_weight="1"
                 android:text="Days to complete"
-                android:textSize="25sp"
-                android:textColor="#ffffff"/>
+                android:textColor="#8A000000"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/worker_tv_days_needed"
@@ -115,17 +115,18 @@
             android:layout_height="0dp"
             android:layout_weight="3"
             android:orientation="horizontal"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="8dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_gravity="start"
+                android:layout_weight="1"
                 android:text="Comment"
-                android:textSize="25sp"
-                android:textColor="#ffffff"/>
+                android:textColor="#8A000000"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/worker_tv_comment"
