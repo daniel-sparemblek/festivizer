@@ -1,11 +1,10 @@
 package com.hfad.organizationofthefestival.leader;
 
-import com.hfad.organizationofthefestival.event.Event;
+import com.hfad.organizationofthefestival.festival.Event.Event;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 import com.hfad.organizationofthefestival.utility.EventApply;
-import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import java.util.HashMap;
 

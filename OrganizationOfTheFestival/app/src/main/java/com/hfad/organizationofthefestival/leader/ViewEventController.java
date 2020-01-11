@@ -2,10 +2,7 @@ package com.hfad.organizationofthefestival.leader;
 
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.event.Event;
-import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.utility.EventApply;
-import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import org.json.JSONObject;
 

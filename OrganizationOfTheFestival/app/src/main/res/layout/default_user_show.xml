@@ -10,28 +10,14 @@
     android:background="@drawable/background_gradient">
 
 
-    <android.support.design.widget.AppBarLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/organizer_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#ff9360"
-            app:popupTheme="@style/AppTheme" />
-
-    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp">
 
         <TextView
             android:id="@+id/user_name"
@@ -48,7 +34,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="28dp"
+        android:paddingTop="24dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
@@ -57,16 +43,17 @@
             android:layout_width="178dp"
             android:layout_height="178dp"
             android:layout_gravity="start|top"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:contentDescription="@string/profile_picture"
             android:src="@drawable/default_profile_picture" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="2dp"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
             android:paddingStart="3dp"
+            android:paddingTop="2dp"
             android:paddingEnd="2dp">
 
             <TextView
@@ -76,6 +63,7 @@
                 android:layout_gravity="start"
                 android:text="@string/default_role"
                 android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/default_name"
                 android:layout_width="wrap_content"
@@ -83,6 +71,7 @@
                 android:layout_gravity="start"
                 android:text="@string/name"
                 android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/default_surname"
                 android:layout_width="wrap_content"
@@ -90,6 +79,7 @@
                 android:layout_gravity="start"
                 android:text="@string/surname"
                 android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/default_email"
                 android:layout_width="wrap_content"
@@ -97,6 +87,7 @@
                 android:layout_gravity="start"
                 android:text="@string/e_mail"
                 android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/default_phone"
                 android:layout_width="wrap_content"

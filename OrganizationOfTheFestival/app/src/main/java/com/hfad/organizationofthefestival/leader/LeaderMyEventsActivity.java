@@ -5,14 +5,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.event.Event;
-import com.hfad.organizationofthefestival.utility.ApplicationResponse;
+import com.hfad.organizationofthefestival.festival.Event.Event;
 
 import java.util.Arrays;
 import java.util.List;
