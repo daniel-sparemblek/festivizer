@@ -4,7 +4,8 @@ from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from decorators import permission_required
 from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalOrganizers, FestivalSchema,
-                    EventModel, EventSchema, JobModel, JobSchema, AuctionModel, JobSpecializations, AuctionSchema, LeaderSchema,
+                    EventModel, EventSchema, JobModel, JobSchema, AuctionModel, JobSpecializations, AuctionSchema,
+                    LeaderSchema,
                     Application, ApplicationSchema, WorkerSchema, SpecializationSchema, SpecializationModel,
                     WorkerSpecializations, OrganizerSchema, JobApplySchema, EventApplySchema, FestivalOrg,
                     FestivalOrgSchema, AuctionWorker, ApplicationWorker, ApplicationWorkerSchema, AuctionWorkerSchema,
@@ -12,6 +13,8 @@ from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, Fes
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 import sys
+import base64
+import os
 
 class UserRegistration(Resource):
     @staticmethod
@@ -43,6 +46,15 @@ class UserRegistration(Resource):
             return {
                        'msg': 'User {} already exists'.format(data['email'])
                    }, 422
+        base64_message = data['picture']
+        base64_bytes = base64_message.encode('ascii')
+        message_bytes = base64.b64decode(base64_bytes)
+
+        picture_path = './festivizer/images/' + data['username'] + '.png'
+
+        f = open(picture_path, 'w+b')
+        f.write(message_bytes)
+        f.close()
 
         if data['permission'] == 1:
             new_user = UserModel(
@@ -50,7 +62,7 @@ class UserRegistration(Resource):
                 password=UserModel.generate_hash(data['password']),
                 first_name=data['first_name'],
                 last_name=data['last_name'],
-                picture=data['picture'],
+                picture=picture_path,
                 phone=data['phone'],
                 email=data['email'],
                 permission=data['permission'],
@@ -62,7 +74,7 @@ class UserRegistration(Resource):
                 password=UserModel.generate_hash(data['password']),
                 first_name=data['first_name'],
                 last_name=data['last_name'],
-                picture=data['picture'],
+                picture=picture_path,
                 phone=data['phone'],
                 email=data['email'],
                 permission=data['permission'],
@@ -114,7 +126,7 @@ class User(Resource):
     def get(self, username):
         user = UserModel.find_by_username(username)
         if user:
-            return UserSchema().dump(user)
+            return UserSchema.to_json(user)
         else:
             return {"msg": "The requested URL /{} was not found on this server.".format(username)}, 404
 
@@ -123,14 +135,14 @@ class Users(Resource):
     @jwt_required
     def get(self):
         if len(list(request.args)) == 0:
-            return UserSchema(many=True).dump(UserModel.return_all()), 200
+            return UserSchema.to_json(UserModel.return_all())
 
         permission = request.args.get('permission')
         is_pending = request.args.get('is_pending')
 
         if permission and is_pending and len(list(request.args)) == 2:
             users = UserModel.query.filter_by(permission=permission, is_pending=is_pending).all()
-            return UserSchema(many=True).dump(users), 200
+            return UserSchema.to_json(users)
         else:
             return redirect("https://kaogrupa.pythonanywhere.com/users")
 
@@ -239,8 +251,6 @@ class Specializations(Resource):
         try:
             id = new_specialization.save_to_db()
             print(str(id), file=sys.stderr)
-
-
 
             return {'msg': 'Specialization {} was successfully created!'.format(data['name'])}, 200
         except IntegrityError:
@@ -548,7 +558,7 @@ class EventUnique(Resource):
 
 
 class Job(Resource):
-    #Kada duration na Application + start_time od posla je prosao onda je posao Completed
+    # Kada duration na Application + start_time od posla je prosao onda je posao Completed
     @jwt_required
     def post(self):
         data = request.get_json()
@@ -560,52 +570,70 @@ class Job(Resource):
         spec2 = data['spec2']
         spec3 = data['spec3']
 
-        spec1_id = SpecializationModel.find_by_name(spec1).specialization_id
-        spec2_id = SpecializationModel.find_by_name(spec2).specialization_id
-        spec3_id = SpecializationModel.find_by_name(spec3).specialization_id
+        spec1_id = 0
+        spec2_id = 0
+        spec3_id = 0
+        if spec1 != "None":
+            spec1_new = SpecializationModel.find_by_name(spec1)
+            print("Kurac" + spec1_new.name, file=sys.stderr)
+            spec1_id = spec1_new.specialization_id
 
-        #job_schema = JobSchema()
-        #validate = job_schema.validate(data)
+        if spec2 != "None":
+            spec2_id = SpecializationModel.find_by_name(spec2).specialization_id
 
-        #if bool(validate):
+        if spec3 != "None":
+            spec3_id = SpecializationModel.find_by_name(spec3).specialization_id
+
+        # job_schema = JobSchema()
+        # validate = job_schema.validate(data)
+
+        # if bool(validate):
         #    value = list(validate.values())[0]
         #    return {"msg": value[0]}, 422
 
         start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
 
+        jobs = JobModel.find_by_event_id(data['event_id'])
+        if not jobs:
+            highest_num=0;
+        else:
+            jobs.sort(key=lambda x: x.order_number, reverse=True)
+            highest_num = jobs[0].order_number
+
         new_job = JobModel(
             name=data['name'],
-            description=data['description'],
+            description=data['desc'],
             event_id=data['event_id'],
             worker_id=data['worker_id'],
             start_time=start_time,
-            is_completed=data["is_completed"]
+            is_completed=data["is_completed"],
+            comment=None,
+            order_number=highest_num + 1
         )
 
         try:
             job_id1 = new_job.save_to_db()
-            print(str(job_id1), file=sys.stderr)
-            print(str(spec1_id), file=sys.stderr)
 
-            new_spec1 = JobSpecializations(
-                job_id=job_id1,
-                specialization_id=spec1_id
-            )
-            new_spec1.save_to_db()
+            if spec1_id != 0:
+                new_spec1 = JobSpecializations(
+                    job_id=job_id1,
+                    specialization_id=spec1_id
+                )
+                new_spec1.save_to_db()
 
-            new_spec2 = JobSpecializations(
-                job_id=job_id1,
-                specialization_id=spec2_id
-            )
-            new_spec2.save_to_db()
+            if spec2_id != 0:
+                new_spec2 = JobSpecializations(
+                    job_id=job_id1,
+                    specialization_id=spec2_id
+                )
+                new_spec2.save_to_db()
 
-            new_spec3 = JobSpecializations(
-                job_id=job_id1,
-                specialization_id=spec3_id
-            )
-            new_spec3.save_to_db()
-
-
+            if spec3_id != 0:
+                new_spec3 = JobSpecializations(
+                    job_id=job_id1,
+                    specialization_id=spec3_id
+                )
+                new_spec3.save_to_db()
 
             return {'msg': 'Job {} was successfully created!'.format(data['name'])}, 200
         except IntegrityError as e:
@@ -613,6 +641,10 @@ class Job(Resource):
         except Exception as e:
             raise e
             return {'msg': 'Internal server error'}, 500
+
+    def get(self):
+        job_id = request.args.get('job_id')
+        return JobApplySchema.to_json(JobModel.find_by_job_id(job_id))
 
 
 class Jobs(Resource):
@@ -643,6 +675,15 @@ class Jobs(Resource):
 
         jobs = JobModel.get_all()
         return JobSchema.to_json(jobs)
+
+
+class OneJob(Resource):
+    @jwt_required
+    def put(self, job_id):
+        data = request.get_json()
+        comment=data['comment']
+        JobModel.update_comment(job_id, comment)
+        return {'msg': 'success'}
 
 
 class JobsNotOnAuction(Resource):
@@ -724,7 +765,7 @@ class Auctions(Resource):
 
         if organizer:
             user = UserModel.find_by_username(organizer)
-            auctions = AuctionModel.find_by_organizer_id(user.id)
+            auctions = AuctionModel.find_real_by_organizer_id(user.id)
 
             real_auctions = []
             for auction in auctions:
