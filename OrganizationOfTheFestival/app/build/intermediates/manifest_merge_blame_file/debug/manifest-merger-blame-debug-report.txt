@@ -1,0 +1,128 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.hfad.organizationofthefestival"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+8-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:5:5-67
+11-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+12-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:6:5-80
+12-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:6:22-78
+13    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14
+15    <application
+15-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:8:5-48:19
+16        android:allowBackup="true"
+16-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:9:9-35
+17        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+17-->[com.android.support:support-compat:28.0.0] /home/kikyy99/.gradle/caches/transforms-2/files-2.1/b73d0db3c489aeab8b531c92b0313ef9/support-compat-28.0.0/AndroidManifest.xml:22:18-91
+18        android:debuggable="true"
+19        android:icon="@drawable/icon"
+19-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:10:9-38
+20        android:label="@string/app_name"
+20-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:11:9-41
+21        android:roundIcon="@mipmap/ic_launcher_round"
+21-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:12:9-54
+22        android:supportsRtl="true"
+22-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:13:9-35
+23        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+23-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:14:9-65
+24        android:usesCleartextTraffic="true" >
+24-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:15:9-44
+25        <activity android:name="com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity" />
+25-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:16:9-77
+25-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:16:19-65
+26        <activity android:name="com.hfad.organizationofthefestival.leader.MyFestivalsActivity" />
+26-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:17:9-64
+26-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:17:19-61
+27        <activity android:name="com.hfad.organizationofthefestival.worker.JobProfileActivity" />
+27-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:18:9-63
+27-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:18:19-60
+28        <activity android:name="com.hfad.organizationofthefestival.worker.ViewApplicationActivity" />
+28-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:19:9-68
+28-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:19:19-65
+29        <activity android:name="com.hfad.organizationofthefestival.worker.ActiveJobsActivity" />
+29-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:20:9-63
+29-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:20:19-60
+30        <activity android:name="com.hfad.organizationofthefestival.worker.MyApplicationsActivity" />
+30-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:21:9-67
+30-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:21:19-64
+31        <activity android:name="com.hfad.organizationofthefestival.search.SearchActivity" />
+31-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:22:9-59
+31-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:22:19-56
+32        <activity android:name="com.hfad.organizationofthefestival.worker.JobApplicationActivity" />
+32-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:23:9-67
+32-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:23:19-64
+33        <activity android:name="com.hfad.organizationofthefestival.worker.JobApplyActivity" />
+33-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:24:9-61
+33-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:24:19-58
+34        <activity android:name="com.hfad.organizationofthefestival.worker.JobOffersActivity" />
+34-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:25:9-62
+34-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:25:19-59
+35        <activity
+35-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:26:9-28:55
+36            android:name="com.hfad.organizationofthefestival.worker.SpecializationsActivity"
+36-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:27:13-59
+37            android:windowSoftInputMode="adjustPan" />
+37-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:28:13-52
+38        <activity android:name="com.hfad.organizationofthefestival.leader.LeaderActivity" />
+38-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:29:9-59
+38-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:29:19-56
+39        <activity android:name="com.hfad.organizationofthefestival.worker.WorkerActivity" />
+39-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:30:9-59
+39-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:30:19-56
+40        <activity android:name="com.hfad.organizationofthefestival.organizer.OrganizerActivity" />
+40-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:31:9-65
+40-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:31:19-62
+41        <activity android:name="com.hfad.organizationofthefestival.organizer.EventsActivity" />
+41-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:32:9-62
+41-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:32:19-59
+42        <activity android:name="com.hfad.organizationofthefestival.organizer.JobsActivity" />
+42-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:33:9-60
+42-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:33:19-57
+43        <activity android:name="com.hfad.organizationofthefestival.organizer.PrintPassActivity" />
+43-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:34:9-65
+43-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:34:19-62
+44        <activity android:name="com.hfad.organizationofthefestival.admin.AdminActivity" />
+44-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:35:9-57
+44-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:35:19-54
+45        <activity android:name="com.hfad.organizationofthefestival.organizer.ApplyFestActivity" />
+45-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:36:9-65
+45-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:36:19-62
+46        <activity android:name="com.hfad.organizationofthefestival.signup.SignupActivity" />
+46-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:37:9-59
+46-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:37:19-56
+47        <activity android:name="com.hfad.organizationofthefestival.leader.LeaderJobAuctionsActivity" />
+47-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:38:9-70
+47-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:38:19-67
+48        <activity android:name="com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity" />
+48-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:39:9-78
+48-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:39:19-75
+49        <activity android:name="com.hfad.organizationofthefestival.login.LoginActivity" >
+49-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:40:9-46:20
+49-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:40:19-54
+50            <intent-filter>
+50-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:41:13-45:29
+51                <action android:name="android.intent.action.MAIN" />
+51-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:42:17-69
+51-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:42:25-66
+52
+53                <category android:name="android.intent.category.LAUNCHER" />
+53-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:44:17-77
+53-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:44:27-74
+54            </intent-filter>
+55        </activity>
+56        <activity android:name="com.hfad.organizationofthefestival.defaultUser.DefaultUserActivity" />
+56-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:47:9-69
+56-->/home/kikyy99/Desktop/FaksHub/OPP/OPP_git/organization_of_the_festival/OrganizationOfTheFestival/app/src/main/AndroidManifest.xml:47:19-66
+57    </application>
+58
+59</manifest>

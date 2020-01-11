@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hfad.organizationofthefestival"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="26"
+        android:targetSdkVersion="28" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true" >
+        <activity android:name="com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.leader.MyFestivalsActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.worker.JobProfileActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.worker.ViewApplicationActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.worker.ActiveJobsActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.worker.MyApplicationsActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.search.SearchActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.worker.JobApplicationActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.worker.JobApplyActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.worker.JobOffersActivity" />
+        <activity
+            android:name="com.hfad.organizationofthefestival.worker.SpecializationsActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.hfad.organizationofthefestival.leader.LeaderActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.worker.WorkerActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.organizer.OrganizerActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.organizer.EventsActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.organizer.JobsActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.organizer.PrintPassActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.admin.AdminActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.organizer.ApplyFestActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.signup.SignupActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.leader.LeaderJobAuctionsActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity" />
+        <activity android:name="com.hfad.organizationofthefestival.login.LoginActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.hfad.organizationofthefestival.defaultUser.DefaultUserActivity" />
+    </application>
+
+</manifest>
