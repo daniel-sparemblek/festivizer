@@ -53,9 +53,11 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         }
 
         controller = new WorkerJobSearchController(this, accessToken, refreshToken);
+        controller.getFestivalName(job.getId());
 
         btnAddComment.setOnClickListener(v -> {
             String comment = etComment.getText().toString();
+            controller.addNewComment(job.getId(), comment);
         });
     }
 

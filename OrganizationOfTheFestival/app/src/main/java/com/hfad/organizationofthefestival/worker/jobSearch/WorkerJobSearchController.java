@@ -1,8 +1,10 @@
 package com.hfad.organizationofthefestival.worker.jobSearch;
 
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.utility.JobApply;
+import com.hfad.organizationofthefestival.utility.SimpleServerResponse;
 import com.hfad.organizationofthefestival.worker.WorkerClient;
 
 import org.json.JSONObject;
@@ -32,8 +34,8 @@ public class WorkerJobSearchController {
         this.refershToken = refershToken;
     }
 
-    private void getFestivalName(String jobId){
-        Call<JobApply> call = api.getJob(jobId, "Bearer " + accessToken);
+    public void getFestivalName(int jobId){
+        Call<JobApply> call = api.getJob(Integer.toString(jobId), "Bearer " + accessToken);
 
         call.enqueue(new Callback<JobApply>() {
             @Override
@@ -53,6 +55,32 @@ public class WorkerJobSearchController {
 
             @Override
             public void onFailure(Call<JobApply> call, Throwable t) {
+                Toast.makeText(activity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void addNewComment(int jobId, String comment){
+        Call<SimpleServerResponse> call = api.addComment(Integer.toString(jobId), comment, "Bearer " + accessToken);
+
+        call.enqueue(new Callback<SimpleServerResponse>() {
+            @Override
+            public void onResponse(Call<SimpleServerResponse> call, Response<SimpleServerResponse> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(activity, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(activity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(activity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleServerResponse> call, Throwable t) {
                 Toast.makeText(activity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });

@@ -4,6 +4,7 @@ import com.hfad.organizationofthefestival.utility.Application;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
+import com.hfad.organizationofthefestival.utility.SimpleServerResponse;
 
 import java.util.HashMap;
 
@@ -12,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -53,4 +55,9 @@ public interface WorkerClient {
 
     @GET("applications")
     Call<Application> getApplication(@Query("application_id") String applicationId, @Header("Authorization") String authorization);
+
+    @PUT("job/{job_id}")
+    Call<SimpleServerResponse> addComment(@Path("job_id") String jobId,
+                                          @Body String comment,
+                                          @Header("Authorization") String authoriaztion);
 }
