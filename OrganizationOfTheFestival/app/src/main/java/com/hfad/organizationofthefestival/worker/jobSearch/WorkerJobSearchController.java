@@ -11,7 +11,9 @@ import com.hfad.organizationofthefestival.worker.WorkerClient;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,7 +74,9 @@ public class WorkerJobSearchController {
     }
 
     public void addNewComment(int jobId, String comment){
-        Call<SimpleServerResponse> call = workerClient.addComment(Integer.toString(jobId), comment, "Bearer " + accessToken);
+        Map<String, String> commentMap = new HashMap<>();
+        commentMap.put("comment", comment);
+        Call<SimpleServerResponse> call = workerClient.addComment(Integer.toString(jobId), commentMap, "Bearer " + accessToken);
 
         call.enqueue(new Callback<SimpleServerResponse>() {
             @Override

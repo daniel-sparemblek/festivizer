@@ -7,6 +7,7 @@ import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 import com.hfad.organizationofthefestival.utility.SimpleServerResponse;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -58,6 +59,6 @@ public interface WorkerClient {
 
     @PUT("jobs/{job_id}")
     Call<SimpleServerResponse> addComment(@Path("job_id") String jobId,
-                                          @Body String comment,
+                                          @Body Map<String, String> comment,
                                           @Header("Authorization") String authorization);
 }
