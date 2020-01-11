@@ -20,6 +20,7 @@ import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.worker.JobProfileActivity;
 import com.hfad.organizationofthefestival.worker.Worker;
+import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
 
 public class DefaultUserActivity extends AppCompatActivity {
     private DefaultUserController controller;
@@ -110,7 +111,12 @@ public class DefaultUserActivity extends AppCompatActivity {
         setProfilePicture(worker.getPicture());
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(DefaultUserActivity.this, JobProfileActivity.class);
+            Intent intent;
+            if (searcherPermission == 2){
+                intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
+            } else {
+                intent = new Intent(DefaultUserActivity.this, JobProfileActivity.class);
+            }
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             Job job = worker.getJob(lv.getItemAtPosition(position).toString());
