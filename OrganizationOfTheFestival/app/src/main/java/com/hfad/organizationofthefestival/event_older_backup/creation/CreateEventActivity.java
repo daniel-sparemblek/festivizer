@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival.event.creation;
+package com.hfad.organizationofthefestival.event_older_backup.creation;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.event.Event;
+import com.hfad.organizationofthefestival.event_older_backup.Event;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import java.time.LocalDate;
@@ -78,9 +78,6 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         btnEndTimePicker.setOnClickListener(this);
 
         btCreate = findViewById(R.id.createEvent);
-
-
-
 
         btCreate.setOnClickListener(v -> {
             String startDateTime = convertTime(etStartTime.getText().toString(),

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
@@ -72,6 +73,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
             btnActive.setEnabled(true);
             btnCompleted.setEnabled(false);
         });
+
 
         lvFestivals.setOnItemClickListener(((parent, view, position, id) -> {
             String name = (String) parent.getItemAtPosition(position);

@@ -1,8 +1,8 @@
-package com.hfad.organizationofthefestival.event.creation;
+package com.hfad.organizationofthefestival.event_older_backup.creation;
 
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.event.Event;
+import com.hfad.organizationofthefestival.event_older_backup.Event;
 
 import org.json.JSONObject;
 

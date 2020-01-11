@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival.worker;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,12 +40,16 @@ public class WorkerActivity extends AppCompatActivity {
     private ListView lvJobs;
     private ImageView ivProfilePicture;
 
+    private ProgressDialog dialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.worker_profile);
 
         Toolbar toolbar = findViewById(R.id.worker_toolbar);
+        toolbar.setTitle("My Profile");
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
@@ -53,6 +59,11 @@ public class WorkerActivity extends AppCompatActivity {
 
 
         workerController = new WorkerController(this, accessToken, username, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         workerController.getWorker();
     }
@@ -72,7 +83,9 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
+            finish();
 
         } else if (id == R.id.applyForJob) {
             Intent intent = new Intent(this, JobOffersActivity.class);
@@ -80,20 +93,21 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             this.startActivity(intent);
+            finish();
         } else if (id == R.id.activeJobs) {
             Intent intent = new Intent(this, ActiveJobsActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             this.startActivity(intent);
-
+            finish();
         } else if (id == R.id.myApplications) {
             Intent intent = new Intent(this, MyApplicationsActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             this.startActivity(intent);
-
+            finish();
         } else if (id == R.id.printPass) {
 
         } else if (id == R.id.search) {
@@ -103,12 +117,21 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
+            finish();
+        }
+        else if (id == R.id.worker_profile) {
+            dialog = new ProgressDialog(this);
+            dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+            workerController.getWorker();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     public void fillInActivity(Worker worker) {
+        this.worker = worker;
 
         ivProfilePicture = findViewById(R.id.profile_picture);
         tvName = findViewById(R.id.workerName);
@@ -129,6 +152,8 @@ public class WorkerActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, worker.getSpecializations());
         lvSpecializations.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 
     private void setProfilePicture(String picture) {
