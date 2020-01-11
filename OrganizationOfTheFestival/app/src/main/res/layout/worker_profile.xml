@@ -12,27 +12,9 @@
         android:id="@+id/worker_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#200e07"
+        android:background="#0c0c0c"
         android:theme="@style/ToolbarTheme"
         app:titleTextColor="#FFFFFF"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/my_profile"
-            android:textSize="21sp" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
