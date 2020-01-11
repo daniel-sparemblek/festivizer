@@ -32,6 +32,7 @@ public class ApplyFestActivity extends AppCompatActivity {
 
         lvEvents = findViewById(R.id.orgFestivalList);
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
+        toolbar.setTitle("Apply for a festival");
         setSupportActionBar(toolbar);
 
 
@@ -97,7 +98,7 @@ public class ApplyFestActivity extends AppCompatActivity {
         } else if (id == R.id.myJobs) {
             switchActivity(JobsActivity.class);
         } else if (id == R.id.printPass) {
-            switchActivity(PrintPassActivity.class);
+            switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
             switchActivity(SearchActivity.class);
         }

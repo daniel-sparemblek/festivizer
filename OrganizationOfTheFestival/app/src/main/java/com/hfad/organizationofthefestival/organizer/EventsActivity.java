@@ -1,24 +1,29 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.EventAdapter;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.EventApply;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class EventsActivity extends ApplyFestActivity {
 
@@ -27,8 +32,12 @@ public class EventsActivity extends ApplyFestActivity {
     private String refreshToken;
     private String username;
     private ListView lvEvents;
-    private ListView thisIsATest;
     EventApply[] gotEvents;
+
+    List<EventApply> completedEvents;
+    List<EventApply> activeEvents;
+
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +55,6 @@ public class EventsActivity extends ApplyFestActivity {
         TabLayout tabs = findViewById(R.id.event_tabs);
         tabs.setupWithViewPager(viewPager);
 
-
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
@@ -56,18 +64,19 @@ public class EventsActivity extends ApplyFestActivity {
 
         eventsController.fetchActiveEvents();
 
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if(position == 0) {
-
+                if (position == 0) {
+                    eventsController.fetchActiveEvents();
                 }
-                if(position == 1) {
-                    if(gotEvents == null) {
-                        eventsController.fetchCompletedEvents();
-                    } else {
-                        fillInCompletedEvents(gotEvents);
-                    }
+                if (position == 1) {
+                    eventsController.fetchCompletedEvents();
                 }
             }
         });
@@ -75,19 +84,14 @@ public class EventsActivity extends ApplyFestActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.organizer_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.myProfile) {
             switchActivity(OrganizerActivity.class);
         } else if (id == R.id.applyForFest) {
@@ -97,7 +101,7 @@ public class EventsActivity extends ApplyFestActivity {
         } else if (id == R.id.myJobs) {
             switchActivity(JobsActivity.class);
         } else if (id == R.id.printPass) {
-            switchActivity(PrintPassActivity.class);
+            switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
             switchActivity(SearchActivity.class);
         }
@@ -116,9 +120,6 @@ public class EventsActivity extends ApplyFestActivity {
     public void fillInActiveEvents(EventApply[] events) {
         lvEvents = findViewById(R.id.orgActiveEventList);
 
-        //bartol
-        gotEvents = events;
-
         lvEvents.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(EventsActivity.this, ViewEventActivity.class);
             intent.putExtra("accessToken", accessToken);
@@ -129,27 +130,17 @@ public class EventsActivity extends ApplyFestActivity {
             startActivity(intent);
         });
 
-        LinkedList<EventApply> newList = new LinkedList<>();
-
-        for(EventApply event : events) {
-            System.out.println(event.getEndTime());
-            if(event.getEndTime() == "b") //je li veci
-                newList.add(event);
-        }
-
-        EventApply[] filteredArray = new EventApply[newList.size()];
-        filteredArray = newList.toArray(filteredArray);
+        activeEvents = Arrays.stream(events)
+                .filter(t -> parseDateTime(t.getEndTime()).isAfter(ZonedDateTime.now()))
+                .collect(Collectors.toList());
 
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, eventsController.format(events));
+                android.R.layout.simple_list_item_1, eventsToStrings(activeEvents));
         lvEvents.setAdapter(specializationArrayAdapter);
     }
 
     public void fillInCompletedEvents(EventApply[] events) {
         lvEvents = findViewById(R.id.orgCompletedEventList);
-
-        //bartol
-        gotEvents = events;
 
         lvEvents.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(EventsActivity.this, ViewEventActivity.class);
@@ -160,26 +151,37 @@ public class EventsActivity extends ApplyFestActivity {
             EventsActivity.this.startActivity(intent);
         });
 
-
-        LinkedList<EventApply> newList = new LinkedList<>();
-
-        for(EventApply event : events) {
-            if(event.getEndTime() == "b") //je li manji
-                newList.add(event);
-        }
-
-        EventApply[] filteredArray = new EventApply[newList.size()];
-        filteredArray = newList.toArray(filteredArray);
+        completedEvents = Arrays.stream(events)
+                .filter(t -> parseDateTime(t.getEndTime()).isBefore(ZonedDateTime.now()))
+                .collect(Collectors.toList());
 
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, eventsController.format(events));
+                android.R.layout.simple_list_item_1, eventsToStrings(completedEvents));
         lvEvents.setAdapter(specializationArrayAdapter);
-
     }
 
 
     public void saveEvents(EventApply[] events) {
         gotEvents = events;
+        dialog.dismiss();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    public ZonedDateTime parseDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+    }
+
+    private List<String> eventsToStrings(List<EventApply> events) {
+        return events.stream()
+                .map(EventApply::getName)
+                .collect(Collectors.toList());
     }
 
 }

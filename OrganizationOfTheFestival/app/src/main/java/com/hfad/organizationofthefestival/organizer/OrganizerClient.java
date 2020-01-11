@@ -3,10 +3,15 @@ package com.hfad.organizationofthefestival.organizer;
 import com.hfad.organizationofthefestival.festival.FestivalsResponse;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 import com.hfad.organizationofthefestival.utility.EventApply;
+import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.NewJob;
+import com.hfad.organizationofthefestival.utility.SimpleServerResponse;
+import com.hfad.organizationofthefestival.utility.Specialization;
 
 import org.json.JSONObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -48,7 +53,17 @@ public interface OrganizerClient {
     Call<EventApply> getEvent(@Path("event_id") String eventId,
                               @Header("Authorization") String authorization);
 
-    @GET
-    Call<JSONObject> createNewJob(@Body NewJob newJob,
-                                  @Header("Authorization") String authorization);
+    @POST("job")
+    Call<SimpleServerResponse> createNewJob(@Body NewJob newJob,
+                                            @Header("Authorization") String authorization);
+
+    @GET("specializations")
+    Call<List<Specialization>> getSpecializations(@Header("Authorization") String authorization);
+
+    @GET("jobs/auction-off")
+    Call<Job[]> getNoneAuctionedJobs(@Query("organizer") String username, @Header("Authorization") String authorization);
+
+    @GET("job")
+    Call<JobApply> getJobInfo(@Query("job_id") int jobId,
+                              @Header("Authorization") String authorization);
 }

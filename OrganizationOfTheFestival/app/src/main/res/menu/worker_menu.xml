@@ -4,6 +4,9 @@
     <!-- tools:showIn="navigation_view" -->
 
     <item
+        android:id="@+id/worker_profile"
+        android:title="@string/my_profile" />
+    <item
         android:id="@+id/addSpecialization"
         android:title="@string/add_specialization" />
     <item

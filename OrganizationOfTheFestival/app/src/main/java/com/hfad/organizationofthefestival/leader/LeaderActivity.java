@@ -43,6 +43,7 @@ public class LeaderActivity extends AppCompatActivity {
         setContentView(R.layout.leader_profile);
 
         Toolbar toolbar = findViewById(R.id.leader_toolbar);
+        toolbar.setTitle("My profile");
         setSupportActionBar(toolbar);
 
         tvLeaderEmail = findViewById(R.id.leaderEmail);
@@ -114,6 +115,7 @@ public class LeaderActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", leader.getPermission());
             startActivity(intent);
         } else if (id == R.id.printPass) {
             Intent intent = new Intent(this, LeaderPrintPassActivity.class);

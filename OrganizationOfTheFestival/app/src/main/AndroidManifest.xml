@@ -37,7 +37,7 @@
         <activity android:name=".organizer.OrganizerActivity" />
         <activity android:name=".organizer.EventsActivity" />
         <activity android:name=".organizer.JobsActivity" />
-        <activity android:name=".organizer.PrintPassActivity" />
+        <activity android:name=".organizer.OrganizerPrintPassActivity" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".organizer.ApplyFestActivity" />
         <activity android:name=".signup.SignupActivity" />
@@ -53,6 +53,8 @@
         <activity android:name=".defaultUser.DefaultUserActivity" />
         <activity android:name=".festival.Event.CreateEventActivity" />
         <activity android:name=".event.creation.CreateEventActivity" />
+        <activity android:name=".worker.jobSearch.WorkerJobSearchActivity" />
+        <activity android:name=".organizer.JobAuctionActivity" />
     </application>
 
 </manifest>

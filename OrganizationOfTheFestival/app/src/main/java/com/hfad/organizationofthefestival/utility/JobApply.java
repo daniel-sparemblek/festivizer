@@ -1,7 +1,6 @@
 package com.hfad.organizationofthefestival.utility;
 
 import com.google.gson.annotations.SerializedName;
-import com.hfad.organizationofthefestival.event.Event;
 import com.hfad.organizationofthefestival.worker.Specialization;
 import com.hfad.organizationofthefestival.worker.Worker;
 
