@@ -6,11 +6,13 @@ import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.NewJob;
+import com.hfad.organizationofthefestival.utility.OnAuctionResponse;
 import com.hfad.organizationofthefestival.utility.SimpleServerResponse;
 import com.hfad.organizationofthefestival.utility.Specialization;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -66,4 +68,10 @@ public interface OrganizerClient {
     @GET("job")
     Call<JobApply> getJobInfo(@Query("job_id") int jobId,
                               @Header("Authorization") String authorization);
+
+    @POST("auction")
+    Call<Void> createAuction(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
+
+    @POST("on_auction")
+    Call<OnAuctionResponse> checkAuction(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
 }
