@@ -8,6 +8,11 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.JobApply;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class JobAuctionActivity extends AppCompatActivity {
 
     private String accessToken;
@@ -64,11 +69,24 @@ public class JobAuctionActivity extends AppCompatActivity {
         tvDesc.setText(job.getDescription());
         tvEvent.setText(job.getEvent().getName());
         tvFestival.setText(job.getEvent().getFestival().getName());
-        tvStartTime.setText(job.getStartTime());
+        tvStartTime.setText(parseDateTime(job.getStartTime())
+                .truncatedTo(ChronoUnit.MINUTES)
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         if(job.getWorker() == null) {
-            tvWorker.setText("NULL BRAT");
+            tvWorker.setText("Not assigned");
         } else {
             tvWorker.setText(job.getWorker().getUsername());
         }
+    }
+
+    public ZonedDateTime parseDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
     }
 }
