@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background_gradient"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingRight="10dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/job"
-            android:textSize="21sp" />
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/job"
+                android:textSize="21sp" />
 
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="25dp"
-        android:paddingTop="28dp"
-        android:paddingEnd="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,55 +38,66 @@
             android:paddingTop="28dp"
             android:paddingEnd="24dp">
 
-
-            <EditText
-                android:id="@+id/price"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:hint="@string/price"
-                android:inputType="number"
-                android:textSize="25sp"
-                android:importantForAutofill="no" />
+                android:orientation="vertical"
+                android:paddingStart="25dp"
+                android:paddingTop="28dp"
+                android:paddingEnd="24dp">
 
-            <EditText
-                android:id="@+id/numbOfPeople"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:inputType="number"
-                android:hint="@string/number_of_people"
-                android:textSize="25sp"
-                android:importantForAutofill="no" />
 
-            <EditText
-                android:id="@+id/timeNeeded"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:inputType="number"
-                android:hint="@string/time_needed_to_complete"
-                android:textSize="25sp"
-                android:importantForAutofill="no" />
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:hint="@string/price"
+                    android:inputType="number"
+                    android:textSize="25sp"
+                    android:importantForAutofill="no" />
 
-            <EditText
-                android:id="@+id/comment"
-                android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/numbOfPeople"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:inputType="number"
+                    android:hint="@string/number_of_people"
+                    android:textSize="25sp"
+                    android:importantForAutofill="no" />
+
+                <EditText
+                    android:id="@+id/timeNeeded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:inputType="number"
+                    android:hint="@string/time_needed_to_complete"
+                    android:textSize="25sp"
+                    android:importantForAutofill="no" />
+
+                <EditText
+                    android:id="@+id/comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:inputType="text"
+                    android:hint="@string/comment"
+                    android:textSize="25sp"
+                    android:importantForAutofill="no" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/workerApply"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:inputType="text"
-                android:hint="@string/comment"
-                android:textSize="25sp"
-                android:importantForAutofill="no" />
+                android:layout_gravity="center"
+                android:onClick="applyForJob"
+                android:text="@string/apply" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/workerApply"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="applyForJob"
-            android:text="@string/apply" />
     </LinearLayout>
 
-</LinearLayout>
+
+</ScrollView>
