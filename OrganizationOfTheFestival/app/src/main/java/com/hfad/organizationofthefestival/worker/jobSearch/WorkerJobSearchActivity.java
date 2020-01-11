@@ -88,7 +88,6 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvWorkerName.setText(jobApply.getWorker().getUsername());
         tvJobName.setText(jobApply.getName());
         tvStartTime.setText(jobApply.getStartTime());
-        System.out.println("KURAC " + permission + " " + eventIds + " " + jobApply.getEvent().getEventId());
         if (permission == 2) {
             if (eventIds.contains(jobApply.getEvent().getEventId())){
                 btnAddComment.setEnabled(true);
