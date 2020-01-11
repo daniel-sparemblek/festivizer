@@ -109,9 +109,4 @@ public class ViewApplicationActivity extends AppCompatActivity {
         tvComment.setText(body.getComment());
         toolbar.setTitle(jobName);
     }
-
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }
 }
