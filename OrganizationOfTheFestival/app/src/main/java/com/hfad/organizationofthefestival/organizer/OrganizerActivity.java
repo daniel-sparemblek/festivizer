@@ -89,7 +89,8 @@ public class OrganizerActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
-            intent.putExtra("permission", organizer.getPermission());
+            intent.putExtra("searcherPermission", organizer.getPermission());
+            //intent.putIntegerArrayListExtra("events", organizer.getFestivalList().)
             startActivity(intent);
         }
 

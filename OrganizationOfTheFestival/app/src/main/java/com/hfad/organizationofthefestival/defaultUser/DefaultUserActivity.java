@@ -12,9 +12,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.leader.Leader;
 import com.hfad.organizationofthefestival.organizer.Organizer;
+import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.worker.Worker;
 import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
 
@@ -34,6 +36,7 @@ public class DefaultUserActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
+    private int searcherPermission;
     private int permission;
 
 
@@ -43,13 +46,11 @@ public class DefaultUserActivity extends AppCompatActivity {
         setContentView(R.layout.default_user_show);
 
         Intent intent = getIntent();
-        permission = intent.getIntExtra("permission", 0);
+        searcherPermission = intent.getIntExtra("searcherPermission", 0);
         String username = intent.getStringExtra("username");
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        if (permission == 2){
-            event = intent.getIntExtra("event", 0);
-        }
+        permission = intent.getIntExtra("permission", 0);
         getViewIds();
         controller = new DefaultUserController(DefaultUserActivity.this, accessToken, refreshToken, username);
         controller.showUserProfile(permission);
@@ -98,11 +99,14 @@ public class DefaultUserActivity extends AppCompatActivity {
         lv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
             intent.putExtra("accessToken", accessToken);
-            if (permission == 2){
+            if (searcherPermission == 3){
                 event = intent.getIntExtra("event", 0);
             }
             intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("permission", permission);
+            intent.putExtra("searcherPermission", searcherPermission);
+            Job job = worker.getJob(lv.getItemAtPosition(position).toString());
+            Gson gson = new Gson();
+            intent.putExtra("job", gson.toJson(job));
             startActivity(intent);
         });
     }

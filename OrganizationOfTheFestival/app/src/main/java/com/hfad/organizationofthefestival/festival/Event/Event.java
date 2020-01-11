@@ -5,9 +5,11 @@ import com.google.gson.annotations.SerializedName;
 public class Event {
 
     @SerializedName("festival_id")
+    private long festivalId;
+    @SerializedName("event_id")
     private long eventId;
-    @SerializedName("leader_id")
-    private long leaderId;
+    @SerializedName("organizer_id")
+    private long organizerId;
     private String name;
     private String desc;
     private String location;
@@ -25,12 +27,12 @@ public class Event {
         this.eventId = eventId;
     }
 
-    public long getLeaderId() {
-        return leaderId;
+    public long getOrganizerId() {
+        return organizerId;
     }
 
-    public void setLeaderId(long leaderId) {
-        this.leaderId = leaderId;
+    public void setOrganizerId(long organizerId) {
+        this.organizerId = organizerId;
     }
 
     public String getName() {

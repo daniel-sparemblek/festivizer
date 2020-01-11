@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -41,12 +40,14 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         findViews();
         btnAddComment.setEnabled(false);
         etComment.setEnabled(false);
-        Intent intent = getIntent();
 
-        event = intent.getIntExtra("event", 0);
-        permission = intent.getIntExtra("permission", 0);
+        Intent intent = getIntent();
+        permission = intent.getIntExtra("searcherPermission", 0);
         String accessToken = intent.getStringExtra("accessToken");
         String refreshToken = intent.getStringExtra("refreshToken");
+        String jsonJob = intent.getStringExtra("job");
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        job = gson.fromJson(jsonJob, Job.class);
 
         if (permission == 2){
             event = intent.getIntExtra("event", 0);
@@ -79,7 +80,7 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvWorkerName.setText(jobApply.getWorker().getUsername());
         tvJobName.setText(jobApply.getName());
         tvStartTime.setText(jobApply.getStartTime());
-
+        System.out.println("KURAC " + event + " " + job.getEventId() + " " + job.isCompleted());
         if (event == job.getEventId() && job.isCompleted()) {
             btnAddComment.setEnabled(true);
             etComment.setEnabled(true);

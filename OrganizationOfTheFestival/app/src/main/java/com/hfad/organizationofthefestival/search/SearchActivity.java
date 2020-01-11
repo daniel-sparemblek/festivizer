@@ -30,7 +30,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private List<User> userList;
 
-    private int permission;
+    private int searcherPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,8 @@ public class SearchActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
-        permission = intent.getIntExtra("permission", 0);
-        if (permission == 2){
+        searcherPermission = intent.getIntExtra("searcherPermission", 0);
+        if (searcherPermission == 2){
             event = intent.getIntExtra("event", 0);
         }
         searchController = new SearchController(this, accessToken, username, refreshToken);
@@ -57,10 +57,12 @@ public class SearchActivity extends AppCompatActivity {
 
         lvSearchResults.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent1 = new Intent(SearchActivity.this, DefaultUserActivity.class);
+
+            intent1.putExtra("searcherPermission", searcherPermission);
             intent1.putExtra("permission", userList.get(position).getRole());
             intent1.putExtra("username", userList.get(position).getUsername());
             intent1.putExtra("accessToken", accessToken);
-            if (permission == 2){
+            if (searcherPermission == 2){
                 intent1.putExtra("event", event);
             }
             startActivity(intent1);
