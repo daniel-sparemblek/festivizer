@@ -11,18 +11,21 @@
         android:title="@string/add_specialization" />
     <item
         android:id="@+id/applyForJob"
-        android:title="@string/apply_for_a_job" />
+        android:title="Apply for a Job" />
     <item
         android:id="@+id/activeJobs"
-        android:title="@string/active_jobs" />
+        android:title="Active Jobs" />
     <item
         android:id="@+id/myApplications"
-        android:title="@string/my_applications" />
+        android:title="My Applications" />
     <item
         android:id="@+id/printPass"
         android:title="@string/print_pass" />
     <item
         android:id="@+id/search"
         android:title="@string/search" />
+    <item
+        android:id="@+id/logout"
+        android:title="Log Out" />
 
 </menu>

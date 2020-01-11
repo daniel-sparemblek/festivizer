@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
@@ -149,6 +150,11 @@ public class MyApplicationsActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", permission);
+            this.startActivity(intent);
+            finish();
+        }
+        else if (id == R.id.logout) {
+            Intent intent = new Intent(this, LoginActivity.class);
             this.startActivity(intent);
             finish();
         }
