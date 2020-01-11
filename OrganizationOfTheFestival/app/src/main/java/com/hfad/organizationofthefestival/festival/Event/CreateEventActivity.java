@@ -129,14 +129,19 @@ public class CreateEventActivity extends AppCompatActivity {
 
 
             int position = spinner.getSelectedItemPosition();
-            Organizer organizer = organizers[position];
 
-            WorkingEvent event = new WorkingEvent(Integer.parseInt(festivalId), organizer.getId(),
-                    name, desc, location, startDateTime, endDateTime);
+            if(position == -1) {
+                Toast.makeText(this, "There is no organizer selected!", Toast.LENGTH_SHORT).show();
+            } else {
+                Organizer organizer = organizers[position];
 
-            controller.createEvent(event, accessToken);
+                WorkingEvent event = new WorkingEvent(Integer.parseInt(festivalId), organizer.getId(),
+                        name, desc, location, startDateTime, endDateTime);
 
-            finish();
+                controller.createEvent(event, accessToken);
+
+                finish();
+            }
         });
     }
 
@@ -211,7 +216,7 @@ public class CreateEventActivity extends AppCompatActivity {
             Toast.makeText(this, "Location can't be empty", Toast.LENGTH_SHORT).show();
             return false;
         } else if ("".equals(etStartTime.getText().toString()) || "".equals(etEndTime.getText().toString())) {
-            Toast.makeText(this, "Start and and time must be specified", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Start and end time must be specified", Toast.LENGTH_SHORT).show();
             return false;
         } else if ("".equals(etStartDate.getText().toString()) || "".equals(etEndDate.getText().toString())) {
             Toast.makeText(this, "Start and end date must be specified", Toast.LENGTH_SHORT).show();

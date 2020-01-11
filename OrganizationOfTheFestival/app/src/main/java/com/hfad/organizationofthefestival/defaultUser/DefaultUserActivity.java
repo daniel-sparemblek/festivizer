@@ -12,13 +12,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.leader.Leader;
+import com.hfad.organizationofthefestival.leader.LeaderFestivalActivity;
 import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.Job;
+import com.hfad.organizationofthefestival.worker.JobProfileActivity;
 import com.hfad.organizationofthefestival.worker.Worker;
-import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
 
 public class DefaultUserActivity extends AppCompatActivity {
     private DefaultUserController controller;
@@ -55,6 +56,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         controller = new DefaultUserController(DefaultUserActivity.this, accessToken, refreshToken, username);
         controller.showUserProfile(permission);
     }
+//not working need to go to default festival profile activity
 
     public void fillInActivityLeader(Leader leader) {
         tvUsername.setText(leader.getUsername());
@@ -68,7 +70,7 @@ public class DefaultUserActivity extends AppCompatActivity {
         lv.setAdapter(arrayAdapter);
         setProfilePicture(leader.getPicture());
     }
-
+//not working need to go to default festival profile activity
     public void fillInActivityOrganizer(Organizer organizer) {
         tvUsername.setText(organizer.getUsername());
         tvRole.setText("ORGANIZER");
@@ -81,6 +83,17 @@ public class DefaultUserActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, organizer.getFestivals());
         lv.setAdapter(arrayAdapter);
         setProfilePicture(organizer.getPicture());
+
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(DefaultUserActivity.this, LeaderFestivalActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            Festival festival = organizer.getFestival(lv.getItemAtPosition(position).toString());
+            intent.putExtra("id", festival.getFestivalId());
+            intent.putExtra("leaderId", festival.getLeaderId());
+            intent.putExtra("username", organizer.getUsername());
+            startActivity(intent);
+        });
     }
 
     public void fillInActivityWorker(Worker worker) {
@@ -97,14 +110,12 @@ public class DefaultUserActivity extends AppCompatActivity {
         setProfilePicture(worker.getPicture());
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
+            Intent intent = new Intent(DefaultUserActivity.this, JobProfileActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("searcherPermission", searcherPermission);
             Job job = worker.getJob(lv.getItemAtPosition(position).toString());
-            Gson gson = new Gson();
-            intent.putExtra("job", gson.toJson(job));
-            intent.putExtra("searcherUsername", searcherUsername);
+            intent.putExtra("username", worker.getUsername());
+            intent.putExtra("job_id", job.getId());
             startActivity(intent);
         });
     }

@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 
 import java.io.IOException;
@@ -92,6 +93,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
             finish();
         } else if (id == R.id.activeJobs) {
@@ -99,6 +101,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
             finish();
         } else if (id == R.id.myApplications) {
@@ -106,6 +109,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
             finish();
         } else if (id == R.id.printPass) {
@@ -118,13 +122,17 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
             finish();
-        }
-        else if (id == R.id.worker_profile) {
+        } else if (id == R.id.worker_profile) {
             dialog = new ProgressDialog(this);
             dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
             workerController.getWorker();
+        }
+        else if (id == R.id.logout) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            this.startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
