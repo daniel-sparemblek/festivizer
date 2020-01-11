@@ -49,7 +49,7 @@ public class SpecializationsActivity extends AppCompatActivity {
         setContentView(R.layout.worker_add_specialization);
 
         Toolbar toolbar = findViewById(R.id.worker_toolbar);
-        toolbar.setTitle("My Profile");
+        toolbar.setTitle("Add Specializations");
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
@@ -163,21 +163,25 @@ public class SpecializationsActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", permission);
             this.startActivity(intent);
+            finish();
         } else if (id == R.id.activeJobs) {
             Intent intent = new Intent(this, ActiveJobsActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", permission);
             this.startActivity(intent);
-
+            finish();
         } else if (id == R.id.myApplications) {
             Intent intent = new Intent(this, MyApplicationsActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", permission);
             this.startActivity(intent);
-
+            finish();
         } else if (id == R.id.printPass) {
 
         } else if (id == R.id.search) {
@@ -187,6 +191,7 @@ public class SpecializationsActivity extends AppCompatActivity {
             intent.putExtra("username", username);
             intent.putExtra("permission", permission);
             this.startActivity(intent);
+            finish();
         } else if (id == R.id.worker_profile) {
             Intent intent = new Intent(this, WorkerActivity.class);
             intent.putExtra("accessToken", accessToken);
