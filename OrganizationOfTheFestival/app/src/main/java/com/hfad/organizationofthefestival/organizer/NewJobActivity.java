@@ -89,6 +89,8 @@ public class NewJobActivity extends AppCompatActivity {
                     spSecondSpecialization.getSelectedItem().toString(),
                     spThirdSpecialization.getSelectedItem().toString());
             controller.createNewJob(newJob);
+
+            returnToEventProfile();
         });
 
         btnStartDate.setOnClickListener(v -> {
@@ -113,6 +115,16 @@ public class NewJobActivity extends AppCompatActivity {
                     (view, hour, minute) -> showPickedTime(tvStartTime, hour, minute), sHour, sMinute, true);
             timePickerDialog.show();
         });
+    }
+
+    private void returnToEventProfile() {
+        Intent intent = new Intent(NewJobActivity.this, ViewEventActivity.class);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        intent.putExtra("event_id", eventId);
+        intent.putExtra("festivalName", festivalName);
+        startActivity(intent);
     }
 
     private void findViews() {
