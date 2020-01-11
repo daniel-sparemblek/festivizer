@@ -104,8 +104,6 @@ public class WorkerJobSearchController {
             @Override
             public void onResponse(Call<EventApply[]> call, Response<EventApply[]> response) {
                 if (response.isSuccessful()){
-                    List<EventApply> eventApplies = Arrays.asList(response.body());
-                    System.out.println("KURAC " + eventApplies);
                     activity.fillEventIds(response.body());
                 } else {
                     try {

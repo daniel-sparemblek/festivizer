@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.leader.Leader;
@@ -122,6 +123,10 @@ public class DefaultUserActivity extends AppCompatActivity {
             Job job = worker.getJob(lv.getItemAtPosition(position).toString());
             intent.putExtra("username", worker.getUsername());
             intent.putExtra("job_id", job.getId());
+            intent.putExtra("searcherPermission", searcherPermission);
+            intent.putExtra("searcherUsername", searcherUsername);
+            Gson gson = new Gson();
+            intent.putExtra("job", gson.toJson(job));
             startActivity(intent);
         });
     }
