@@ -6,7 +6,7 @@ from passlib.hash import pbkdf2_sha256 as sha256
 from run import db
 from run import ma
 from datetime import datetime
-import sys
+import base64
 
 
 # MODELS
@@ -223,7 +223,8 @@ class EventModel(db.Model):
     @classmethod
     def find_active_by_festival_id(cls, festival_id):
         now = datetime.now()
-        return db.session.query(cls).filter(cls.festival_id == festival_id, cls.end_time > now, cls.start_time < now).all()
+        return db.session.query(cls).filter(cls.festival_id == festival_id, cls.end_time > now,
+                                            cls.start_time < now).all()
 
     @classmethod
     def find_by_event_id(cls, event_id):
@@ -268,6 +269,13 @@ class AuctionModel(db.Model):
             .filter(EventModel.organizer_id == organizer_id).all()
 
     @classmethod
+    def find_real_by_organizer_id(cls, organizer_id):
+        now = datetime.now()
+        return db.session.query(cls).join(JobModel, JobModel.job_id == cls.job_id) \
+            .join(EventModel, EventModel.event_id == JobModel.event_id) \
+            .filter(EventModel.organizer_id == organizer_id, cls.end_time > now, cls.start_time < now).all()
+
+    @classmethod
     def find_all(cls):
         return cls.query.all()
 
@@ -286,6 +294,8 @@ class JobModel(db.Model):
     worker_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     start_time = db.Column(db.DateTime, nullable=False)
     is_completed = db.Column(db.Boolean, nullable=False)
+    comment = db.Column(db.String, nullable=True)
+    order_number = db.Column(db.Integer, nullable=False)
 
     @classmethod
     def find_by_job_id(cls, job_id):
@@ -311,6 +321,16 @@ class JobModel(db.Model):
         return db.session.query(cls).join(EventModel, EventModel.event_id == cls.event_id) \
             .filter(EventModel.organizer_id == organizer_id).all()
 
+    @classmethod
+    def find_by_event_id(cls, event_id):
+        return cls.query.filter_by(event_id=event_id).all()
+
+    @classmethod
+    def update_comment(cls, job_id, comment):
+        old_job = JobModel.find_by_job_id(job_id)
+        old_job.comment=comment
+        db.session.commit()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
@@ -326,17 +346,19 @@ class JobModel(db.Model):
 
     @classmethod
     def find_jobs_not_on_auction_by_organizer_id(cls, organizer_id):
-        job_auc_tuple = db.session.query(cls, AuctionModel).join(EventModel, EventModel.event_id == cls.event_id)\
-            .outerjoin(AuctionModel, AuctionModel.job_id == cls.job_id)\
+        job_auc_tuple = db.session.query(cls, AuctionModel).join(EventModel, EventModel.event_id == cls.event_id) \
+            .outerjoin(AuctionModel, AuctionModel.job_id == cls.job_id) \
             .filter(EventModel.organizer_id == organizer_id).all()
-        print("Ja doso do drugdje", file=sys.stderr)
         jobs = []
+        now = datetime.now()
         for job_auc in job_auc_tuple:
-            print("Ja se vrtim", file=sys.stderr)
             if job_auc[1] is None:
-                print("Ja nemam aukciju", file=sys.stderr)
                 jobs.append(job_auc[0])
-        print("Ja se vise ne vrtim", file=sys.stderr)
+            elif job_auc[1].start_time > now:
+                jobs.append(job_auc[0])
+            elif job_auc[1].end_time < now:
+                jobs.append(job_auc[0])
+
         return jobs
 
 
@@ -405,7 +427,7 @@ class SpecializationModel(db.Model):
 
     @classmethod
     def find_by_name(cls, name):
-        return cls.query.filter_by(name=name).one()
+        return db.session.query(cls).filter(cls.name == name).one()
 
     @classmethod
     def find_by_specialization_id(cls, specialization_id):
@@ -497,9 +519,21 @@ class UserSchema(ma.ModelSchema):
     @classmethod
     def to_json(cls, value):
         if type(value) is list:
-            user_schema = UserSchema(many=True)
-            return user_schema.dump(value)
-        return UserSchema().dump(value)
+            users = []
+            for user in value:
+                with open(user.picture, "rb") as imageFile:
+                    pic = base64.b64encode(imageFile.read())
+
+                    new_user = User(user.id, user.username, user.password, user.first_name, user.last_name,
+                                    pic, user.phone, user.email, user.permission, user.is_pending)
+                    users.append(new_user)
+            return UserSchema(many=True).dump(users)
+        with open(value.picture, "rb") as imageFile:
+            pic = base64.b64encode(imageFile.read())
+
+            new_user = User(value.id, value.username, value.password, value.first_name, value.last_name,
+                            pic, value.phone, value.email, value.permission, value.is_pending)
+        return UserSchema().dump(new_user)
 
     class Meta:
         model = UserModel
@@ -624,6 +658,8 @@ class JobSchema(ma.ModelSchema):
     worker_id = fields.Integer(required=False, allow_none=True)
     start_time = fields.DateTime(required=True, error_messages={"required": "Missing start time"})
     is_completed = fields.Boolean(required=True, error_messages={"required": "Missing completion"})
+    comment = fields.String(required=False)
+    order_number = fields.Integer(required=True, error_messages={'required': 'Missing order number!'})
 
     @classmethod
     def to_json(cls, value):
@@ -747,13 +783,15 @@ class LeaderSchema(ma.Schema):
             leaders = []
             for leader in value:
                 festivals = FestivalModel.find_completed_by_leader_id(leader.id)
+                with open(leader.picture, "rb") as imageFile:
+                    pic = base64.b64encode(imageFile.read())
                 new_leader = Leader(
                     user_id=leader.id,
                     username=leader.username,
                     password=leader.password,
                     first_name=leader.first_name,
                     last_name=leader.last_name,
-                    picture=leader.picture,
+                    picture=pic,
                     phone=leader.phone,
                     email=leader.email,
                     permission=leader.permission,
@@ -763,13 +801,15 @@ class LeaderSchema(ma.Schema):
                 leaders.append(new_leader)
             return cls(many=True).dump(leaders)
         festivals = FestivalModel.find_completed_by_leader_id(value.id)
+        with open(value.picture, "rb") as imageFile:
+            pic = base64.b64encode(imageFile.read())
         leader = Leader(
             user_id=value.id,
             username=value.username,
             password=value.password,
             first_name=value.first_name,
             last_name=value.last_name,
-            picture=value.picture,
+            picture=pic,
             phone=value.phone,
             email=value.email,
             permission=value.permission,
@@ -818,13 +858,15 @@ class WorkerSchema(ma.Schema):
             for worker in value:
                 specializations = SpecializationModel.find_by_worker_id(worker_id=worker.id)
                 jobs = JobModel.find_completed_by_worker_id(worker_id=worker.id)
+                with open(worker.picture, "rb") as imageFile:
+                    pic = base64.b64encode(imageFile.read())
                 new_worker = Worker(
                     user_id=worker.id,
                     username=worker.username,
                     password=worker.password,
                     first_name=worker.first_name,
                     last_name=worker.last_name,
-                    picture=worker.picture,
+                    picture=pic,
                     phone=worker.phone,
                     email=worker.email,
                     permission=worker.permission,
@@ -836,13 +878,15 @@ class WorkerSchema(ma.Schema):
             return cls(many=True).dump(workers)
         specializations = SpecializationModel.find_by_worker_id(worker_id=value.id)
         jobs = JobModel.find_completed_by_worker_id(worker_id=value.id)
+        with open(value.picture, "rb") as imageFile:
+            pic = base64.b64encode(imageFile.read())
         worker = Worker(
             user_id=value.id,
             username=value.username,
             password=value.password,
             first_name=value.first_name,
             last_name=value.last_name,
-            picture=value.picture,
+            picture=pic,
             phone=value.phone,
             email=value.email,
             permission=value.permission,
@@ -871,13 +915,15 @@ class OrganizerSchema(ma.Schema):
             organizers = []
             for organizer in value:
                 festivals = FestivalModel.find_by_approved_organizer_id(organizer_id=organizer.id)
+                with open(organizer.picture, "rb") as imageFile:
+                    pic = base64.b64encode(imageFile.read())
                 new_organizer = Organizer(
                     user_id=organizer.id,
                     username=organizer.username,
                     password=organizer.password,
                     first_name=organizer.first_name,
                     last_name=organizer.last_name,
-                    picture=organizer.picture,
+                    picture=pic,
                     phone=organizer.phone,
                     email=organizer.email,
                     permission=organizer.permission,
@@ -887,13 +933,15 @@ class OrganizerSchema(ma.Schema):
                 organizers.append(new_organizer)
             return cls(many=True).dump(organizers)
         festivals = FestivalModel.find_by_approved_organizer_id(organizer_id=value.id)
+        with open(value.picture, "rb") as imageFile:
+            pic = base64.b64encode(imageFile.read())
         organizer = Organizer(
             user_id=value.id,
             username=value.username,
             password=value.password,
             first_name=value.first_name,
             last_name=value.last_name,
-            picture=value.picture,
+            picture=pic,
             phone=value.phone,
             email=value.email,
             permission=value.permission,
@@ -904,7 +952,7 @@ class OrganizerSchema(ma.Schema):
 
 
 class JobApply(object):
-    def __init__(self, job_id, name, description, event, worker, start_time, is_completed, specializations):
+    def __init__(self, job_id, name, description, event, worker, start_time, is_completed, specializations, comment, order_number):
         self.job_id = job_id
         self.name = name
         self.description = description
@@ -913,6 +961,8 @@ class JobApply(object):
         self.start_time = start_time
         self.is_completed = is_completed
         self.specializations = specializations
+        self.comment = comment
+        self.order_number = order_number
 
 
 class EventApply(object):
@@ -1015,7 +1065,9 @@ class JobApplySchema(ma.Schema):
                     worker=new_worker,
                     start_time=job.start_time,
                     is_completed=job.is_completed,
-                    specializations=specializations
+                    specializations=specializations,
+                    comment = job.comment,
+                    order_number = job.order_number
                 )
                 jobs.append(new_job)
             return cls(many=True).dump(jobs)
@@ -1049,7 +1101,7 @@ class JobApplySchema(ma.Schema):
             )
         specializations = SpecializationModel.find_by_job_id(job_id=value.job_id)
         new_job = JobApply(value.job_id, value.name, value.description, event_apply, new_worker,
-                           value.start_time, value.is_completed, specializations)
+                           value.start_time, value.is_completed, specializations, value.comment, value.order_number)
         return cls().dump(new_job)
 
 
