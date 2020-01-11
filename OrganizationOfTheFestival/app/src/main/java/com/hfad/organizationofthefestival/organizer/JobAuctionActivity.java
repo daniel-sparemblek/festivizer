@@ -1,12 +1,17 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.JobApply;
+import com.hfad.organizationofthefestival.utility.OnAuctionResponse;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -19,7 +24,7 @@ public class JobAuctionActivity extends AppCompatActivity {
     private String refreshToken;
     private String username;
     private int jobId;
-    private JobAuctionController controller;
+    private JobAuctionController jobAuctionController;
 
     private TextView tvName;
     private TextView tvDesc;
@@ -27,6 +32,10 @@ public class JobAuctionActivity extends AppCompatActivity {
     private TextView tvFestival;
     private TextView tvStartTime;
     private TextView tvWorker;
+    private Button btnCreateAuction;
+
+    private JobApply job;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,21 +48,18 @@ public class JobAuctionActivity extends AppCompatActivity {
         tvFestival = findViewById(R.id.org_fest);
         tvStartTime = findViewById(R.id.org_startTime);
         tvWorker = findViewById(R.id.org_workerName);
+        btnCreateAuction = findViewById(R.id.org_auction);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         getDataFromIntent();
 
-        controller = new JobAuctionController(this, accessToken, jobId, refreshToken);
+        jobAuctionController = new JobAuctionController(this, accessToken, jobId, refreshToken);
 
-        controller.getJobInfo();
-    }
-
-    private void getViews() {
-        tvName = findViewById(R.id.jobName);
-        tvDesc = findViewById(R.id.jobDesc);
-        tvEvent = findViewById(R.id.org_event);
-        tvFestival = findViewById(R.id.org_fest);
-        tvStartTime = findViewById(R.id.org_startTime);
-        tvWorker = findViewById(R.id.org_workerName);
+        jobAuctionController.getJobInfo();
     }
 
     private void getDataFromIntent() {
@@ -65,6 +71,7 @@ public class JobAuctionActivity extends AppCompatActivity {
     }
 
     public void fillInActivity(JobApply job) {
+        this.job = job;
         tvName.setText(job.getName());
         tvDesc.setText(job.getDescription());
         tvEvent.setText(job.getEvent().getName());
@@ -72,11 +79,12 @@ public class JobAuctionActivity extends AppCompatActivity {
         tvStartTime.setText(parseDateTime(job.getStartTime())
                 .truncatedTo(ChronoUnit.MINUTES)
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
-        if(job.getWorker() == null) {
+        if (job.getWorker() == null) {
             tvWorker.setText("Not assigned");
         } else {
             tvWorker.setText(job.getWorker().getUsername());
         }
+        jobAuctionController.hasAuction(jobId);
     }
 
     public ZonedDateTime parseDateTime(String dateTime) {
@@ -88,5 +96,25 @@ public class JobAuctionActivity extends AppCompatActivity {
         int second = Integer.parseInt(dateTime.substring(17, 19));
 
         return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+    }
+
+    public void createAuction(View view) {
+        jobAuctionController.createAuction(job.getJobId());
+    }
+
+    public void blockButton() {
+        btnCreateAuction.setEnabled(false);
+        dialog.dismiss();
+    }
+
+    public void setButton(OnAuctionResponse body) {
+        System.out.println("TUUUUUUUUU");
+        boolean hasAuction = body.isOnAuction;
+
+        if (hasAuction) {
+            blockButton();
+            return;
+        }
+        dialog.dismiss();
     }
 }
