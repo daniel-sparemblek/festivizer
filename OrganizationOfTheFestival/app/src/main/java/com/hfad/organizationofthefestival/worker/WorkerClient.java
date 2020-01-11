@@ -59,5 +59,5 @@ public interface WorkerClient {
     @PUT("jobs/{job_id}")
     Call<SimpleServerResponse> addComment(@Path("job_id") String jobId,
                                           @Body String comment,
-                                          @Header("Authorization") String authoriaztion);
+                                          @Header("Authorization") String authorization);
 }
