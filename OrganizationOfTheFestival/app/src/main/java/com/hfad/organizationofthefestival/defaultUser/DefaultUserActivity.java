@@ -51,7 +51,6 @@ public class DefaultUserActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         permission = intent.getIntExtra("permission", 0);
         searcherUsername = intent.getStringExtra("searcherUsername");
-        System.out.println("KURAC " + searcherUsername);
         getViewIds();
         controller = new DefaultUserController(DefaultUserActivity.this, accessToken, refreshToken, username);
         controller.showUserProfile(permission);

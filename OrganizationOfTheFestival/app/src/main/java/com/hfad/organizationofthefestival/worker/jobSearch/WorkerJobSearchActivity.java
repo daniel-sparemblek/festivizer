@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class WorkerJobSearchActivity extends AppCompatActivity {
 
     private Job job;
-    private int event;
 
     private EditText etComment;
     private Button btnAddComment;
@@ -58,8 +57,6 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         job = gson.fromJson(jsonJob, Job.class);
 
         controller = new WorkerJobSearchController(this, accessToken, refreshToken);
-        controller.getFestivalName(job.getId());
-
         if (permission == 2){
             controller.getOrganizerEvents(searcherUsername);
         }
@@ -100,5 +97,6 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         eventIds = Arrays.stream(events)
                 .map(EventApply::getEventId)
                 .collect(Collectors.toList());
+        controller.getFestivalName(job.getId());
     }
 }
