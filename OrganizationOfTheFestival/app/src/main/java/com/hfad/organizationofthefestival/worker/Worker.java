@@ -5,6 +5,8 @@ import com.hfad.organizationofthefestival.utility.Job;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Worker {
 
@@ -20,18 +22,26 @@ public class Worker {
     private String email;
     private int permission;
     private List<Specialization> specializations;
+    private List<Job> jobs;
 
-    public List<String> getJobs() {
-        List<String> result = new ArrayList<>();
-
-        for (Job job : jobs) {
-            result.add(job.toString());
-        }
-
-        return result;
+    public Worker(int id, String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission, List<Specialization> specializations) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.picture = picture;
+        this.phone = phone;
+        this.email = email;
+        this.permission = permission;
+        this.specializations = specializations;
     }
 
-    private List<Job> jobs;
+    public List<String> getJobNames() {
+        return jobs.stream()
+                .map(Job::getName)
+                .collect(Collectors.toList());
+    }
 
     public int getId() {
         return id;
@@ -81,6 +91,17 @@ public class Worker {
         this.picture = picture;
     }
 
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    public Job getJob(String jobName){
+        Optional<Job> optionalJob = jobs.stream()
+                .filter(t -> t.getName().equals(jobName))
+                .findAny();
+        return optionalJob.orElse(null);
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -105,27 +126,10 @@ public class Worker {
         this.permission = permission;
     }
 
-    public Worker(int id, String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission, List<Specialization> specializations) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.picture = picture;
-        this.phone = phone;
-        this.email = email;
-        this.permission = permission;
-        this.specializations = specializations;
-    }
-
     public List<String> getSpecializations() {
-        List<String> result = new ArrayList<>();
-
-        for (Specialization spec : specializations) {
-            result.add(spec.toString());
-        }
-
-        return result;
+        return specializations.stream()
+                .map(Specialization::getName)
+                .collect(Collectors.toList());
     }
 
     public void setSpecializations(List<Specialization> specializations) {

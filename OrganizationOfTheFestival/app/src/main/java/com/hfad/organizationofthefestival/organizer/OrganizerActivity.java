@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.leader.PrintPassActivity;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 
 public class OrganizerActivity extends AppCompatActivity {
@@ -39,6 +38,7 @@ public class OrganizerActivity extends AppCompatActivity {
         setContentView(R.layout.organizer_profile);
 
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
+        toolbar.setTitle("My profile");
         setSupportActionBar(toolbar);
 
 
@@ -78,14 +78,19 @@ public class OrganizerActivity extends AppCompatActivity {
         } else if (id == R.id.myJobs) {
             switchActivity(JobsActivity.class);
         } else if (id == R.id.printPass) {
-            Intent intent = new Intent(this, PrintPassActivity.class);
+            Intent intent = new Intent(this, OrganizerPrintPassActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("leader_id", organizer.getId());
             intent.putExtra("username", organizer.getUsername());
             startActivity(intent);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("permission", organizer.getPermission());
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

@@ -3,36 +3,34 @@ package com.hfad.organizationofthefestival.festival.Event;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.leader.LeaderActivity;
+import com.hfad.organizationofthefestival.organizer.Organizer;
+import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
-import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class CreateEventActivity extends AppCompatActivity {
 
     private EventCreationController controller;
     private String accessToken;
     private String refreshToken;
-    private String username;
+    private String festivalId;
 
     private EditText etName;
     private EditText etDescription;
@@ -43,7 +41,11 @@ public class CreateEventActivity extends AppCompatActivity {
     private TextView etEndDate;
     private Button btCreate;
 
+    private Spinner spinner;
+
     private Event event;
+
+    Organizer[] organizers;
 
     private Button btnStartDatePicker, btnStartTimePicker;
     private Button btnEndDatePicker, btnEndTimePicker;
@@ -56,12 +58,17 @@ public class CreateEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leader_screen_create_event);
 
-        findViews();
-        controller = new EventCreationController(this);
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        username = intent.getStringExtra("username");
+        festivalId = intent.getStringExtra("id");
+
+        controller = new EventCreationController(this, accessToken, festivalId, refreshToken);
+
+        findViews();
+        controller.getOrganizers();
+
+        System.out.println("FFFFFFFF");
 
         btnStartDatePicker.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
@@ -114,19 +121,39 @@ public class CreateEventActivity extends AppCompatActivity {
                 return;
             }
 
+            String name = etName.getText().toString();
+            String desc = etDescription.getText().toString();
+            String location = etLocation.getText().toString();
             String startDateTime = convertTime(etStartTime.getText().toString(), etStartDate.getText().toString());
             String endDateTime = convertTime(etEndTime.getText().toString(), etEndDate.getText().toString());
 
-            event = new Event(etName.getText().toString(),
-                    etDescription.getText().toString(),
-                    etLocation.getText().toString(),
-                    startDateTime,
-                    endDateTime
-                    );
+
+            int position = spinner.getSelectedItemPosition();
+            Organizer organizer = organizers[position];
+
+            WorkingEvent event = new WorkingEvent(Integer.parseInt(festivalId), organizer.getId(),
+                    name, desc, location, startDateTime, endDateTime);
+
             controller.createEvent(event, accessToken);
 
-            returnToLeaderActivity();
+            finish();
         });
+    }
+
+    public void setupSpinner(Organizer[] organizers) {
+        this.organizers = organizers;
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, getOrganizers(organizers));
+        spinner.setAdapter(adapter);
+    }
+
+    private List<String> getOrganizers(Organizer[] organizers) {
+        List<String> result = new ArrayList<>();
+
+        for (Organizer organizer : organizers) {
+            result.add(organizer.getUsername());
+        }
+
+        return result;
     }
 
     private void showPickedDate(TextView et, int day, int month, int year) {
@@ -154,19 +181,11 @@ public class CreateEventActivity extends AppCompatActivity {
         }
     }
 
-    private void returnToLeaderActivity() {
-        Intent intent = new Intent(CreateEventActivity.this, LeaderActivity.class);
-        intent.putExtra("accessToken", accessToken);
-        intent.putExtra("refreshToken", refreshToken);
-        intent.putExtra("username", username);
-        startActivity(intent);
-    }
-
     private void findViews() {
         etLocation = findViewById(R.id.location);
         etName = findViewById(R.id.name);
         etDescription = findViewById(R.id.desc);
-        btCreate = findViewById(R.id.createBtn);
+        btCreate = findViewById(R.id.createEvent);
 
         btnStartDatePicker = findViewById(R.id.startDatebtn);
         btnStartTimePicker = findViewById(R.id.startTimebtn);
@@ -177,6 +196,8 @@ public class CreateEventActivity extends AppCompatActivity {
         btnEndTimePicker = findViewById(R.id.endTimebtn);
         etEndDate = findViewById(R.id.endDate);
         etEndTime = findViewById(R.id.endTime);
+
+        spinner = findViewById(R.id.selOrganizerIn);
     }
 
     private boolean checkEntry() {
@@ -186,7 +207,7 @@ public class CreateEventActivity extends AppCompatActivity {
         } else if ("".equals(etDescription.getText().toString())) {
             Toast.makeText(this, "Description can't be empty", Toast.LENGTH_SHORT).show();
             return false;
-        } else if("".equals(etLocation.getText().toString())) {
+        } else if ("".equals(etLocation.getText().toString())) {
             Toast.makeText(this, "Location can't be empty", Toast.LENGTH_SHORT).show();
             return false;
         } else if ("".equals(etStartTime.getText().toString()) || "".equals(etEndTime.getText().toString())) {

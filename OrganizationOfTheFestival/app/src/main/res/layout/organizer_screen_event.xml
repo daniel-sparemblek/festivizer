@@ -51,7 +51,7 @@
         android:paddingRight="24dp">
 
         <TextView
-            android:id="@+id/org_festName"
+            android:id="@+id/org_event_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -120,6 +120,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:onClick="createNewJob"
             android:text="@string/new_job" />
     </LinearLayout>
 

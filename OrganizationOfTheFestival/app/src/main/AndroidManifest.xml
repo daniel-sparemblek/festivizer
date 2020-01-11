@@ -3,7 +3,7 @@
     package="com.hfad.organizationofthefestival">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".leader.PrintPassActivity"></activity>
+        <activity android:name=".organizer.NewJobActivity"></activity>
+        <activity android:name=".organizer.ViewEventActivity" />
+        <activity android:name=".leader.ViewEventActivity" />
+        <activity android:name=".leader.LeaderMyEventsActivity" />
+        <activity android:name=".leader.ApproveOrganizersActivity" />
+        <activity android:name=".leader.LeaderPrintPassActivity" />
         <activity android:name=".leader.MyFestivalsActivity" />
         <activity android:name=".leader.LeaderFestivalActivity" />
         <activity android:name=".worker.JobProfileActivity" />
@@ -32,7 +37,7 @@
         <activity android:name=".organizer.OrganizerActivity" />
         <activity android:name=".organizer.EventsActivity" />
         <activity android:name=".organizer.JobsActivity" />
-        <activity android:name=".organizer.PrintPassActivity" />
+        <activity android:name=".organizer.OrganizerPrintPassActivity" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".organizer.ApplyFestActivity" />
         <activity android:name=".signup.SignupActivity" />
@@ -48,6 +53,8 @@
         <activity android:name=".defaultUser.DefaultUserActivity" />
         <activity android:name=".festival.Event.CreateEventActivity" />
         <activity android:name=".event.creation.CreateEventActivity" />
+        <activity android:name=".worker.jobSearch.WorkerJobSearchActivity" />
+        <activity android:name=".organizer.JobAuctionActivity" />
     </application>
 
 </manifest>

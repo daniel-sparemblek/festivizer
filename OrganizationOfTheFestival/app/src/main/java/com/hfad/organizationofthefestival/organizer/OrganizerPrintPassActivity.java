@@ -1,4 +1,4 @@
-package com.hfad.organizationofthefestival.leader;
+package com.hfad.organizationofthefestival.organizer;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,8 +10,11 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 import com.google.zxing.WriterException;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,72 +32,115 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
-public class PrintPassActivity extends AppCompatActivity {
+public class OrganizerPrintPassActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
-    private int leaderId;
+    private int organizerId;
     private String username;
-    private Leader leader;
+    private Organizer organizer;
 
     private Spinner spFestivalPicker;
     private Button btnGeneratePass;
 
-    private LeaderPrintPassController leaderPrintPassController;
-
     private List<Festival> festivalList;
-
+    private OrganizerPrintPassController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.leader_print_pass);
+        setContentView(R.layout.organizer_screen_prt_pass);
+
+        Toolbar toolbar = findViewById(R.id.organizer_toolbar);
+        toolbar.setTitle("Print Pass");
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        leaderId = intent.getIntExtra("leader_id", 0);
         username = intent.getStringExtra("username");
+        spFestivalPicker = findViewById(R.id.org_pickFestival);
+        btnGeneratePass = findViewById(R.id.org_genPass);
 
-        spFestivalPicker = findViewById(R.id.leader_sp_festival_picker);
-        btnGeneratePass = findViewById(R.id.leader_btn_generate_pass);
+        controller = new OrganizerPrintPassController(this, accessToken, username, refreshToken);
+        controller.getOrganizer();
 
-        leaderPrintPassController = new LeaderPrintPassController(this, accessToken, username, refreshToken);
-        leaderPrintPassController.getLeaderFestivals(leaderId);
+        btnGeneratePass.setOnClickListener(v -> generatePass(spFestivalPicker.getSelectedView()));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.organizer_menu, menu);
+        return true;
+    }
 
-    public void fillInActivity(Festival[] body) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.myProfile) {
+            switchActivity(OrganizerActivity.class);
+        } else if (id == R.id.applyForFest) {
+            switchActivity(ApplyFestActivity.class);
+        } else if (id == R.id.myEvents) {
+            switchActivity(EventsActivity.class);
+        } else if (id == R.id.myJobs) {
+            switchActivity(JobsActivity.class);
+        } else if (id == R.id.printPass) {
+            // do nothing
+        } else if (id == R.id.search) {
+            switchActivity(SearchActivity.class);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void switchActivity(Class<?> destination) {
+        Intent intent = new Intent(this, destination);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        this.startActivity(intent);
+    }
+
+    public void fillInActivity(Organizer organizer, List<Festival> festivalList) {
+        this.organizer = organizer;
+        this.festivalList = festivalList;
+
         ArrayAdapter<String> festivalsArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, festivalsToStrings(body));
+                android.R.layout.simple_spinner_dropdown_item, festivalsToStrings(festivalList));
 
         spFestivalPicker.setAdapter(festivalsArrayAdapter);
     }
 
-    public void fillInLeader(Leader leader) {
-        this.leader = leader;
+    public void fillInOrganizer(Organizer organizer) {
+        this.organizer = organizer;
     }
 
-    public List<String> festivalsToStrings(Festival[] festivals) {
-        festivalList = Arrays.asList(festivals);
-
-        return festivalList.stream()
+    public List<String> festivalsToStrings(List<Festival> festivals) {
+        return festivals.stream()
                 .map(Festival::getName)
                 .collect(Collectors.toList());
     }
 
     public void generatePass(View view) {
+        System.out.println("jebosebe");
+
         int position = spFestivalPicker.getSelectedItemPosition();
 
         Festival festival = festivalList.get(position);
-        createPdf(leader.getFirstName(), leader.getLastName(), festival);
+        createPdf(organizer.getFirstName(), organizer.getLastName(), festival);
 
     }
 
@@ -117,11 +164,11 @@ public class PrintPassActivity extends AppCompatActivity {
         canvas.drawText(leaderFirstName, 99.5F, 80, infoPaint);
         canvas.drawText(leaderLastName, 99.5F, 100, infoPaint);
         canvas.drawText(festival.getName(), 99.5F, 120, infoPaint);
-        canvas.drawBitmap(Bitmap.createScaledBitmap(pictureStringToBitmap(leader.getPicture()), 100, 100, false),
+        canvas.drawBitmap(Bitmap.createScaledBitmap(pictureStringToBitmap(organizer.getPicture()), 100, 100, false),
                 49.5f, 140, titlePaint);
         canvas.drawBitmap(Bitmap.createScaledBitmap(pictureStringToBitmap(festival.getLogo()), 30, 30, false),
                 10, 244, titlePaint);
-        canvas.drawBitmap(createQRCodeImage(leader.getUsername(), festival.getName()), 159, 244, titlePaint);
+        canvas.drawBitmap(createQRCodeImage(organizer.getUsername(), festival.getName()), 159, 244, titlePaint);
 
 
         document.finishPage(page);

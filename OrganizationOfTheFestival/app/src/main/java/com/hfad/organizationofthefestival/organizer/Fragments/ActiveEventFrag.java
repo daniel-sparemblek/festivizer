@@ -14,8 +14,8 @@ public class ActiveEventFrag extends Fragment {
     public ActiveEventFrag() {
         // Required empty public constructor
     }
-    public static CompletedJobsFrag newInstance() {
-        CompletedJobsFrag fragment = new CompletedJobsFrag();
+    public static ActiveEventFrag newInstance() {
+        ActiveEventFrag fragment = new ActiveEventFrag();
         return fragment;
     }
 
@@ -27,6 +27,6 @@ public class ActiveEventFrag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.organizer_screen_my_jobs_rows, container, false);
+        return inflater.inflate(R.layout.organizer_fragment_active_events, container, false);
     }
 }

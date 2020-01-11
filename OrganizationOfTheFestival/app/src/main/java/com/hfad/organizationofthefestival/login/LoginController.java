@@ -69,6 +69,7 @@ public class LoginController {
             case 0:
                 intent = new Intent(loginActivity, AdminActivity.class);
                 intent.putExtra("accessToken", accessToken);
+                intent.putExtra("permission", permission);
                 intent.putExtra("refreshToken", refreshToken);
                 intent.putExtra("username", username);
                 loginActivity.startActivity(intent);
@@ -78,6 +79,7 @@ public class LoginController {
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
                 intent.putExtra("username", username);
+                intent.putExtra("permission", permission);
                 loginActivity.startActivity(intent);
                 break;
 
@@ -86,6 +88,7 @@ public class LoginController {
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
                 intent.putExtra("username", username);
+                intent.putExtra("permission", permission);
                 loginActivity.startActivity(intent);
                 break;
 
@@ -94,6 +97,7 @@ public class LoginController {
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
                 intent.putExtra("username", username);
+                intent.putExtra("permission", permission);
                 loginActivity.startActivity(intent);
                 break;
         }

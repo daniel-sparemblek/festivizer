@@ -10,22 +10,22 @@ import com.hfad.organizationofthefestival.R;
 
 public class CompletedEventFrag extends Fragment {
 
+
     public CompletedEventFrag() {
         // Required empty public constructor
     }
-    public static CompletedJobsFrag newInstance() {
-        CompletedJobsFrag fragment = new CompletedJobsFrag();
+    public static CompletedEventFrag newInstance() {
+        CompletedEventFrag fragment = new CompletedEventFrag();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.organizer_screen_my_events_rows, container, false);
+        return inflater.inflate(R.layout.organizer_fragment_completed_events, container, false);
     }
 }

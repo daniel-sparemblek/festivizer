@@ -21,6 +21,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
     private String accessToken;
     private String refreshToken;
     private String leaderId;
+    private String username;
     private Festival[] festivals;
 
     private MyFestivalsController controller;
@@ -39,6 +40,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         leaderId = intent.getStringExtra("leader_id");
+        username = intent.getStringExtra("username");
 
         btnActive = findViewById(R.id.btnActive);
         btnPending = findViewById(R.id.btnPending);
@@ -90,6 +92,8 @@ public class MyFestivalsActivity extends AppCompatActivity {
         intent.putExtra("accessToken", accessToken);
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("id", id.toString());
+        intent.putExtra("leaderId", leaderId);
+        intent.putExtra("username", username);
         this.startActivity(intent);
     }
 

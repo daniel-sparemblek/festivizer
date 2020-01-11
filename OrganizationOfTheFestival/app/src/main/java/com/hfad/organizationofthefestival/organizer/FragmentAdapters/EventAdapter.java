@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.organizer.EventsActivity;
 import com.hfad.organizationofthefestival.organizer.Fragments.ActiveEventFrag;
 import com.hfad.organizationofthefestival.organizer.Fragments.CompletedEventFrag;
 
@@ -15,10 +16,10 @@ public class EventAdapter extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.active, R.string.completed};
-    private final Context mContext;
+    private final EventsActivity mContext;
 
 
-    public EventAdapter(Context context, FragmentManager fm) {
+    public EventAdapter(EventsActivity context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }
@@ -28,11 +29,9 @@ public class EventAdapter extends FragmentPagerAdapter {
         Fragment fragment = new Fragment();
         switch (position) {
             case 0:
-                System.out.println("Ovdje sam usao 1");
                 fragment = ActiveEventFrag.newInstance();
                 break;
             case 1:
-                System.out.println("Ovdje sam usao 2");
                 fragment = CompletedEventFrag.newInstance();
                 break;
         }

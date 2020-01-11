@@ -14,8 +14,16 @@ import android.widget.ListView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.JobsAdapter;
 import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class JobsActivity extends AppCompatActivity {
 
@@ -24,6 +32,13 @@ public class JobsActivity extends AppCompatActivity {
     private String refreshToken;
     private String username;
     private ListView lvJobs;
+    private JobApply[] gotJobs = null;
+
+    private List<Job> auctionedJobs;
+    private List<Job> pendingJobs;
+    private List<Job> activeJobs;
+    private List<Job> completedJobs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +46,13 @@ public class JobsActivity extends AppCompatActivity {
         setContentView(R.layout.organizer_screen_my_jobs);
 
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
+        toolbar.setTitle("My jobs");
         setSupportActionBar(toolbar);
 
-        JobsAdapter jobsAdapter = new JobsAdapter(this, getSupportFragmentManager(), getIntent(), this);
+        JobsAdapter jobsAdapter = new JobsAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(jobsAdapter);
+        viewPager.setOffscreenPageLimit(4);
 
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
@@ -52,13 +69,20 @@ public class JobsActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if(position == 0) {
+                if (position == 0) {
                     jobsController.getAuctionedJobs();
-                    System.out.println("I ovdje sam uhvatio 1.");
                 }
-                if(position == 1) {
-                    jobsController.getJobs();
-                    System.out.println("I ovdje sam uhvatio 2.");
+
+                if (position == 1) {
+                    jobsController.getActiveJobs();
+                }
+
+                if (position == 2) {
+                    jobsController.getPendingJobs();
+                }
+
+                if (position == 3) {
+                    jobsController.getCompletedJobs();
                 }
             }
         });
@@ -66,19 +90,14 @@ public class JobsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.organizer_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.myProfile) {
             switchActivity(OrganizerActivity.class);
         } else if (id == R.id.applyForFest) {
@@ -88,7 +107,7 @@ public class JobsActivity extends AppCompatActivity {
         } else if (id == R.id.myJobs) {
             // do nothing
         } else if (id == R.id.printPass) {
-            switchActivity(PrintPassActivity.class);
+            switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
             switchActivity(SearchActivity.class);
         }
@@ -104,17 +123,105 @@ public class JobsActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void fillInJobs(JobApply[] jobs) {
+    public void fillInAuctions(ApplicationAuction[] auctions) {
+        List<ApplicationAuction> onAuctions = Arrays.stream(auctions)
+                .filter(t -> parseDateTime(t.getEndTime()).isAfter(ZonedDateTime.now()))
+                .collect(Collectors.toList());
+
+        auctionedJobs = auctionsToJobs(onAuctions.toArray(new ApplicationAuction[0]));
         lvJobs = findViewById(R.id.orgJobsList);
+
+        Job[] jobs = auctionedJobs.toArray(new Job[0]);
+
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsController.formatJobs(jobs));
+                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
     }
 
-    public void fillInAuctions(ApplicationAuction[] jobs) {
-        lvJobs = findViewById(R.id.orgJobsList);
+    public void fillInActiveJobs(Job[] jobs) {
+        activeJobs = Arrays.stream(jobs)
+                .filter(t -> t.getWorkerId() != 0)
+                .filter(t -> !t.isCompleted())
+                .collect(Collectors.toList());
+
+        jobs = activeJobs.toArray(new Job[0]);
+        lvJobs = findViewById(R.id.orgActiveJobList);
+
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsController.formatAuctions(jobs));
+                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
     }
+
+    public void fillInPendingJobs(Job[] jobs) {
+        pendingJobs = Arrays.stream(jobs)
+                .filter(t -> t.getWorkerId() == 0)
+                .filter(t -> !t.isCompleted())
+                .collect(Collectors.toList());
+
+        jobs = pendingJobs.toArray(new Job[0]);
+        lvJobs = findViewById(R.id.orgPendingJobList);
+
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
+        lvJobs.setAdapter(specializationArrayAdapter);
+
+        setupListViewListener(jobs);
+    }
+
+    private void setupListViewListener(Job[] jobs) {
+        lvJobs.setOnItemClickListener((parent, view, position, id) -> {
+            String name = (String) parent.getItemAtPosition(position);
+
+            Optional<Job> jobOptional = Arrays.stream(jobs)
+                    .filter(t -> name.equals(t.getName()))
+                    .findFirst();
+
+            if(jobOptional.isPresent()) {
+                Intent intent = new Intent(this, JobAuctionActivity.class);
+                intent.putExtra("accessToken", accessToken);
+                intent.putExtra("refreshToken", refreshToken);
+                intent.putExtra("username", username);
+                intent.putExtra("jobId", jobOptional.get().getId());
+                this.startActivity(intent);
+            }
+        });
+
+    }
+
+    public void fillInCompletedJobs(Job[] jobs) {
+        completedJobs = Arrays.stream(jobs)
+                .filter(Job::isCompleted)
+                .collect(Collectors.toList());
+
+        jobs = completedJobs.toArray(new Job[0]);
+        lvJobs = findViewById(R.id.orgCompletedJobList);
+
+        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
+        lvJobs.setAdapter(specializationArrayAdapter);
+    }
+
+    public List<String> jobsToStrings(Job[] jobs) {
+        return Arrays.asList(jobs).stream()
+                .map(Job::getName)
+                .collect(Collectors.toList());
+    }
+
+    public List<Job> auctionsToJobs(ApplicationAuction[] applicationAuctions) {
+        return Arrays.asList(applicationAuctions).stream()
+                .map(ApplicationAuction::getJob)
+                .collect(Collectors.toList());
+    }
+
+    public ZonedDateTime parseDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+    }
+
 }

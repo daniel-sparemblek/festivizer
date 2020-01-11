@@ -43,6 +43,7 @@ public class LeaderActivity extends AppCompatActivity {
         setContentView(R.layout.leader_profile);
 
         Toolbar toolbar = findViewById(R.id.leader_toolbar);
+        toolbar.setTitle("My profile");
         setSupportActionBar(toolbar);
 
         tvLeaderEmail = findViewById(R.id.leaderEmail);
@@ -95,6 +96,7 @@ public class LeaderActivity extends AppCompatActivity {
             intent.putExtra("leader_id", Integer.toString(leader.getId()));
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
             startActivity(intent);
         } else if (id == R.id.createNewFest) {
             Intent intent = new Intent(this, CreateFestivalActivity.class);
@@ -113,9 +115,10 @@ public class LeaderActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", leader.getPermission());
             startActivity(intent);
         } else if (id == R.id.printPass) {
-            Intent intent = new Intent(this, PrintPassActivity.class);
+            Intent intent = new Intent(this, LeaderPrintPassActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("leader_id", leader.getId());

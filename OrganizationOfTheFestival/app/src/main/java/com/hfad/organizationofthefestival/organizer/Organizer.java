@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Organizer {
 
+    @SerializedName("user_id")
     private int id;
     private String username;
     private String password;
@@ -115,6 +116,10 @@ public class Organizer {
         }
 
         return result;
+    }
+
+    public List<Festival> getFestivalList() {
+        return this.festivals;
     }
 
     public void setFestivals(List<Festival> festivals) {

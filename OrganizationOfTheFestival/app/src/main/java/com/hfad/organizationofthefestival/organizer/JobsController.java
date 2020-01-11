@@ -1,9 +1,11 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,19 +36,56 @@ public class JobsController {
     }
 
 
-    public void getJobs() {
-        Call<JobApply[]> jobsCall = api.getAllJobs(username, "Bearer " + accessToken);
+    public void getActiveJobs() {
+        Call<Job[]> jobsCall = api.getNoneAuctionedJobs(username, "Bearer " + accessToken);
 
-        jobsCall.enqueue(new Callback<JobApply[]>() {
+        jobsCall.enqueue(new Callback<Job[]>() {
             @Override
-            public void onResponse(Call<JobApply[]> call, Response<JobApply[]> response) {
+            public void onResponse(Call<Job[]> call, Response<Job[]> response) {
                 if(response.isSuccessful()) {
-                    jobsActivity.fillInJobs(response.body());
+                    jobsActivity.fillInActiveJobs(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<JobApply[]> call, Throwable t) {
+            public void onFailure(Call<Job[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getPendingJobs() {
+        Call<Job[]> jobsCall = api.getNoneAuctionedJobs(username, "Bearer " + accessToken);
+
+
+        jobsCall.enqueue(new Callback<Job[]>() {
+            @Override
+            public void onResponse(Call<Job[]> call, Response<Job[]> response) {
+                if(response.isSuccessful()) {
+                    jobsActivity.fillInPendingJobs(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Job[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getCompletedJobs() {
+        Call<Job[]> jobsCall = api.getNoneAuctionedJobs(username, "Bearer " + accessToken);
+
+        jobsCall.enqueue(new Callback<Job[]>() {
+            @Override
+            public void onResponse(Call<Job[]> call, Response<Job[]> response) {
+                if(response.isSuccessful()) {
+                    jobsActivity.fillInCompletedJobs(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Job[]> call, Throwable t) {
 
             }
         });
@@ -68,25 +107,5 @@ public class JobsController {
 
             }
         });
-    }
-
-    public List<String> formatJobs(JobApply[] jobs) {
-        List<String> result = new ArrayList<>();
-
-        for(JobApply job : jobs) {
-            result.add(job.getName());
-        }
-
-        return result;
-    }
-
-    public List<String> formatAuctions(ApplicationAuction[] applicationAuctions) {
-        List<String> result = new ArrayList<>();
-
-        for(ApplicationAuction applicationAuction : applicationAuctions) {
-            result.add(applicationAuction.getJob().getName());
-        }
-
-        return result;
     }
 }

@@ -23,17 +23,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/apply_for_a_festival"
-            android:textSize="21sp" />
-
-    </LinearLayout>
+        android:paddingRight="10dp"/>
 
 
     <LinearLayout
