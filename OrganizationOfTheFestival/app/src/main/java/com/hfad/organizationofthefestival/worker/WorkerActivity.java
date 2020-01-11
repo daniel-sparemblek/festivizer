@@ -92,6 +92,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
             finish();
         } else if (id == R.id.activeJobs) {
@@ -99,6 +100,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
             finish();
         } else if (id == R.id.myApplications) {
@@ -106,6 +108,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
+            intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
             finish();
         } else if (id == R.id.printPass) {
@@ -118,8 +121,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
             finish();
-        }
-        else if (id == R.id.worker_profile) {
+        } else if (id == R.id.worker_profile) {
             dialog = new ProgressDialog(this);
             dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
             dialog.setCanceledOnTouchOutside(false);
