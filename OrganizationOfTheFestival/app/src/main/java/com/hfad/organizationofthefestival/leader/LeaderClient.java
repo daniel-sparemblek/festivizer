@@ -34,6 +34,10 @@ public interface LeaderClient {
     Call<ApplicationResponse[]> getAuctions(@Query("leader_id") String leaderID,
                                             @Header("Authorization") String authorization);
 
+    @GET("applications")
+    Call<ApplicationResponse[]> getActiveAuctions(@Query("leader_id_active") String leaderID,
+                                            @Header("Authorization") String authorization);
+
     @GET("organizers")
     Call<Organizer[]> getUnapprovedOrganizers(@Query("festival_id_all") String leaderId,
                                               @Header("Authorization") String authorization);
