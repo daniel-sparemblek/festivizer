@@ -1,18 +1,17 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.AdminAdapter;
 import com.hfad.organizationofthefestival.organizer.Organizer;
-import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +28,8 @@ public class ApproveOrganizersActivity extends AppCompatActivity {
 
     private ApproveOrganizersController approveOrganizersController;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,12 @@ public class ApproveOrganizersActivity extends AppCompatActivity {
         lvOrganizers = findViewById(R.id.org_approval_list);
 
         approveOrganizersController = new ApproveOrganizersController(this, accessToken, festivalId, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         approveOrganizersController.getUnapprovedOrganizers();
     }
 
@@ -50,6 +57,8 @@ public class ApproveOrganizersActivity extends AppCompatActivity {
         List<String> organizers = organizersToStrings(body);
         AdminAdapter adapter = new AdminAdapter(this, R.layout.admin_row_layout, organizers);
         lvOrganizers.setAdapter(adapter);
+
+        dialog.dismiss();
     }
 
     public void adminOnClickAccept(View view) {

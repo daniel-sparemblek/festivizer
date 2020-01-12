@@ -1,9 +1,11 @@
 package com.hfad.organizationofthefestival.worker;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -28,6 +30,8 @@ public class ViewApplicationActivity extends AppCompatActivity {
     private TextView tvComment;
     private Toolbar toolbar;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,12 @@ public class ViewApplicationActivity extends AppCompatActivity {
         tvComment = findViewById(R.id.worker_tv_comment);
 
         viewApplicationController = new ViewApplicationController(this, accessToken, username, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         viewApplicationController.getApplication(applicationId);
     }
 
@@ -108,5 +118,7 @@ public class ViewApplicationActivity extends AppCompatActivity {
         tvNumberOfPeople.setText(String.valueOf(body.getPeopleNumber()));
         tvComment.setText(body.getComment());
         toolbar.setTitle(jobName);
+
+        dialog.dismiss();
     }
 }

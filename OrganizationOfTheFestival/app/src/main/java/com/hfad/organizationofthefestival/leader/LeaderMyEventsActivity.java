@@ -1,9 +1,11 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,6 +33,8 @@ public class LeaderMyEventsActivity extends AppCompatActivity {
     private LeaderMyEventsController leaderMyEventsController;
     private List<Event> eventList;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,12 @@ public class LeaderMyEventsActivity extends AppCompatActivity {
         leaderMyEventsController = new LeaderMyEventsController(this, accessToken, refreshToken);
 
         btnActiveEvents.setBackgroundColor(Color.WHITE);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         leaderMyEventsController.getActiveEvents(festivalId);
 
         lvEvents.setOnItemClickListener((parent, view, position, id) -> {
@@ -68,6 +78,8 @@ public class LeaderMyEventsActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, eventsToStrings(body));
         lvEvents.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 
     public List<String> eventsToStrings(Event[] events) {

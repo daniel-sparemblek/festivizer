@@ -1,13 +1,14 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.EventApply;
-import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -31,6 +32,8 @@ public class ViewEventActivity extends AppCompatActivity {
 
     private ViewEventController viewEventController;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,12 @@ public class ViewEventActivity extends AppCompatActivity {
         eventId = intent.getLongExtra("event_id", 0);
 
         viewEventController = new ViewEventController(this, accessToken, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         viewEventController.getEvent((int)eventId);
     }
 
@@ -67,6 +76,8 @@ public class ViewEventActivity extends AppCompatActivity {
                 .truncatedTo(ChronoUnit.MINUTES)
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         tvOrganizerName.setText(String.valueOf(body.getOrganizer().getUsername()));
+
+        dialog.dismiss();
     }
 
     public ZonedDateTime parseDateTime(String dateTime) {

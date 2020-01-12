@@ -1,9 +1,11 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
@@ -24,6 +26,8 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
 
     private List<ApplicationResponse> applicationList;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,11 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
 
         controller = new LeaderJobAuctionsController(this, accessToken, refreshToken, leaderID);
 
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         controller.getJobAuctions();
     }
 
@@ -47,6 +56,8 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, R.layout.application_row_layout, applicationList);
 
         jobAuctionsList.setAdapter(applicationAdapter);
+
+        dialog.dismiss();
 
     }
 }

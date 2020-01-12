@@ -1,8 +1,10 @@
 package com.hfad.organizationofthefestival.search;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -30,6 +32,8 @@ public class SearchActivity extends AppCompatActivity {
     private List<User> userList;
 
     private int searcherPermission;
+
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,12 @@ public class SearchActivity extends AppCompatActivity {
 
     public void search() {
         String searched = tvSearch.getText().toString();
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         searchController.search(searched);
     }
 
@@ -73,6 +83,8 @@ public class SearchActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, users.stream().map(User::getUsername).collect(Collectors.toList()));
         lvSearchResults.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
 
     }
 

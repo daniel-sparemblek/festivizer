@@ -1,9 +1,11 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -24,6 +26,8 @@ public class ApplyFestActivity extends AppCompatActivity {
     private char c = 0x2714;
     private FestivalsResponse[] festivals;
 
+    private ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,11 @@ public class ApplyFestActivity extends AppCompatActivity {
 
 
         applyFestController = new ApplyFestController(this, accessToken, username, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         applyFestController.fetchFestivals();
 
@@ -121,5 +130,7 @@ public class ApplyFestActivity extends AppCompatActivity {
         ArrayAdapter<String> festivalsArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, applyFestController.formatFestivals(festivals));
         lvEvents.setAdapter(festivalsArrayAdapter);
+
+        dialog.dismiss();
     }
 }

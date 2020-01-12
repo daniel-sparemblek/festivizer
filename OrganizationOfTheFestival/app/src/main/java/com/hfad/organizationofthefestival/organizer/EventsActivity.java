@@ -21,7 +21,6 @@ import com.hfad.organizationofthefestival.utility.EventApply;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,12 +61,13 @@ public class EventsActivity extends ApplyFestActivity {
 
         eventsController = new EventsController(this, accessToken, username, refreshToken);
 
-        eventsController.fetchActiveEvents();
-
         dialog = new ProgressDialog(this);
         dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+
+        eventsController.fetchActiveEvents();
+
 
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -137,6 +137,8 @@ public class EventsActivity extends ApplyFestActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, eventsToStrings(activeEvents));
         lvEvents.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 
     public void fillInCompletedEvents(EventApply[] events) {
@@ -158,6 +160,8 @@ public class EventsActivity extends ApplyFestActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, eventsToStrings(completedEvents));
         lvEvents.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 
 

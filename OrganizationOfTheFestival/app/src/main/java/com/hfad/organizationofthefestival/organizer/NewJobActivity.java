@@ -1,10 +1,12 @@
 package com.hfad.organizationofthefestival.organizer;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,6 +57,8 @@ public class NewJobActivity extends AppCompatActivity {
 
     private int sYear, sMonth, sDay, sHour, sMinute;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +78,12 @@ public class NewJobActivity extends AppCompatActivity {
         tvFestivalName.setText(festivalName);
 
         controller = new NewJobController(this, accessToken, username, refreshToken, eventName, festivalName);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         controller.getSpecializations();
 
         btnCrateJob.setOnClickListener(v -> {
@@ -153,6 +163,9 @@ public class NewJobActivity extends AppCompatActivity {
         spFirstSpecialization.setAdapter(arrayAdapter);
         spSecondSpecialization.setAdapter(arrayAdapter);
         spThirdSpecialization.setAdapter(arrayAdapter);
+
+
+        dialog.dismiss();
     }
 
     private boolean checkChosenSpecs() {

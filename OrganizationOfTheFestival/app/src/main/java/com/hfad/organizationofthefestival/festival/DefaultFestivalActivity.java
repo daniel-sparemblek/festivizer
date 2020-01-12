@@ -1,10 +1,12 @@
 package com.hfad.organizationofthefestival.festival;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +32,8 @@ public class DefaultFestivalActivity extends AppCompatActivity {
 
     private DefaultFestivalController controller;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,12 @@ public class DefaultFestivalActivity extends AppCompatActivity {
 
         controller = new DefaultFestivalController(this, accessToken, festivalId.toString(), refreshToken);
 
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         controller.getFestivalData();
 
     }
@@ -63,6 +73,8 @@ public class DefaultFestivalActivity extends AppCompatActivity {
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
         setProfilePicture(festival.getLogo());
+
+        dialog.dismiss();
     }
 
     public ZonedDateTime parseDateTime(String dateTime) {

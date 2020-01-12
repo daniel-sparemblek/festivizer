@@ -1,11 +1,13 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -39,6 +41,8 @@ public class JobsActivity extends AppCompatActivity {
     private List<Job> activeJobs;
     private List<Job> completedJobs;
 
+    private ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,11 @@ public class JobsActivity extends AppCompatActivity {
         username = intent.getStringExtra("username");
 
         jobsController = new JobsController(this, accessToken, username, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         jobsController.getAuctionedJobs();
 
@@ -136,6 +145,8 @@ public class JobsActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 
     public void fillInActiveJobs(Job[] jobs) {
@@ -150,6 +161,8 @@ public class JobsActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 
     public void fillInPendingJobs(Job[] jobs) {
@@ -166,6 +179,8 @@ public class JobsActivity extends AppCompatActivity {
         lvJobs.setAdapter(specializationArrayAdapter);
 
         setupListViewListener(jobs);
+
+        dialog.dismiss();
     }
 
     private void setupListViewListener(Job[] jobs) {
@@ -199,6 +214,8 @@ public class JobsActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 
     public List<String> jobsToStrings(Job[] jobs) {

@@ -1,13 +1,13 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
@@ -31,6 +31,8 @@ public class MyFestivalsActivity extends AppCompatActivity {
     private Button btnPending;
     private Button btnCompleted;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,12 @@ public class MyFestivalsActivity extends AppCompatActivity {
         lvFestivals = findViewById(R.id.festivalList);
 
         controller = new MyFestivalsController(this, accessToken, leaderId, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         controller.getFestivals("active");
         btnActive.setEnabled(false);
 
@@ -109,5 +117,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
                         .collect(Collectors.toList()));
 
         lvFestivals.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 }

@@ -1,11 +1,13 @@
 package com.hfad.organizationofthefestival.defaultUser;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Base64;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -41,6 +43,8 @@ public class DefaultUserActivity extends AppCompatActivity {
     private int permission;
     private String searcherUsername;
 
+    private ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,9 +60,14 @@ public class DefaultUserActivity extends AppCompatActivity {
         searcherUsername = intent.getStringExtra("searcherUsername");
         getViewIds();
         controller = new DefaultUserController(DefaultUserActivity.this, accessToken, refreshToken, username);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         controller.showUserProfile(permission);
     }
-//not working need to go to default festival profile activity
 
     public void fillInActivityLeader(Leader leader) {
         tvUsername.setText(leader.getUsername());
@@ -80,8 +89,10 @@ public class DefaultUserActivity extends AppCompatActivity {
             intent.putExtra("id", festival.getFestivalId());
             startActivity(intent);
         });
+
+        dialog.dismiss();
     }
-//not working need to go to default festival profile activity
+
     public void fillInActivityOrganizer(Organizer organizer) {
         tvUsername.setText(organizer.getUsername());
         tvRole.setText("ORGANIZER");
@@ -103,6 +114,8 @@ public class DefaultUserActivity extends AppCompatActivity {
             intent.putExtra("id", festival.getFestivalId());
             startActivity(intent);
         });
+
+        dialog.dismiss();
     }
 
     public void fillInActivityWorker(Worker worker) {
@@ -136,6 +149,8 @@ public class DefaultUserActivity extends AppCompatActivity {
             intent.putExtra("job", gson.toJson(job));
             startActivity(intent);
         });
+
+        dialog.dismiss();
     }
 
     private void getViewIds() {

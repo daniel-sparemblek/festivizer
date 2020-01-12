@@ -1,10 +1,12 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +41,8 @@ public class LeaderFestivalActivity extends AppCompatActivity {
 
     private LeaderFestivalController controller;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,11 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         ivLogo = findViewById(R.id.festivalLogo);
 
         controller = new LeaderFestivalController(this, accessToken, festivalId, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         controller.getFestivalData();
 
@@ -89,6 +98,8 @@ public class LeaderFestivalActivity extends AppCompatActivity {
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
         setProfilePicture(festival.getLogo());
+
+        dialog.dismiss();
     }
 
     public void approveOrganizers(View view) {

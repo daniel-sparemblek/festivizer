@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +52,7 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
 
     private List<Festival> festivalList;
 
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,12 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         btnGeneratePass = findViewById(R.id.leader_btn_generate_pass);
 
         leaderPrintPassController = new LeaderPrintPassController(this, accessToken, username, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         leaderPrintPassController.getLeaderFestivals(leaderId);
     }
 
@@ -75,6 +84,8 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item, festivalsToStrings(body));
 
         spFestivalPicker.setAdapter(festivalsArrayAdapter);
+
+        dialog.dismiss();
     }
 
     public void fillInLeader(Leader leader) {
