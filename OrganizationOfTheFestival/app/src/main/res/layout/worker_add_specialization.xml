@@ -23,17 +23,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="0.2"
-        android:text="@string/search"
-        android:textSize="21sp" />
-
     <EditText
         android:id="@+id/worker_searchTxt"
         android:layout_width="match_parent"
@@ -41,7 +30,7 @@
         android:layout_marginStart="8dp"
         android:layout_weight="0.3"
         android:autofillHints=""
-        android:hint="@string/search_here"
+        android:hint="@string/search_specializations"
         android:inputType="textCapWords"
         tools:targetApi="o" />
 
