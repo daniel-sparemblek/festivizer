@@ -112,11 +112,7 @@ public class SearchActivity extends AppCompatActivity {
         } else if (id == R.id.myJobs) {
             switchActivity(JobsActivity.class);
         } else if (id == R.id.printPass) {
-            Intent intent = new Intent(this, OrganizerPrintPassActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", searcherUsername);
-            startActivity(intent);
+            switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
             finish();
             startActivity(getIntent());
