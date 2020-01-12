@@ -35,7 +35,7 @@ public interface LeaderClient {
                                             @Header("Authorization") String authorization);
 
     @GET("applications")
-    Call<ApplicationResponse[]> getActiveAuctions(@Query("leader_id_active") String leaderID,
+    Call<ApplicationResponse[]> getActiveAuctions(@Query("leader_id_accept") String leaderID,
                                             @Header("Authorization") String authorization);
 
     @GET("organizers")
