@@ -31,6 +31,8 @@ public class CreateEventActivity extends AppCompatActivity {
     private String accessToken;
     private String refreshToken;
     private String festivalId;
+    private String festivalStartDateTime;
+    private String festivalEndDateTime;
 
     private EditText etName;
     private EditText etDescription;
@@ -52,6 +54,8 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private int sYear, sMonth, sDay, sHour, sMinute;
     private int eYear, eMonth, eDay, eHour, eMinute;
+    private String startDateTime;
+    private String endDateTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,13 +66,17 @@ public class CreateEventActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         festivalId = intent.getStringExtra("id");
+        festivalStartDateTime = intent.getStringExtra("startDateTime");
+        festivalEndDateTime = intent.getStringExtra("endDateTime");
+
+
+        System.out.println(festivalEndDateTime);
+        System.out.println(festivalStartDateTime);
 
         controller = new EventCreationController(this, accessToken, festivalId, refreshToken);
 
         findViews();
         controller.getOrganizers();
-
-        System.out.println("FFFFFFFF");
 
         btnStartDatePicker.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
@@ -124,8 +132,8 @@ public class CreateEventActivity extends AppCompatActivity {
             String name = etName.getText().toString();
             String desc = etDescription.getText().toString();
             String location = etLocation.getText().toString();
-            String startDateTime = convertTime(etStartTime.getText().toString(), etStartDate.getText().toString());
-            String endDateTime = convertTime(etEndTime.getText().toString(), etEndDate.getText().toString());
+            startDateTime = convertTime(etStartTime.getText().toString(), etStartDate.getText().toString());
+            endDateTime = convertTime(etEndTime.getText().toString(), etEndDate.getText().toString());
 
 
             int position = spinner.getSelectedItemPosition();
@@ -133,14 +141,29 @@ public class CreateEventActivity extends AppCompatActivity {
             if(position == -1) {
                 Toast.makeText(this, "There is no organizer selected!", Toast.LENGTH_SHORT).show();
             } else {
-                Organizer organizer = organizers[position];
+                if (!parseDateTime(startDateTime).isBefore(parseDateTime(endDateTime))){
+                    Toast.makeText(this, "Start time should be before end time.", Toast.LENGTH_SHORT).show();
+                } else if (!parseDateTime(startDateTime).isAfter(ZonedDateTime.now())){
+                    Toast.makeText(this, "Start time should be after today's time.", Toast.LENGTH_SHORT).show();
+                } else if (!parseDateTime(startDateTime).isAfter(parseDateTime(festivalStartDateTime))){
+                    Toast.makeText(this, "Start time should be after festivals start time.", Toast.LENGTH_SHORT).show();
+                } else if (!parseDateTime(endDateTime).isBefore(parseDateTime(festivalEndDateTime))){
+                    Toast.makeText(this, "End time should be before festivals end time.", Toast.LENGTH_SHORT).show();
+                } else if (!parseDateTime(startDateTime).isBefore(parseDateTime(festivalEndDateTime))){
+                    Toast.makeText(this, "Start time should be before festivals end time.", Toast.LENGTH_SHORT).show();
+                } else if (!parseDateTime(endDateTime).isAfter(parseDateTime(festivalStartDateTime))) {
+                    Toast.makeText(this, "End time should be before festivals start time.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Organizer organizer = organizers[position];
 
-                WorkingEvent event = new WorkingEvent(Integer.parseInt(festivalId), organizer.getId(),
-                        name, desc, location, startDateTime, endDateTime);
+                    WorkingEvent event = new WorkingEvent(Integer.parseInt(festivalId), organizer.getId(),
+                            name, desc, location, startDateTime, endDateTime);
 
-                controller.createEvent(event, accessToken);
+                    controller.createEvent(event, accessToken);
 
-                finish();
+                    finish();
+                }
+
             }
         });
     }
@@ -232,5 +255,16 @@ public class CreateEventActivity extends AppCompatActivity {
         LocalDate localDate = LocalDate.parse(date, formatter);
         ZonedDateTime dateTime = localDate.atStartOfDay(ZoneId.systemDefault());
         return dateTime.format(dateTimeFormatter) + "T" + time + ":00.000+0000";
+    }
+
+    public ZonedDateTime parseDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
     }
 }
