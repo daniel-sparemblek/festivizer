@@ -88,7 +88,7 @@ public class OrganizerActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("searcherUsername", username);
+            intent.putExtra("username", username);
             intent.putExtra("searcherPermission", organizer.getPermission());
             startActivity(intent);
         }

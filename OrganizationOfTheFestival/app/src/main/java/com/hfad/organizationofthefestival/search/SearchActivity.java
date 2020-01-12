@@ -55,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        searcherUsername = intent.getStringExtra("searcherUsername");
+        searcherUsername = intent.getStringExtra("username");
         searcherPermission = intent.getIntExtra("searcherPermission", 0);
         searchController = new SearchController(this, accessToken, refreshToken);
 
