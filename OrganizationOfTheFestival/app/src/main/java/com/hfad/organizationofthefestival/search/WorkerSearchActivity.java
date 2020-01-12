@@ -20,7 +20,12 @@ import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.leader.LeaderJobAuctionsActivity;
 import com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity;
 import com.hfad.organizationofthefestival.leader.MyFestivalsActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.utility.User;
+import com.hfad.organizationofthefestival.worker.ActiveJobsActivity;
+import com.hfad.organizationofthefestival.worker.JobOffersActivity;
+import com.hfad.organizationofthefestival.worker.MyApplicationsActivity;
+import com.hfad.organizationofthefestival.worker.SpecializationsActivity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +36,6 @@ public class WorkerSearchActivity extends AppCompatActivity {
     private String refreshToken;
     private String searcherUsername;
     private int permission;
-    private int leaderId;
 
     private WorkerSearchController searchController;
 
@@ -63,6 +67,7 @@ public class WorkerSearchActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         searcherUsername = intent.getStringExtra("username");
         searcherPermission = intent.getIntExtra("searcherPermission", 0);
+        permission = getIntent().getIntExtra("permission", 1);
         searchController = new WorkerSearchController(this, accessToken, refreshToken);
 
         btnSearch.setOnClickListener(v -> {
@@ -104,46 +109,72 @@ public class WorkerSearchActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.leader_menu, menu);
+        getMenuInflater().inflate(R.menu.worker_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.myProfile) {
-            switchActivity(LeaderActivity.class);
-        } else if (id == R.id.myFests) {
-            switchActivity(MyFestivalsActivity.class);
-        } else if (id == R.id.createNewFest) {
-            switchActivity(CreateFestivalActivity.class);
-        } else if (id == R.id.jobAuctns) {
-            switchActivity(LeaderJobAuctionsActivity.class);
-        } else if (id == R.id.search) {
+        if (id == R.id.addSpecialization) {
+            Intent intent = new Intent(this, SpecializationsActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", searcherUsername);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
             finish();
-            startActivity(getIntent());
+
+        } else if (id == R.id.applyForJob) {
+            Intent intent = new Intent(this, JobOffersActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", searcherUsername);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
+            finish();
+        } else if (id == R.id.activeJobs) {
+            Intent intent = new Intent(this, ActiveJobsActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", searcherUsername);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
+            finish();
+        } else if (id == R.id.myApplications) {
+            Intent intent = new Intent(this, MyApplicationsActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", searcherUsername);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
+            finish();
         } else if (id == R.id.printPass) {
-            switchActivity(LeaderPrintPassActivity.class);
+
+        } else if (id == R.id.search) {
+            Intent intent = new Intent(this, WorkerSearchActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", searcherUsername);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
+            finish();
+        } else if (id == R.id.worker_profile) {
+            Intent intent = new Intent(this, WorkerSearchActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", searcherUsername);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
+        }
+        else if (id == R.id.logout) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            this.startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void switchActivity(Class<?> destination) {
-        Intent intent = new Intent(this, destination);
-        intent.putExtra("leader_id", leaderId);
-        intent.putExtra("accessToken", accessToken);
-        intent.putExtra("refreshToken", refreshToken);
-        intent.putExtra("username", searcherUsername);
-        intent.putExtra("permission", permission);
-        startActivity(intent);
     }
 
 
