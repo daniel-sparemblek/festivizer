@@ -11,6 +11,7 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
@@ -58,6 +59,10 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leader_print_pass);
+
+        Toolbar toolbar = findViewById(R.id.leader_toolbar);
+        toolbar.setTitle("Print Pass");
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,6 +64,10 @@ public class CreateFestivalActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leader_screen_festival_creation);
+
+        Toolbar toolbar = findViewById(R.id.leader_toolbar);
+        toolbar.setTitle("Festival creation");
+        setSupportActionBar(toolbar);
 
         findViews();
         controller = new FestivalCreationController(this);

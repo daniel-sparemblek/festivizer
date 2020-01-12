@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,6 +38,10 @@ public class MyFestivalsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leader_screen_my_fests);
+
+        Toolbar toolbar = findViewById(R.id.leader_toolbar);
+        toolbar.setTitle("My festivals");
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
