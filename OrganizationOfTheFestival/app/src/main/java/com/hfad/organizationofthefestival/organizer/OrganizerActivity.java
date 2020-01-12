@@ -129,6 +129,8 @@ public class OrganizerActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, organizer.getFestivals());
         lvFestivals.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 
     private void setProfilePicture(String picture) {

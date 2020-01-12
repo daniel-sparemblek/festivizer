@@ -51,7 +51,6 @@ public class AdminActivity extends AppCompatActivity {
         dialog.show();
 
         adminController.getData();
-
     }
 
     public void adminOnClickAccept(View view) {
