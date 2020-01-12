@@ -28,8 +28,11 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
     private LeaderJobAuctionsController controller;
 
     private ListView jobAuctionsList;
+    private ListView jobActiveAuctionsList;
 
     private List<ApplicationResponse> applicationList;
+    private List<ApplicationResponse> activeApplicationList;
+
 
     private ProgressDialog dialog;
     private String username;
@@ -45,6 +48,7 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         jobAuctionsList = findViewById(R.id.jobAuctionList);
+        jobActiveAuctionsList = findViewById(R.id.jobAuctionListActive);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
@@ -69,9 +73,6 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, R.layout.application_row_layout, applicationList);
 
         jobAuctionsList.setAdapter(applicationAdapter);
-
-        dialog.dismiss();
-
     }
 
     @Override
@@ -121,5 +122,15 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    public void fillInActiveApplications(ApplicationResponse[] applications) {
+        activeApplicationList = Arrays.asList(applications);
+
+        ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, R.layout.application_row_layout, activeApplicationList);
+
+        jobActiveAuctionsList.setAdapter(applicationAdapter);
+
+        dialog.dismiss();
     }
 }

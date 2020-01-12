@@ -39,6 +39,25 @@ public class LeaderJobAuctionsController {
             public void onResponse(Call<ApplicationResponse[]> call, Response<ApplicationResponse[]> response) {
                 if (response.isSuccessful()) {
                     activity.fillInActivity(response.body());
+                    getActiveJobAuctions();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationResponse[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getActiveJobAuctions() {
+        Call<ApplicationResponse[]> call = api.getActiveAuctions(leaderID, "Bearer " + accessToken);
+
+        call.enqueue(new Callback<ApplicationResponse[]>() {
+            @Override
+            public void onResponse(Call<ApplicationResponse[]> call, Response<ApplicationResponse[]> response) {
+                if (response.isSuccessful()) {
+                    activity.fillInActiveApplications(response.body());
                 }
             }
 
