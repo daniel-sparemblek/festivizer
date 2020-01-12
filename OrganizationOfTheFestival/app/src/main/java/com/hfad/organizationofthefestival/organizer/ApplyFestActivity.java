@@ -122,4 +122,9 @@ public class ApplyFestActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, applyFestController.formatFestivals(festivals));
         lvEvents.setAdapter(festivalsArrayAdapter);
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

@@ -184,4 +184,9 @@ public class EventsActivity extends ApplyFestActivity {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
 }
