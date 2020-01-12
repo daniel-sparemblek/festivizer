@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 public class LeaderActivity extends AppCompatActivity {
 
@@ -34,6 +34,8 @@ public class LeaderActivity extends AppCompatActivity {
     private String username;
     private String accessToken;
     private String refreshToken;
+    private int permission;
+    private int leaderId;
 
     private LeaderController controller;
 
@@ -70,7 +72,6 @@ public class LeaderActivity extends AppCompatActivity {
         dialog.show();
 
         controller.getData();
-
     }
 
     @Override
@@ -101,45 +102,34 @@ public class LeaderActivity extends AppCompatActivity {
             finish();
             startActivity(getIntent());
         } else if (id == R.id.myFests) {
-            Intent intent = new Intent(this, MyFestivalsActivity.class);
-            intent.putExtra("leader_id", Integer.toString(leader.getId()));
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            startActivity(intent);
+            switchActivity(MyFestivalsActivity.class);
         } else if (id == R.id.createNewFest) {
-            Intent intent = new Intent(this, CreateFestivalActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            startActivity(intent);
+            switchActivity(CreateFestivalActivity.class);
         } else if (id == R.id.jobAuctns) {
-            Intent intent = new Intent(this, LeaderJobAuctionsActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("leaderID", String.valueOf(leader.getId()));
-            startActivity(intent);
+            switchActivity(LeaderJobAuctionsActivity.class);
         } else if (id == R.id.search) {
-            Intent intent = new Intent(this, SearchActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            intent.putExtra("permission", leader.getPermission());
-            startActivity(intent);
+            switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
-            Intent intent = new Intent(this, LeaderPrintPassActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("leader_id", leader.getId());
-            intent.putExtra("username", leader.getUsername());
-            startActivity(intent);
+            switchActivity(LeaderPrintPassActivity.class);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void switchActivity(Class<?> destination) {
+        Intent intent = new Intent(this, destination);
+        intent.putExtra("leader_id", leaderId);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        intent.putExtra("permission", permission);
+        startActivity(intent);
+    }
+
     public void fillInActivity(Leader leader) {
         this.leader = leader;
+        permission = leader.getPermission();
+        leaderId = leader.getId();
         tvLeaderName.setText(leader.getUsername());
         tvLeaderEmail.setText(leader.getEmail());
         setProfilePicture(leader.getPicture());
@@ -156,5 +146,10 @@ public class LeaderActivity extends AppCompatActivity {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
         ivProfilePicture.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }

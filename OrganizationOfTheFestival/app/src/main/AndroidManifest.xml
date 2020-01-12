@@ -13,49 +13,51 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".organizer.NewJobActivity"></activity>
-        <activity android:name=".organizer.ViewEventActivity" />
-        <activity android:name=".leader.ViewEventActivity" />
-        <activity android:name=".leader.LeaderMyEventsActivity" />
-        <activity android:name=".leader.ApproveOrganizersActivity" />
-        <activity android:name=".leader.LeaderPrintPassActivity" />
-        <activity android:name=".leader.MyFestivalsActivity" />
-        <activity android:name=".leader.LeaderFestivalActivity" />
-        <activity android:name=".worker.JobProfileActivity" />
-        <activity android:name=".worker.ViewApplicationActivity" />
-        <activity android:name=".worker.ActiveJobsActivity" />
-        <activity android:name=".worker.MyApplicationsActivity" />
-        <activity android:name=".search.SearchActivity" />
-        <activity android:name=".worker.JobApplicationActivity" />
-        <activity android:name=".worker.JobApplyActivity" />
-        <activity android:name=".worker.JobOffersActivity" />
+
+        <activity android:name=".organizer.NewJobActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".organizer.ViewEventActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".leader.ViewEventActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".leader.LeaderMyEventsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".leader.ApproveOrganizersActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".leader.LeaderPrintPassActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".leader.MyFestivalsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".leader.LeaderFestivalActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".worker.JobProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".worker.ViewApplicationActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".worker.ActiveJobsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".worker.MyApplicationsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".search.SearchActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".worker.JobApplicationActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".worker.JobApplyActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".worker.JobOffersActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".worker.SpecializationsActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".leader.LeaderActivity" />
-        <activity android:name=".worker.WorkerActivity" />
-        <activity android:name=".organizer.OrganizerActivity" />
-        <activity android:name=".organizer.EventsActivity" />
-        <activity android:name=".organizer.JobsActivity" />
-        <activity android:name=".organizer.OrganizerPrintPassActivity" />
-        <activity android:name=".admin.AdminActivity" />
-        <activity android:name=".organizer.ApplyFestActivity" />
-        <activity android:name=".signup.SignupActivity" />
-        <activity android:name=".leader.LeaderJobAuctionsActivity" />
-        <activity android:name=".festival.creation.CreateFestivalActivity" />
-        <activity android:name=".login.LoginActivity">
+            android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"/>
+        <activity android:name=".leader.LeaderActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".worker.WorkerActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".organizer.OrganizerActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".organizer.EventsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".organizer.JobsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".organizer.OrganizerPrintPassActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".admin.AdminActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".organizer.ApplyFestActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".signup.SignupActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".leader.LeaderJobAuctionsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".festival.creation.CreateFestivalActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".login.LoginActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".defaultUser.DefaultUserActivity" />
-        <activity android:name=".festival.Event.CreateEventActivity" />
-        <activity android:name=".event.creation.CreateEventActivity" />
-        <activity android:name=".worker.jobSearch.WorkerJobSearchActivity" />
-        <activity android:name=".organizer.JobAuctionActivity" />
-        <activity android:name=".festival.DefaultFestivalActivity" />
+        <activity android:name=".defaultUser.DefaultUserActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".festival.Event.CreateEventActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".event.creation.CreateEventActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".worker.jobSearch.WorkerJobSearchActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".organizer.JobAuctionActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".festival.DefaultFestivalActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".search.LeaderSearchActivity" />
     </application>
 
 </manifest>

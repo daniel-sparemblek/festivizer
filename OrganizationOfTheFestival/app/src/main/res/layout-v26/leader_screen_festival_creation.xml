@@ -10,10 +10,26 @@
     android:background="@drawable/background_gradient">
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/leader_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#ff9360"
+                app:popupTheme="@style/AppTheme" />
+
+        </android.support.design.widget.AppBarLayout>
 
         <LinearLayout
     android:orientation="horizontal"
@@ -21,16 +37,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="5dp"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:text="@string/festival_creation"
-        android:textSize="21sp" />
-
-</LinearLayout>
+    android:paddingRight="10dp"/>
 
     <LinearLayout
         android:orientation="horizontal"

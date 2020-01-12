@@ -44,13 +44,7 @@ public class JobApplicationController {
                     Toast.makeText(jobApplicationActivity, "Application successfully created!", Toast.LENGTH_SHORT).show();
                     jobApplicationActivity.finish();
                 } else {
-                    try {
-                        JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(jobApplicationActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        Toast.makeText(jobApplicationActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    }
+                    Toast.makeText(jobApplicationActivity, "You have already applied!", Toast.LENGTH_SHORT).show();
                 }
             }
 
