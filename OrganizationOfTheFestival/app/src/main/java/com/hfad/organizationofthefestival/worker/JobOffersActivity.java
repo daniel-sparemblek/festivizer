@@ -80,10 +80,9 @@ public class JobOffersActivity extends AppCompatActivity {
     public List<String> jobsToStrings(Job[] jobs) {
         jobList = Arrays.asList(jobs);
 
-        List<String> stringList = jobList.stream()
-                .map(t -> t.toString())
+        return jobList.stream()
+                .map(Job::toString)
                 .collect(Collectors.toList());
-        return stringList;
     }
 
     @Override

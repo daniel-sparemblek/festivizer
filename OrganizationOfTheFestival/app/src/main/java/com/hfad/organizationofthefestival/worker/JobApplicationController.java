@@ -42,6 +42,7 @@ public class JobApplicationController {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(jobApplicationActivity, "Application successfully created!", Toast.LENGTH_SHORT).show();
+                    jobApplicationActivity.finish();
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
