@@ -32,7 +32,6 @@ public class LeaderJobAuctionsController {
     }
 
     public void getJobAuctions() {
-        System.out.println("kurva:" +leaderID);
         Call<ApplicationResponse[]> call = api.getAuctions(leaderID, "Bearer " + accessToken);
 
         call.enqueue(new Callback<ApplicationResponse[]>() {

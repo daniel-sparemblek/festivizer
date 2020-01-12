@@ -1,11 +1,13 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,10 +34,14 @@ public class LeaderActivity extends AppCompatActivity {
     private String username;
     private String accessToken;
     private String refreshToken;
+    private int permission;
+    private int leaderId;
 
     private LeaderController controller;
 
     private Leader leader;
+
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +66,12 @@ public class LeaderActivity extends AppCompatActivity {
 
         controller = new LeaderController(this, accessToken, username, refreshToken);
 
-        controller.getData();
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
+        controller.getData();
     }
 
     @Override
@@ -92,45 +102,34 @@ public class LeaderActivity extends AppCompatActivity {
             finish();
             startActivity(getIntent());
         } else if (id == R.id.myFests) {
-            Intent intent = new Intent(this, MyFestivalsActivity.class);
-            intent.putExtra("leader_id", Integer.toString(leader.getId()));
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            startActivity(intent);
+            switchActivity(MyFestivalsActivity.class);
         } else if (id == R.id.createNewFest) {
-            Intent intent = new Intent(this, CreateFestivalActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            startActivity(intent);
+            switchActivity(CreateFestivalActivity.class);
         } else if (id == R.id.jobAuctns) {
-            Intent intent = new Intent(this, LeaderJobAuctionsActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("leaderID", String.valueOf(leader.getId()));
-            startActivity(intent);
+            switchActivity(LeaderJobAuctionsActivity.class);
         } else if (id == R.id.search) {
-            Intent intent = new Intent(this, SearchActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            intent.putExtra("permission", leader.getPermission());
-            startActivity(intent);
+            switchActivity(SearchActivity.class);
         } else if (id == R.id.printPass) {
-            Intent intent = new Intent(this, LeaderPrintPassActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("leader_id", leader.getId());
-            intent.putExtra("username", leader.getUsername());
-            startActivity(intent);
+            switchActivity(LeaderPrintPassActivity.class);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void switchActivity(Class<?> destination) {
+        Intent intent = new Intent(this, destination);
+        intent.putExtra("leader_id", leaderId);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        intent.putExtra("permission", permission);
+        startActivity(intent);
+    }
+
     public void fillInActivity(Leader leader) {
         this.leader = leader;
+        permission = leader.getPermission();
+        leaderId = leader.getId();
         tvLeaderName.setText(leader.getUsername());
         tvLeaderEmail.setText(leader.getEmail());
         setProfilePicture(leader.getPicture());
@@ -140,6 +139,7 @@ public class LeaderActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, leader.getFestivalNames());
         lvFestivalList.setAdapter(arrayAdapter);
 
+        dialog.dismiss();
     }
 
     private void setProfilePicture(String picture) {

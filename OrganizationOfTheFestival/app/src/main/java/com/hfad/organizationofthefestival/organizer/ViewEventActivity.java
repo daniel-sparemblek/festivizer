@@ -1,9 +1,11 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,6 +37,8 @@ public class ViewEventActivity extends AppCompatActivity {
 
     private ViewEventController viewEventController;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,12 @@ public class ViewEventActivity extends AppCompatActivity {
         createJob = findViewById(R.id.org_newJob);
 
         viewEventController = new ViewEventController(this, accessToken, username, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         viewEventController.getEvent((int) eventId);
     }
 

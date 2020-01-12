@@ -1,16 +1,21 @@
 package com.hfad.organizationofthefestival.leader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,16 +36,25 @@ public class MyFestivalsActivity extends AppCompatActivity {
     private Button btnPending;
     private Button btnCompleted;
 
+    private ProgressDialog dialog;
+    private int permission;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leader_screen_my_fests);
+
+        Toolbar toolbar = findViewById(R.id.leader_toolbar);
+        toolbar.setTitle("My festivals");
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         leaderId = intent.getStringExtra("leader_id");
         username = intent.getStringExtra("username");
+        permission = intent.getIntExtra("permission", 1);
+
 
         btnActive = findViewById(R.id.btnActive);
         btnPending = findViewById(R.id.btnPending);
@@ -49,6 +63,12 @@ public class MyFestivalsActivity extends AppCompatActivity {
         lvFestivals = findViewById(R.id.festivalList);
 
         controller = new MyFestivalsController(this, accessToken, leaderId, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         controller.getFestivals("active");
         btnActive.setEnabled(false);
 
@@ -109,5 +129,51 @@ public class MyFestivalsActivity extends AppCompatActivity {
                         .collect(Collectors.toList()));
 
         lvFestivals.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.leader_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.myProfile) {
+            switchActivity(LeaderActivity.class);
+        } else if (id == R.id.myFests) {
+            finish();
+            startActivity(getIntent());
+        } else if (id == R.id.createNewFest) {
+            switchActivity(CreateFestivalActivity.class);
+        } else if (id == R.id.jobAuctns) {
+            switchActivity(LeaderJobAuctionsActivity.class);
+        } else if (id == R.id.search) {
+            switchActivity(SearchActivity.class);
+        } else if (id == R.id.printPass) {
+            switchActivity(MyFestivalsActivity.class);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void switchActivity(Class<?> destination) {
+        Intent intent = new Intent(this, destination);
+        intent.putExtra("leader_id", leaderId);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        intent.putExtra("permission", permission);
+        startActivity(intent);
     }
 }

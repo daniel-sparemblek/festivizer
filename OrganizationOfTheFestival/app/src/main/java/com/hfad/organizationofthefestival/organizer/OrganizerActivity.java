@@ -1,11 +1,13 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +34,8 @@ public class OrganizerActivity extends AppCompatActivity {
 
     private Organizer organizer;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,11 @@ public class OrganizerActivity extends AppCompatActivity {
 
 
         organizerController = new OrganizerController(this, accessToken, username, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         organizerController.getOrganizer();
     }
@@ -88,7 +97,7 @@ public class OrganizerActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("searcherUsername", username);
+            intent.putExtra("username", username);
             intent.putExtra("searcherPermission", organizer.getPermission());
             startActivity(intent);
         }
@@ -120,11 +129,18 @@ public class OrganizerActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, organizer.getFestivals());
         lvFestivals.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
     }
 
     private void setProfilePicture(String picture) {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
         ivProfilePicture.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }

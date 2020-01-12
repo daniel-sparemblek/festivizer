@@ -1,9 +1,11 @@
 package com.hfad.organizationofthefestival.worker.jobSearch;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,6 +40,8 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
     private String searcherUsername;
     private List<Long> eventIds;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,11 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         searcherUsername = intent.getStringExtra("searcherUsername");
         job = gson.fromJson(jsonJob, Job.class);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         controller = new WorkerJobSearchController(this, accessToken, refreshToken);
         if (permission == 2){

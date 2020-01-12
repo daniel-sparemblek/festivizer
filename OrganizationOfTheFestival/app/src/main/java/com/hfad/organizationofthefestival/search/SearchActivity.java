@@ -1,8 +1,10 @@
 package com.hfad.organizationofthefestival.search;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +41,8 @@ public class SearchActivity extends AppCompatActivity {
 
     private int searcherPermission;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +59,7 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        searcherUsername = intent.getStringExtra("searcherUsername");
+        searcherUsername = intent.getStringExtra("username");
         searcherPermission = intent.getIntExtra("searcherPermission", 0);
         searchController = new SearchController(this, accessToken, refreshToken);
 
@@ -77,6 +81,12 @@ public class SearchActivity extends AppCompatActivity {
 
     public void search() {
         String searched = tvSearch.getText().toString();
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         searchController.search(searched);
     }
 
@@ -85,6 +95,8 @@ public class SearchActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, users.stream().map(User::getUsername).collect(Collectors.toList()));
         lvSearchResults.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
 
     }
 

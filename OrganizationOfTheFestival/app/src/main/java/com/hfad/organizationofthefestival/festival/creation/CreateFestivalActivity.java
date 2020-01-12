@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,6 +24,10 @@ import android.widget.Toast;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.leader.LeaderActivity;
+import com.hfad.organizationofthefestival.leader.LeaderJobAuctionsActivity;
+import com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity;
+import com.hfad.organizationofthefestival.leader.MyFestivalsActivity;
+import com.hfad.organizationofthefestival.search.SearchActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -58,11 +65,17 @@ public class CreateFestivalActivity extends AppCompatActivity {
 
     private int sYear, sMonth, sDay, sHour, sMinute;
     private int eYear, eMonth, eDay, eHour, eMinute;
+    private int permission;
+    private int leaderId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leader_screen_festival_creation);
+
+        Toolbar toolbar = findViewById(R.id.leader_toolbar);
+        toolbar.setTitle("Festival creation");
+        setSupportActionBar(toolbar);
 
         findViews();
         controller = new FestivalCreationController(this);
@@ -70,6 +83,9 @@ public class CreateFestivalActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
+        permission = intent.getIntExtra("permission", 1);
+        leaderId = intent.getIntExtra("leader_id", 0);
+
 
         btnStartDatePicker.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
@@ -243,5 +259,47 @@ public class CreateFestivalActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.leader_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.myProfile) {
+            switchActivity(LeaderActivity.class);
+        } else if (id == R.id.myFests) {
+            switchActivity(MyFestivalsActivity.class);
+        } else if (id == R.id.createNewFest) {
+            finish();
+            startActivity(getIntent());
+        } else if (id == R.id.jobAuctns) {
+            switchActivity(LeaderJobAuctionsActivity.class);
+        } else if (id == R.id.search) {
+            switchActivity(SearchActivity.class);
+        } else if (id == R.id.printPass) {
+            switchActivity(LeaderPrintPassActivity.class);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void switchActivity(Class<?> destination) {
+        Intent intent = new Intent(this, destination);
+        intent.putExtra("leader_id", leaderId);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        intent.putExtra("permission", permission);
+        startActivity(intent);
+    }
 }

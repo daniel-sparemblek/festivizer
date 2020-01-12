@@ -1,5 +1,6 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -52,6 +54,8 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
     private List<Festival> festivalList;
     private OrganizerPrintPassController controller;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +73,12 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
         btnGeneratePass = findViewById(R.id.org_genPass);
 
         controller = new OrganizerPrintPassController(this, accessToken, username, refreshToken);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         controller.getOrganizer();
 
         btnGeneratePass.setOnClickListener(v -> generatePass(spFestivalPicker.getSelectedView()));
@@ -224,5 +234,10 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
     private Bitmap pictureStringToBitmap(String picture) {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }

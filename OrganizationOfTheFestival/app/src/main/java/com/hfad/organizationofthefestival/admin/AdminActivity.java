@@ -1,11 +1,12 @@
 package com.hfad.organizationofthefestival.admin;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.view.View;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.AdminAdapter;
@@ -29,6 +30,8 @@ public class AdminActivity extends AppCompatActivity {
 
     private List<Leader> leaders;
 
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +44,13 @@ public class AdminActivity extends AppCompatActivity {
         refreshToken = getIntent().getStringExtra("refreshToken");
 
         adminController = new AdminController(this, accessToken, username, refreshToken);
-        adminController.getData();
 
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        adminController.getData();
     }
 
     public void adminOnClickAccept(View view) {
@@ -69,7 +77,7 @@ public class AdminActivity extends AppCompatActivity {
 
         AdminAdapter adminAdapter = new AdminAdapter(this, R.layout.admin_row_layout, stringList);
         approvalList.setAdapter(adminAdapter);
-
+        dialog.dismiss();
     }
 
     public List<String> leadersToStrings(List<Leader> leaders) {

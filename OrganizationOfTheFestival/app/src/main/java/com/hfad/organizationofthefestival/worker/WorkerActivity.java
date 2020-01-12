@@ -58,7 +58,6 @@ public class WorkerActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
 
-
         workerController = new WorkerController(this, accessToken, username, refreshToken);
 
         dialog = new ProgressDialog(this);
