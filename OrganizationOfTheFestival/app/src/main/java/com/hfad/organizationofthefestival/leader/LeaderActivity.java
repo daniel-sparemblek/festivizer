@@ -147,4 +147,9 @@ public class LeaderActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
         ivProfilePicture.setImageBitmap(bitmap);
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

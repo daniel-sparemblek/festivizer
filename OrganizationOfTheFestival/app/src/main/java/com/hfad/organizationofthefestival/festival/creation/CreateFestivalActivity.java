@@ -300,4 +300,9 @@ public class CreateFestivalActivity extends AppCompatActivity {
         intent.putExtra("permission", permission);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

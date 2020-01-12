@@ -253,4 +253,9 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
 }
