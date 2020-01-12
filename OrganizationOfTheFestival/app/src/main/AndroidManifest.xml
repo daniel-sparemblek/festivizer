@@ -57,6 +57,8 @@
         <activity android:name=".worker.jobSearch.WorkerJobSearchActivity" android:screenOrientation="portrait"/>
         <activity android:name=".organizer.JobAuctionActivity" android:screenOrientation="portrait"/>
         <activity android:name=".festival.DefaultFestivalActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".search.LeaderSearchActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".search.WorkerSearchActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

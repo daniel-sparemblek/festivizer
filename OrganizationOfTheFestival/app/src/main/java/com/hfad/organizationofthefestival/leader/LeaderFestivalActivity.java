@@ -30,6 +30,9 @@ public class LeaderFestivalActivity extends AppCompatActivity {
     private String leaderId;
     private String username;
 
+    private String startDateTime;
+    private String endDateTime;
+
     private TextView tvName;
     private TextView tvDesc;
     private TextView tvStart;
@@ -42,6 +45,7 @@ public class LeaderFestivalActivity extends AppCompatActivity {
     private LeaderFestivalController controller;
 
     private ProgressDialog dialog;
+    private CreateEventActivity createEventActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +87,12 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         intent.putExtra("accessToken", accessToken);
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("id", festivalId);
+        System.out.println(startDateTime);
+        System.out.println(endDateTime);
+        intent.putExtra("startDateTime", startDateTime);
+        intent.putExtra("endDateTime", endDateTime);
         intent.putExtra("leaderId", leaderId);
+
         this.startActivity(intent);
     }
 
@@ -98,6 +107,9 @@ public class LeaderFestivalActivity extends AppCompatActivity {
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
         setProfilePicture(festival.getLogo());
+
+        startDateTime = festival.getStartTime();
+        endDateTime = festival.getEndTime();
 
         dialog.dismiss();
     }

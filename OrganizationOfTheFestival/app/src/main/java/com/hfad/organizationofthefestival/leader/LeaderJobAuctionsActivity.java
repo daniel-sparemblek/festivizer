@@ -10,12 +10,11 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.ApplicationAdapter;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
 import java.util.Arrays;
@@ -29,8 +28,11 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
     private LeaderJobAuctionsController controller;
 
     private ListView jobAuctionsList;
+    private ListView jobActiveAuctionsList;
 
     private List<ApplicationResponse> applicationList;
+    private List<ApplicationResponse> activeApplicationList;
+
 
     private ProgressDialog dialog;
     private String username;
@@ -46,6 +48,7 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         jobAuctionsList = findViewById(R.id.jobAuctionList);
+        jobActiveAuctionsList = findViewById(R.id.jobAuctionListActive);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
@@ -70,9 +73,6 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, R.layout.application_row_layout, applicationList);
 
         jobAuctionsList.setAdapter(applicationAdapter);
-
-        dialog.dismiss();
-
     }
 
     @Override
@@ -101,7 +101,7 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
             finish();
             startActivity(getIntent());
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             switchActivity(LeaderPrintPassActivity.class);
         }
@@ -117,5 +117,20 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         intent.putExtra("username", username);
         intent.putExtra("permission", permission);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    public void fillInActiveApplications(ApplicationResponse[] applications) {
+        activeApplicationList = Arrays.asList(applications);
+
+        ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, R.layout.application_row_layout, activeApplicationList);
+
+        jobActiveAuctionsList.setAdapter(applicationAdapter);
+
+        dialog.dismiss();
     }
 }

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.WorkerSearchActivity;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
 import java.util.Arrays;
@@ -137,7 +138,7 @@ public class MyApplicationsActivity extends AppCompatActivity {
         } else if (id == R.id.printPass) {
 
         } else if (id == R.id.search) {
-            Intent intent = new Intent(this, SearchActivity.class);
+            Intent intent = new Intent(this, WorkerSearchActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);

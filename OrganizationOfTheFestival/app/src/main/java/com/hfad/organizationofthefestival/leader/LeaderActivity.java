@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 public class LeaderActivity extends AppCompatActivity {
 
@@ -108,7 +108,7 @@ public class LeaderActivity extends AppCompatActivity {
         } else if (id == R.id.jobAuctns) {
             switchActivity(LeaderJobAuctionsActivity.class);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             switchActivity(LeaderPrintPassActivity.class);
         }
@@ -146,5 +146,10 @@ public class LeaderActivity extends AppCompatActivity {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
         ivProfilePicture.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
