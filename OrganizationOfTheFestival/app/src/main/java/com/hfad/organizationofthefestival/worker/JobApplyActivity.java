@@ -83,7 +83,7 @@ public class JobApplyActivity extends AppCompatActivity {
         eventName.setText(body.getEvent().getName());
 
         List<String> specStrings = body.getSpecializations().stream()
-                .map(t -> t.toString())
+                .map(Specialization::toString)
                 .collect(Collectors.toList());
 
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
