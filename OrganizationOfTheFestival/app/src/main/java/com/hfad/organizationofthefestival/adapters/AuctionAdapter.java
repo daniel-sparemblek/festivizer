@@ -5,20 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.ApplicationResponse;
+import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
 import java.util.List;
 
-public class AuctionAdapter extends ArrayAdapter<ApplicationResponse> {
+public class AuctionAdapter extends ArrayAdapter<ApplicationAuction> {
 
     private Context context;
     private int resource;
-    private List<ApplicationResponse> applicationList;
+    private List<ApplicationAuction> applicationList;
 
-    public AuctionAdapter(Context context, int resource, List<ApplicationResponse> applicationList) {
+    public AuctionAdapter(Context context, int resource, List<ApplicationAuction> applicationList) {
         super(context, resource, applicationList);
         this.context = context;
         this.applicationList = applicationList;
@@ -29,23 +30,18 @@ public class AuctionAdapter extends ArrayAdapter<ApplicationResponse> {
 
         View view = convertView;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.leader_screen_job_auc_row_layout, null);
+            view = LayoutInflater.from(context).inflate(R.layout.organizer_screen_my_jobs_one_row, null);
         }
 
-        ApplicationResponse application = applicationList.get(position);
+        ApplicationAuction application = applicationList.get(position);
 
-        TextView tvWorkerName = view.findViewById(R.id.tv_app_worker_name);
-        TextView tvPrice = view.findViewById(R.id.tv_app_price);
-        TextView tvPeopleNumber = view.findViewById(R.id.tv_app_people_num);
-        TextView tvDuration = view.findViewById(R.id.tv_app_duration);
-        TextView tvJobName = view.findViewById(R.id.tv_app_job_name);
+        TextView endTime = view.findViewById(R.id.end_time);
+        TextView jobName = view.findViewById(R.id.job_name);
+        Button extButton = view.findViewById(R.id.btn_extend);
 
 
-        tvWorkerName.setText(application.getWorker().getUsername());
-        tvPrice.setText(String.valueOf(application.getPrice()));
-        tvPeopleNumber.setText(String.valueOf(application.getPeopleNumber()));
-        tvDuration.setText(String.valueOf(application.getDuration()));
-        tvJobName.setText(String.valueOf(application.getAuction().getJob().getName()));
+        endTime.setText(application.getEndTime());
+        jobName.setText(String.valueOf(application.getJob().getName()));
         return view;
     }
 }

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.organizer.JobsController;
 
 public class AuctionJobsFrag extends Fragment {
 

@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.adapters.AuctionAdapter;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.JobsAdapter;
 import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.Job;
@@ -36,7 +37,7 @@ public class JobsActivity extends AppCompatActivity {
     private ListView lvJobs;
     private JobApply[] gotJobs = null;
 
-    private List<Job> auctionedJobs;
+    private List<ApplicationAuction> auctionedJobs;
     private List<Job> pendingJobs;
     private List<Job> activeJobs;
     private List<Job> completedJobs;
@@ -137,14 +138,13 @@ public class JobsActivity extends AppCompatActivity {
                 .filter(t -> parseDateTime(t.getEndTime()).isAfter(ZonedDateTime.now()))
                 .collect(Collectors.toList());
 
-        auctionedJobs = auctionsToJobs(onAuctions.toArray(new ApplicationAuction[0]));
+        //auctionedJobs = auctionsToJobs(onAuctions.toArray(new ApplicationAuction[0]));
         lvJobs = findViewById(R.id.orgJobsList);
 
-        Job[] jobs = auctionedJobs.toArray(new Job[0]);
+        //Job[] jobs = auctionedJobs.toArray(new Job[0]);
 
-        ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
-        lvJobs.setAdapter(specializationArrayAdapter);
+        AuctionAdapter myCustomAdapter = new AuctionAdapter(this, R.layout.organizer_screen_my_jobs_one_row, onAuctions);
+        lvJobs.setAdapter(myCustomAdapter);
 
         dialog.dismiss();
     }
