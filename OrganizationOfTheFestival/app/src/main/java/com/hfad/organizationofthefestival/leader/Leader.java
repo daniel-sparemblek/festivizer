@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.hfad.organizationofthefestival.festival.Festival;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Leader {
@@ -116,6 +117,14 @@ public class Leader {
 
     public int getPermission() {
         return permission;
+    }
+
+
+    public Festival getFestival(String FestivalName){
+        Optional<Festival> optionalJob = festivals.stream()
+                .filter(t -> t.getName().equals(FestivalName))
+                .findAny();
+        return optionalJob.orElse(null);
     }
 
     public List<String> getFestivalNames() {

@@ -55,6 +55,7 @@
         <activity android:name=".event.creation.CreateEventActivity" />
         <activity android:name=".worker.jobSearch.WorkerJobSearchActivity" />
         <activity android:name=".organizer.JobAuctionActivity" />
+        <activity android:name=".festival.DefaultFestivalActivity" />
     </application>
 
 </manifest>
