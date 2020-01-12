@@ -160,7 +160,7 @@ public class CreateEventActivity extends AppCompatActivity {
                             name, desc, location, startDateTime, endDateTime);
 
                     controller.createEvent(event, accessToken);
-
+// add if with message from backend if organizer already has an event at that time
                     finish();
                 }
 
