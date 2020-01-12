@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,12 +26,11 @@ import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.leader.LeaderJobAuctionsActivity;
 import com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity;
 import com.hfad.organizationofthefestival.leader.MyFestivalsActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -147,14 +145,20 @@ public class CreateFestivalActivity extends AppCompatActivity {
             String startDateTime = convertTime(etStartTime.getText().toString(), etStartDate.getText().toString());
             String endDateTime = convertTime(etEndTime.getText().toString(), etEndDate.getText().toString());
 
-            festival = new Festival(etName.getText().toString(),
-                    etDescription.getText().toString(),
-                    getPictureString(),
-                    startDateTime,
-                    endDateTime);
-            controller.createFestival(festival, accessToken);
+            if (parseDateTime(startDateTime).isBefore(parseDateTime(endDateTime)) && parseDateTime(startDateTime).isAfter(ZonedDateTime.now())){
+                festival = new Festival(etName.getText().toString(),
+                        etDescription.getText().toString(),
+                        getPictureString(),
+                        startDateTime,
+                        endDateTime);
+                controller.createFestival(festival, accessToken);
 
-            returnToLeaderActivity();
+                returnToLeaderActivity();
+            } else {
+                Toast.makeText(this, "Start date should be before end date or after today's date.", Toast.LENGTH_SHORT).show();
+            }
+
+
         });
     }
 
@@ -259,6 +263,17 @@ public class CreateFestivalActivity extends AppCompatActivity {
         }
     }
 
+    public ZonedDateTime parseDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -285,7 +300,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
         } else if (id == R.id.jobAuctns) {
             switchActivity(LeaderJobAuctionsActivity.class);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             switchActivity(LeaderPrintPassActivity.class);
         }
@@ -301,5 +316,10 @@ public class CreateFestivalActivity extends AppCompatActivity {
         intent.putExtra("username", username);
         intent.putExtra("permission", permission);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }

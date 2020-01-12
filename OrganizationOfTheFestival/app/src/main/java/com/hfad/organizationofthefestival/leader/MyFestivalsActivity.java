@@ -15,7 +15,7 @@ import android.widget.ListView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -159,7 +159,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
         } else if (id == R.id.jobAuctns) {
             switchActivity(LeaderJobAuctionsActivity.class);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             switchActivity(MyFestivalsActivity.class);
         }
@@ -175,5 +175,10 @@ public class MyFestivalsActivity extends AppCompatActivity {
         intent.putExtra("username", username);
         intent.putExtra("permission", permission);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
