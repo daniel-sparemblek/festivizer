@@ -46,7 +46,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:onClick="search"
-            android:text="@string/search" />
+            android:text="@string/search"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/login_button" />
     </LinearLayout>
 
     <LinearLayout
