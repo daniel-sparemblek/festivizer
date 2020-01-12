@@ -27,7 +27,7 @@ import com.google.zxing.WriterException;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -234,7 +234,7 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         } else if (id == R.id.jobAuctns) {
             switchActivity(LeaderJobAuctionsActivity.class);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             finish();
             startActivity(getIntent());

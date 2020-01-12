@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,12 +26,11 @@ import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.leader.LeaderJobAuctionsActivity;
 import com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity;
 import com.hfad.organizationofthefestival.leader.MyFestivalsActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -285,7 +283,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
         } else if (id == R.id.jobAuctns) {
             switchActivity(LeaderJobAuctionsActivity.class);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             switchActivity(LeaderPrintPassActivity.class);
         }
