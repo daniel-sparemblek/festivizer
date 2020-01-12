@@ -235,4 +235,9 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

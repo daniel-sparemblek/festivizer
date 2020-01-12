@@ -133,4 +133,9 @@ public class ApplyFestActivity extends AppCompatActivity {
 
         dialog.dismiss();
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

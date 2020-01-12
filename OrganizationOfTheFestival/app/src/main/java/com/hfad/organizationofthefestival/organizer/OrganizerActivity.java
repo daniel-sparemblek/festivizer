@@ -97,7 +97,7 @@ public class OrganizerActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("searcherUsername", username);
+            intent.putExtra("username", username);
             intent.putExtra("searcherPermission", organizer.getPermission());
             startActivity(intent);
         }
@@ -135,5 +135,10 @@ public class OrganizerActivity extends AppCompatActivity {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
         ivProfilePicture.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
