@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.festival.DefaultFestivalActivity;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.leader.Leader;
-import com.hfad.organizationofthefestival.leader.LeaderFestivalActivity;
 import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.worker.JobProfileActivity;
@@ -71,6 +71,15 @@ public class DefaultUserActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, leader.getFestivalNames());
         lv.setAdapter(arrayAdapter);
         setProfilePicture(leader.getPicture());
+
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(DefaultUserActivity.this, DefaultFestivalActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            Festival festival = leader.getFestival(lv.getItemAtPosition(position).toString());
+            intent.putExtra("id", festival.getFestivalId());
+            startActivity(intent);
+        });
     }
 //not working need to go to default festival profile activity
     public void fillInActivityOrganizer(Organizer organizer) {
@@ -87,13 +96,11 @@ public class DefaultUserActivity extends AppCompatActivity {
         setProfilePicture(organizer.getPicture());
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(DefaultUserActivity.this, LeaderFestivalActivity.class);
+            Intent intent = new Intent(DefaultUserActivity.this, DefaultFestivalActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             Festival festival = organizer.getFestival(lv.getItemAtPosition(position).toString());
             intent.putExtra("id", festival.getFestivalId());
-            intent.putExtra("leaderId", festival.getLeaderId());
-            intent.putExtra("username", organizer.getUsername());
             startActivity(intent);
         });
     }
