@@ -109,5 +109,7 @@
     <string name="default_role">My role</string>
     <string name="search_specializations">Search Specializations</string>
     <string name="extend">Extend</string>
+    <string name="num_of_people">Num Of People</string>
+    <string name="log_out">Log Out</string>
 
 </resources>

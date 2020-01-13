@@ -193,6 +193,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("username", username);
         startActivity(intent);
+        finish();
     }
 
     private void findViews() {
@@ -316,6 +317,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
         intent.putExtra("username", username);
         intent.putExtra("permission", permission);
         startActivity(intent);
+        finish();
     }
 
     @Override

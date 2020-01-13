@@ -30,4 +30,9 @@
         android:icon="@drawable/ic_search"
         android:title="@string/search" />
 
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_search"
+        android:title="@string/log_out" />
+
 </menu>

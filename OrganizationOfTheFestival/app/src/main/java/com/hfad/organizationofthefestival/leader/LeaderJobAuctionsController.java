@@ -15,10 +15,10 @@ public class LeaderJobAuctionsController {
     private LeaderJobAuctionsActivity activity;
     private String accessToken;
     private String refreshToken;
-    private String leaderID;
+    private int leaderID;
     private LeaderClient api;
 
-    public LeaderJobAuctionsController(LeaderJobAuctionsActivity activity, String accessToken, String refreshToken, String leaderID) {
+    public LeaderJobAuctionsController(LeaderJobAuctionsActivity activity, String accessToken, String refreshToken, int leaderID) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())

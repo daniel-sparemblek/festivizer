@@ -150,6 +150,7 @@ public class LeaderSearchActivity extends AppCompatActivity {
         intent.putExtra("username", searcherUsername);
         intent.putExtra("permission", permission);
         startActivity(intent);
+        finish();
     }
 
 
