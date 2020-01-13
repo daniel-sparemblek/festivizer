@@ -100,7 +100,6 @@ public class WaitingListController {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
                     getWaitingApplications();
-                    Toast.makeText(waitingListActivity, "Success!", Toast.LENGTH_SHORT).show();
                 } else {
                     try {
                         Toast.makeText(waitingListActivity, "Something went wrong: " + response.errorBody().string(), Toast.LENGTH_SHORT).show();
