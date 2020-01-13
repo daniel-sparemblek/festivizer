@@ -81,9 +81,17 @@ public interface OrganizerClient {
     Call<Void> extendAuction(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
 
     @GET("applications")
-    Call<ApplicationResponse[]> getApplications(@Query("job_id_unconfirmed") int jobId,
+    Call<ApplicationResponse[]> getWaitingApplications(@Query("job_id_unconfirmed") int jobId,
                                               @Header("Authorization") String authorization);
+    @GET("applications")
+    Call<ApplicationResponse[]> getAcceptedApplications(@Query("job_id_confirmed") int jobId,
+                                                       @Header("Authorization") String authorization);
+
     @GET("jobs/event")
     Call<Job[]> getJobsForEvent(@Query("event_id") String eventId,
                                 @Header("Authorization") String authorization);
+
+    @PUT("applications")
+    Call<Void> setStatus(@Body HashMap<String, String> body,
+                         @Header("Authorization") String authorization);
 }
