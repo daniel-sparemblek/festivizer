@@ -87,8 +87,7 @@ public class NewJobActivity extends AppCompatActivity {
         controller.getSpecializations();
 
         btnCrateJob.setOnClickListener(v -> {
-            if (checkChosenSpecs()) {
-                Toast.makeText(NewJobActivity.this, "Choose different specs.", Toast.LENGTH_SHORT).show();
+            if (!specsAreValid()) {
                 return;
             }
             NewJob newJob = new NewJob(etName.getText().toString(),
@@ -168,8 +167,8 @@ public class NewJobActivity extends AppCompatActivity {
         dialog.dismiss();
     }
 
-    private boolean checkChosenSpecs() {
-        if (checkIfSpecsAreNone()){
+    private boolean specsAreValid() {
+        if (specsAreNone()){
             Toast.makeText(NewJobActivity.this, "At least one specialization must be chosen.", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -179,12 +178,13 @@ public class NewJobActivity extends AppCompatActivity {
                 .equals(spThirdSpecialization.getSelectedItem().toString())
                 || spThirdSpecialization.getSelectedItem().toString()
                 .equals(spSecondSpecialization.getSelectedItem().toString()) && checkIfAnyPairIsNone()) {
-            return true;
+            Toast.makeText(NewJobActivity.this, "Choose different specs.", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        return false;
+        return true;
     }
 
-    private boolean checkIfSpecsAreNone() {
+    private boolean specsAreNone() {
         if ("None".equals(spFirstSpecialization.getSelectedItem().toString())
                 && "None".equals(spThirdSpecialization.getSelectedItem().toString())
                 && "None".equals(spSecondSpecialization.getSelectedItem().toString())) {

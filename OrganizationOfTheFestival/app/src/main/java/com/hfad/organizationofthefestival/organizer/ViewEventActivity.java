@@ -84,6 +84,7 @@ public class ViewEventActivity extends AppCompatActivity {
         tvEndTime.setText(parseDateTime(event.getEndTime())
                 .truncatedTo(ChronoUnit.MINUTES)
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+        dialog.dismiss();
     }
 
     public ZonedDateTime parseDateTime(String dateTime) {
