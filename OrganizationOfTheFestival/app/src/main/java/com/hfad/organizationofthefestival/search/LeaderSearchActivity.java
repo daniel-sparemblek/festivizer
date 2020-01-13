@@ -70,6 +70,8 @@ public class LeaderSearchActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         searcherUsername = intent.getStringExtra("username");
         searcherPermission = intent.getIntExtra("searcherPermission", 0);
+        leaderId = intent.getIntExtra("leader_id", 0);
+        permission = intent.getIntExtra("permission", 0);
         searchController = new LeaderSearchController(this, accessToken, refreshToken);
 
         btnSearch.setOnClickListener(v -> {
