@@ -20,10 +20,16 @@ import com.hfad.organizationofthefestival.festival.DefaultFestivalActivity;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.leader.Leader;
 import com.hfad.organizationofthefestival.organizer.Organizer;
+import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.worker.JobProfileActivity;
 import com.hfad.organizationofthefestival.worker.Worker;
 import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
+import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchController;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DefaultUserActivity extends AppCompatActivity {
     private DefaultUserController controller;
@@ -44,6 +50,7 @@ public class DefaultUserActivity extends AppCompatActivity {
     private String searcherUsername;
 
     private ProgressDialog dialog;
+    private List<Long> eventIds;
 
 
     @Override
@@ -61,6 +68,9 @@ public class DefaultUserActivity extends AppCompatActivity {
         getViewIds();
         controller = new DefaultUserController(DefaultUserActivity.this, accessToken, refreshToken, username);
 
+        if (permission == 2) {
+            controller.getOrganizerEvents(searcherUsername);
+        }
         dialog = new ProgressDialog(this);
         dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
         dialog.setCanceledOnTouchOutside(false);
@@ -133,7 +143,7 @@ public class DefaultUserActivity extends AppCompatActivity {
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent;
-            if (searcherPermission == 2){
+            if (searcherPermission == 2 && eventIds.contains(worker.getJobs().get(position))){
                 intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
             } else {
                 intent = new Intent(DefaultUserActivity.this, JobProfileActivity.class);
@@ -169,5 +179,11 @@ public class DefaultUserActivity extends AppCompatActivity {
         byte[] pictureBytes = Base64.decode(picture, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length);
         ivProfilePicture.setImageBitmap(bitmap);
+    }
+
+    public void fillEventIds(EventApply[] events){
+        eventIds = Arrays.stream(events)
+                .map(EventApply::getEventId)
+                .collect(Collectors.toList());
     }
 }

@@ -4,6 +4,7 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.leader.Leader;
 import com.hfad.organizationofthefestival.organizer.Organizer;
+import com.hfad.organizationofthefestival.organizer.OrganizerClient;
 import com.hfad.organizationofthefestival.worker.Worker;
 
 import org.json.JSONObject;
@@ -20,6 +21,7 @@ public class DefaultUserController {
     private String accessToken;
     private String username;
     private String refreshToken;
+
 
     public DefaultUserController(DefaultUserActivity activity, String accessToken, String refreshToken, String username) {
         api = new Retrofit.Builder()

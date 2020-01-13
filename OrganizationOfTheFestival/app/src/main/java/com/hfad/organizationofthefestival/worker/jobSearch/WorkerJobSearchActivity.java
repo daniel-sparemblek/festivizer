@@ -13,13 +13,10 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WorkerJobSearchActivity extends AppCompatActivity {
 
@@ -38,7 +35,6 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
 
     private int permission;
     private String searcherUsername;
-    private List<Long> eventIds;
 
     private ProgressDialog dialog;
 
@@ -66,11 +62,7 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         dialog.show();
 
         controller = new WorkerJobSearchController(this, accessToken, refreshToken);
-        if (permission == 2){
-            controller.getOrganizerEvents(searcherUsername);
-        } else {
-            controller.getFestivalName(job.getId());
-        }
+        controller.getFestivalName(job.getId());
 
         btnAddComment.setOnClickListener(v -> {
             String comment = etComment.getText().toString();
@@ -96,18 +88,7 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvWorkerName.setText(jobApply.getWorker().getUsername());
         tvJobName.setText(jobApply.getName());
         tvStartTime.setText(jobApply.getStartTime());
-        if (permission == 2) {
-            if (eventIds.contains(jobApply.getEvent().getEventId())){
-                btnAddComment.setEnabled(true);
-                etComment.setEnabled(true);
-            }
-        }
-    }
-
-    public void fillEventIds(EventApply[] events){
-        eventIds = Arrays.stream(events)
-                .map(EventApply::getEventId)
-                .collect(Collectors.toList());
-        controller.getFestivalName(job.getId());
+        btnAddComment.setEnabled(true);
+        etComment.setEnabled(true);
     }
 }
