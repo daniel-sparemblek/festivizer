@@ -8,6 +8,9 @@ import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,7 +78,6 @@ public class ViewEventController {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
                         Toast.makeText(viewEventActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        System.out.println("TU IZBACUJEM ERROR");
                         Toast.makeText(viewEventActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
@@ -85,6 +87,30 @@ public class ViewEventController {
             @Override
             public void onFailure(Call<Job[]> call, Throwable t) {
                 Toast.makeText(viewEventActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void updateJobOrders(List<String> order_numbers, String event_id) {
+        HashMap<String, String> orderMap = new HashMap<>();
+
+        for(int i = 1; i <= order_numbers.size(); i++) {
+            orderMap.put(Integer.toString(i), order_numbers.get(i - 1));
+        }
+        System.out.println(orderMap.entrySet().toString());
+        Call<Void> call = api.updateJobOrders(event_id, orderMap, "Bearer " + accessToken);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()) {
+                    Toast.makeText(viewEventActivity, "Successfully updated job order, restart to see!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
             }
         });
     }
