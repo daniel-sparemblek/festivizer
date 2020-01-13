@@ -43,7 +43,7 @@ public class OrganizerActivity extends AppCompatActivity {
         setContentView(R.layout.organizer_profile);
 
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
-        toolbar.setTitle("My profile");
+        toolbar.setTitle("My Profile");
         setSupportActionBar(toolbar);
 
 

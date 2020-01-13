@@ -13,9 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.adapters.AuctionAdapter;
 import com.hfad.organizationofthefestival.adapters.OrderAdapter;
-import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 
@@ -23,6 +21,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,6 +30,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.LinkedList;
+import java.util.List;
+=======
+import java.util.LinkedList;
+import java.util.List;
+>>>>>>> Stashed changes
+=======
+import java.util.LinkedList;
+import java.util.List;
+>>>>>>> Stashed changes
 
 public class ViewEventActivity extends AppCompatActivity {
 
@@ -61,6 +71,7 @@ public class ViewEventActivity extends AppCompatActivity {
         setContentView(R.layout.organizer_screen_event);
 
         Toolbar toolbar = findViewById(R.id.organizer_toolbar);
+        toolbar.setTitle("Event");
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
