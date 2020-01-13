@@ -16,6 +16,7 @@ public class Job {
     @SerializedName("is_completed")
     private boolean isCompleted;
     private String comment;
+
     @SerializedName("order_number")
     private String orderNumber;
 
@@ -79,4 +80,6 @@ public class Job {
     public void setCompleted(boolean completed) {
         isCompleted = completed;
     }
+
+    public String getOrderNumber() { return orderNumber; }
 }
