@@ -124,6 +124,7 @@ public class LeaderActivity extends AppCompatActivity {
         intent.putExtra("username", username);
         intent.putExtra("permission", permission);
         startActivity(intent);
+        finish();
     }
 
     public void fillInActivity(Leader leader) {

@@ -24,7 +24,7 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
-    private String leaderId;
+    private int leaderId;
     private LeaderJobAuctionsController controller;
 
     private ListView jobAuctionsList;
@@ -53,7 +53,7 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        leaderId = intent.getStringExtra("leader_id");
+        leaderId = intent.getIntExtra("leader_id", 0);
         username = intent.getStringExtra("username");
         permission = intent.getIntExtra("permission", 1);
 

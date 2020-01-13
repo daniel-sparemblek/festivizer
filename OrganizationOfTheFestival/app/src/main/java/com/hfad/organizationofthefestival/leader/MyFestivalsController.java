@@ -17,10 +17,10 @@ class MyFestivalsController {
     private MyFestivalsActivity myFestivalsActivity;
     private LeaderClient leaderApi;
     private String accessToken;
-    private String leaderID;
+    private int leaderID;
     private String refreshToken;
 
-    public MyFestivalsController(MyFestivalsActivity myFestivalsActivity, String accessToken, String leaderID, String refreshToken) {
+    public MyFestivalsController(MyFestivalsActivity myFestivalsActivity, String accessToken, int leaderID, String refreshToken) {
         leaderApi = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
