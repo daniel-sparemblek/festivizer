@@ -108,7 +108,7 @@ public class ViewEventActivity extends AppCompatActivity {
             jobsList.add(job);
         }
 
-        lvJobs = findViewById(R.id.orgJobsList);
+        lvJobs = findViewById(R.id.jobsOrderList);
 
         OrderAdapter myCustomAdapter = new OrderAdapter(this,
                 R.layout.organizer_order_row_layout, jobsList, viewEventController);
