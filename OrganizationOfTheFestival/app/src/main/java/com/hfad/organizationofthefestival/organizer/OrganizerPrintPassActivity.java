@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.google.zxing.WriterException;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
 
 import java.io.File;
@@ -116,6 +117,9 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("searcherPermission", organizer.getPermission());
             startActivity(intent);
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

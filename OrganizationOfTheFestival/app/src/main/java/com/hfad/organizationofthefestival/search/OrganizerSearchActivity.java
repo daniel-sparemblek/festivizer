@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.defaultUser.DefaultUserActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.organizer.ApplyFestActivity;
 import com.hfad.organizationofthefestival.organizer.EventsActivity;
 import com.hfad.organizationofthefestival.organizer.JobsActivity;
@@ -128,6 +129,9 @@ public class OrganizerSearchActivity extends AppCompatActivity {
         } else if (id == R.id.search) {
             finish();
             startActivity(getIntent());
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
