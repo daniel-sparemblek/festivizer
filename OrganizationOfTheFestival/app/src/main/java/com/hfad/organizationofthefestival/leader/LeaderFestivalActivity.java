@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Base64;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,9 +17,6 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Event.CreateEventActivity;
 import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
-import com.hfad.organizationofthefestival.login.LoginActivity;
-import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -90,43 +85,6 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         btnAddEvent.setOnClickListener(v -> {
             switchActivity(CreateEventActivity.class);
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.leader_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.myProfile) {
-            finish();
-            startActivity(getIntent());
-        } else if (id == R.id.myFests) {
-            switchActivity(MyFestivalsActivity.class);
-        } else if (id == R.id.createNewFest) {
-            switchActivity(CreateFestivalActivity.class);
-        } else if (id == R.id.jobAuctns) {
-            switchActivity(LeaderJobAuctionsActivity.class);
-        } else if (id == R.id.search) {
-            switchActivity(LeaderSearchActivity.class);
-        } else if (id == R.id.printPass) {
-            switchActivity(LeaderPrintPassActivity.class);
-        } else if (id == R.id.logout){
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 
