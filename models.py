@@ -6,7 +6,10 @@ from passlib.hash import pbkdf2_sha256 as sha256
 from run import db
 from run import ma
 from datetime import datetime
+from datetime import timedelta
 import base64
+from sqlalchemy import or_
+import sys
 
 
 # MODELS
@@ -162,6 +165,20 @@ class FestivalModel(db.Model):
         db.session.commit()
 
 
+class OrdinaryFestival(object):
+    def __init__(self, festival):
+        with open(festival.logo, "rb") as imageFile:
+            pic = base64.b64encode(imageFile.read())
+        self.festival_id = festival.festival_id
+        self.leader_id = festival.leader_id
+        self.name = festival.name
+        self.desc = festival.desc
+        self.logo = pic
+        self.start_time = festival.start_time
+        self.end_time = festival.end_time
+        self.status = festival.status
+
+
 class FestivalOrganizers(db.Model):
     __tablename__ = 'festival_organizers'
 
@@ -223,6 +240,7 @@ class EventModel(db.Model):
     @classmethod
     def find_active_by_festival_id(cls, festival_id):
         now = datetime.now()
+        print(now, file=sys.stderr)
         return db.session.query(cls).filter(cls.festival_id == festival_id, cls.end_time > now,
                                             cls.start_time < now).all()
 
@@ -279,6 +297,10 @@ class AuctionModel(db.Model):
     def find_all(cls):
         return cls.query.all()
 
+    def extend_auction(self):
+        self.end_time = self.end_time + timedelta(days=1)
+        db.session.commit()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
@@ -328,8 +350,13 @@ class JobModel(db.Model):
     @classmethod
     def update_comment(cls, job_id, comment):
         old_job = JobModel.find_by_job_id(job_id)
-        old_job.comment=comment
+        old_job.comment = comment
         db.session.commit()
+
+    @classmethod
+    def find_jobs_on_auction_by_job_id(cls, job_id):
+        return db.session.query(cls).join(AuctionModel, AuctionModel.job_id == cls.job_id) \
+            .filter(cls.job_id == job_id).all()
 
     def save_to_db(self):
         db.session.add(self)
@@ -342,7 +369,9 @@ class JobModel(db.Model):
 
     @classmethod
     def find_jobs_on_auction(cls):
-        return db.session.query(cls).join(AuctionModel, AuctionModel.job_id == cls.job_id).all()
+        now = datetime.now()
+        return db.session.query(cls).join(AuctionModel, AuctionModel.job_id == cls.job_id).filter(
+            now < AuctionModel.end_time).all()
 
     @classmethod
     def find_jobs_not_on_auction_by_organizer_id(cls, organizer_id):
@@ -372,6 +401,7 @@ class Application(db.Model):
     comment = db.Column(db.String(500), nullable=True)
     duration = db.Column(db.Integer, nullable=False)
     people_number = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.Integer, nullable=False)
     __table_args__ = (db.UniqueConstraint('auction_id', 'worker_id'),)
 
     def save_to_db(self):
@@ -391,12 +421,66 @@ class Application(db.Model):
         return cls.query.filter_by(worker_id=worker_id).all()
 
     @classmethod
+    def update_workers(cls):
+        now = datetime.now()
+
+        auctions_to_update = db.session.query(AuctionModel).filter(AuctionModel.end_time < now).all()
+
+        if auctions_to_update:
+            auctions_to_update.sort(key=lambda x: x.auction_id, reverse=True)
+
+            for auction in auctions_to_update:
+                apps = cls.query.filter_by(auction_id=auction.auction_id).all()
+                apps.sort(key=lambda x: x.price, reverse=False)
+                job = JobModel.find_by_job_id(auction.job_id)
+                job.worker_id = apps[0].worker_id
+            db.session.commit()
+
+    @classmethod
+    def find_by_job_id_and_worker_id(cls, job_id, worker_id):
+        auction = db.session.query(cls).join(AuctionModel, AuctionModel.auction_id == cls.auction_id) \
+            .join(JobModel, JobModel.job_id == AuctionModel.job_id).filter(JobModel.job_id == job_id).first()
+
+        return cls.query.filter_by(auction_id=auction.auction_id, worker_id=worker_id).all()
+
+    @classmethod
+    def find_by_job_id_unconfirmed(cls, job_id):
+        auction = db.session.query(cls).join(AuctionModel, AuctionModel.auction_id == cls.auction_id) \
+            .join(JobModel, JobModel.job_id == AuctionModel.job_id).filter(JobModel.job_id == job_id).first()
+
+        return cls.query.filter_by(auction_id=auction.auction_id, status=0).all()
+
+    @classmethod
+    def find_by_job_id_confirmed(cls, job_id):
+        auction = db.session.query(cls).join(AuctionModel, AuctionModel.auction_id == cls.auction_id) \
+            .join(JobModel, JobModel.job_id == AuctionModel.job_id).filter(JobModel.job_id == job_id).first()
+
+        return cls.query.filter_by(auction_id=auction.auction_id, status=1).all()
+
+    @classmethod
     def find_by_leader_id(cls, leader_id):
         return db.session.query(cls).join(AuctionModel, AuctionModel.auction_id == cls.auction_id) \
             .join(JobModel, JobModel.job_id == AuctionModel.job_id) \
             .join(EventModel, EventModel.event_id == JobModel.event_id) \
             .join(FestivalModel, FestivalModel.festival_id == EventModel.festival_id) \
-            .filter(FestivalModel.leader_id == leader_id).all()
+            .filter(FestivalModel.leader_id == leader_id, cls.status == 0).all()
+
+    @classmethod
+    def find_by_leader_id_accepted(cls, leader_id):
+        return db.session.query(cls).join(AuctionModel, AuctionModel.auction_id == cls.auction_id) \
+            .join(JobModel, JobModel.job_id == AuctionModel.job_id) \
+            .join(EventModel, EventModel.event_id == JobModel.event_id) \
+            .join(FestivalModel, FestivalModel.festival_id == EventModel.festival_id) \
+            .filter(FestivalModel.leader_id == leader_id, cls.status == 1).all()
+
+    @classmethod
+    def has_application(cls, auction_id, worker_id):
+        app = db.session.query(cls).join(AuctionModel, AuctionModel.auction_id == cls.auction_id).filter(
+            cls.worker_id == worker_id).all()
+
+        if app:
+            return True
+        return False
 
 
 class SpecializationModel(db.Model):
@@ -605,8 +689,13 @@ class FestivalSchema(ma.ModelSchema):
     def to_json(cls, value):
         if type(value) is list:
             festival_schema = FestivalSchema(many=True)
-            return festival_schema.dump(value)
-        return FestivalSchema().dump(value)
+            fests = []
+            for fest in value:
+                new_festival = OrdinaryFestival(fest)
+                fests.append(new_festival)
+            return festival_schema.dump(fests)
+        new_festival = OrdinaryFestival(value)
+        return FestivalSchema().dump(new_festival)
 
     class Meta:
         model = FestivalModel
@@ -680,6 +769,7 @@ class ApplicationSchema(ma.ModelSchema):
     comment = fields.String(required=False)
     duration = fields.Integer(required=True, error_messages={"required": "Missing duration"})
     people_number = fields.Integer(required=True, error_messages={"required": "Missing number of people"})
+    status = fields.Integer(required=True, error_messages={"required": "Missing number of people"})
 
     @classmethod
     def to_json(cls, value):
@@ -952,7 +1042,8 @@ class OrganizerSchema(ma.Schema):
 
 
 class JobApply(object):
-    def __init__(self, job_id, name, description, event, worker, start_time, is_completed, specializations, comment, order_number):
+    def __init__(self, job_id, name, description, event, worker, start_time, is_completed, specializations, comment,
+                 order_number):
         self.job_id = job_id
         self.name = name
         self.description = description
@@ -1022,11 +1113,13 @@ class JobApplySchema(ma.Schema):
     start_time = fields.DateTime(required=True, error_messages={"required": "Missing start time"})
     is_completed = fields.Boolean(required=True, error_messages={"required": "Missing completion"})
     specializations = fields.List(fields.Nested(SpecializationSchema))
+    comment = fields.String(required=False)
+    order_number = fields.Integer(required=True, error_messages={"required": "Missing order number."})
 
     @classmethod
     def to_json(cls, value):
         if type(value) is list:
-            jobs = []
+            job_list_unique = []
             for job in value:
                 event = EventModel.find_by_event_id(event_id=job.event_id)
                 festival = FestivalModel.find_by_festival_id(event.festival_id)
@@ -1066,11 +1159,11 @@ class JobApplySchema(ma.Schema):
                     start_time=job.start_time,
                     is_completed=job.is_completed,
                     specializations=specializations,
-                    comment = job.comment,
-                    order_number = job.order_number
+                    comment=job.comment,
+                    order_number=job.order_number
                 )
-                jobs.append(new_job)
-            return cls(many=True).dump(jobs)
+                job_list_unique.append(new_job)
+            return cls(many=True).dump(job_list_unique)
         event = EventModel.find_by_event_id(event_id=value.event_id)
         festival = FestivalModel.find_by_festival_id(event.festival_id)
         user = UserModel.find_by_id(event.organizer_id)
@@ -1140,6 +1233,7 @@ class ApplicationWorker(object):
         self.comment = application.comment
         self.duration = application.duration
         self.people_number = application.people_number
+        self.status = application.status
 
 
 class AuctionWorkerSchema(ma.Schema):
@@ -1163,6 +1257,7 @@ class ApplicationWorkerSchema(ma.Schema):
     comment = fields.String(required=False)
     duration = fields.Integer(required=True, error_messages={"required": "Missing duration"})
     people_number = fields.Integer(required=True, error_messages={"required": "Missing number of people"})
+    status = fields.Integer(required=True, error_messages={"required": "Missing number of people"})
 
     @classmethod
     def to_json(cls, value):

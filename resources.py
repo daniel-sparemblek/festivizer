@@ -1,20 +1,21 @@
-from flask_restful import Resource
+import base64
+import sys
+from datetime import datetime, timedelta
+
 from flask import request, redirect
-from datetime import datetime
+from flask_jwt_extended import (create_access_token, create_refresh_token,
+                                jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
+from os import path
 from decorators import permission_required
 from models import (UserModel, RevokedTokenModel, UserSchema, FestivalModel, FestivalOrganizers, FestivalSchema,
-                    EventModel, EventSchema, JobModel, JobSchema, AuctionModel, JobSpecializations, AuctionSchema,
-                    LeaderSchema,
+                    EventModel, EventSchema, JobModel, JobSchema, AuctionModel, JobSpecializations, LeaderSchema,
                     Application, ApplicationSchema, WorkerSchema, SpecializationSchema, SpecializationModel,
                     WorkerSpecializations, OrganizerSchema, JobApplySchema, EventApplySchema, FestivalOrg,
                     FestivalOrgSchema, AuctionWorker, ApplicationWorker, ApplicationWorkerSchema, AuctionWorkerSchema,
                     Admin, AdminSchema)
-from flask_jwt_extended import (create_access_token, create_refresh_token,
-                                jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-import sys
-import base64
-import os
+
 
 class UserRegistration(Resource):
     @staticmethod
@@ -192,6 +193,19 @@ class Workers(Resource):
         return {}, 200
 
 
+class OnAuction(Resource):
+    @jwt_required
+    def post(self):
+        data = request.get_json()
+
+        job_id = data['job_id']
+        jobs = JobModel.find_jobs_on_auction_by_job_id(job_id)
+
+        if len(jobs) == 0:
+            return {'is_on_auction': False}
+        return {'is_on_auction': True}
+
+
 class Organizers(Resource):
     @jwt_required
     def get(self):
@@ -295,14 +309,14 @@ class Festivals(Resource):
 
         if len(list(request.args)) == 1 and leader_id:
             festivals = FestivalModel.find_by_leader_id(leader_id)
-            return FestivalSchema(many=True).dump(festivals)
+            return FestivalSchema.to_json(festivals)
 
         if organizer_id:
             festivals = FestivalModel.find_by_organizer_id(organizer_id)
-            return FestivalSchema(many=True).dump(festivals)
+            return FestivalSchema.to_json(festivals)
 
         festivals = FestivalModel.return_all()
-        return FestivalSchema(many=True).dump(festivals)
+        return FestivalSchema.to_json(festivals)
 
 
 class FestivalsComplete(Resource):
@@ -312,10 +326,10 @@ class FestivalsComplete(Resource):
 
         if len(list(request.args)) == 1 and leader_id:
             festivals = FestivalModel.find_completed_by_leader_id(leader_id)
-            return FestivalSchema(many=True).dump(festivals)
+            return FestivalSchema.to_json(festivals)
 
         festivals = FestivalModel.return_all()
-        return FestivalSchema(many=True).dump(festivals)
+        return FestivalSchema.to_json(festivals)
 
 
 class FestivalsActive(Resource):
@@ -325,10 +339,10 @@ class FestivalsActive(Resource):
 
         if len(list(request.args)) == 1 and leader_id:
             festivals = FestivalModel.find_active_by_leader_id(leader_id)
-            return FestivalSchema(many=True).dump(festivals)
+            return FestivalSchema.to_json(festivals)
 
         festivals = FestivalModel.return_all()
-        return FestivalSchema(many=True).dump(festivals)
+        return FestivalSchema.to_json(festivals)
 
 
 class FestivalsPending(Resource):
@@ -338,10 +352,10 @@ class FestivalsPending(Resource):
 
         if len(list(request.args)) == 1 and leader_id:
             festivals = FestivalModel.find_pending_by_leader_id(leader_id)
-            return FestivalSchema(many=True).dump(festivals)
+            return FestivalSchema.to_json(festivals)
 
         festivals = FestivalModel.return_all()
-        return FestivalSchema(many=True).dump(festivals)
+        return FestivalSchema(many=True).to_json(festivals)
 
 
 class Festival(Resource):
@@ -368,11 +382,25 @@ class Festival(Resource):
         if end_time < start_time:
             return {"msg": "End time can't be before start time."}
 
+        base64_message = data['logo']
+        base64_bytes = base64_message.encode('ascii')
+        message_bytes = base64.b64decode(base64_bytes)
+
+        i = 1
+        while True:
+            picture_path = './festivizer/logos/' + str(i) + '.png'
+            if not path.exists(picture_path):
+                break
+
+        f = open(picture_path, 'w+b')
+        f.write(message_bytes)
+        f.close()
+
         new_festival = FestivalModel(
             leader_id=data['leader_id'],
             name=data['name'],
             desc=data['desc'],
-            logo=data['logo'],
+            logo=picture_path,
             start_time=start_time,
             end_time=end_time,
             status=data['status']
@@ -480,6 +508,7 @@ class Events(Resource):
             organizer = UserModel.find_by_username(username)
             return EventApplySchema.to_json(EventModel.find_by_organizer_id(organizer.id))
 
+        print("sjebo sam" + username, file=sys.stderr)
         return {'msg:': 'Bad request'}, 400
 
 
@@ -595,7 +624,7 @@ class Job(Resource):
 
         jobs = JobModel.find_by_event_id(data['event_id'])
         if not jobs:
-            highest_num=0;
+            highest_num = 0;
         else:
             jobs.sort(key=lambda x: x.order_number, reverse=True)
             highest_num = jobs[0].order_number
@@ -649,6 +678,8 @@ class Job(Resource):
 
 class Jobs(Resource):
     def get(self):
+        Application.update_workers()
+
         leader_id = request.args.get('leader_id')
         job_id = request.args.get('job_id')
         username = request.args.get('username')
@@ -662,8 +693,11 @@ class Jobs(Resource):
             return JobApplySchema.to_json(JobModel.find_by_job_id(job_id=job_id))
 
         if username is not None and is_completed == "0":
+            print("NA PRAVOM MJESTU", file=sys.stderr)
             user = UserModel.find_by_username(username)
-            return JobApplySchema.to_json(JobModel.find_active_by_worker_id(user.id))
+            jobs = JobModel.find_active_by_worker_id(user.id)
+            print("SIZE:" + str(len(jobs)), file=sys.stderr)
+            return JobApplySchema.to_json(jobs)
 
         if username is not None and is_completed == "1":
             user = UserModel.find_by_username(username)
@@ -681,7 +715,8 @@ class OneJob(Resource):
     @jwt_required
     def put(self, job_id):
         data = request.get_json()
-        comment=data['comment']
+        print(data['comment'], file=sys.stderr)
+        comment = data['comment']
         JobModel.update_comment(job_id, comment)
         return {'msg': 'success'}
 
@@ -700,29 +735,26 @@ class AvailableJobs(Resource):
     def get(self):
         return JobSchema.to_json(JobModel.find_jobs_on_auction())
 
+    @jwt_required
+    def post(self):
+        data = request.get_json()
+        worker_id = data['worker_id']
+        auction_id = data['auction_id']
+
+        has_application = Application.has_application(auction_id, worker_id)
+
+        return {'has_auction': has_application}
+
 
 class Auction(Resource):
     @jwt_required
     def post(self):
         data = request.get_json()
 
-        auction_schema = AuctionSchema()
-        validate = auction_schema.validate(data)
-
-        if bool(validate):
-            value = list(validate.values())[0]
-            return {"msg": value[0]}, 422
-
-        start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
-        end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%H:%M:%S.%f%z')
-
-        if end_time < start_time:
-            return {"msg": "End time can't be before start time."}
-
         new_auction = AuctionModel(
             job_id=data['job_id'],
-            start_time=start_time,
-            end_time=end_time
+            start_time=datetime.now(),
+            end_time=datetime.now() + timedelta(days=1)
         )
 
         try:
@@ -734,6 +766,15 @@ class Auction(Resource):
         except Exception as e:
             raise e
             return {'msg': 'Internal server error'}, 500
+
+    @jwt_required
+    def put(self):
+        data = request.get_json()
+        auction_id = data['auction_id']
+
+        auction = AuctionModel.find_by_auction_id(auction_id)
+        auction.extend_auction()
+        return {'msg': 'Success'}
 
 
 class OrganizersFestivals(Resource):
@@ -807,7 +848,8 @@ class Applications(Resource):
             price=data['price'],
             comment=data['comment'],
             duration=data['duration'],
-            people_number=data['people_number']
+            people_number=data['people_number'],
+            status=0
         )
 
         try:
@@ -826,6 +868,10 @@ class Applications(Resource):
         application_id = request.args.get('application_id')
         username = request.args.get('username')
         leader_id = request.args.get('leader_id')
+        leader_id_accept = request.args.get('leader_id_accept')
+        job_id = request.args.get('job_id')
+        job_id_confirmed = request.args.get('job_id_confirmed')
+        job_id_unconfirmed = request.args.get('job_id_unconfirmed')
 
         if application_id:
             return ApplicationSchema.to_json(Application.find_by_application_id(application_id=application_id))
@@ -842,6 +888,44 @@ class Applications(Resource):
 
         if leader_id:
             applications = Application.find_by_leader_id(leader_id)
+
+            worker_apps = []
+            for app in applications:
+                worker_apps.append(ApplicationWorker(app))
+
+            return ApplicationWorkerSchema.to_json(worker_apps)
+
+        if leader_id_accept:
+            applications = Application.find_by_leader_id_accepted(leader_id_accept)
+
+            worker_apps = []
+            for app in applications:
+                worker_apps.append(ApplicationWorker(app))
+
+            return ApplicationWorkerSchema.to_json(worker_apps)
+
+        if job_id:
+            username = get_jwt_identity()
+            user = UserModel.find_by_username(username)
+            applications = Application.find_by_job_id_and_worker_id(job_id, user.id)
+
+            worker_apps = []
+            for app in applications:
+                worker_apps.append(ApplicationWorker(app))
+
+            return ApplicationWorkerSchema.to_json(worker_apps)
+
+        if job_id_unconfirmed:
+            applications = Application.find_by_job_id_unconfirmed(job_id_unconfirmed)
+
+            worker_apps = []
+            for app in applications:
+                worker_apps.append(ApplicationWorker(app))
+
+            return ApplicationWorkerSchema.to_json(worker_apps)
+
+        if job_id_confirmed:
+            applications = Application.find_by_job_id_confirmed(job_id_confirmed)
 
             worker_apps = []
             for app in applications:
