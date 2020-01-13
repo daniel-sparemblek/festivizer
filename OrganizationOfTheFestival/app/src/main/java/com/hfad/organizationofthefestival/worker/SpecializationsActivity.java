@@ -17,12 +17,10 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.login.LoginActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.search.WorkerSearchActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 

@@ -15,7 +15,7 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.EventAdapter;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
 import com.hfad.organizationofthefestival.utility.EventApply;
 
 import java.time.ZoneId;
@@ -103,7 +103,7 @@ public class EventsActivity extends ApplyFestActivity {
         } else if (id == R.id.printPass) {
             switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            switchActivity(OrganizerSearchActivity.class);
         }
 
         return super.onOptionsItemSelected(item);
