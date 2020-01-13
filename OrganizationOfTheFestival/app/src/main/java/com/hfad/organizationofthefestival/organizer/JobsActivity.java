@@ -13,14 +13,16 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.AuctionAdapter;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.JobsAdapter;
 import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
+import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
-import com.hfad.organizationofthefestival.utility.ApplicationAuction;
+import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -42,6 +44,7 @@ public class JobsActivity extends AppCompatActivity {
     private List<Job> pendingJobs;
     private List<Job> activeJobs;
     private List<Job> completedJobs;
+    private String permission;
 
     private ProgressDialog dialog;
 
@@ -67,6 +70,7 @@ public class JobsActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
+        permission = intent.getStringExtra("permission");
 
         jobsController = new JobsController(this, accessToken, username, refreshToken);
 
@@ -196,7 +200,7 @@ public class JobsActivity extends AppCompatActivity {
                     .filter(t -> name.equals(t.getName()))
                     .findFirst();
 
-            if(jobOptional.isPresent()) {
+            if (jobOptional.isPresent()) {
                 Intent intent = new Intent(this, JobAuctionActivity.class);
                 intent.putExtra("accessToken", accessToken);
                 intent.putExtra("refreshToken", refreshToken);
@@ -213,12 +217,22 @@ public class JobsActivity extends AppCompatActivity {
                 .filter(Job::isCompleted)
                 .collect(Collectors.toList());
 
-        jobs = completedJobs.toArray(new Job[0]);
         lvJobs = findViewById(R.id.orgCompletedJobList);
 
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
+
+        lvJobs.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(JobsActivity.this, WorkerJobSearchActivity.class);
+            Job job = completedJobs.get(position);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("job_id", job.getId());
+            Gson gson = new Gson();
+            intent.putExtra("job", gson.toJson(job));
+            startActivity(intent);
+        });
 
         dialog.dismiss();
     }

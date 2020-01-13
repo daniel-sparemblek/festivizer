@@ -13,13 +13,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class WorkerJobSearchActivity extends AppCompatActivity {
 
@@ -36,8 +31,6 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
 
     private WorkerJobSearchController controller;
 
-    private int permission;
-    private String searcherUsername;
 
     private ProgressDialog dialog;
 
@@ -51,12 +44,10 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         etComment.setEnabled(false);
 
         Intent intent = getIntent();
-        permission = intent.getIntExtra("searcherPermission", 0);
         String accessToken = intent.getStringExtra("accessToken");
         String refreshToken = intent.getStringExtra("refreshToken");
         String jsonJob = intent.getStringExtra("job");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        searcherUsername = intent.getStringExtra("searcherUsername");
         job = gson.fromJson(jsonJob, Job.class);
 
         dialog = new ProgressDialog(this);
