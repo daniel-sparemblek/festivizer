@@ -5,6 +5,7 @@ import android.widget.Toast;
 import com.hfad.organizationofthefestival.leader.Leader;
 import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.organizer.OrganizerClient;
+import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.worker.Worker;
 
 import org.json.JSONObject;
@@ -21,6 +22,7 @@ public class DefaultUserController {
     private String accessToken;
     private String username;
     private String refreshToken;
+    private OrganizerClient organizerClient;
 
 
     public DefaultUserController(DefaultUserActivity activity, String accessToken, String refreshToken, String username) {
@@ -29,6 +31,12 @@ public class DefaultUserController {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(DefaultUserApi.class);
+
+        organizerClient = new Retrofit.Builder()
+                .baseUrl("https://kaogrupa.pythonanywhere.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(OrganizerClient.class);
 
         this.activity = activity;
         this.accessToken = accessToken;
@@ -120,4 +128,32 @@ public class DefaultUserController {
             }
         });
     }
+
+    public void getOrganizerEvents(String username){
+        Call<EventApply[]> call = organizerClient.getAllEvents(username, "Bearer " + accessToken);
+
+        call.enqueue(new Callback<EventApply[]>() {
+            @Override
+            public void onResponse(Call<EventApply[]> call, Response<EventApply[]> response) {
+                if (response.isSuccessful()){
+                    activity.fillEventIds(response.body());
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(activity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(activity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventApply[]> call, Throwable t) {
+                Toast.makeText(activity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 }

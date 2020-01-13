@@ -22,10 +22,10 @@ import com.hfad.organizationofthefestival.leader.Leader;
 import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
+import com.hfad.organizationofthefestival.worker.JobCommentActivity;
 import com.hfad.organizationofthefestival.worker.JobProfileActivity;
 import com.hfad.organizationofthefestival.worker.Worker;
 import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
-import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchController;
 
 import java.util.Arrays;
 import java.util.List;
@@ -68,15 +68,14 @@ public class DefaultUserActivity extends AppCompatActivity {
         getViewIds();
         controller = new DefaultUserController(DefaultUserActivity.this, accessToken, refreshToken, username);
 
-        if (permission == 2) {
+        if (searcherPermission == 2) {
+            System.out.println("KURAC");
             controller.getOrganizerEvents(searcherUsername);
         }
         dialog = new ProgressDialog(this);
         dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
-
-        controller.showUserProfile(permission);
     }
 
     public void fillInActivityLeader(Leader leader) {
@@ -143,10 +142,10 @@ public class DefaultUserActivity extends AppCompatActivity {
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent;
-            if (searcherPermission == 2 && eventIds.contains(worker.getJobs().get(position))){
+            if (searcherPermission == 2 && eventIds.contains(worker.getJobs().get(position))) {
                 intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
             } else {
-                intent = new Intent(DefaultUserActivity.this, JobProfileActivity.class);
+                intent = new Intent(DefaultUserActivity.this, JobCommentActivity.class);
             }
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
@@ -181,9 +180,10 @@ public class DefaultUserActivity extends AppCompatActivity {
         ivProfilePicture.setImageBitmap(bitmap);
     }
 
-    public void fillEventIds(EventApply[] events){
+    public void fillEventIds(EventApply[] events) {
         eventIds = Arrays.stream(events)
                 .map(EventApply::getEventId)
                 .collect(Collectors.toList());
+        controller.showUserProfile(permission);
     }
 }
