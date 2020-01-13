@@ -98,7 +98,6 @@ public class NewJobActivity extends AppCompatActivity {
                     spSecondSpecialization.getSelectedItem().toString(),
                     spThirdSpecialization.getSelectedItem().toString());
             controller.createNewJob(newJob);
-
             returnToEventProfile();
         });
 
@@ -134,6 +133,7 @@ public class NewJobActivity extends AppCompatActivity {
         intent.putExtra("event_id", eventId);
         intent.putExtra("festivalName", festivalName);
         startActivity(intent);
+        finish();
     }
 
     private void findViews() {
