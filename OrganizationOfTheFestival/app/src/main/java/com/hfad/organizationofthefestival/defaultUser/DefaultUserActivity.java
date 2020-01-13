@@ -23,7 +23,6 @@ import com.hfad.organizationofthefestival.organizer.Organizer;
 import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.worker.JobCommentActivity;
-import com.hfad.organizationofthefestival.worker.JobProfileActivity;
 import com.hfad.organizationofthefestival.worker.Worker;
 import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
 
@@ -144,7 +143,7 @@ public class DefaultUserActivity extends AppCompatActivity {
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent;
-            if (searcherPermission == 2 && eventIds.contains((long)worker.getJobs().get(position).getEventId())) {
+            if (searcherPermission == 2 && eventIds.contains((long) worker.getJobs().get(position).getEventId())) {
                 intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
             } else {
                 intent = new Intent(DefaultUserActivity.this, JobCommentActivity.class);

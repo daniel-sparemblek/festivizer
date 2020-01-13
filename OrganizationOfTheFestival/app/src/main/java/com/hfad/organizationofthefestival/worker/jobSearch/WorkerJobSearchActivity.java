@@ -65,6 +65,7 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         dialog.show();
 
         controller = new WorkerJobSearchController(this, accessToken, refreshToken);
+
         controller.getFestivalName(job.getId());
 
         btnAddComment.setOnClickListener(v -> {
@@ -91,8 +92,13 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvWorkerName.setText(jobApply.getWorker().getUsername());
         tvJobName.setText(jobApply.getName());
         tvStartTime.setText(jobApply.getStartTime());
-        btnAddComment.setEnabled(true);
-        etComment.setEnabled(true);
+
+        if (jobApply.getComment() == null) {
+            btnAddComment.setEnabled(true);
+            etComment.setEnabled(true);
+        } else {
+            etComment.setText(jobApply.getComment());
+        }
         dialog.dismiss();
     }
 }
