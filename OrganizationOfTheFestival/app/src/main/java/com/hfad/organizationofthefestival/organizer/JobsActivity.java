@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.AuctionAdapter;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.JobsAdapter;
 import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
 import com.hfad.organizationofthefestival.utility.Job;
@@ -120,6 +121,9 @@ public class JobsActivity extends AppCompatActivity {
             switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
             switchActivity(OrganizerSearchActivity.class);
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
