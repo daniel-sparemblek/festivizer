@@ -41,6 +41,7 @@ class ActiveJobsController {
             @Override
             public void onResponse(Call<JobApply[]> call, Response<JobApply[]> response) {
                 if (response.isSuccessful()) {
+                    System.out.println(response.body().length);
                     activeJobsActivity.fillInActivity(response.body());
                 } else {
                     try {

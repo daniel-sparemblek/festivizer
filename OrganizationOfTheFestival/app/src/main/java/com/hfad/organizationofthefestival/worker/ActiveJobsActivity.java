@@ -71,6 +71,8 @@ public class ActiveJobsActivity extends AppCompatActivity {
     }
 
     public void fillInActivity(JobApply[] body) {
+
+        System.out.println("BROJ: " + body.length);
         jobs = Arrays.asList(body);
 
         List<String> specStrings = jobs.stream()
