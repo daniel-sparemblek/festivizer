@@ -1,13 +1,12 @@
 package com.hfad.organizationofthefestival.login;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.admin.AdminActivity;
+import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.organizer.OrganizerActivity;
 import com.hfad.organizationofthefestival.worker.WorkerActivity;
-import com.hfad.organizationofthefestival.leader.LeaderActivity;
 
 import org.json.JSONObject;
 
@@ -73,6 +72,7 @@ public class LoginController {
                 intent.putExtra("refreshToken", refreshToken);
                 intent.putExtra("username", username);
                 loginActivity.startActivity(intent);
+                loginActivity.finish();
                 break;
             case 1:
                 intent = new Intent(loginActivity, LeaderActivity.class);
@@ -81,6 +81,7 @@ public class LoginController {
                 intent.putExtra("username", username);
                 intent.putExtra("permission", permission);
                 loginActivity.startActivity(intent);
+                loginActivity.finish();
                 break;
 
             case 2:
@@ -90,6 +91,7 @@ public class LoginController {
                 intent.putExtra("username", username);
                 intent.putExtra("permission", permission);
                 loginActivity.startActivity(intent);
+                loginActivity.finish();
                 break;
 
             case 3:
@@ -99,6 +101,7 @@ public class LoginController {
                 intent.putExtra("username", username);
                 intent.putExtra("permission", permission);
                 loginActivity.startActivity(intent);
+                loginActivity.finish();
                 break;
         }
     }

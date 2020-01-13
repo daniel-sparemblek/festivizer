@@ -23,7 +23,7 @@ public interface LeaderClient {
 
     @GET("festivals/{type}")
     Call<Festival[]> getFestivals(@Path("type") String type,
-                                  @Query("leader_id") String leader_id,
+                                  @Query("leader_id") int leader_id,
                                   @Header("Authorization") String authorization);
 
     @GET("festivals")
@@ -31,11 +31,11 @@ public interface LeaderClient {
                                         @Header("Authorization") String authorization);
 
     @GET("applications")
-    Call<ApplicationResponse[]> getAuctions(@Query("leader_id") String leaderID,
+    Call<ApplicationResponse[]> getAuctions(@Query("leader_id") int leaderID,
                                             @Header("Authorization") String authorization);
 
     @GET("applications")
-    Call<ApplicationResponse[]> getActiveAuctions(@Query("leader_id_accept") String leaderID,
+    Call<ApplicationResponse[]> getActiveAuctions(@Query("leader_id_accept") int leaderID,
                                             @Header("Authorization") String authorization);
 
     @GET("organizers")

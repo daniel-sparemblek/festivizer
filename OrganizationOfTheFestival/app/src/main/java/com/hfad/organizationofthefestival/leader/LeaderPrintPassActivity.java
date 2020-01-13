@@ -27,6 +27,7 @@ import com.google.zxing.WriterException;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.io.File;
@@ -214,11 +215,10 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        if(leader.getIsPending() == 1) {
+        if (leader.getIsPending() == 1) {
             Toast.makeText(this, "You have not yet been accepted as leader!", Toast.LENGTH_SHORT).show();
             return true;
-        }
-        else if(leader.getIsPending() == 2) {
+        } else if (leader.getIsPending() == 2) {
             Toast.makeText(this, "Sorry, you have been revoked as leader...", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -238,6 +238,9 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         } else if (id == R.id.printPass) {
             finish();
             startActivity(getIntent());
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -251,6 +254,7 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         intent.putExtra("username", username);
         intent.putExtra("permission", permission);
         startActivity(intent);
+        finish();
     }
 
     @Override

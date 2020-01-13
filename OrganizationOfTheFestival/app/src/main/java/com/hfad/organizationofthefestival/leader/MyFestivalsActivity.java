@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
-    private String leaderId;
+    private int leaderId;
     private String username;
     private Festival[] festivals;
 
@@ -51,7 +52,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        leaderId = intent.getStringExtra("leader_id");
+        leaderId = intent.getIntExtra("leader_id", 0);
         username = intent.getStringExtra("username");
         permission = intent.getIntExtra("permission", 1);
 
@@ -162,6 +163,9 @@ public class MyFestivalsActivity extends AppCompatActivity {
             switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             switchActivity(MyFestivalsActivity.class);
+        } else if (id == R.id.logout){
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -175,6 +179,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
         intent.putExtra("username", username);
         intent.putExtra("permission", permission);
         startActivity(intent);
+        finish();
     }
 
     @Override

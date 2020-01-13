@@ -84,7 +84,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
 
         } else if (id == R.id.applyForJob) {
@@ -93,7 +93,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.activeJobs) {
             Intent intent = new Intent(this, ActiveJobsActivity.class);
@@ -101,7 +101,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.myApplications) {
             Intent intent = new Intent(this, MyApplicationsActivity.class);
@@ -109,7 +109,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.printPass) {
             Intent intent = new Intent(this, WorkerPrintPassActivity.class);
@@ -126,7 +126,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.worker_profile) {
             dialog = new ProgressDialog(this);
@@ -137,7 +137,7 @@ public class WorkerActivity extends AppCompatActivity {
         }
         else if (id == R.id.logout) {
             Intent intent = new Intent(this, LoginActivity.class);
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         }
 

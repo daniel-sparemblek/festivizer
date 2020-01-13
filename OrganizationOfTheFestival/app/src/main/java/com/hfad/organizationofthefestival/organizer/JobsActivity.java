@@ -15,8 +15,9 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.AuctionAdapter;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.organizer.FragmentAdapters.JobsAdapter;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
@@ -119,7 +120,10 @@ public class JobsActivity extends AppCompatActivity {
         } else if (id == R.id.printPass) {
             switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            switchActivity(OrganizerSearchActivity.class);
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -247,4 +251,7 @@ public class JobsActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+    public void goToWaitingList() {
+        switchActivity(WaitingListActivity.class);
+    }
 }

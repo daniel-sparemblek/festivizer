@@ -17,7 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
+import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
 
 public class OrganizerActivity extends AppCompatActivity {
 
@@ -89,12 +90,15 @@ public class OrganizerActivity extends AppCompatActivity {
             intent.putExtra("username", organizer.getUsername());
             startActivity(intent);
         } else if (id == R.id.search) {
-            Intent intent = new Intent(this, SearchActivity.class);
+            Intent intent = new Intent(this, OrganizerSearchActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("searcherPermission", organizer.getPermission());
             startActivity(intent);
+        } else if (id == R.id.logout){
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

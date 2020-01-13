@@ -2,9 +2,7 @@ package com.hfad.organizationofthefestival.search;
 
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.utility.User;
-import com.hfad.organizationofthefestival.worker.WorkerClient;
 
 import org.json.JSONObject;
 
@@ -18,12 +16,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchController {
-    private SearchActivity searchActivity;
+    private OrganizerSearchActivity searchActivity;
     private SearchApi api;
     private String accessToken;
     private String refreshToken;
 
-    public SearchController(SearchActivity searchActivity, String accessToken, String refreshToken) {
+    public SearchController(OrganizerSearchActivity searchActivity, String accessToken, String refreshToken) {
         api = new Retrofit.Builder()
                 .baseUrl("https://kaogrupa.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())

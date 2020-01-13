@@ -36,25 +36,29 @@
             android:id="@+id/tv_app_worker_name"
             android:layout_width="103dp"
             android:layout_height="35dp"
+            android:gravity="center_horizontal"
             android:text="@string/worker"/>
 
         <TextView
             android:id="@+id/tv_app_price"
             android:layout_width="52dp"
             android:layout_height="35dp"
-            android:text="@string/price"/>
+            android:gravity="center_horizontal"
+            android:text="@string/price" />
 
         <TextView
             android:id="@+id/tv_app_people_num"
             android:layout_width="50dp"
             android:layout_height="35dp"
-            android:text="@string/num_of_people"/>
+            android:gravity="center_horizontal"
+            android:text="@string/num_of_people" />
 
         <TextView
             android:id="@+id/tv_app_job_name"
             android:layout_width="106dp"
             android:layout_height="35dp"
-            android:text="@string/job_name"/>
+            android:gravity="center_horizontal"
+            android:text="@string/job_name" />
 
         <TextView
             android:id="@+id/tv_app_duration"
@@ -64,35 +68,53 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="55dp">
+        android:orientation="horizontal">
 
-        <ListView
-            android:id="@+id/jobAuctionList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ListView
-            android:id="@+id/jobAuctionListActive"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="     PENDING APPLICATIONS"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/jobAuctionList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     COMPLETED APPLICATIONS"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/jobAuctionListActive"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </LinearLayout>

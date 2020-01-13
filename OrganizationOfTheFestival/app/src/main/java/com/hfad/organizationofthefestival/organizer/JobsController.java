@@ -132,4 +132,8 @@ public class JobsController {
             }
         });
     }
+
+    public void goToWaitingList() {
+        jobsActivity.goToWaitingList();
+    }
 }

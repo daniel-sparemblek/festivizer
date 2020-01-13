@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 public class LeaderActivity extends AppCompatActivity {
@@ -111,6 +112,9 @@ public class LeaderActivity extends AppCompatActivity {
             switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             switchActivity(LeaderPrintPassActivity.class);
+        } else if (id == R.id.logout){
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -118,12 +122,13 @@ public class LeaderActivity extends AppCompatActivity {
 
     private void switchActivity(Class<?> destination) {
         Intent intent = new Intent(this, destination);
-        intent.putExtra("leader_id", String.valueOf(leaderId));
+        intent.putExtra("leader_id", leaderId);
         intent.putExtra("accessToken", accessToken);
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("username", username);
         intent.putExtra("permission", permission);
         startActivity(intent);
+        finish();
     }
 
     public void fillInActivity(Leader leader) {

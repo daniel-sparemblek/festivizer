@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.login.LoginActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.search.WorkerSearchActivity;
 import com.hfad.organizationofthefestival.utility.JobApply;
 

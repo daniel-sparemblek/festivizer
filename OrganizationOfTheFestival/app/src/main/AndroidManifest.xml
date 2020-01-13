@@ -51,7 +51,7 @@
             android:name=".worker.MyApplicationsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".search.SearchActivity"
+            android:name=".search.OrganizerSearchActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".worker.JobApplicationActivity"
@@ -133,6 +133,9 @@
             android:name=".search.WorkerSearchActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".worker.WorkerPrintPassActivity" />
+
+        <activity android:name=".organizer.WaitingListActivity" />
+
     </application>
 
 </manifest>
