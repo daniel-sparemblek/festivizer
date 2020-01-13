@@ -59,6 +59,23 @@
 			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
 			
 			\eject 
+			
+		\section{UML Deployment Diagram}
+		
+			The application consists of two parts: the mobile application(kind of a front-end) and the back-end hosted on the Pythonanywhere cloud. The application uses protocols GET(for information retrieval from the server), and POST in order to send/communicate information to the server. Furthermore, the server consists of 4 parts:
+			\begin{itemize}
+				\item App.db - definition of the database for SQLite 3
+				\item Models.py - database tables modelled as Python classes
+				\item Run.py - endpoint initialisation and control
+				\item Resource.py - Used for handling server requests and responses
+			\end{itemize}
+			
+			As far as hardware goes - basically 2 devices are required - the mobile phone and the cloud hosting computer. Network is also required as it is used to convey
+			information between these 2 endpoints. While there is only one server instance, it is expected that multiple concurrent mobile phones will be using the application. Therefore, in the instance deployment diagram more than one mobile phone could be present.
+		
+			\eject
+		
+		
 		
 		\section{Upute za puštanje u pogon}
 		
