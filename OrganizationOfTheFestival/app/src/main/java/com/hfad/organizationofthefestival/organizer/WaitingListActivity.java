@@ -11,7 +11,6 @@ import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.WaitingListAdapter;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,35 +46,28 @@ public class WaitingListActivity extends AppCompatActivity {
 
         controller = new WaitingListController(this, accessToken, username, refreshToken, Integer.parseInt(jobId));
 
-        controller.setApplicationStatus();
+        controller.getWaitingApplications();
     }
 
-    public void fillInActivity(ApplicationResponse[] applicationResponses) {
+    public void fillInWaiting(ApplicationResponse[] applicationResponses) {
         List<ApplicationResponse> content = Arrays.asList(applicationResponses);
-        List<ApplicationResponse> waiting;
-        List<ApplicationResponse> approved;
-
-        waiting = content.stream()
-                .filter(t -> t.getStatus() == 0)
-                .collect(Collectors.toList());
-
-        approved = content.stream()
-                .filter(t -> t.getStatus() == 1)
-                .collect(Collectors.toList());
 
         WaitingListAdapter myCustomAdapter = new WaitingListAdapter(this,
-                R.layout.organizer_screen_waiting_list_row, waiting, controller);
+                R.layout.organizer_screen_waiting_list_row, content, controller);
         lvWorkers.setAdapter(myCustomAdapter);
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, format(approved));
-        lvBids.setAdapter(arrayAdapter);
-
     }
 
     private List<String> format(List<ApplicationResponse> approved) {
         return approved.stream()
                 .map(t -> t.getWorker().getUsername() + " " +  t.getPrice())
                 .collect(Collectors.toList());
+    }
+
+    public void fillInAccepted(ApplicationResponse[] applicationResponses) {
+        List<ApplicationResponse> content = Arrays.asList(applicationResponses);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, format(content));
+        lvBids.setAdapter(arrayAdapter);
     }
 }
