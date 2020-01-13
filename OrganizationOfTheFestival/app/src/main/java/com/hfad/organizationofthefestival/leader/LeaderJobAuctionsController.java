@@ -2,9 +2,6 @@ package com.hfad.organizationofthefestival.leader;
 
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
-import java.util.Arrays;
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,7 +35,7 @@ public class LeaderJobAuctionsController {
             @Override
             public void onResponse(Call<ApplicationResponse[]> call, Response<ApplicationResponse[]> response) {
                 if (response.isSuccessful()) {
-                    activity.fillInActivity(response.body());
+                    activity.fillInWaitingApplications(response.body());
                     getActiveJobAuctions();
                 }
             }
