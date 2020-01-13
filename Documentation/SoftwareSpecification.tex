@@ -111,30 +111,6 @@
 				
 				\subsubsection{Use Cases Description}
 					
-				\noindent \underbar{\textbf{UC1 - Festivals Overview and Detail inspection}}
-				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrators
-					\item \textbf{Goal:} View the list of all the Festivals, ability to click on a specific Festival and view its details in a new Screen
-					\item \textbf{Stakeholders:} Database
-					\item \textbf{Conditions:} Must be logged in
-					\item \textbf{Event flow description: }
-					\begin{packed_enum}
-						\item A list of Festivals is displayed(retrieved from the Database)
-						\item Administrator selects a Festival of which he wants to inspect further details
-						\item A new Screen appears depicting a detailed view of the Festival's information
-					\end{packed_enum}
-				
-					\begin{packed_item}
-						\item[1.a] Data not successfully retrieved
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data couldn't be retrieved
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
-							\item Upon successful data retrieval(if ever) the button and error message are removed and then the data is displayed
-						\end{packed_enum}
-					\end{packed_item}
-					
-				\end{packed_item}
-					
 				\noindent \underbar{\textbf{UC2 - Registration}}
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Unregistered/Guest Users
@@ -205,7 +181,7 @@
 					\item \textbf{Conditions:} Must be logged in
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
-						\item User taps the sandwich button in the upper right screen corner, and then taps Account
+						\item User taps the corresponding button, and views his profile information
 						\item Data is retrieved from the Database
 						\item A screen depicting Account data appears
 					\end{packed_enum}
@@ -218,85 +194,6 @@
 							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 						\end{packed_enum}
 					\end{packed_item}
-				\end{packed_item}
-			
-				\noindent \underbar{\textbf{UC5 - Changing Account Data}}
-				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} User
-					\item \textbf{Goal:} Change the account data
-					\item \textbf{Stakeholders:} Database, Back-End(Server)
-					\item \textbf{Conditions:} Must be logged in
-					\item \textbf{Event flow description: }
-					\begin{packed_enum}
-						\item User taps the sandwich button in the upper right screen corner, and then taps Account
-						\item Data is retrieved from the Database
-						\item A screen depicting Account data appears
-						\item User clicks the 'Change info' button and is taken to a new Screen
-						\item User enters the desired new data
-						\item User clicks the 'OK' button and the data is sent to the Database
-						\item Upon receiving a confirmation from the Server that change has taken place the success notification is displayed to the User
-					\end{packed_enum}
-					
-					\begin{packed_item}
-						\item[2.a] Data not successfully retrieved
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data couldn't be retrieved
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
-							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
-						\end{packed_enum}
-
-						\item[2.a] Illegal input
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that they have entered illegal input
-							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
-							\item The steps above are repeated if new input isn't accepted either
-						\end{packed_enum}
-
-						\item[6.a, 7.a] Data not successfully sent or parsed on the Server
-						\item[] \begin{packed_enum}
-							\item Field values are saved, and kept the same
-							\item An error is displayed to the User stating that data wasn't successfully sent and that User needs to resend the form
-							\item User resends the form. If still not successful, the same steps above apply.
-						\end{packed_enum}
-														
-					\end{packed_item}
-							
-				\end{packed_item}
-					
-				\noindent \underbar{\textbf{UC6 - Account Deletion}}
-				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} User
-					\item \textbf{Goal:} Delete their Account
-					\item \textbf{Stakeholders:} Database, Back-End(Server)
-					\item \textbf{Conditions:} Must be logged in
-					\item \textbf{Event flow description: }
-					\begin{packed_enum}
-						\item User taps the sandwich button in the upper right screen corner, and then taps Account
-						\item Data is retrieved from the Database
-						\item A screen depicting Account data appears
-						\item User clicks the 'Delete Account' button
-						\item A request is sent to the Server. Upon reception, the Server deletes the Account from the database.
-						\item The Server sends the confirmation to the User that his account has been deleted.
-						\item The User is logged out of the application
-					\end{packed_enum}
-					
-					\begin{packed_item}
-						\item[2.a] Data not successfully retrieved
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data couldn't be retrieved
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
-							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
-						\end{packed_enum}
-						
-						\item[5.a] Data not successfully sent or parsed on the Server
-						\item[] \begin{packed_enum}
-							\item Field values are saved, and kept the same
-							\item An error is displayed to the User stating that data wasn't successfully sent and that User needs to resend the form
-							\item User resends the form. If still not successful, the same steps above apply.
-						\end{packed_enum}
-						
-					\end{packed_item}
-					
 				\end{packed_item}
 			
 				\noindent \underbar{\textbf{UC7 - Verifying a Leader}}
@@ -307,10 +204,9 @@
 					\item \textbf{Conditions:} Must be logged in. There is a Leader awaiting confirmation.
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
-						\item Administrator opens the panel for verifying Leaders
+						\item The list of Leaders is displayed to the Administrator
 						\item Data is fetched from the Database
-						\item Administrator reads the info about the Leader and the Festival that the Leader wants to create
-						\item Administrator decides whether to verify the Leader or not
+						\item Administrator decides whether to verify or deny the Leader
 					\end{packed_enum}
 					
 					\begin{packed_item}
@@ -354,7 +250,7 @@
 					\end{packed_item}
 				\end{packed_item}
 					
-				\noindent \underbar{\textbf{UC9 - Appoint an Organiser to the selected Festival}}
+				\noindent \underbar{\textbf{UC9 - Approve an Organiser to the selected Festival}}
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Leader
 					\item \textbf{Goal:} The Organiser is appointed and begins carefully managing and organising the Festival
@@ -364,9 +260,9 @@
 					\begin{packed_enum}
 						\item The Leader opens the Screen featuring their festivals
 						\item The Leader selects one of the Festivals
+						\item The Leader taps the button to approve organizers
 						\item The Leader selects one of the Organisers, and appoints them to the selected Festival
 						\item This data is sent to the Server, which updates the Database
-						\item A notification is sent to the Organiser, who can either accept or reject the said Festival
 					\end{packed_enum}
 					
 					\begin{packed_item}
@@ -377,75 +273,7 @@
 							\item The Leader can try resending the form
 							\item The Leader is notified upon success
 						\end{packed_enum}
-					
-						\item[5.a] Attempt to send a notification to the Organiser fails.
-						\item[] \begin{packed_enum}
-							\item The Server will resend it until success
-							\item Upon success, the Leader is notified that the action of requesting an Organiser is successful
-						\end{packed_enum}
-						
-					\end{packed_item}
-				\end{packed_item}	
-					
-				\noindent \underbar{\textbf{UC10 - Update Festival info}}
-				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Leader
-					\item \textbf{Goal:} Update/modify Festival details
-					\item \textbf{Stakeholders: } Database, Back-End(Server), Organiser, Workers
-					\item \textbf{Conditions: } Must be logged in
-					\item \textbf{Event flow description: }
-					\begin{packed_enum}
-						\item The Leader opens the Screen for creating a Festival
-						\item The Leader fills in all the necessary info required for creating a Festival
-						\item The Leader submits the form and a Festival is created
-					\end{packed_enum}
-					
-					\begin{packed_item}
-						\item[2.a] Illegal input
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that they have entered illegal input
-							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
-							\item The steps above are repeated if new input isn't accepted either
-						\end{packed_enum}
-						
-						\item[3.a] Data not successfully sent and/or parsed on the Server
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that an error has occurred
-							\item A 'Retry' button is displayed on the screen - upon clicking it the form is resent and parsing tried again
-							\item The Leader is notified upon success
-						\end{packed_enum}
-						
-					\end{packed_item}
-				\end{packed_item}
-			
-				\noindent \underbar{\textbf{UC11 - Create a Job}}
-				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Organiser, Leader
-					\item \textbf{Goal:} Create a Job entry that would be visible to Workers who would apply to this Job via Job Auctions
-					\item \textbf{Stakeholders: } Database, Back-End(Server), Worker
-					\item \textbf{Conditions: } Must be logged in
-					\item \textbf{Event flow description: }
-					\begin{packed_enum}
-						\item The Organiser opens the Screen for creating a Job
-						\item The Leader fills in all the necessary info required for creating a Job
-						\item The Leader submits the form, the Job is created and added to the list of Jobs(this list is visible to Workers who can then send their application to Organisers for the selected Job)
-					\end{packed_enum}
-					
-					\begin{packed_item}
-						\item[2.a] Illegal input
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that they have entered illegal input
-							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
-							\item The steps above are repeated if new input isn't accepted either
-						\end{packed_enum}
-						
-						\item[3.a] Data not successfully sent and/or parsed on the Server
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that an error has occurred
-							\item A 'Retry' button is displayed on the screen - upon clicking it the form is resent and parsing tried again
-							\item The Organiser is notified upon success
-						\end{packed_enum}
-						
+
 					\end{packed_item}
 				\end{packed_item}
 			
