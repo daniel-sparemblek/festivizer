@@ -76,6 +76,8 @@ public class DefaultUserActivity extends AppCompatActivity {
         dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+        controller.showUserProfile(permission);
+
     }
 
     public void fillInActivityLeader(Leader leader) {
@@ -143,8 +145,10 @@ public class DefaultUserActivity extends AppCompatActivity {
         lv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent;
             if (searcherPermission == 2 && eventIds.contains(worker.getJobs().get(position))) {
+                System.out.println("OVDJE");
                 intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
             } else {
+                System.out.println("OVDJE2");
                 intent = new Intent(DefaultUserActivity.this, JobCommentActivity.class);
             }
             intent.putExtra("accessToken", accessToken);
@@ -184,6 +188,5 @@ public class DefaultUserActivity extends AppCompatActivity {
         eventIds = Arrays.stream(events)
                 .map(EventApply::getEventId)
                 .collect(Collectors.toList());
-        controller.showUserProfile(permission);
     }
 }
