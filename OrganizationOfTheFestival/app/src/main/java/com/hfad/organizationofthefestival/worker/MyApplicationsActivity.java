@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.login.LoginActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.search.WorkerSearchActivity;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
@@ -68,7 +67,7 @@ public class MyApplicationsActivity extends AppCompatActivity {
             intent1.putExtra("username", username);
             intent1.putExtra("job_name", applicationList.get(position).getAuction().getJob().getName());
             intent1.putExtra("app_id", applicationList.get(position).getApplicationId());
-            MyApplicationsActivity.this.startActivity(intent1);
+            startActivity(intent1);
         });
     }
 
@@ -110,7 +109,7 @@ public class MyApplicationsActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", permission);
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
 
         } else if (id == R.id.applyForJob) {
@@ -119,7 +118,7 @@ public class MyApplicationsActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", permission);
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.activeJobs) {
             Intent intent = new Intent(this, ActiveJobsActivity.class);
@@ -127,7 +126,7 @@ public class MyApplicationsActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", permission);
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.myApplications) {
             dialog = new ProgressDialog(this);
@@ -136,14 +135,20 @@ public class MyApplicationsActivity extends AppCompatActivity {
             dialog.show();
             myApplicationsController.getWorkerApplications();
         } else if (id == R.id.printPass) {
-
+            Intent intent = new Intent(this, WorkerPrintPassActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
+            finish();
         } else if (id == R.id.search) {
             Intent intent = new Intent(this, WorkerSearchActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", permission);
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.worker_profile) {
             Intent intent = new Intent(this, WorkerActivity.class);

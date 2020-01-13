@@ -83,4 +83,7 @@ public interface OrganizerClient {
     @GET("applications")
     Call<ApplicationResponse[]> getApplications(@Query("job_id_unconfirmed") int jobId,
                                               @Header("Authorization") String authorization);
+    @GET("jobs/event")
+    Call<Job[]> getJobsForEvent(@Query("event_id") String eventId,
+                                @Header("Authorization") String authorization);
 }

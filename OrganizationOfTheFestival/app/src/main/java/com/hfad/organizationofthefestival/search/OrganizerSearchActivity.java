@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.defaultUser.DefaultUserActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.organizer.ApplyFestActivity;
 import com.hfad.organizationofthefestival.organizer.EventsActivity;
 import com.hfad.organizationofthefestival.organizer.JobsActivity;
@@ -25,7 +26,7 @@ import com.hfad.organizationofthefestival.utility.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchActivity extends AppCompatActivity {
+public class OrganizerSearchActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
@@ -68,7 +69,7 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         lvSearchResults.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent1 = new Intent(SearchActivity.this, DefaultUserActivity.class);
+            Intent intent1 = new Intent(OrganizerSearchActivity.this, DefaultUserActivity.class);
 
             intent1.putExtra("searcherPermission", searcherPermission);
             intent1.putExtra("searcherUsername", searcherUsername);
@@ -128,6 +129,9 @@ public class SearchActivity extends AppCompatActivity {
         } else if (id == R.id.search) {
             finish();
             startActivity(getIntent());
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

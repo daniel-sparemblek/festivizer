@@ -13,7 +13,8 @@ import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.FestivalsResponse;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
+import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
 
 public class ApplyFestActivity extends AppCompatActivity {
 
@@ -109,7 +110,10 @@ public class ApplyFestActivity extends AppCompatActivity {
         } else if (id == R.id.printPass) {
             switchActivity(OrganizerPrintPassActivity.class);
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            switchActivity(OrganizerSearchActivity.class);
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

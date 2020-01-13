@@ -61,4 +61,7 @@ public interface WorkerClient {
     Call<SimpleServerResponse> addComment(@Path("job_id") String jobId,
                                           @Body Map<String, String> comment,
                                           @Header("Authorization") String authorization);
+
+    @GET("applications")
+    Call<ApplicationResponse> getWorkerApplication(@Query("job_id") String jobId, @Header("Authorization") String authorization);
 }

@@ -130,8 +130,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="     JOBS ORDER"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
         <ListView
-            android:id="@+id/jobsList"
+            android:id="@+id/jobsOrderList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="15dp"/>

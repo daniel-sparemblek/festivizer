@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.organizer;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.utility.EventApply;
+import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import org.json.JSONObject;
@@ -57,6 +58,33 @@ public class ViewEventController {
             @Override
             public void onFailure(Call<EventApply> call, Throwable t) {
                 Toast.makeText(viewEventActivity, "unable to connect :(", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getJobs(int eventId) {
+        Call<Job[]> call = api.getJobsForEvent(String.valueOf(eventId), "Bearer " + accessToken);
+
+        call.enqueue(new Callback<Job[]>() {
+            @Override
+            public void onResponse(Call<Job[]> call, Response<Job[]> response) {
+                if (response.isSuccessful()) {
+                    viewEventActivity.fillInOrderList(response.body());
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(viewEventActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        System.out.println("TU IZBACUJEM ERROR");
+                        Toast.makeText(viewEventActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Job[]> call, Throwable t) {
+                Toast.makeText(viewEventActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });
     }

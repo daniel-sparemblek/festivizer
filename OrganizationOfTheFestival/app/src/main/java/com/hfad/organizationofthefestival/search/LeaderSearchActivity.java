@@ -21,6 +21,7 @@ import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.leader.LeaderJobAuctionsActivity;
 import com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity;
 import com.hfad.organizationofthefestival.leader.MyFestivalsActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.organizer.ApplyFestActivity;
 import com.hfad.organizationofthefestival.organizer.EventsActivity;
 import com.hfad.organizationofthefestival.organizer.JobsActivity;
@@ -137,6 +138,9 @@ public class LeaderSearchActivity extends AppCompatActivity {
             startActivity(getIntent());
         } else if (id == R.id.printPass) {
             switchActivity(LeaderPrintPassActivity.class);
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

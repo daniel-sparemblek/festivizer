@@ -110,6 +110,7 @@ public class JobApplyActivity extends AppCompatActivity {
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("username", username);
         intent.putExtra("job_id", jobId);
-        this.startActivity(intent);
+        startActivity(intent);
+        finish();
     }
 }

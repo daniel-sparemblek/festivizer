@@ -26,7 +26,8 @@ import android.widget.Toast;
 import com.google.zxing.WriterException;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
-import com.hfad.organizationofthefestival.search.SearchActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
+import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -110,7 +111,15 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
         } else if (id == R.id.printPass) {
             // do nothing
         } else if (id == R.id.search) {
-            switchActivity(SearchActivity.class);
+            Intent intent = new Intent(this, OrganizerSearchActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("searcherPermission", organizer.getPermission());
+            startActivity(intent);
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -132,6 +141,7 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item, festivalsToStrings(festivalList));
 
         spFestivalPicker.setAdapter(festivalsArrayAdapter);
+        dialog.dismiss();
     }
 
     public void fillInOrganizer(Organizer organizer) {
@@ -145,8 +155,6 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
     }
 
     public void generatePass(View view) {
-        System.out.println("jebosebe");
-
         int position = spFestivalPicker.getSelectedItemPosition();
 
         Festival festival = festivalList.get(position);

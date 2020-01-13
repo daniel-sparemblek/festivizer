@@ -21,7 +21,6 @@ import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.login.LoginActivity;
-import com.hfad.organizationofthefestival.search.SearchActivity;
 import com.hfad.organizationofthefestival.search.WorkerSearchActivity;
 
 import java.io.IOException;
@@ -85,7 +84,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
 
         } else if (id == R.id.applyForJob) {
@@ -94,7 +93,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.activeJobs) {
             Intent intent = new Intent(this, ActiveJobsActivity.class);
@@ -102,7 +101,7 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.myApplications) {
             Intent intent = new Intent(this, MyApplicationsActivity.class);
@@ -110,17 +109,23 @@ public class WorkerActivity extends AppCompatActivity {
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.printPass) {
-
+            Intent intent = new Intent(this, WorkerPrintPassActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("permission", worker.getPermission());
+            this.startActivity(intent);
+            finish();
         } else if (id == R.id.search) {
             Intent intent = new Intent(this, WorkerSearchActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else if (id == R.id.worker_profile) {
             dialog = new ProgressDialog(this);
@@ -131,7 +136,7 @@ public class WorkerActivity extends AppCompatActivity {
         }
         else if (id == R.id.logout) {
             Intent intent = new Intent(this, LoginActivity.class);
-            this.startActivity(intent);
+            startActivity(intent);
             finish();
         }
 

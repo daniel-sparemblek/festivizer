@@ -26,6 +26,7 @@ import com.hfad.organizationofthefestival.leader.LeaderActivity;
 import com.hfad.organizationofthefestival.leader.LeaderJobAuctionsActivity;
 import com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity;
 import com.hfad.organizationofthefestival.leader.MyFestivalsActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -145,7 +146,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
             String startDateTime = convertTime(etStartTime.getText().toString(), etStartDate.getText().toString());
             String endDateTime = convertTime(etEndTime.getText().toString(), etEndDate.getText().toString());
 
-            if (parseDateTime(startDateTime).isBefore(parseDateTime(endDateTime)) && parseDateTime(startDateTime).isAfter(ZonedDateTime.now())){
+            if (parseDateTime(startDateTime).isBefore(parseDateTime(endDateTime)) && parseDateTime(startDateTime).isAfter(ZonedDateTime.now())) {
                 festival = new Festival(etName.getText().toString(),
                         etDescription.getText().toString(),
                         getPictureString(),
@@ -304,6 +305,9 @@ public class CreateFestivalActivity extends AppCompatActivity {
             switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             switchActivity(LeaderPrintPassActivity.class);
+        } else if (id == R.id.logout) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
