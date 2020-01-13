@@ -98,7 +98,6 @@ public class WorkerPrintPassActivity extends AppCompatActivity {
         workerPrintPassController.getWorkerJobs(username);
     }
 
-
     public void fillInActivity(JobApply[] body) {
         ArrayAdapter<String> jobsArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, jobsToString(body));
@@ -142,9 +141,6 @@ public class WorkerPrintPassActivity extends AppCompatActivity {
         System.out.println(job.getJobId() + "TUUUUUUUUUUUUUU");
 
         workerPrintPassController.getApplication(job);
-
-
-
     }
 
     private void createPdf(String workerFirstName, String workerLastName, JobApply job, int numOfPeople) {
@@ -162,6 +158,9 @@ public class WorkerPrintPassActivity extends AppCompatActivity {
         titlePaint.setFakeBoldText(true);
         canvas.drawText("WORKER PASS", 99.5F, 40, titlePaint);
 
+        EventApply event = job.getEvent();
+        Festival festival = event.getFestival();
+
         Paint infoPaint = new Paint();
         infoPaint.setColor(Color.parseColor("#dfb23d"));
         infoPaint.setTextSize(15);
@@ -169,14 +168,16 @@ public class WorkerPrintPassActivity extends AppCompatActivity {
         canvas.drawText(workerFirstName, 99.5F, 80, infoPaint);
         canvas.drawText(workerLastName, 99.5F, 100, infoPaint);
         canvas.drawText(job.getName(), 99.5F, 120, infoPaint);
-        canvas.drawBitmap(Bitmap.createScaledBitmap(pictureStringToBitmap(worker.getPicture()), 100, 100, false),
-                49.5f, 140, titlePaint);
-        EventApply event = job.getEvent();
-        Festival festival = event.getFestival();
-        System.out.println("festival" + festival.getLogo());
+        canvas.drawText("JOB NUMBER: " + job.getOrderNumber(), 99.5F, 140, infoPaint);
+        canvas.drawText("WORKER NUMBER" + String.valueOf(numOfPeople), 99.5F, 160, infoPaint);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(pictureStringToBitmap(worker.getPicture()), 90, 90, false),
+                49.5f, 180, titlePaint);
         canvas.drawBitmap(Bitmap.createScaledBitmap(pictureStringToBitmap(festival.getLogo()), 30, 30, false),
                 10, 244, titlePaint);
-        canvas.drawBitmap(createQRCodeImage(worker.getUsername(), festival.getName(), job.getOrderNumber(), String.valueOf(numOfPeople)), 159, 244, titlePaint);
+        canvas.drawBitmap(createQRCodeImage(worker.getUsername(), festival.getName(), job.getOrderNumber(), String.valueOf(numOfPeople)),
+                150, 235, titlePaint);
+
+
 
 
         document.finishPage(page);
