@@ -277,46 +277,149 @@
 					\end{packed_item}
 				\end{packed_item}
 			
-				\noindent \underbar{\textbf{UC12 - View the list of all the Jobs(Worker View)}}
+				\noindent \underbar{\textbf{UC12.a - View the list of all the active Jobs}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Worker, Administrators
-					\item \textbf{Goal:} View the list of Jobs. Includes the ability to filter the Jobs by Categories.
+					\item \textbf{Main Stakeholders:} Worker
+					\item \textbf{Goal:} View the list of all the active Jobs
 					\item \textbf{Stakeholders: } Database, Leaders, Organisers
 					\item \textbf{Conditions: } Must be logged in
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
-						\item The User opens the Screen for viewing the list of Jobs
+						\item The User opens the Screen for viewing the list of active Jobs
 						\item The data is fetched from the Database
-						\item Optional: Filtering the Jobs according to the specified filter
-						\item The User selects the Job and views the details about it(the 'View Job details' button)
+						\item The list is displayed to the Worker
 					\end{packed_enum}
 					
 					\begin{packed_item}
-						\item[2.a] Illegal input
+						\item[1.a] Data not successfully retrieved
 						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that they have entered illegal input
-							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
-							\item The steps above are repeated if new input isn't accepted either
+							\item An error message is displayed informing the User data couldn't be retrieved
+							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+						\end{packed_enum}
+					
+						\item[] Worker taps the entry
+						\item[] \begin{packed_enum}
+							\item The Job details are opened to the Worker. There he can further inspect
+							the details of this Job
 						\end{packed_enum}
 					\end{packed_item}
-				
+					
+				\end{packed_item}
+			
+				\noindent \underbar{\textbf{UC12.b - View the list of all the completed Jobs and Worker's Specializations}}
+				\begin{packed_item}
+					\item \textbf{Main Stakeholders:} Worker
+					\item \textbf{Goal:} View the list of all the completed Jobs and this Worker's Specializations
+					\item \textbf{Stakeholders: } Database, Leaders, Organisers
+					\item \textbf{Conditions: } Must be logged in
+					\item \textbf{Event flow description: }
+					\begin{packed_enum}
+						\item The User opens his profile screen
+						\item The data is fetched from the Database
+						\item The lists are displayed to the Worker
+					\end{packed_enum}
+					
+					\begin{packed_item}
+						\item[1.a] Data not successfully retrieved
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User data couldn't be retrieved
+							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+						\end{packed_enum}
+					\end{packed_item}
+					
+				\end{packed_item}
+			
+				\noindent \underbar{\textbf{UC45 - View the list of all the Specializations(Add Specialization view)}}
+				\begin{packed_item}
+					\item \textbf{Main Stakeholders:} Worker
+					\item \textbf{Goal:} View the list of all the Specializations
+					\item \textbf{Stakeholders: } Database, Leaders, Organisers
+					\item \textbf{Conditions: } Must be logged in
+					\item \textbf{Event flow description: }
+					\begin{packed_enum}
+						\item The User opens the Screen for viewing the list of Specializations
+						\item The data is fetched from the Database
+						\item The list is displayed to the Worker
+						\item Optional: Filtering the Specializations according to their name
+					\end{packed_enum}
+					
+					\begin{packed_item}
+						\item[1.a] Data not successfully retrieved
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User data couldn't be retrieved
+							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+						\end{packed_enum}
+						
+						\item[3.a] Worker enters a name of the Specialization
+						\item[] \begin{packed_enum}
+							\item The Specializations are filtered according to the given name
+							\item Only the selected Specializations are displayed to the Worker
+						\end{packed_enum}
+						
+						\item[] Worker taps the entry
+						\item[] \begin{packed_enum}
+							\item The specified Specialization becomes bound/added to the Worker
+						\end{packed_enum}
+					\end{packed_item}
+					
+				\end{packed_item}
+			
+				\noindent \underbar{\textbf{UC44 - Create a Specialization}}
+				\begin{packed_item}
+					\item \textbf{Main Stakeholders:} Worker
+					\item \textbf{Goal:} Add a new Specialization to the list of Specializations
+					\item \textbf{Stakeholders: } Database, Leaders, Organisers
+					\item \textbf{Conditions: } Must be logged in
+					\item \textbf{Event flow description: }
+					\begin{packed_enum}
+						\item The User opens the Screen for viewing the list of Specializations
+						\item The data is fetched from the Database
+						\item The list is displayed to the User
+						\item Optional: Filtering the Specializations according to their name
+						\item The Worker enters the new name of the Specialization
+						\item Upon tapping the 'Add Specialization' button, the Specialization is created and added to the list, but not to the Worker himself
+						\item New data is sent to the Server and parsed there
+					\end{packed_enum}
+					
+					\begin{packed_item}
+						\item[1.a] Data not successfully retrieved
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User data couldn't be retrieved
+							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+						\end{packed_enum}
+						
+						\item[6.a] Data not successfully sent and/or parsed on the Server
+						\item[] \begin{packed_enum}
+							\item An error message is displayed informing the User of this bad request
+						\end{packed_enum}
+						
+						\item[] Worker taps the entry
+						\item[] \begin{packed_enum}
+							\item The specified Specialization becomes bound/added to the Worker
+						\end{packed_enum}
+					\end{packed_item}
+					
 				\end{packed_item}
 			
 				\noindent \underbar{\textbf{UC13 - View Job details(Worker view)}}
 				\begin{packed_item}
 					\item \textbf{Main Stakeholders:} Worker, Administrators
-					\item \textbf{Goal:} View Job details and specifics - such as Time, Location, Duration, Description, ...
+					\item \textbf{Goal:} View Job details and specifics - such as Time, Location, Name, Description, ...
 					\item \textbf{Stakeholders: } Database, Leader, Organiser
 					\item \textbf{Conditions: } Must be logged in, must have selected a Job
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
+						\item Data is retrieved from the server
 						\item The User can read Job specifics
-						\item The Worker can click the 'Send Job application' button in order to apply to the given Job
-						\item The Administrator can click the 'Moderate this Job' button
+						\item The Worker can view the list of Specializations
 					\end{packed_enum}
 					
 					\begin{packed_item}
-						\item[1.a] Data not successfully retrieved
+						\item[0.a] Data not successfully retrieved
 						\item[] \begin{packed_enum}
 							\item An error message is displayed informing the User data couldn't be retrieved
 							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
@@ -330,57 +433,44 @@
 					\item \textbf{Main Stakeholders:} Worker
 					\item \textbf{Goal:} Send his application to the Job's supervising Organiser/Leader
 					\item \textbf{Stakeholders: } Database, Back-End(Server), Organiser, Leader
-					\item \textbf{Conditions: } Must be logged in, the Job details Screen is opened
+					\item \textbf{Conditions: } Must be logged in, the corresponding Screen is opened
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
-						\item The Worker on this Screen fills out the details into the form(Application Form)
-						\item Upon filling out the form, he sends the form by pressing the 'Send Job Application' button
-						\item The Application is sent to the Server
+						\item The Worker taps the 'Apply for a Job' entry in the hamburger menu
+						\item The data is fetched from the Server and the list displayed to the User
+						\item The Worker can now select the Job which he wants to apply for
+						\item Job details are fetched and displayed to the Worker
 					\end{packed_enum}
 					
 					\begin{packed_item}
-						\item[1.a] Illegal input
+						\item[1.a, 3.a] Data not successfully retrieved
 						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that they have entered illegal input
-							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
-							\item The steps above are repeated if new input isn't accepted either
+							\item An error message is displayed informing the User data couldn't be retrieved
+							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 						\end{packed_enum}
 						
-						\item[3.a] Data not successfully sent to the Server
+						\item[3.a] The worker taps on the Apply button
 						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data wasn't successfully sent to the Server
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
-							\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
-						\end{packed_enum}
-					\end{packed_item}
-				\end{packed_item}
-			
-				\noindent \underbar{\textbf{UC15 - Moderate the Job}}
-				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrators
-					\item \textbf{Goal:} Moderating the selected Job - in case certain part of it violates the Rules
-					\item \textbf{Stakeholders: } Database, Back-End(Server), Worker, Organiser
-					\item \textbf{Conditions: } Must be logged in, and must have selected a Job to moderate
-					\item \textbf{Event flow description: }
-					\begin{packed_enum}
-						\item The Administrator alters certain part of the Job, or deletes it(by pressing the 'Delete Job' button)
-						\item The Administrator chooses whether the Job creator(corresponding Organiser or Leader) is notified or not
-						\item The changes are sent to the Server
-					\end{packed_enum}
-					
-					\begin{packed_item}
-						\item[1.a] Illegal input
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that they have entered illegal input
-							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
-							\item The steps above are repeated if new input isn't accepted either
-						\end{packed_enum}
-						
-						\item[3.a] Data not successfully sent to the Server
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data wasn't successfully sent to the Server
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
-							\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+							\item A form is opened that Worker fills out
+							\item Data is sent to the server
+							\item[] \begin{packed_enum}
+								
+								\item[0.a] Illegal input
+								\item[] \begin{packed_enum}
+									\item An error message is displayed informing the User data couldn't be retrieved
+									\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+									\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+								\end{packed_enum}
+							
+								\item[1.a] Data not successfully sent to the Server
+								\item[] \begin{packed_enum}
+									\item An error message is displayed informing the User data wasn't successfully sent to the Server
+									\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
+									\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
+								\end{packed_enum}
+							
+							\end{packed_enum}
 						\end{packed_enum}
 					\end{packed_item}
 				\end{packed_item}
@@ -431,121 +521,25 @@
 							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
 						\end{packed_enum}
 					\end{packed_item}
-				\end{packed_item}
-				
-				\noindent \underbar{\textbf{UC18 - Modify Job details}}
-				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Leader, Organiser
-					\item \textbf{Goal:} Edit the details and specifics of the selected Job
-					\item \textbf{Stakeholders: } Database, Back-End(Server), Worker
-					\item \textbf{Conditions: } Must be logged in and must have selected this Job by clicking on it on the list of Jobs
-					\item \textbf{Event flow description: }
-					\begin{packed_enum}
-						\item A new Screen is shown to the User featuring all the Job details, but their editing is enabled
-						\item The User arbitrarily edits the Job
-						\item Upon being done, they can press the 'Save changes' button - the changes are sent to the Server
-					\end{packed_enum}
-						
-					\begin{packed_item}	
-						\item[1.a] Data not successfully retrieved
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data couldn't be retrieved
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
-							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
-						\end{packed_enum}
-					
-						\item[2.a] Illegal input
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that they have entered illegal input
-							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
-							\item The steps above are repeated if new input isn't accepted either
-						\end{packed_enum}
-					
-						\item[3.a] Data not successfully sent to the Server
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data wasn't successfully sent to the Server
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
-							\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
-						\end{packed_enum}
-					\end{packed_item}
-				\end{packed_item}
-					
-
-				\noindent \underbar{\textbf{UC19 - View the list of all the Festivals}}
-				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrators
-					\item \textbf{Goal:} View the list of all the Festivals
-					\item \textbf{Stakeholders: } Database, Back-End(Server)
-					\item \textbf{Conditions: } Must be logged in
-					\item \textbf{Event flow description: }
-					\begin{packed_enum}
-						\item Data is fetched from the Server
-						\item A new Screen is shown to the Administrator featuring all the Festivals
-						\item The Administrator arbitrarily selects the Festival
-						\item They are taken to a new screen where Festival details are displayed - data retrieved from the Server
-					\end{packed_enum}
-					
-					\begin{packed_item}
-						\item[1.a, 4.a] Data not successfully retrieved
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data couldn't be retrieved
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
-							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
-						\end{packed_enum}
-					\end{packed_item}
-				\end{packed_item}				
-			
-				\noindent \underbar{\textbf{UC20 - Moderate the Festival}}
-				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Administrators
-					\item \textbf{Goal:} Modify or delete the selected Festival
-					\item \textbf{Stakeholders: } Database, Back-End(Server), Organiser, Leader
-					\item \textbf{Conditions: } Must be logged in and must have selected the Festival to be moderated
-					\item \textbf{Event flow description: }
-					\begin{packed_enum}
-						\item Data is fetched from the Server
-						\item A new Screen is shown to the Administrator featuring Festival details
-						\item The Administrator arbitrarily edits the data
-						\item The Administrator clicks the 'Save changes' button or the 'Delete Festival' button, or he just clicks the backward arrow and is taken to the previous Screen
-						\item Changes are sent to the Server and saved
-					\end{packed_enum}
-					
-					\begin{packed_item}
-						\item[1.a] Data not successfully retrieved
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data couldn't be retrieved
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
-							\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
-						\end{packed_enum}
-					
-						\item[3.a] Illegal input
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User that they have entered illegal input
-							\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
-							\item The steps above are repeated if new input isn't accepted either
-						\end{packed_enum}
-						
-						\item[5.a] Data not successfully sent to the Server
-						\item[] \begin{packed_enum}
-							\item An error message is displayed informing the User data wasn't successfully sent to the Server
-							\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
-							\item Upon success(if ever) the Screen is closed. Otherwise the aforementioned procedure is again executed
-						\end{packed_enum}
-					\end{packed_item}
 				\end{packed_item}	
 			
-				\noindent \underbar{\textbf{UC21 - View the list of own Festivals(Leader, Organiser)}}
+				\noindent \underbar{\textbf{UC21 - View the list of own Festivals}}
 				\begin{packed_item}
-					\item \textbf{Main Stakeholders:} Leader, Organiser
-					\item \textbf{Goal:} See the list of all the Festivals that the Leader created, or that the Organiser organises
-					\item \textbf{Stakeholders: } Database, Back-End(Server), Workers
+					\item \textbf{Main Stakeholders:} Leader
+					\item \textbf{Goal:} See the list of all the Festivals that the Leader created
+					\item \textbf{Stakeholders: } Database, Back-End(Server), Workers, Organisers
 					\item \textbf{Conditions: } Must be logged in
 					\item \textbf{Event flow description: }
 					\begin{packed_enum}
-						\item The User presses the sandwich button and then presses the 'View my Festivals' button
+						\item The User presses the sandwich button and then taps the 'My Festivals' entry
 						\item Data is fetched from the Server
-						\item A new Screen is shown, featuring the list of Festivals
-						\item The Leader/Organiser can tap on the Festival to open up its details
+						\item A new Screen is shown, featuring the list of Festivals - they are divided into 3 categories:
+							\item[] \begin{packed_enum}
+								\item Active
+								\item Pending
+								\item Completed
+							\end{packed_enum}
+						\item The Leader can tap on the Festival to open up its details
 						\item The Leader can create, remove, or edit Festivals
 					\end{packed_enum}
 				
