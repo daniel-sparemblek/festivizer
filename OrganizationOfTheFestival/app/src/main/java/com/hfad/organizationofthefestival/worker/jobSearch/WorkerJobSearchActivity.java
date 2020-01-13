@@ -102,6 +102,7 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
                 etComment.setEnabled(true);
             }
         }
+        dialog.dismiss();
     }
 
     public void fillEventIds(EventApply[] events){
