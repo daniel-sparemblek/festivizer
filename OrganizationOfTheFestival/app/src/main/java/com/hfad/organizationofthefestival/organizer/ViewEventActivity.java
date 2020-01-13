@@ -36,7 +36,9 @@ public class ViewEventActivity extends AppCompatActivity {
     private TextView tvLocation;
     private TextView tvDesc;
     private Button createJob;
+    private Button btnUpdateOrder;
     private ListView lvJobs;
+    private OrderAdapter savedAdapter;
 
     private String accessToken;
     private String refreshToken;
@@ -71,6 +73,7 @@ public class ViewEventActivity extends AppCompatActivity {
         tvLocation = findViewById(R.id.org_location);
         tvDesc = findViewById(R.id.org_desc);
         createJob = findViewById(R.id.org_newJob);
+        btnUpdateOrder = findViewById(R.id.btn_order_update);
 
         viewEventController = new ViewEventController(this, accessToken, username, refreshToken);
 
@@ -80,6 +83,14 @@ public class ViewEventActivity extends AppCompatActivity {
         dialog.show();
 
         viewEventController.getEvent((int) eventId);
+
+        btnUpdateOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Ovo je na prvom mjestu: " + savedAdapter.getItem(0));
+                viewEventController.updateJobOrders((int) eventId);
+            }
+        });
     }
 
     public void fillInActivity(EventApply event) {
@@ -113,6 +124,7 @@ public class ViewEventActivity extends AppCompatActivity {
         OrderAdapter myCustomAdapter = new OrderAdapter(this,
                 R.layout.organizer_order_row_layout, jobsList, viewEventController);
         lvJobs.setAdapter(myCustomAdapter);
+        savedAdapter = myCustomAdapter;
 
 
         dialog.dismiss();

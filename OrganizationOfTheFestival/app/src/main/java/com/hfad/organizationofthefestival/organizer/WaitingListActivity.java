@@ -25,6 +25,7 @@ public class WaitingListActivity extends AppCompatActivity {
     private String jobId;
     private ListView lvWorkers;
     private ListView lvBids;
+    private String fixer;
 
     private WaitingListController controller;
 
@@ -65,13 +66,6 @@ public class WaitingListActivity extends AppCompatActivity {
         WaitingListAdapter myCustomAdapter = new WaitingListAdapter(this,
                 R.layout.organizer_screen_waiting_list_row, content, controller);
         lvWorkers.setAdapter(myCustomAdapter);
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, format(content));
-        lvBids.setAdapter(arrayAdapter);
-
-        dialog.dismiss();
-
     }
 
     private List<String> format(List<ApplicationResponse> approved) {
@@ -86,5 +80,8 @@ public class WaitingListActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, format(content));
         lvBids.setAdapter(arrayAdapter);
+
+        dialog.dismiss();
+
     }
 }

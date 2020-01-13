@@ -9,10 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.ApplicationAdapter;
+import com.hfad.organizationofthefestival.adapters.WaitingListAdapter;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
@@ -20,6 +22,7 @@ import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LeaderJobAuctionsActivity extends AppCompatActivity {
 
@@ -42,14 +45,14 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.leader_screen_job_auc);
+        setContentView(R.layout.leader_screen_waiting_list);
 
         Toolbar toolbar = findViewById(R.id.leader_toolbar);
         toolbar.setTitle("Job applications");
         setSupportActionBar(toolbar);
 
-        jobAuctionsList = findViewById(R.id.jobAuctionList);
-        jobActiveAuctionsList = findViewById(R.id.jobAuctionListActive);
+        jobAuctionsList = findViewById(R.id.approvalList1);
+        jobActiveAuctionsList = findViewById(R.id.bidList);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
@@ -66,14 +69,6 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         dialog.show();
 
         controller.getJobAuctions();
-    }
-
-    public void fillInActivity(ApplicationResponse[] applications){
-        applicationList = Arrays.asList(applications);
-
-        ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, R.layout.application_row_layout, applicationList);
-
-        jobAuctionsList.setAdapter(applicationAdapter);
     }
 
     @Override
@@ -129,13 +124,24 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+
+    public void fillInWaitingApplications(ApplicationResponse[] applications){
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, format(applications));
+        jobAuctionsList.setAdapter(arrayAdapter);
+    }
+
     public void fillInActiveApplications(ApplicationResponse[] applications) {
-        activeApplicationList = Arrays.asList(applications);
-
-        ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, R.layout.application_row_layout, activeApplicationList);
-
-        jobActiveAuctionsList.setAdapter(applicationAdapter);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, format(applications));
+        jobActiveAuctionsList.setAdapter(arrayAdapter);
 
         dialog.dismiss();
+    }
+
+    private List<String> format(ApplicationResponse[] applicationResponses) {
+        return Arrays.stream(applicationResponses)
+                .map(t -> t.getWorker().getUsername())
+                .collect(Collectors.toList());
     }
 }
