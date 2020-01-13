@@ -94,6 +94,6 @@ public interface OrganizerClient {
     @PUT("applications")
     Call<Void> setStatus(@Body HashMap<String, String> body,
                          @Header("Authorization") String authorization);
-    @PUT("jobs/{event_id}")
+    @PUT("jobs")
     Call<Void> updateJobOrders(@Query("event_id") String event_id, @Body HashMap<String, String> body, @Header("Authorization") String authorization);
 }

@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/generate_pass"
+            android:onClick="generatePass"
             android:textColor="#FFFFFF"
             android:background="@drawable/login_button" />
     </LinearLayout>

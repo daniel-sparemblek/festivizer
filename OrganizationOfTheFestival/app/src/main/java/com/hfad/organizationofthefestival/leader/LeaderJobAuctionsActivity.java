@@ -13,8 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.adapters.ApplicationAdapter;
-import com.hfad.organizationofthefestival.adapters.WaitingListAdapter;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
@@ -48,7 +46,7 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         setContentView(R.layout.leader_screen_waiting_list);
 
         Toolbar toolbar = findViewById(R.id.leader_toolbar);
-        toolbar.setTitle("Job applications");
+        toolbar.setTitle("Job Applications");
         setSupportActionBar(toolbar);
 
         jobAuctionsList = findViewById(R.id.approvalList1);

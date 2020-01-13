@@ -73,7 +73,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
         setContentView(R.layout.leader_screen_festival_creation);
 
         Toolbar toolbar = findViewById(R.id.leader_toolbar);
-        toolbar.setTitle("Festival creation");
+        toolbar.setTitle("Festival Creation");
         setSupportActionBar(toolbar);
 
         findViews();
