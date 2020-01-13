@@ -69,7 +69,6 @@ public class MyApplicationsActivity extends AppCompatActivity {
             intent1.putExtra("job_name", applicationList.get(position).getAuction().getJob().getName());
             intent1.putExtra("app_id", applicationList.get(position).getApplicationId());
             startActivity(intent1);
-            finish();
         });
     }
 

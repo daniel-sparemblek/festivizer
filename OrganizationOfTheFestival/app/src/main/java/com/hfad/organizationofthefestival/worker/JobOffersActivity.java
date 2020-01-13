@@ -61,7 +61,6 @@ public class JobOffersActivity extends AppCompatActivity {
             intent1.putExtra("username", username);
             intent1.putExtra("job_id", jobList.get(position).getId());
             startActivity(intent1);
-            finish();
         });
 
         dialog = new ProgressDialog(this);

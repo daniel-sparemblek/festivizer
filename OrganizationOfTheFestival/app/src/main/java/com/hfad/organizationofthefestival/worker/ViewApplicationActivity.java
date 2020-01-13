@@ -62,58 +62,6 @@ public class ViewApplicationActivity extends AppCompatActivity {
         viewApplicationController.getApplication(applicationId);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.worker_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.addSpecialization) {
-            Intent intent = new Intent(this, SpecializationsActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.applyForJob) {
-            Intent intent = new Intent(this, JobOffersActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.activeJobs) {
-            Intent intent = new Intent(this, ActiveJobsActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.myApplications) {
-            Intent intent = new Intent(this, MyApplicationsActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.printPass) {
-
-        } else if (id == R.id.search) {
-            Intent intent = new Intent(this, SearchActivity.class);
-            intent.putExtra("accessToken", accessToken);
-            intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("username", username);
-            startActivity(intent);
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void fillInActivity(Application body) {
         tvPrice.setText(String.valueOf(body.getPrice()));
         tvDaysNeeded.setText(String.valueOf(body.getDuration()));
