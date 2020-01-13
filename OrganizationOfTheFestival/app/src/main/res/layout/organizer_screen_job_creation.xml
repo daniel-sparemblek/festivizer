@@ -30,24 +30,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="@string/job_creation"
-                android:textSize="21sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="24dp"
             android:paddingTop="28dp"

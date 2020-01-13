@@ -111,5 +111,11 @@
     <string name="extend">Extend</string>
     <string name="num_of_people">Num Of People</string>
     <string name="log_out">Log Out</string>
+    <string name="description2">Description:</string>
+    <string name="start_time2">Start time:</string>
+    <string name="festival2">Festival:</string>
+    <string name="event2">Event:</string>
+    <string name="required_specializations2">Required specializations:</string>
+    <string name="comment2">Comment:</string>
 
 </resources>

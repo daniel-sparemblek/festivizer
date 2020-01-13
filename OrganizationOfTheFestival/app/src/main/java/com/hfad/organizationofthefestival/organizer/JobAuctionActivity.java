@@ -85,6 +85,8 @@ public class JobAuctionActivity extends AppCompatActivity {
             tvWorker.setText(job.getWorker().getUsername());
         }
         jobAuctionController.hasAuction(jobId);
+        dialog.dismiss();
+
     }
 
     public ZonedDateTime parseDateTime(String dateTime) {
