@@ -24,7 +24,7 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
 
     private String accessToken;
     private String refreshToken;
-    private int leaderId;
+    private String leaderId;
     private LeaderJobAuctionsController controller;
 
     private ListView jobAuctionsList;
@@ -53,11 +53,11 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        leaderId = intent.getIntExtra("leader_id", 0);
+        leaderId = intent.getStringExtra("leader_id");
         username = intent.getStringExtra("username");
         permission = intent.getIntExtra("permission", 1);
 
-        controller = new LeaderJobAuctionsController(this, accessToken, refreshToken, Integer.toString(leaderId));
+        controller = new LeaderJobAuctionsController(this, accessToken, refreshToken, leaderId);
 
         dialog = new ProgressDialog(this);
         dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));

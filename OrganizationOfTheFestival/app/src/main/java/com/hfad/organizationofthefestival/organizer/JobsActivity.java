@@ -143,7 +143,8 @@ public class JobsActivity extends AppCompatActivity {
 
         //Job[] jobs = auctionedJobs.toArray(new Job[0]);
 
-        AuctionAdapter myCustomAdapter = new AuctionAdapter(this, R.layout.organizer_screen_my_jobs_one_row, onAuctions);
+        AuctionAdapter myCustomAdapter = new AuctionAdapter(this,
+                R.layout.organizer_screen_my_jobs_one_row, onAuctions, jobsController);
         lvJobs.setAdapter(myCustomAdapter);
 
         dialog.dismiss();

@@ -1,11 +1,14 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.widget.Toast;
+
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -104,6 +107,27 @@ public class JobsController {
 
             @Override
             public void onFailure(Call<ApplicationAuction[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void extendAuction(int auctionId) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("auction_id", String.valueOf(auctionId));
+        Call<Void> jobsCall = api.extendAuction(body, "Bearer " + accessToken);
+
+        jobsCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()) {
+                    Toast.makeText(jobsActivity, "Successfully extended auction!", Toast.LENGTH_SHORT).show();
+                    getAuctionedJobs();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
 
             }
         });
