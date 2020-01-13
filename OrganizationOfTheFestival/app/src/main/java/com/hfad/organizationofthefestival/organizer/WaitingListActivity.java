@@ -23,6 +23,7 @@ public class WaitingListActivity extends AppCompatActivity {
     private String jobId;
     private ListView lvWorkers;
     private ListView lvBids;
+    private String fixer;
 
     private WaitingListController controller;
 
