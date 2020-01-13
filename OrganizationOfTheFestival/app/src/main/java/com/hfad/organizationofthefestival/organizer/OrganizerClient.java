@@ -86,4 +86,7 @@ public interface OrganizerClient {
     @GET("jobs/event")
     Call<Job[]> getJobsForEvent(@Query("event_id") String eventId,
                                 @Header("Authorization") String authorization);
+
+    @PUT("jobs/{event_id}")
+    Call<Void> updateJobOrders(@Query("event_id") String event_id, @Body HashMap<String, String> body, @Header("Authorization") String authorization);
 }
