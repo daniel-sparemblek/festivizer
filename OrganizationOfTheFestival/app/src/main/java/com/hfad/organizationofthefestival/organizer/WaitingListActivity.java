@@ -56,7 +56,6 @@ public class WaitingListActivity extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
-        controller.setApplicationStatus();
         controller.getWaitingApplications();
     }
 
@@ -68,13 +67,11 @@ public class WaitingListActivity extends AppCompatActivity {
         lvWorkers.setAdapter(myCustomAdapter);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, format(approved));
+                android.R.layout.simple_list_item_1, format(content));
         lvBids.setAdapter(arrayAdapter);
 
         dialog.dismiss();
 
-=======
->>>>>>> e26669cb1b5782e2132f5238492f58f8b764f2d3
     }
 
     private List<String> format(List<ApplicationResponse> approved) {
