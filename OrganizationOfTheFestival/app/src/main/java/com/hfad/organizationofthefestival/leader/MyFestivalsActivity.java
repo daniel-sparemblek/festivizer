@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
+import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.util.Arrays;
@@ -162,6 +163,9 @@ public class MyFestivalsActivity extends AppCompatActivity {
             switchActivity(LeaderSearchActivity.class);
         } else if (id == R.id.printPass) {
             switchActivity(MyFestivalsActivity.class);
+        } else if (id == R.id.logout){
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
