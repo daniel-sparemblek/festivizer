@@ -81,7 +81,6 @@ public class WorkerPrintPassActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
-        workerId = intent.getIntExtra("worker_id", 0);
         username = intent.getStringExtra("username");
         permission = intent.getIntExtra("permission", 1);
 
@@ -283,7 +282,11 @@ public class WorkerPrintPassActivity extends AppCompatActivity {
             this.startActivity(intent);
             finish();
         } else if (id == R.id.printPass) {
-
+            dialog = new ProgressDialog(this);
+            dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+            workerPrintPassController.getWorkerJobs(username);
         } else if (id == R.id.search) {
             Intent intent = new Intent(this, WorkerSearchActivity.class);
             intent.putExtra("accessToken", accessToken);
@@ -293,11 +296,12 @@ public class WorkerPrintPassActivity extends AppCompatActivity {
             this.startActivity(intent);
             finish();
         } else if (id == R.id.worker_profile) {
-            dialog = new ProgressDialog(this);
-            dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            workerPrintPassController.getWorker();
+            Intent intent = new Intent(this, WorkerActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
         }
         else if (id == R.id.logout) {
             Intent intent = new Intent(this, LoginActivity.class);

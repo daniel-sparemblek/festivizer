@@ -15,17 +15,14 @@ import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.defaultUser.DefaultUserActivity;
-import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
-import com.hfad.organizationofthefestival.leader.LeaderActivity;
-import com.hfad.organizationofthefestival.leader.LeaderJobAuctionsActivity;
-import com.hfad.organizationofthefestival.leader.LeaderPrintPassActivity;
-import com.hfad.organizationofthefestival.leader.MyFestivalsActivity;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.utility.User;
 import com.hfad.organizationofthefestival.worker.ActiveJobsActivity;
 import com.hfad.organizationofthefestival.worker.JobOffersActivity;
 import com.hfad.organizationofthefestival.worker.MyApplicationsActivity;
 import com.hfad.organizationofthefestival.worker.SpecializationsActivity;
+import com.hfad.organizationofthefestival.worker.WorkerActivity;
+import com.hfad.organizationofthefestival.worker.WorkerPrintPassActivity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -151,7 +148,13 @@ public class WorkerSearchActivity extends AppCompatActivity {
             this.startActivity(intent);
             finish();
         } else if (id == R.id.printPass) {
-
+            Intent intent = new Intent(this, WorkerPrintPassActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", searcherUsername);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
+            finish();
         } else if (id == R.id.search) {
             Intent intent = new Intent(this, WorkerSearchActivity.class);
             intent.putExtra("accessToken", accessToken);
@@ -161,7 +164,7 @@ public class WorkerSearchActivity extends AppCompatActivity {
             this.startActivity(intent);
             finish();
         } else if (id == R.id.worker_profile) {
-            Intent intent = new Intent(this, WorkerSearchActivity.class);
+            Intent intent = new Intent(this, WorkerActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", searcherUsername);

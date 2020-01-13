@@ -115,7 +115,6 @@ public class WorkerActivity extends AppCompatActivity {
             Intent intent = new Intent(this, WorkerPrintPassActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
-            intent.putExtra("worker_id", worker.getId());
             intent.putExtra("username", username);
             intent.putExtra("permission", worker.getPermission());
             this.startActivity(intent);
