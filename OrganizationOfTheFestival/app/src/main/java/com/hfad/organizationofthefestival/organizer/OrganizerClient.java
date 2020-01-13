@@ -2,6 +2,7 @@ package com.hfad.organizationofthefestival.organizer;
 
 import com.hfad.organizationofthefestival.festival.FestivalsResponse;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
+import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
@@ -78,4 +79,8 @@ public interface OrganizerClient {
 
     @PUT("auction")
     Call<Void> extendAuction(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
+
+    @GET("applications")
+    Call<ApplicationResponse[]> getApplications(@Query("job_id_unconfirmed") int jobId,
+                                              @Header("Authorization") String authorization);
 }

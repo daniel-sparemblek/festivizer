@@ -4,25 +4,34 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:layout_margin="5dp">
 
     <TextView
         android:id="@+id/org_rowTxt"
-        android:layout_width="170dp"
+        android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:text="@string/name_abc_change_in_java"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:paddingTop="10dp"/>
     <Button
         android:id="@+id/org_rowBtn1"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_gravity="end"
-        android:text="@string/approve" />
+        android:text="@string/approve"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/login_button"
+        android:layout_marginRight="5dp" />
     <Button
         android:id="@+id/org_rowBtn2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_gravity="end"
-        android:text="@string/decline" />
+        android:text="@string/decline"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/login_button" />
 </LinearLayout>

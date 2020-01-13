@@ -12,6 +12,7 @@ public class ApplicationResponse {
     private User worker;
     @SerializedName("people_number")
     private int peopleNumber;
+    private int status;
 
     public ApplicationResponse(int applicationId, ApplicationAuction auction, double price, String comment, int duration, User worker, int peopleNumber) {
         this.applicationId = applicationId;
@@ -21,6 +22,14 @@ public class ApplicationResponse {
         this.duration = duration;
         this.worker = worker;
         this.peopleNumber = peopleNumber;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public User getWorker() {
