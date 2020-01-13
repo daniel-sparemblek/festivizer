@@ -2,14 +2,9 @@ package com.hfad.organizationofthefestival.festival.Event;
 
 import android.widget.Toast;
 
-import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.festival.FestivalClient;
-import com.hfad.organizationofthefestival.organizer.EventsActivity;
 import com.hfad.organizationofthefestival.organizer.Organizer;
-import com.hfad.organizationofthefestival.organizer.OrganizerClient;
 import com.hfad.organizationofthefestival.utility.WorkingEvent;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -58,7 +53,11 @@ public class EventCreationController {
                 if (response.isSuccessful()) {
                     Toast.makeText(activity, "Successfully created event!", Toast.LENGTH_SHORT).show();
                 } else {
-
+                    try {
+                        Toast.makeText(activity, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        Toast.makeText(activity, "Unable to parse the error message", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 

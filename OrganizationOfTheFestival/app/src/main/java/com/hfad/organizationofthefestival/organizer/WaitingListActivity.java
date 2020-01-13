@@ -57,23 +57,14 @@ public class WaitingListActivity extends AppCompatActivity {
         dialog.show();
 
         controller.setApplicationStatus();
+        controller.getWaitingApplications();
     }
 
-    public void fillInActivity(ApplicationResponse[] applicationResponses) {
+    public void fillInWaiting(ApplicationResponse[] applicationResponses) {
         List<ApplicationResponse> content = Arrays.asList(applicationResponses);
-        List<ApplicationResponse> waiting;
-        List<ApplicationResponse> approved;
-
-        waiting = content.stream()
-                .filter(t -> t.getStatus() == 0)
-                .collect(Collectors.toList());
-
-        approved = content.stream()
-                .filter(t -> t.getStatus() == 1)
-                .collect(Collectors.toList());
 
         WaitingListAdapter myCustomAdapter = new WaitingListAdapter(this,
-                R.layout.organizer_screen_waiting_list_row, waiting, controller);
+                R.layout.organizer_screen_waiting_list_row, content, controller);
         lvWorkers.setAdapter(myCustomAdapter);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
@@ -82,11 +73,21 @@ public class WaitingListActivity extends AppCompatActivity {
 
         dialog.dismiss();
 
+=======
+>>>>>>> e26669cb1b5782e2132f5238492f58f8b764f2d3
     }
 
     private List<String> format(List<ApplicationResponse> approved) {
         return approved.stream()
                 .map(t -> t.getWorker().getUsername() + " " +  t.getPrice())
                 .collect(Collectors.toList());
+    }
+
+    public void fillInAccepted(ApplicationResponse[] applicationResponses) {
+        List<ApplicationResponse> content = Arrays.asList(applicationResponses);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, format(content));
+        lvBids.setAdapter(arrayAdapter);
     }
 }

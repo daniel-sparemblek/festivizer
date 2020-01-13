@@ -13,20 +13,21 @@ import com.hfad.organizationofthefestival.organizer.ViewEventController;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 import com.hfad.organizationofthefestival.utility.Job;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class OrderAdapter extends ArrayAdapter<OrderAdapter> {
+public class OrderAdapter extends ArrayAdapter<Job> {
 
     private Context context;
     private int resource;
-    private List<Job> JobOrder;
-    private List<String> orderList;
+    private List<Job> jobOrder;
+    private List<String> orderList = new LinkedList<>();
     private ViewEventController viewEventController;
 
     public OrderAdapter(Context context, int resource, List<Job> jobsList, ViewEventController viewEventController) {
         super(context, resource);
         this.context = context;
-        this.JobOrder = jobsList;
+        this.jobOrder = jobsList;
         this.viewEventController = viewEventController;
         for(Job job : jobsList) {
             this.orderList.add(job.getOrderNumber());
@@ -35,29 +36,27 @@ public class OrderAdapter extends ArrayAdapter<OrderAdapter> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View view = convertView;
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.organizer_order_row_layout, null);
         }
 
-        Job jobs = JobOrder.get(position);
+        Job jobs = jobOrder.get(position);
 
         TextView orderNumber = view.findViewById(R.id.order_number);
         TextView jobName = view.findViewById(R.id.order_job_name);
-        Button orderUpdate = view.findViewById(R.id.btn_order_update);
-
+        //Button orderUpdate = view.findViewById(R.id.btn_order_update);
 
         orderNumber.setText(jobs.getOrderNumber());
         jobName.setText(jobs.getName());
 
 
-        orderUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OrderAdapter.this.viewEventController.updateJobOrders(orderList, Integer.toString(jobs.getEventId()));
-            }
-        });
+//        orderUpdate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                OrderAdapter.this.viewEventController.updateJobOrders(orderList, Integer.toString(jobs.getEventId()));
+//            }
+//        });
 
         return view;
     }
