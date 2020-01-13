@@ -77,28 +77,29 @@ public class ViewApplicationActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
-            this.startActivity(intent);
-
+            startActivity(intent);
+            finish();
         } else if (id == R.id.applyForJob) {
             Intent intent = new Intent(this, JobOffersActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
-            this.startActivity(intent);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.activeJobs) {
             Intent intent = new Intent(this, ActiveJobsActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
-            this.startActivity(intent);
-
+            startActivity(intent);
+            finish();
         } else if (id == R.id.myApplications) {
             Intent intent = new Intent(this, MyApplicationsActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
-            this.startActivity(intent);
-
+            startActivity(intent);
+            finish();
         } else if (id == R.id.printPass) {
 
         } else if (id == R.id.search) {
@@ -106,7 +107,8 @@ public class ViewApplicationActivity extends AppCompatActivity {
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
-            this.startActivity(intent);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
