@@ -12,6 +12,10 @@ import android.widget.TextView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.JobApply;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +43,7 @@ public class JobCommentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.worker_job_profile);
+        setContentView(R.layout.activity_job_comment);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
@@ -72,7 +76,9 @@ public class JobCommentActivity extends AppCompatActivity {
         tvName.setText(body.getName());
         tvFestivalName.setText(body.getEvent().getFestival().getName());
         tvEventName.setText(body.getEvent().getName());
-        tvStartTime.setText(body.getStartTime());
+        tvStartTime.setText(parseDateTime(body.getStartTime())
+                .truncatedTo(ChronoUnit.MINUTES)
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         tvDescription.setText(body.getDescription());
         tvComment.setText(body.getComment());
 
@@ -88,5 +94,16 @@ public class JobCommentActivity extends AppCompatActivity {
                 .map(Specialization::getName)
                 .collect(Collectors.toList());
         return stringList;
+    }
+
+    public ZonedDateTime parseDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        int month = Integer.parseInt(dateTime.substring(5, 7));
+        int day = Integer.parseInt(dateTime.substring(8, 10));
+        int hour = Integer.parseInt(dateTime.substring(11, 13));
+        int minute = Integer.parseInt(dateTime.substring(14, 16));
+        int second = Integer.parseInt(dateTime.substring(17, 19));
+
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
     }
 }
