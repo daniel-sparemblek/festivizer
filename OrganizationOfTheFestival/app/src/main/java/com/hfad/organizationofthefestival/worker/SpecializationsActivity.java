@@ -101,6 +101,7 @@ public class SpecializationsActivity extends AppCompatActivity {
                 specStrings.set(i, specStrings.get(i) + c);
             }
         }
+        this.specializations.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
         specStrings.sort(String::compareTo);
 
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
