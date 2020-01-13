@@ -96,14 +96,18 @@
                 android:ems="10"
                 android:hint="@string/start_date"
                 android:importantForAutofill="no"
-                android:inputType="date" />
+                android:inputType="date"
+                />
 
             <Button
                 android:id="@+id/startDatebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/select_date" />
+                android:text="@string/select_date"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/login_button"
+                android:layout_marginBottom="5dp"/>
 
         </LinearLayout>
 
@@ -128,7 +132,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/select_time" />
+                android:text="@string/select_time"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/login_button"
+                android:layout_marginBottom="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -152,7 +159,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/select_date" />
+                android:text="@string/select_date"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/login_button"
+                android:layout_marginBottom="5dp"/>
 
         </LinearLayout>
 
@@ -177,7 +187,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/select_time" />
+                android:text="@string/select_time"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/login_button" />
         </LinearLayout>
 
         <Button
@@ -185,7 +197,10 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/create" />
+            android:text="@string/create"
+            android:layout_marginTop="20dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/login_button" />
         </LinearLayout>
 
     </LinearLayout>

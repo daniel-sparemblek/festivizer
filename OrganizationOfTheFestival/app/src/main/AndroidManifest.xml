@@ -132,6 +132,7 @@
         <activity
             android:name=".search.WorkerSearchActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".organizer.WaitingListActivity" />
     </application>
 
 </manifest>

@@ -247,4 +247,7 @@ public class JobsActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+    public void goToWaitingList() {
+        switchActivity(WaitingListActivity.class);
+    }
 }

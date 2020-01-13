@@ -310,7 +310,7 @@ public class CreateFestivalActivity extends AppCompatActivity {
 
     private void switchActivity(Class<?> destination) {
         Intent intent = new Intent(this, destination);
-        intent.putExtra("leader_id", leaderId);
+        intent.putExtra("leader_id", String.valueOf(leaderId));
         intent.putExtra("accessToken", accessToken);
         intent.putExtra("refreshToken", refreshToken);
         intent.putExtra("username", username);
