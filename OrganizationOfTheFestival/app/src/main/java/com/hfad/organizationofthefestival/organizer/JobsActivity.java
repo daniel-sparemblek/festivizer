@@ -251,7 +251,12 @@ public class JobsActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    public void goToWaitingList() {
-        switchActivity(WaitingListActivity.class);
+    public void goToWaitingList(String jobId) {
+        Intent intent = new Intent(this, WaitingListActivity.class);
+        intent.putExtra("accessToken", accessToken);
+        intent.putExtra("refreshToken", refreshToken);
+        intent.putExtra("username", username);
+        intent.putExtra("jobId", jobId);
+        this.startActivity(intent);
     }
 }

@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
-import com.hfad.organizationofthefestival.organizer.JobsActivity;
 import com.hfad.organizationofthefestival.organizer.JobsController;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
@@ -47,8 +46,8 @@ public class AuctionAdapter extends ArrayAdapter<ApplicationAuction> {
         TextView jobName = view.findViewById(R.id.job_name);
         Button extButton = view.findViewById(R.id.btn_extend);
 
-        endTime.setOnClickListener(v -> jobsController.goToWaitingList());
-        jobName.setOnClickListener(v -> jobsController.goToWaitingList());
+        endTime.setOnClickListener(v -> jobsController.goToWaitingList(String.valueOf(application.getJob().getId())));
+        jobName.setOnClickListener(v -> jobsController.goToWaitingList(String.valueOf(application.getJob().getId())));
 
         extButton.setOnClickListener(new View.OnClickListener() {
             @Override

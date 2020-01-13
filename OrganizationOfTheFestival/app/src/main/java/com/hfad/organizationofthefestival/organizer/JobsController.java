@@ -3,13 +3,9 @@ package com.hfad.organizationofthefestival.organizer;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.utility.Job;
-import com.hfad.organizationofthefestival.utility.JobApply;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -133,7 +129,7 @@ public class JobsController {
         });
     }
 
-    public void goToWaitingList() {
-        jobsActivity.goToWaitingList();
+    public void goToWaitingList(String jobId) {
+        jobsActivity.goToWaitingList(jobId);
     }
 }

@@ -135,7 +135,13 @@ public class MyApplicationsActivity extends AppCompatActivity {
             dialog.show();
             myApplicationsController.getWorkerApplications();
         } else if (id == R.id.printPass) {
-
+            Intent intent = new Intent(this, WorkerPrintPassActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("permission", permission);
+            this.startActivity(intent);
+            finish();
         } else if (id == R.id.search) {
             Intent intent = new Intent(this, WorkerSearchActivity.class);
             intent.putExtra("accessToken", accessToken);
