@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_gradient"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/worker_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#ff9360"
+            app:popupTheme="@style/AppTheme" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <EditText
+        android:id="@+id/worker_searchTxt"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="0.3"
+        android:autofillHints=""
+        android:hint="@string/search_specializations"
+        android:inputType="textCapWords"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/worker_searchBtn"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.3"
+        android:onClick="searchSpecialization"
+        android:text="@string/search" />
+
+
+    <EditText
+        android:id="@+id/tv_create_spec"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.3"
+        android:autofillHints=""
+        android:gravity="center"
+        android:hint="@string/add_specialization"
+        android:inputType="text"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/btn_create_spec"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.3"
+        android:gravity="center"
+        android:onClick="createSpecialization"
+        android:text="@string/add_specialization" />
+
+    <ListView
+        android:id="@+id/worker_search_specialization"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="2.4"></ListView>
+
+
+</LinearLayout>

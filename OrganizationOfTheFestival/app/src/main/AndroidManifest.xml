@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hfad.organizationofthefestival">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".worker.JobCommentActivity"></activity>
+        <activity
+            android:name=".organizer.NewJobActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".organizer.ViewEventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".leader.ViewEventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".leader.LeaderMyEventsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".leader.ApproveOrganizersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".leader.LeaderPrintPassActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".leader.MyFestivalsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".leader.LeaderFestivalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.JobProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.ViewApplicationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.ActiveJobsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.MyApplicationsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".search.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.JobApplicationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.JobApplyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.JobOffersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.SpecializationsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".leader.LeaderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.WorkerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".organizer.OrganizerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".organizer.EventsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".organizer.JobsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".organizer.OrganizerPrintPassActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".admin.AdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".organizer.ApplyFestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".signup.SignupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".leader.LeaderJobAuctionsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".festival.creation.CreateFestivalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".defaultUser.DefaultUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".festival.Event.CreateEventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".event.creation.CreateEventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".worker.jobSearch.WorkerJobSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".organizer.JobAuctionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".festival.DefaultFestivalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".search.LeaderSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".search.WorkerSearchActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>
