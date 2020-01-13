@@ -313,3 +313,20 @@
 			\textbf{ dio 2. revizije}\\
 		
 			  Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.
+			  
+			\eject
+			  
+		\section{Component diagram}
+			
+			The application can so be divided into 2 separate parts - the front-end android application part, and the back-end server part. Even though a mobile application, this division much resembles the usual architecture of web applications.
+			
+			To begin with, the back-end is the part hosted on the pythonanywhere cloud. It features the python back-end code and the SQLite database. The python script called 'Run.py' is the one which starts the Marshmallow, JWT and SQLAlchemy Python components. From there, other components - 'Models.py' and 'Resources.py' can continue to work. The 'Models.py' scripts basically contains Database models in Python class form, while the 'Resources.py' script handles server requests and responses.
+			
+			As is visible, the Android application and the server need 2 interfaces - one for requests, and the other one for responses. The Android application is actually split into multiple parts: Controllers, API classes, Activities, and Models. This is due to the implementation of the MVC architecture, where Activities are the Android equivalent of Views. API Classes are the ones that provide the JSON GET, POST, and PUT interface methods for communication with the Server. All the logic is handled in the Controllers. They are the ones that call API methods, fetch, and send data, as well as update the Models and the Activities.
+			
+			Activities control and manifest the design - they provide dynamic view experience to the user. Design layouts are actually .xml files that were made in Android Studio. Finally, Models are made by controllers, and they resemble the back-end Python models. They are class manifestation of database tables - and are used for holding dynamic data. Data is fetched into them, as well as pulled from them when updating server info.
+			
+			The adapter class is used for holding multiple instances(lists) of some Models, and the utility class contains many subclasses that were hard to categorise into one of the other classes. Search is used for searching users --> found users are displayed using the defaultUser activity/view class.
+		
+			\eject
+				
