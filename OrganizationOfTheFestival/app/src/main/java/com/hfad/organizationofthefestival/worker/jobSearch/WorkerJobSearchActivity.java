@@ -13,10 +13,13 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.utility.EventApply;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WorkerJobSearchActivity extends AppCompatActivity {
 
@@ -90,5 +93,6 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvStartTime.setText(jobApply.getStartTime());
         btnAddComment.setEnabled(true);
         etComment.setEnabled(true);
+        dialog.dismiss();
     }
 }
