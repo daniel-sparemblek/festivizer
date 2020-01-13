@@ -9,6 +9,7 @@ import com.hfad.organizationofthefestival.utility.WorkingEvent;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,6 +26,7 @@ public class ViewEventController {
     private String username;
     private String refreshToken;
     private Organizer organizer;
+    private List<String> orderList = new LinkedList<>();
 
     public ViewEventController(ViewEventActivity viewEventActivity, String accessToken, String username, String refreshToken) {
         api = new Retrofit.Builder()
@@ -91,14 +93,14 @@ public class ViewEventController {
         });
     }
 
-    public void updateJobOrders(List<String> order_numbers, String event_id) {
+    public void updateJobOrders(int event_id) {
         HashMap<String, String> orderMap = new HashMap<>();
 
-        for(int i = 1; i <= order_numbers.size(); i++) {
-            orderMap.put(Integer.toString(i), order_numbers.get(i - 1));
+        for(int i = 1; i <= orderList.size(); i++) {
+            orderMap.put(Integer.toString(i), orderList.get(i - 1));
         }
         System.out.println(orderMap.entrySet().toString());
-        Call<Void> call = api.updateJobOrders(event_id, orderMap, "Bearer " + accessToken);
+        Call<Void> call = api.updateJobOrders(Integer.toString(event_id), orderMap, "Bearer " + accessToken);
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -113,5 +115,9 @@ public class ViewEventController {
 
             }
         });
+    }
+
+    public void saveList(List<String> orderList) {
+        this.orderList = orderList;
     }
 }

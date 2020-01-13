@@ -98,7 +98,6 @@ public class NewJobActivity extends AppCompatActivity {
                     spSecondSpecialization.getSelectedItem().toString(),
                     spThirdSpecialization.getSelectedItem().toString());
             controller.createNewJob(newJob);
-
             returnToEventProfile();
         });
 
@@ -134,6 +133,7 @@ public class NewJobActivity extends AppCompatActivity {
         intent.putExtra("event_id", eventId);
         intent.putExtra("festivalName", festivalName);
         startActivity(intent);
+        finish();
     }
 
     private void findViews() {
@@ -168,16 +168,16 @@ public class NewJobActivity extends AppCompatActivity {
     }
 
     private boolean specsAreValid() {
-        if (specsAreNone()){
+        if (specsAreNone()) {
             Toast.makeText(NewJobActivity.this, "At least one specialization must be chosen.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (spFirstSpecialization.getSelectedItem().toString()
+        if ((spFirstSpecialization.getSelectedItem().toString()
                 .equals(spSecondSpecialization.getSelectedItem().toString())
                 || spFirstSpecialization.getSelectedItem().toString()
                 .equals(spThirdSpecialization.getSelectedItem().toString())
                 || spThirdSpecialization.getSelectedItem().toString()
-                .equals(spSecondSpecialization.getSelectedItem().toString()) && checkIfAnyPairIsNone()) {
+                .equals(spSecondSpecialization.getSelectedItem().toString())) && checkIfAnyPairIsNone()) {
             Toast.makeText(NewJobActivity.this, "Choose different specs.", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -193,14 +193,16 @@ public class NewJobActivity extends AppCompatActivity {
         return false;
     }
 
-    private boolean checkIfAnyPairIsNone(){
+    private boolean checkIfAnyPairIsNone() {
         if ("None".equals(spFirstSpecialization.getSelectedItem().toString())
-                && "None".equals(spThirdSpecialization.getSelectedItem().toString())){
+                && "None".equals(spThirdSpecialization.getSelectedItem().toString())) {
             return false;
-        } if ("None".equals(spThirdSpecialization.getSelectedItem().toString())
+        }
+        if ("None".equals(spThirdSpecialization.getSelectedItem().toString())
                 && "None".equals(spSecondSpecialization.getSelectedItem().toString())) {
             return false;
-        } if ("None".equals(spFirstSpecialization.getSelectedItem().toString())
+        }
+        if ("None".equals(spFirstSpecialization.getSelectedItem().toString())
                 && "None".equals(spSecondSpecialization.getSelectedItem().toString())) {
             return false;
         }

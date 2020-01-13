@@ -35,6 +35,20 @@ public class OrderAdapter extends ArrayAdapter<Job> {
     }
 
     @Override
+    public int getCount() {
+        return orderList.size();
+    }
+
+    public List<String> getItemOrders() {
+        for(int i = 0; i < getCount(); i++) {
+
+        }
+        return orderList;
+    }
+
+
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
@@ -42,21 +56,13 @@ public class OrderAdapter extends ArrayAdapter<Job> {
         }
 
         Job jobs = jobOrder.get(position);
-
         TextView orderNumber = view.findViewById(R.id.order_number);
         TextView jobName = view.findViewById(R.id.order_job_name);
-        //Button orderUpdate = view.findViewById(R.id.btn_order_update);
 
         orderNumber.setText(jobs.getOrderNumber());
         jobName.setText(jobs.getName());
 
-
-//        orderUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                OrderAdapter.this.viewEventController.updateJobOrders(orderList, Integer.toString(jobs.getEventId()));
-//            }
-//        });
+        viewEventController.saveList(orderList);
 
         return view;
     }

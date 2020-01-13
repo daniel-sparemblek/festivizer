@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,151 +9,160 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/background_gradient">
 
-    <android.support.design.widget.AppBarLayout
 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme">
+        android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/organizer_toolbar"
+        <android.support.design.widget.AppBarLayout
+
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#ff9360"
-            app:popupTheme="@style/AppTheme" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/event"
-            android:textSize="21sp" />
+            android:theme="@style/AppTheme">
 
-    </LinearLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/organizer_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#ff9360"
+                app:popupTheme="@style/AppTheme" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="28dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        </android.support.design.widget.AppBarLayout>
 
-        <TextView
-            android:id="@+id/org_event_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/festival_name"
-            android:textSize="21sp" />
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/event"
+                android:textSize="21sp" />
 
+        </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="28dp"
-        android:paddingStart="25dp"
-        android:paddingEnd="24dp">
-
-        <TextView
-            android:id="@+id/org_festival"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/festival"
-            android:textSize="25sp" />
-        <TextView
-            android:id="@+id/org_startTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/start_time"
-            android:textSize="25sp" />
-        <TextView
-            android:id="@+id/org_endTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/end_time"
-            android:textSize="25sp" />
-        <TextView
-            android:id="@+id/org_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/location"
-            android:textSize="25sp" />
-        <TextView
-            android:id="@+id/org_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/decs"
-            android:textSize="25sp" />
+            android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:paddingTop="28dp"
+            android:paddingRight="24dp">
 
+            <TextView
+                android:id="@+id/org_event_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/festival_name"
+                android:textSize="21sp" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text=""
-            android:textSize="25sp" />
+        </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingStart="25dp"
+            android:paddingTop="28dp"
+            android:paddingEnd="24dp">
 
-            <Button
-                android:id="@+id/org_newJob"
-                android:layout_width="150dp"
+            <TextView
+                android:id="@+id/org_festival"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="createNewJob"
-                android:text="@string/new_job" />
+                android:layout_gravity="start"
+                android:text="@string/festival"
+                android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/btn_order_update"
+            <TextView
+                android:id="@+id/org_startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/start_time"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/org_endTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/end_time"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/org_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/location"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/org_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/decs"
+                android:textSize="25sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text=""
+                android:textSize="25sp" />
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="UPDATE ORDER" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/org_newJob"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:onClick="createNewJob"
+                    android:text="@string/new_job" />
+
+                <Button
+                    android:id="@+id/btn_order_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="UPDATE ORDER" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="     JOBS ORDER"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <ListView
-            android:id="@+id/jobsOrderList"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"/>
-    </LinearLayout>
+            android:orientation="vertical">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="     JOBS ORDER"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <ListView
+                android:id="@+id/jobsOrderList"
+                android:layout_width="match_parent"
+                android:layout_height="214dp"
+                android:layout_margin="15dp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
