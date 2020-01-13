@@ -251,6 +251,7 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         intent.putExtra("username", username);
         intent.putExtra("permission", permission);
         startActivity(intent);
+        finish();
     }
 
     @Override
