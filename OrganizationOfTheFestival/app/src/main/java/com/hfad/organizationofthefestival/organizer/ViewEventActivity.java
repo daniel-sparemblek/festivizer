@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,9 +23,12 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ViewEventActivity extends AppCompatActivity {
@@ -83,14 +87,6 @@ public class ViewEventActivity extends AppCompatActivity {
         dialog.show();
 
         viewEventController.getEvent((int) eventId);
-
-        btnUpdateOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Ovo je na prvom mjestu: " + savedAdapter.getItem(0));
-                viewEventController.updateJobOrders((int) eventId);
-            }
-        });
     }
 
     public void fillInActivity(EventApply event) {
@@ -150,5 +146,46 @@ public class ViewEventActivity extends AppCompatActivity {
         intent.putExtra("festivalName", festivalName);
         intent.putExtra("eventName", event.getName());
         this.startActivity(intent);
+    }
+
+    public View getViewByPosition(int pos, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
+    }
+
+    public List<TextView> getAllViews(ListView listView) {
+        List<TextView> views = new ArrayList<>();
+        for (int i = 0; i < listView.getChildCount(); i++) {
+            views.add((TextView)((LinearLayout)getViewByPosition(i, listView)).getChildAt(0));
+        }
+        return views;
+    }
+
+    public void updateOrder(View view) {
+        List<TextView> tvOrderNumbers = getAllViews(this.lvJobs);
+
+        List<String> orderNumbers = tvOrderNumbers.stream()
+                .map(t -> t.getText().toString())
+                .collect(Collectors.toList());
+
+
+        HashMap<String, String> body = new HashMap<>();
+
+        int i = 1;
+
+        for(String orderNumber : orderNumbers) {
+            body.put(String.valueOf(i), orderNumber);
+            i++;
+        }
+
+        viewEventController.updateJobOrders((int)eventId, body);
+
     }
 }
