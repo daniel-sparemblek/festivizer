@@ -144,11 +144,9 @@ public class DefaultUserActivity extends AppCompatActivity {
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent;
-            if (searcherPermission == 2 && eventIds.contains(worker.getJobs().get(position))) {
-                System.out.println("OVDJE");
+            if (searcherPermission == 2 && eventIds.contains((long)worker.getJobs().get(position).getEventId())) {
                 intent = new Intent(DefaultUserActivity.this, WorkerJobSearchActivity.class);
             } else {
-                System.out.println("OVDJE2");
                 intent = new Intent(DefaultUserActivity.this, JobCommentActivity.class);
             }
             intent.putExtra("accessToken", accessToken);
