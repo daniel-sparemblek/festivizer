@@ -8,15 +8,24 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hfad.organizationofthefestival.R;
+import com.hfad.organizationofthefestival.adapters.AuctionAdapter;
+import com.hfad.organizationofthefestival.adapters.OrderAdapter;
+import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 import com.hfad.organizationofthefestival.utility.EventApply;
+import com.hfad.organizationofthefestival.utility.Job;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ViewEventActivity extends AppCompatActivity {
 
@@ -27,6 +36,7 @@ public class ViewEventActivity extends AppCompatActivity {
     private TextView tvLocation;
     private TextView tvDesc;
     private Button createJob;
+    private ListView lvJobs;
 
     private String accessToken;
     private String refreshToken;
@@ -84,6 +94,27 @@ public class ViewEventActivity extends AppCompatActivity {
         tvEndTime.setText(parseDateTime(event.getEndTime())
                 .truncatedTo(ChronoUnit.MINUTES)
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+
+
+        viewEventController.getJobs((int) eventId);
+
+    }
+
+    public void fillInOrderList(Job[] jobs) {
+
+        List<Job> jobsList = new LinkedList<>();
+
+        for(Job job : jobs) {
+            jobsList.add(job);
+        }
+
+        lvJobs = findViewById(R.id.orgJobsList);
+
+        OrderAdapter myCustomAdapter = new OrderAdapter(this,
+                R.layout.organizer_order_row_layout, jobsList);
+        lvJobs.setAdapter(myCustomAdapter);
+
+
         dialog.dismiss();
     }
 

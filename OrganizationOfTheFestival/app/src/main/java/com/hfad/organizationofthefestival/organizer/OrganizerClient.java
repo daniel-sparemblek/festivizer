@@ -78,4 +78,8 @@ public interface OrganizerClient {
 
     @PUT("auction")
     Call<Void> extendAuction(@Body HashMap<String, String> body, @Header("Authorization") String authorization);
+
+    @GET("jobs/event")
+    Call<Job[]> getJobsForEvent(@Query("event_id") String eventId,
+                                @Header("Authorization") String authorization);
 }
