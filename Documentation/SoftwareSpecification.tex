@@ -654,7 +654,85 @@
 				
 			\end{packed_item}
 			
-			\noindent \underbar{\textbf{UC28 - View Job Worker Application Entries}}
+			\noindent \underbar{\textbf{UC48 - Bind an Event to an Organizer}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Leader
+				\item \textbf{Goal:} Bind an Event to an Organizer
+				\item \textbf{Stakeholders: } Database, Leader, Organizers, Workers
+				\item \textbf{Conditions: } Must be logged in and must have selected a Festival and one of its Events
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The User opens the Screen for viewing Festival details, and then taps the 'Add new event' button
+					\item The data is fetched from the Database
+					\item The form for creating an Event is shown to the Leader
+					\item Upon tapping the 'Create' button, the Event is created and added to this Festival
+					\item New data is sent to the Server and parsed there
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					
+					\item[1.a] Data not successfully retrieved
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+					\end{packed_enum}
+					
+					\item[2.a] Illegal input
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User that they have entered illegal input
+						\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
+						\item The steps above are repeated if new input isn't accepted either
+					\end{packed_enum}
+					
+					\item[4.a] Data not successfully sent and/or parsed on the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User of this bad request
+					\end{packed_enum}
+				\end{packed_item}
+				
+			\end{packed_item}
+		
+			\noindent \underbar{\textbf{UC49 - Open a Job to Auctioning}}
+			\begin{packed_item}
+				\item \textbf{Main Stakeholders:} Leader
+				\item \textbf{Goal:} Add a new Event to this
+				\item \textbf{Stakeholders: } Database, Leader, Organizers
+				\item \textbf{Conditions: } Must be logged in and must have selected a Festival
+				\item \textbf{Event flow description: }
+				\begin{packed_enum}
+					\item The User opens the Screen for viewing Festival details, and then taps the 'Add new event' button
+					\item The data is fetched from the Database
+					\item The form for creating an Event is shown to the Leader
+					\item Upon tapping the 'Create' button, the Event is created and added to this Festival
+					\item New data is sent to the Server and parsed there
+				\end{packed_enum}
+				
+				\begin{packed_item}
+					
+					\item[1.a] Data not successfully retrieved
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User data couldn't be retrieved
+						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
+						\item Upon successful data retrieval(If ever) the button and error message are removed and then the data is displayed
+					\end{packed_enum}
+					
+					\item[2.a] Illegal input
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User that they have entered illegal input
+						\item The notification asks the User to re-format and re-enter the input. The expected format and rules are displayed
+						\item The steps above are repeated if new input isn't accepted either
+					\end{packed_enum}
+					
+					\item[4.a] Data not successfully sent and/or parsed on the Server
+					\item[] \begin{packed_enum}
+						\item An error message is displayed informing the User of this bad request
+					\end{packed_enum}
+				\end{packed_item}
+				
+			\end{packed_item}
+			
+			\noindent \underbar{\textbf{UC28 - View Worker Job Application Entries}}
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Leader, Organiser
 				\item \textbf{Goal:} View the list of all the Job Worker Application Entries, so that they can be verified in order for Workers to enter the Auction process
@@ -665,7 +743,14 @@
 					\item Tap the button to 'Job Applications'
 					\item The list is fetched from the Server
 					\item The User is taken to a new Screen where all the entries are displayed
-					\item There Jobs can be verified or declined entry
+					\item Jobs are split into 4 categories
+					\item[] \begin{packed_enum}
+						\item Auction
+						\item Active
+						\item Pending
+						\item Completed
+					\end{packed_enum}
+					\item There Jobs can be either verified or declined entry into the Job Auction process
 				\end{packed_enum}
 				
 				\begin{packed_item}
@@ -681,18 +766,17 @@
 			\noindent \underbar{\textbf{UC30 - Verify Worker Job Application entry}}
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Leader, Organiser
-				\item \textbf{Goal:} Upon inspection, if the Job Entry is deemed quality, verify this Entry so that it can compete with other Entries for the final approval
+				\item \textbf{Goal:} Upon inspection, if the Job Entry is deemed quality, verify this Entry so that it can compete with other Entries in the Job Auction
 				\item \textbf{Stakeholders: } Database, Back-End(Server), Worker(s)
 				\item \textbf{Conditions: } Must be logged in, must have selected a Job to verify
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
-					\item Upon clicking the 'Verify this Job Application Entry' this Worker's Entry is verified
-					\item It enters the Job Auction process
+					\item Upon tapping the verify button, the Job is added to the Job Auction process
 					\item Data is sent to the Server
 				\end{packed_enum}
 				
 				\begin{packed_item}
-					\item[3.a] Data not successfully sent to the Server
+					\item[1.a] Data not successfully sent to the Server
 					\item[] \begin{packed_enum}
 						\item An error message is displayed informing the User data wasn't successfully sent to the Server
 						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to send the data again
