@@ -44,6 +44,9 @@ public class WaitingListAdapter extends ArrayAdapter<ApplicationResponse> {
 
         tvWorkerName.setText(application.getWorker().getUsername());
 
+        tvWorkerName.setOnClickListener(v -> {
+            controller.go(application);
+        });
         btnAcc.setOnClickListener(v -> controller.setApplicationStatus(application.getApplicationId(), 1));
         btnDec.setOnClickListener(v -> controller.setApplicationStatus(application.getApplicationId(), 2));
 

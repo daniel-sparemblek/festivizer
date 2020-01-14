@@ -115,4 +115,8 @@ public class WaitingListController {
             }
         });
     }
+
+    public void go(ApplicationResponse application) {
+        waitingListActivity.waitingSwitch(application);
+    }
 }
