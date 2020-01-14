@@ -118,7 +118,15 @@
             <ListView
                 android:id="@+id/specializationList"
                 android:layout_width="match_parent"
-                android:layout_height="291dp" />
+                android:layout_height="172dp" />
+
+            <Button
+                android:id="@+id/btnCompleted"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:text="Completed" />
 
         </LinearLayout>
 
