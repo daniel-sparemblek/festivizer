@@ -174,16 +174,13 @@ public class JobsActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
 
-        lvJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(JobsActivity.this, JobProfileActivity.class);
-                intent.putExtra("accessToken", accessToken);
-                intent.putExtra("refreshToken", refreshToken);
-                intent.putExtra("username", username);
-                intent.putExtra("job_id", activeJobs.get(position).getId());
-                startActivity(intent);
-            }
+        lvJobs.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(JobsActivity.this, JobProfileActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("job_id", activeJobs.get(position).getId());
+            startActivity(intent);
         });
 
         dialog.dismiss();
