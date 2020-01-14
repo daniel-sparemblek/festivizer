@@ -12,11 +12,15 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
 import com.hfad.organizationofthefestival.login.LoginActivity;
 import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +36,7 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
     private ListView jobAuctionsList;
     private ListView jobActiveAuctionsList;
 
-    private List<ApplicationResponse> applicationList;
+    private List<ApplicationResponse> waitingApplicationList;
     private List<ApplicationResponse> activeApplicationList;
 
 
@@ -67,6 +71,20 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         dialog.show();
 
         controller.getJobAuctions();
+
+        jobAuctionsList.setOnItemClickListener((parent, view, position, id) -> {
+            String name = (String) parent.getItemAtPosition(position);
+            Gson gson = new Gson();
+
+            for(ApplicationResponse applicationResponse : waitingApplicationList) {
+                if(name.equals(applicationResponse.getWorker().getUsername())) {
+                    String body = gson.toJson(applicationResponse);
+                    Intent data = new Intent(this, ViewApplicationActivity.class);
+                    data.putExtra("application", body);
+                    startActivity(data);
+                }
+            }
+        });
     }
 
     @Override
@@ -124,14 +142,18 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
 
 
     public void fillInWaitingApplications(ApplicationResponse[] applications){
+        waitingApplicationList = Arrays.asList(applications);
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, format(applications));
         jobAuctionsList.setAdapter(arrayAdapter);
     }
 
     public void fillInActiveApplications(ApplicationResponse[] applications) {
+        activeApplicationList = Arrays.asList(applications);
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, format(applications));
+                android.R.layout.simple_list_item_1, format(applications, true));
         jobActiveAuctionsList.setAdapter(arrayAdapter);
 
         dialog.dismiss();
@@ -140,6 +162,12 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
     private List<String> format(ApplicationResponse[] applicationResponses) {
         return Arrays.stream(applicationResponses)
                 .map(t -> t.getWorker().getUsername())
+                .collect(Collectors.toList());
+    }
+
+    private List<String> format(ApplicationResponse[] applicationResponses, boolean isActive) {
+        return Arrays.stream(applicationResponses)
+                .map(t -> t.getWorker().getUsername() + " | " + t.getPrice())
                 .collect(Collectors.toList());
     }
 }

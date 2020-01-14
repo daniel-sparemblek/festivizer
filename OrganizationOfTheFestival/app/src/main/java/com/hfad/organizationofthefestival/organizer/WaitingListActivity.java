@@ -9,8 +9,10 @@ import android.text.Html;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.WaitingListAdapter;
+import com.hfad.organizationofthefestival.leader.ViewApplicationActivity;
 import com.hfad.organizationofthefestival.utility.ApplicationResponse;
 
 import java.util.Arrays;
@@ -84,4 +86,13 @@ public class WaitingListActivity extends AppCompatActivity {
         dialog.dismiss();
 
     }
+
+    public void waitingSwitch(ApplicationResponse applicationResponse) {
+        Gson gson = new Gson();
+        String body = gson.toJson(applicationResponse);
+        Intent data = new Intent(this, ViewApplicationActivity.class);
+        data.putExtra("application", body);
+        startActivity(data);
+    }
+
 }
