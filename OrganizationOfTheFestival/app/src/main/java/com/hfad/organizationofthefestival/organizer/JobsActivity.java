@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,6 +24,7 @@ import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
+import com.hfad.organizationofthefestival.worker.JobProfileActivity;
 import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
 
 import java.time.ZoneId;
@@ -170,6 +173,18 @@ public class JobsActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
+
+        lvJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(JobsActivity.this, JobProfileActivity.class);
+                intent.putExtra("accessToken", accessToken);
+                intent.putExtra("refreshToken", refreshToken);
+                intent.putExtra("username", username);
+                intent.putExtra("job_id", activeJobs.get(position).getId());
+                startActivity(intent);
+            }
+        });
 
         dialog.dismiss();
     }

@@ -54,7 +54,6 @@ public class JobProfileActivity extends AppCompatActivity {
         lvSpecializations = findViewById(R.id.specializationList);
 
         jobProfileController = new JobProfileController(this, accessToken, username, refreshToken);
-        System.out.println("JOB_ID " + jobId);
 
         dialog = new ProgressDialog(this);
         dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
