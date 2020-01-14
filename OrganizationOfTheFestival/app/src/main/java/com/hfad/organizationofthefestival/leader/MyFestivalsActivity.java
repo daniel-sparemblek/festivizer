@@ -109,14 +109,29 @@ public class MyFestivalsActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 0) {
+                    dialog = new ProgressDialog(MyFestivalsActivity.this);
+                    dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
+
                     controller.getFestivals("active");
                 }
 
                 if (position == 1) {
+                    dialog = new ProgressDialog(MyFestivalsActivity.this);
+                    dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
+
                     controller.getFestivals("pending");
                 }
 
                 if (position == 2) {
+                    dialog = new ProgressDialog(MyFestivalsActivity.this);
+                    dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
+
                     controller.getFestivals("complete");
                 }
             }
