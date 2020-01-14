@@ -10,8 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -31,7 +29,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class JobsActivity extends AppCompatActivity {
@@ -199,10 +196,8 @@ public class JobsActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
 
-        setupListViewListener(jobs);
-
         lvJobs.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(JobsActivity.this, JobProfileActivity.class);
+            Intent intent = new Intent(JobsActivity.this, JobAuctionActivity.class);
             intent.putExtra("accessToken", accessToken);
             intent.putExtra("refreshToken", refreshToken);
             intent.putExtra("username", username);
@@ -211,26 +206,6 @@ public class JobsActivity extends AppCompatActivity {
         });
 
         dialog.dismiss();
-    }
-
-    private void setupListViewListener(Job[] jobs) {
-        lvJobs.setOnItemClickListener((parent, view, position, id) -> {
-            String name = (String) parent.getItemAtPosition(position);
-
-            Optional<Job> jobOptional = Arrays.stream(jobs)
-                    .filter(t -> name.equals(t.getName()))
-                    .findFirst();
-
-            if (jobOptional.isPresent()) {
-                Intent intent = new Intent(this, JobAuctionActivity.class);
-                intent.putExtra("accessToken", accessToken);
-                intent.putExtra("refreshToken", refreshToken);
-                intent.putExtra("username", username);
-                intent.putExtra("jobId", jobOptional.get().getId());
-                this.startActivity(intent);
-            }
-        });
-
     }
 
     public void fillInCompletedJobs(Job[] jobs) {
