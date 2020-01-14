@@ -50,7 +50,7 @@ public class LeaderActivity extends AppCompatActivity {
         setContentView(R.layout.leader_profile);
 
         Toolbar toolbar = findViewById(R.id.leader_toolbar);
-        toolbar.setTitle("My profile");
+        toolbar.setTitle("My Profile");
         setSupportActionBar(toolbar);
 
         tvLeaderEmail = findViewById(R.id.leaderEmail);

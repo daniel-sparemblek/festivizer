@@ -127,8 +127,6 @@
                 android:inputType="text"
                 android:textAllCaps="false" />
 
-        </FrameLayout>
-
         <Button
             android:id="@+id/add_comment"
             android:layout_width="150dp"

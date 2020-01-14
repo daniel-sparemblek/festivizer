@@ -16,6 +16,11 @@ import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class WorkerJobSearchActivity extends AppCompatActivity {
 
     private Job job;
@@ -82,7 +87,9 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvJobDescription.setText(jobApply.getDescription());
         tvWorkerName.setText(jobApply.getWorker().getUsername());
         tvJobName.setText(jobApply.getName());
-        tvStartTime.setText(jobApply.getStartTime());
+        tvStartTime.setText(convertTime(jobApply.getStartTime())
+                .truncatedTo(ChronoUnit.MINUTES)
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
         if (jobApply.getComment() == null) {
             btnAddComment.setEnabled(true);
@@ -91,5 +98,15 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
             etComment.setText(jobApply.getComment());
         }
         dialog.dismiss();
+    }
+
+    private ZonedDateTime convertTime(String time){
+        int year = Integer.parseInt(time.substring(0, 4));
+        int month = Integer.parseInt(time.substring(5, 7));
+        int day = Integer.parseInt(time.substring(8, 10));
+        int hour = Integer.parseInt(time.substring(11, 13));
+        int minute = Integer.parseInt(time.substring(14, 16));
+        int second = Integer.parseInt(time.substring(17, 19));
+        return ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
     }
 }
