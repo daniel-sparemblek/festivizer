@@ -111,8 +111,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/comment"
             android:textAllCaps="false"
+            android:textStyle="bold"
             android:importantForAutofill="no"
-            android:inputType="text" />
+            android:inputType="textMultiLine" />
 
         <Button
             android:id="@+id/add_comment"
