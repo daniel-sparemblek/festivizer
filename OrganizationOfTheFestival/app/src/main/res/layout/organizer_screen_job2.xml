@@ -105,14 +105,29 @@
             android:text=""
             android:textSize="25sp" />
 
-        <EditText
-            android:id="@+id/org_searchTxt"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/comment"
-            android:textAllCaps="false"
-            android:importantForAutofill="no"
-            android:inputType="text" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/org_searchTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/comment"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/tvorg_searchTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/comment"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textAllCaps="false" />
+
+        </FrameLayout>
 
         <Button
             android:id="@+id/add_comment"
