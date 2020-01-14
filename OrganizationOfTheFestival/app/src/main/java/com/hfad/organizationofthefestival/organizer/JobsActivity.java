@@ -201,6 +201,15 @@ public class JobsActivity extends AppCompatActivity {
 
         setupListViewListener(jobs);
 
+        lvJobs.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(JobsActivity.this, JobProfileActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("job_id", pendingJobs.get(position).getId());
+            startActivity(intent);
+        });
+
         dialog.dismiss();
     }
 
