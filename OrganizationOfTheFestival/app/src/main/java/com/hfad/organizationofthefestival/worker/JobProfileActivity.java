@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -63,7 +64,7 @@ public class JobProfileActivity extends AppCompatActivity {
         tvEventName = findViewById(R.id.event);
         tvFestivalName = findViewById(R.id.fest);
         lvSpecializations = findViewById(R.id.specializationList);
-        btnComplete = findViewById(R.id.);
+        btnComplete = findViewById(R.id.btnCompleted);
 
         jobProfileController = new JobProfileController(this, accessToken, username, refreshToken);
 
@@ -73,6 +74,8 @@ public class JobProfileActivity extends AppCompatActivity {
         dialog.show();
 
         jobProfileController.getJobApplication(jobId);
+
+        btnComplete.setOnClickListener(v -> jobProfileController.completeJob(jobId));
     }
 
     public void fillInActivity(JobApply body) {
@@ -89,6 +92,9 @@ public class JobProfileActivity extends AppCompatActivity {
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, specializationsToStrings(body.getSpecializations()));
         lvSpecializations.setAdapter(specializationArrayAdapter);
+
+        btnComplete.setClickable(true);
+
 
         dialog.dismiss();
     }
