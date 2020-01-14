@@ -40,7 +40,7 @@ public class ActiveJobsActivity extends AppCompatActivity {
         setContentView(R.layout.worker_active_jobs);
 
         Toolbar toolbar = findViewById(R.id.worker_toolbar);
-        toolbar.setTitle("Active Jobs");
+        toolbar.setTitle("ActiveFrag Jobs");
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
