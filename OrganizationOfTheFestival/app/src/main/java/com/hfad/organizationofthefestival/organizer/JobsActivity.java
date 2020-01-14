@@ -214,13 +214,14 @@ public class JobsActivity extends AppCompatActivity {
 
     public void fillInCompletedJobs(Job[] jobs) {
         completedJobs = Arrays.stream(jobs)
-                .filter(Job::isCompleted)
+                .filter(t -> t.isCompleted())
                 .collect(Collectors.toList());
 
+        Job[] toArray = completedJobs.toArray(new Job[0]);
         lvJobs = findViewById(R.id.orgCompletedJobList);
 
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
+                android.R.layout.simple_list_item_1, jobsToStrings(toArray));
         lvJobs.setAdapter(specializationArrayAdapter);
 
         lvJobs.setOnItemClickListener((parent, view, position, id) -> {
