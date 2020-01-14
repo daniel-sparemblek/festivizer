@@ -88,15 +88,16 @@ public class LeaderActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        if(leader.getIsPending() == 1) {
+        int id = item.getItemId();
+
+        if(leader.getIsPending() == 1 && id != R.id.myProfile && id != R.id.logout) {
             Toast.makeText(this, "You have not yet been accepted as leader!", Toast.LENGTH_SHORT).show();
             return true;
         }
-        else if(leader.getIsPending() == 2) {
+        else if(leader.getIsPending() == 2 && id != R.id.myProfile && id != R.id.logout) {
             Toast.makeText(this, "Sorry, you have been revoked as leader...", Toast.LENGTH_SHORT).show();
             return true;
         }
-        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.myProfile) {

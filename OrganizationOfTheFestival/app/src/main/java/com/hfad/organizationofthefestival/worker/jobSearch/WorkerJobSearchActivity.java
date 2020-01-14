@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
     private TextView tvStartTime;
     private TextView tvFestivalName;
 
+    private TextView tvComment;
+
     private WorkerJobSearchController controller;
 
 
@@ -45,8 +48,9 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         setContentView(R.layout.organizer_screen_job2);
 
         findViews();
-        btnAddComment.setEnabled(false);
-        etComment.setEnabled(false);
+        btnAddComment.setVisibility(View.INVISIBLE);
+        etComment.setVisibility(View.INVISIBLE);
+        tvComment.setVisibility(View.INVISIBLE);
 
         Intent intent = getIntent();
         String accessToken = intent.getStringExtra("accessToken");
@@ -79,6 +83,7 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
         tvJobName = findViewById(R.id.jobName);
         tvStartTime = findViewById(R.id.org_startTime);
         tvFestivalName = findViewById(R.id.org_fest);
+        tvComment = findViewById(R.id.tvorg_searchTxt);
     }
 
     public void fillInActivity(JobApply jobApply) {
@@ -92,10 +97,11 @@ public class WorkerJobSearchActivity extends AppCompatActivity {
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
         if (jobApply.getComment() == null) {
-            btnAddComment.setEnabled(true);
-            etComment.setEnabled(true);
+            btnAddComment.setVisibility(View.VISIBLE);
+            etComment.setVisibility(View.VISIBLE);
         } else {
-            etComment.setText(jobApply.getComment());
+            tvComment.setVisibility(View.VISIBLE);
+            tvComment.setText(jobApply.getComment());
         }
         dialog.dismiss();
     }

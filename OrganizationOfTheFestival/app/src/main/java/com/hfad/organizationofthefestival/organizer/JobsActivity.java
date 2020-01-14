@@ -22,13 +22,13 @@ import com.hfad.organizationofthefestival.search.OrganizerSearchActivity;
 import com.hfad.organizationofthefestival.utility.ApplicationAuction;
 import com.hfad.organizationofthefestival.utility.Job;
 import com.hfad.organizationofthefestival.utility.JobApply;
+import com.hfad.organizationofthefestival.worker.JobProfileActivity;
 import com.hfad.organizationofthefestival.worker.jobSearch.WorkerJobSearchActivity;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class JobsActivity extends AppCompatActivity {
@@ -171,6 +171,15 @@ public class JobsActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
 
+        lvJobs.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(JobsActivity.this, JobProfileActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("job_id", activeJobs.get(position).getId());
+            startActivity(intent);
+        });
+
         dialog.dismiss();
     }
 
@@ -187,40 +196,28 @@ public class JobsActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, jobsToStrings(jobs));
         lvJobs.setAdapter(specializationArrayAdapter);
 
-        setupListViewListener(jobs);
+        lvJobs.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(JobsActivity.this, JobAuctionActivity.class);
+            intent.putExtra("accessToken", accessToken);
+            intent.putExtra("refreshToken", refreshToken);
+            intent.putExtra("username", username);
+            intent.putExtra("job_id", pendingJobs.get(position).getId());
+            startActivity(intent);
+        });
 
         dialog.dismiss();
     }
 
-    private void setupListViewListener(Job[] jobs) {
-        lvJobs.setOnItemClickListener((parent, view, position, id) -> {
-            String name = (String) parent.getItemAtPosition(position);
-
-            Optional<Job> jobOptional = Arrays.stream(jobs)
-                    .filter(t -> name.equals(t.getName()))
-                    .findFirst();
-
-            if (jobOptional.isPresent()) {
-                Intent intent = new Intent(this, JobAuctionActivity.class);
-                intent.putExtra("accessToken", accessToken);
-                intent.putExtra("refreshToken", refreshToken);
-                intent.putExtra("username", username);
-                intent.putExtra("jobId", jobOptional.get().getId());
-                this.startActivity(intent);
-            }
-        });
-
-    }
-
     public void fillInCompletedJobs(Job[] jobs) {
         completedJobs = Arrays.stream(jobs)
-                .filter(Job::isCompleted)
+                .filter(t -> t.isCompleted())
                 .collect(Collectors.toList());
 
+        Job[] toArray = completedJobs.toArray(new Job[0]);
         lvJobs = findViewById(R.id.orgCompletedJobList);
 
         ArrayAdapter<String> specializationArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, jobsToStrings(jobs));
+                android.R.layout.simple_list_item_1, jobsToStrings(toArray));
         lvJobs.setAdapter(specializationArrayAdapter);
 
         lvJobs.setOnItemClickListener((parent, view, position, id) -> {
