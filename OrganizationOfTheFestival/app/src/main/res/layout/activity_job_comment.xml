@@ -98,7 +98,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginStart="25dp"
         android:layout_width="match_parent"
-        android:layout_height="291dp" />
+        android:layout_height="100dp" />
 
 
     <TextView
@@ -117,6 +117,8 @@
         android:layout_marginEnd="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:textStyle="bold"
         android:gravity="start"
         android:textSize="21sp"/>
 

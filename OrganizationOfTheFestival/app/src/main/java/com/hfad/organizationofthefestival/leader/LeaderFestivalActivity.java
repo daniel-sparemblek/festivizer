@@ -117,6 +117,11 @@ public class LeaderFestivalActivity extends AppCompatActivity {
         startDateTime = festival.getStartTime();
         endDateTime = festival.getEndTime();
 
+        if(parseDateTime(endDateTime).isBefore(ZonedDateTime.now())) {
+            btnAddEvent.setEnabled(false);
+            btnApproveOrganizers.setEnabled(false);
+        }
+
         dialog.dismiss();
     }
 

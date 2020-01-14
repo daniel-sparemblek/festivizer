@@ -135,6 +135,7 @@
         <activity android:name=".worker.WorkerPrintPassActivity" />
 
         <activity android:name=".organizer.WaitingListActivity" />
+        <activity android:name=".leader.ViewApplicationActivity" />
 
     </application>
 

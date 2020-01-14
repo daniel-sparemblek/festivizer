@@ -197,7 +197,7 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
         if (!file.exists()) {
             file.mkdirs();
         }
-        String targetPdf = directory_path + "/" + festival.getName();
+        String targetPdf = directory_path + "/" + festival.getName() + ".pdf";
         File filePath = new File(targetPdf);
         try {
             document.writeTo(new FileOutputStream(filePath));
