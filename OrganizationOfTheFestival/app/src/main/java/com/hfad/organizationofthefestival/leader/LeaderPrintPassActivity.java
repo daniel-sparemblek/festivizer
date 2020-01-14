@@ -154,7 +154,7 @@ public class LeaderPrintPassActivity extends AppCompatActivity {
         if (!file.exists()) {
             file.mkdirs();
         }
-        String targetPdf = directory_path + "test-2.pdf";
+        String targetPdf = directory_path + "/" + festival.getName() + ".pdf";
         File filePath = new File(targetPdf);
         try {
             document.writeTo(new FileOutputStream(filePath));
