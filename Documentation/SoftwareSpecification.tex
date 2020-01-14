@@ -654,22 +654,22 @@
 				
 			\end{packed_item}
 			
-			\noindent \underbar{\textbf{UC28 - View Job Worker Application Entries of the current Festival}}
+			\noindent \underbar{\textbf{UC28 - View Job Worker Application Entries}}
 			\begin{packed_item}
 				\item \textbf{Main Stakeholders:} Leader, Organiser
 				\item \textbf{Goal:} View the list of all the Job Worker Application Entries, so that they can be verified in order for Workers to enter the Auction process
 				\item \textbf{Stakeholders: } Database, Back-End(Server), Workers
-				\item \textbf{Conditions: } Must be logged in, must have selected a Festival
+				\item \textbf{Conditions: } Must be logged in
 				\item \textbf{Event flow description: }
 				\begin{packed_enum}
-					\item Tap the button to 'View the Worker Job Application Entries'
+					\item Tap the button to 'Job Applications'
 					\item The list is fetched from the Server
 					\item The User is taken to a new Screen where all the entries are displayed
-					\item Each Entry has an 'Inspect entry' button - upon pressing it the User it taken to a new Screen
+					\item There Jobs can be verified or declined entry
 				\end{packed_enum}
 				
 				\begin{packed_item}
-					\item[2.a] Data not successfully retrieved
+					\item[1.a] Data not successfully retrieved
 					\item[] \begin{packed_enum}
 						\item An error message is displayed informing the User data couldn't be retrieved
 						\item A 'Retry' button is displayed on the screen - upon clicking it the app attempts to fetch data again
