@@ -40,7 +40,7 @@ public class ActiveJobsActivity extends AppCompatActivity {
         setContentView(R.layout.worker_active_jobs);
 
         Toolbar toolbar = findViewById(R.id.worker_toolbar);
-        toolbar.setTitle("ActiveFrag Jobs");
+        toolbar.setTitle("Active Jobs");
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
@@ -59,7 +59,9 @@ public class ActiveJobsActivity extends AppCompatActivity {
             intent1.putExtra("refreshToken", refreshToken);
             intent1.putExtra("username", username);
             intent1.putExtra("job_id", jobs.get(position).getJobId());
+            intent1.putExtra("permission", permission);
             ActiveJobsActivity.this.startActivity(intent1);
+            finish();
         });
 
         dialog = new ProgressDialog(this);

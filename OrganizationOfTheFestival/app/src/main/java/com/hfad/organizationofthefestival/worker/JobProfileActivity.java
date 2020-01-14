@@ -37,6 +37,7 @@ public class JobProfileActivity extends AppCompatActivity {
     private String refreshToken;
     private String username;
     private int jobId;
+    private String permission;
 
     private JobProfileController jobProfileController;
     private List<JobApply> jobList;
@@ -53,6 +54,7 @@ public class JobProfileActivity extends AppCompatActivity {
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
         jobId = intent.getIntExtra("job_id", 0);
+        permission = intent.getStringExtra("permission");
 
         Toolbar toolbar = findViewById(R.id.worker_toolbar);
         toolbar.setTitle("Job profile");
@@ -75,7 +77,16 @@ public class JobProfileActivity extends AppCompatActivity {
 
         jobProfileController.getJobApplication(jobId);
 
-        btnComplete.setOnClickListener(v -> jobProfileController.completeJob(jobId));
+        btnComplete.setOnClickListener(v -> {
+            jobProfileController.completeJob(jobId);
+            Intent intent1 = new Intent(this, ActiveJobsActivity.class);
+            intent1.putExtra("permission", permission);
+            intent1.putExtra("accessToken", accessToken);
+            intent1.putExtra("refreshToken", refreshToken);
+            intent1.putExtra("username", username);
+            startActivity(intent1);
+            finish();
+        });
     }
 
     public void fillInActivity(JobApply body) {
@@ -94,7 +105,6 @@ public class JobProfileActivity extends AppCompatActivity {
         lvSpecializations.setAdapter(specializationArrayAdapter);
 
         btnComplete.setClickable(true);
-
 
         dialog.dismiss();
     }
