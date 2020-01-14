@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class JobProfileActivity extends AppCompatActivity {
     private TextView tvFestivalName;
     private TextView tvEventName;
     private ListView lvSpecializations;
+    private Button btnComplete;
 
     private String accessToken;
     private String refreshToken;
@@ -61,6 +63,7 @@ public class JobProfileActivity extends AppCompatActivity {
         tvEventName = findViewById(R.id.event);
         tvFestivalName = findViewById(R.id.fest);
         lvSpecializations = findViewById(R.id.specializationList);
+        btnComplete = findViewById(R.id.);
 
         jobProfileController = new JobProfileController(this, accessToken, username, refreshToken);
 
