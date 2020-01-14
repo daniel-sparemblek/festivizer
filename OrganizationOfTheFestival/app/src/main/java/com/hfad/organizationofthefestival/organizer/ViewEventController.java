@@ -1,5 +1,7 @@
 package com.hfad.organizationofthefestival.organizer;
 
+import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.utility.EventApply;
@@ -8,9 +10,11 @@ import com.hfad.organizationofthefestival.utility.WorkingEvent;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -93,13 +97,7 @@ public class ViewEventController {
         });
     }
 
-    public void updateJobOrders(int event_id) {
-        HashMap<String, String> orderMap = new HashMap<>();
-
-        for(int i = 1; i <= orderList.size(); i++) {
-            orderMap.put(Integer.toString(i), orderList.get(i - 1));
-        }
-        System.out.println(orderMap.entrySet().toString());
+    public void updateJobOrders(int event_id, HashMap<String, String>orderMap) {
         Call<Void> call = api.updateJobOrders(Integer.toString(event_id), orderMap, "Bearer " + accessToken);
 
         call.enqueue(new Callback<Void>() {
@@ -107,6 +105,7 @@ public class ViewEventController {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
                     Toast.makeText(viewEventActivity, "Successfully updated job order, restart to see!", Toast.LENGTH_SHORT).show();
+                    getJobs(event_id);
                 }
             }
 
@@ -120,4 +119,6 @@ public class ViewEventController {
     public void saveList(List<String> orderList) {
         this.orderList = orderList;
     }
+
+
 }

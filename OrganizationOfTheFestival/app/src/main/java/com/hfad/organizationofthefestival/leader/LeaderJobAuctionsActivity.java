@@ -50,7 +50,7 @@ public class LeaderJobAuctionsActivity extends AppCompatActivity {
         setContentView(R.layout.leader_screen_waiting_list);
 
         Toolbar toolbar = findViewById(R.id.leader_toolbar);
-        toolbar.setTitle("Job applications");
+        toolbar.setTitle("Job Applications");
         setSupportActionBar(toolbar);
 
         jobAuctionsList = findViewById(R.id.approvalList1);

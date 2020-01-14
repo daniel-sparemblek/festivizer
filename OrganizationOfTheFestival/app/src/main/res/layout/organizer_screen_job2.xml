@@ -108,11 +108,12 @@
         <EditText
             android:id="@+id/org_searchTxt"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="wrap_content"
             android:hint="@string/comment"
+            android:textAllCaps="false"
+            android:textStyle="bold"
             android:importantForAutofill="no"
-            android:inputType="textCapWords" />
-
+            android:inputType="textMultiLine" />
 
         <Button
             android:id="@+id/add_comment"

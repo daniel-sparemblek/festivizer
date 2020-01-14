@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -63,6 +64,10 @@ public class NewJobActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.organizer_screen_job_creation);
+
+        Toolbar toolbar = findViewById(R.id.organizer_toolbar);
+        toolbar.setTitle("Create Job");
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");

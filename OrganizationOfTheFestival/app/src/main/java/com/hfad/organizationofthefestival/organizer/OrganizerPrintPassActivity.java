@@ -81,8 +81,6 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
         dialog.show();
 
         controller.getOrganizer();
-
-        btnGeneratePass.setOnClickListener(v -> generatePass(spFestivalPicker.getSelectedView()));
     }
 
     @Override
@@ -158,6 +156,9 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
         int position = spFestivalPicker.getSelectedItemPosition();
 
         Festival festival = festivalList.get(position);
+        System.out.println(organizer.getFirstName());
+        System.out.println(organizer.getLastName());
+        System.out.println(festival.getLogo());
         createPdf(organizer.getFirstName(), organizer.getLastName(), festival);
 
     }
@@ -196,7 +197,7 @@ public class OrganizerPrintPassActivity extends AppCompatActivity {
         if (!file.exists()) {
             file.mkdirs();
         }
-        String targetPdf = directory_path + "test-2.pdf";
+        String targetPdf = directory_path + "/" + festival.getName() + ".pdf";
         File filePath = new File(targetPdf);
         try {
             document.writeTo(new FileOutputStream(filePath));
