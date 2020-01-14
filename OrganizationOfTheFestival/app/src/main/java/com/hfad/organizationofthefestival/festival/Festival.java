@@ -77,7 +77,9 @@ public class Festival {
         this.status = status;
     }
 
-    public Festival(String name, String desc, String logo, String startTime, String endTime) {
+    public Festival(String name, String desc,
+                    String logo, String startTime,
+                    String endTime) {
         this.name = name;
         this.desc = desc;
         this.logo = logo;
