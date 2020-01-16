@@ -24,10 +24,6 @@ public class Leader {
     @SerializedName("is_pending")
     private int isPending;
 
-    public void setFestivals(List<Festival> festivals) {
-        this.festivals = festivals;
-    }
-
     private List<Festival> festivals;
 
     public Leader(int id, String username, String password, String firstName, String lastName, String picture, String phone, String email, int permission, int isPending) {

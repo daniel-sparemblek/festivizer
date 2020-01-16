@@ -66,12 +66,52 @@
 			\eject			
 		\section{Deployment instructions}
 		
-			\subsection{Setting up the server side}
+		
+		
+			\subsection{Building the APK}
 				
-				The files are already present on the URI: https://www.pythonanywhere.com/user/kaogrupa/. It is merely necessary to run the server using the button depicted down below:
-				IMAGE HERE
+				The APK can be built in the following way:
+				First, you need to git clone the application's repository: https://gitlab.com/barbil/organization_of_the_festival
 				
-				The server, once run, initialises and sets up the database, and begins listening for requests. 
+				\begin{figure}[H]
+					\includegraphics[width=\linewidth]{images/Deploy_M_1.png}
+					\caption{Cloning from git}
+					\label{fig:install_1}
+				\end{figure}
+				
+				After pulling, the project needs to be opened in Android Studio. Merely go \textbf{File -> Open}, and then navigate to the cloned git repository. There you will find the project file that can be opened. Now, you would want to build an APK to run it on your device.
+				
+				\begin{figure}[H]
+					\includegraphics[width=\linewidth]{images/Deploy_M_2.png}
+					\caption{Opening the Project}
+					\label{fig:install_2}
+				\end{figure}
+				
+				There is also an alternative. It is to go to our store, and install the app from there. Also, it is possible to build a signed build in Android Studio that is ready for deployment on any App store.
+				
+				Here, we will go into the process of generating your APK. Go to \textbf{Build -> Build Bundle(s)/APK(s)} or \textbf{Build -> Build Signed Bundle/APK}. If opting for signed bundles and APKs, you will need to generate a secure key that will be used for the signing process.
+			
+				\begin{figure}[H]
+					\includegraphics[width=\linewidth]{images/Deploy_M_3.png}
+					\caption{Building process}
+					\label{fig:install_3}
+				\end{figure}
+			
+				\begin{figure}[H]
+					\includegraphics[width=\linewidth]{images/Deploy_M_4.png}
+					\caption{Building process}
+					\label{fig:install_4}
+				\end{figure}
+			
+				\begin{figure}[H]
+					\includegraphics[width=\linewidth]{images/Deploy_M_5.png}
+					\caption{Building process}
+					\label{fig:install_5}
+				\end{figure}
+			
+			Once you have the APK, it can be uploaded to any app store. \textbf{The APKs that will be uploaded to the app store SHOULD be signed.} It is also possible to put this .apk on the mobile device, and install it it there.
+			
+			Upon running the application, it will automatically connect to the kaogrupa pythonanywhere site, and communicate with the server. You are now ready to use the application. 
 			
 			\textbf{\textit{dio 2. revizije}}\\
 		
