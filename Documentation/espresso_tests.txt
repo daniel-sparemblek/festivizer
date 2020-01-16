@@ -65,7 +65,7 @@ Actual result:
 (Test scenario 4) Organizer print pass test
 Input:
 1. Input organizer user data, tap 'Login'.
-2. Tap 'Print Pass'
+2. Tap 'Print Pass'.
 
 Expected output:
 1. Login as organizer.
