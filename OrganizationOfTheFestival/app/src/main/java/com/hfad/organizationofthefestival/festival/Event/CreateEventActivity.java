@@ -250,9 +250,16 @@ public class CreateEventActivity extends AppCompatActivity {
 
     // this is shit but it works (kinda :))
     public String convertTime(String time, String date) {
+
+        // date argument must be in format "dd.MM.yyyy."
+        // time must be in form HH:MM
+        // in the end we get "yyyy-MM-ddTHH:MM+00.000+0000"
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         LocalDate localDate = LocalDate.parse(date, formatter);
+
         ZonedDateTime dateTime = localDate.atStartOfDay(ZoneId.systemDefault());
         return dateTime.format(dateTimeFormatter) + "T" + time + ":00.000+0000";
     }
