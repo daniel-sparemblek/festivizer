@@ -2,18 +2,32 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Use Case diagram - General Account Usage}}{34}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Use Case diagram - Festival}}{34}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Use Case diagram - Job}}{35}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Use Case diagram - Auction}}{35}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Use Case diagram - Activity}}{36}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Job Activities Sequence Diagram}}{38}{figure.3.6}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Festival Job Timeline Sequence Diagram}}{39}{figure.3.7}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Job Activities Timeline Sequence Diagram}}{40}{figure.3.8}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Organiser/Leader Festival List Sequence Diagram}}{41}{figure.3.9}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Use Case diagram - General Overview}}{33}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Use Case diagram - Leader}}{34}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Use Case diagram - Organizer}}{35}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Use Case diagram - Worker}}{36}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Specializations Sequence Diagram}}{37}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Organiser/Leader Festival List Sequence Diagram}}{39}{figure.3.6}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces E-R Diagram}}{49}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Database Diagram}}{50}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Class Diagram}}{51}{figure.4.3}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces E-R Diagram}}{47}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Database Diagram}}{48}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Controller Class Diagram 1}}{49}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Controller Class Diagram 2}}{50}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Controller Class Diagram 3}}{50}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Controller Class Diagram 4}}{51}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Controller Class Diagram 5}}{51}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Controller Class Diagram 6}}{52}{figure.4.8}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Controller Class Diagram 7}}{53}{figure.4.9}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Models Class Diagram 1}}{54}{figure.4.10}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Models Class Diagram 2}}{54}{figure.4.11}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Models Class Diagram 3}}{55}{figure.4.12}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Models Class Diagram 4}}{55}{figure.4.13}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Models Class Diagram 5}}{56}{figure.4.14}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Models Class Diagram 6}}{57}{figure.4.15}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Activities Class Diagram 1}}{58}{figure.4.16}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Activities Class Diagram 2}}{58}{figure.4.17}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Activities Class Diagram 3}}{59}{figure.4.18}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Adapters Class Diagram}}{59}{figure.4.19}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Fragments Class Diagram}}{60}{figure.4.20}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
