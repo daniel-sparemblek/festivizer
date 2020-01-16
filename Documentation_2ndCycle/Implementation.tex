@@ -8,11 +8,11 @@
 		
 		Flask cooperates with further sub-components(as visible in the component diagram) - SQLAlchemy\footnote{\url{https://www.sqlalchemy.org/}}, Flask-JWT\footnote{\url{https://pythonhosted.org/Flask-JWT/}}, and Marshmallow\footnote{\url{https://marshmallow.readthedocs.io/en/stable/}}. SqlAlchemy is the component used for communicating with the database, JWT is used for the OAuth 2.0 implementation\footnote{\url{https://oauth.net/2/}}, and Marshmallow is used for JSON serialisation and de-serialisation. JWT = JSON Web Token.
 		
-		Front-end design and logic were all developed in Android Studio which provided a very convenient IDE --> code-generation and assistance was of great help, as well as the ability to edit XML files through a GUI instead of only the classical text editing. The application can be deployed and/or debugged on the mobile device by connecting it to the PC/Mac that has Android Studio running with the application code loaded into it. This has provided the basis for smooth application development and testing.
+		Front-end design and logic were all developed in Android Studio which provided a very convenient IDE $\rightarrow$ code-generation and assistance was of great help, as well as the ability to edit XML files through a GUI instead of only the classical text editing. The application can be deployed and/or debugged on the mobile device by connecting it to the PC/Mac that has Android Studio running with the application code loaded into it. This has provided the basis for smooth application development and testing.
 		
 		Team communication was at first achieved using the Whatsapp application.\footnote{\url{https://www.whatsapp.com//}}. This worked at first, but has since proven itself to not provide satisfactory level of organisation and communication features. Therefore it was replaced with Slack\footnote{\url{https://slack.com/}} - where multiple threads and channels have made organisation and project overview much easier. What's more, a Slack bot and tasks have further increased the productivity and organisation.
 		
-		The version control system used was Git\footnote{\url{https://git-scm.com/}}. The most important branches were: master, dev, and devdoc. The application code was put on the dev branch, while the documentation resided on the devdoc branch. Before turning the application in, branched would be merged to the main branch --> the master branch. 
+		The version control system used was Git\footnote{\url{https://git-scm.com/}}. The most important branches were: master, dev, and devdoc. The application code was put on the dev branch, while the documentation resided on the devdoc branch. Before turning the application in, branched would be merged to the main branch $\rightarrow$ the master branch. 
 		
 		The software used for documentation were: LaTeX\footnote{\url{https://www.latex-project.org/}} and Astah UML\footnote{\url{http://astah.net/}}. For LaTeX, we were provided with a template which greatly helped with LaTeX understanding and documentation writing. Astah UML was used for drawing diagrams and ha proven to be very accessible, intuitive, and satisfying to use.
 		
@@ -571,7 +571,7 @@ public void emptyTests(){
 				\label{fig:install_1}
 			\end{figure}
 			
-			After pulling, the project needs to be opened in Android Studio. Merely go \textbf{File -> Open}, and then navigate to the cloned git repository. There you will find the project file that can be opened. Now, you would want to build an APK to run it on your device.
+			After pulling, the project needs to be opened in Android Studio. Merely go \textbf{File $\rightarrow$ Open}, and then navigate to the cloned git repository. There you will find the project file that can be opened. Now, you would want to build an APK to run it on your device.
 			
 			\begin{figure}[H]
 				\includegraphics[width=\linewidth]{images/Deploy_M_2.png}
@@ -581,7 +581,7 @@ public void emptyTests(){
 			
 			There is also an alternative. It is to go to our store, and install the app from there. Also, it is possible to build a signed build in Android Studio that is ready for deployment on any App store. Link of our application: \href{https://play.google.com/store/apps/details?id=com.hfad.organizationofthefestival}{App Store entry}
 			
-			Here, we will go into the process of generating your APK. Go to \textbf{Build -> Build Bundle(s)/APK(s)} or \textbf{Build -> Build Signed Bundle/APK}. If opting for signed bundles and APKs, you will need to generate a secure key that will be used for the signing process.
+			Here, we will go into the process of generating your APK. Go to \textbf{Build $\rightarrow$ Build Bundle(s)/APK(s)} or \textbf{Build $\rightarrow$ Build Signed Bundle/APK}. If opting for signed bundles and APKs, you will need to generate a secure key that will be used for the signing process.
 			
 			\begin{figure}[H]
 				\includegraphics[width=\linewidth]{images/Deploy_M_3.png}
@@ -632,7 +632,7 @@ public void emptyTests(){
 				
 				A wizard will appear on the right side, where you should select Flask. Python 3.6 is the minimum supported Python version. The default file flask\_app.py will be generated. 
 				
-				Now the project is set up. All that is needed is to upload the files. Flask\_app.py entry point file - you should put into it the app.py code from git. Also upload the other files to the server. You should now be set up - all that is left to do is to change the hardcoded kaogrupa URL in the application to point to your server. Once that is done, you have got your own back-end set up, and can comfortably change and experiment on the application.
+				Now the project is set up. All that is needed is to upload the files. Flask\_app.py entry point file $\rightarrow$ you should put into it the app.py code from git. Also upload the other files to the server. You should now be set up $\rightarrow$ all that is left to do is to change the hardcoded kaogrupa URL in the application to point to your server. Once that is done, you have got your own back-end set up, and can comfortably change and experiment on the application.
 				
 				That is depicted on thee pictures below:
 				\begin{figure}[H]
