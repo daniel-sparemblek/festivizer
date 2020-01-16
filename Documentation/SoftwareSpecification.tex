@@ -963,79 +963,59 @@
 			\subsubsection{Use Case Diagrams}		
 				
 				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{diagrams/uc-diag0-general.png}
-					\caption{Use Case diagram - General Account Usage}
+					\includegraphics[width=\linewidth]{diagrams/NewUCD_General.png}
+					\caption{Use Case diagram - General Overview}
 					\label{fig:uc_diag_0_general}
 				\end{figure}
 			
 				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{diagrams/uc-diag1-festival.png}
-					\caption{Use Case diagram - Festival}
-					\label{fig:uc_diag_1_festival}
+					\includegraphics[width=\linewidth]{diagrams/NewUCD_Leader.png}
+					\caption{Use Case diagram - Leader}
+					\label{fig:uc_diag_1_leader}
 				\end{figure}
 		
 				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{diagrams/uc-diag2-job.png}
-					\caption{Use Case diagram - Job}
-					\label{fig:uc_diag_2_job}
+					\includegraphics[width=\linewidth]{diagrams/NewUCD_Organizer.png}
+					\caption{Use Case diagram - Organizer}
+					\label{fig:uc_diag_2_organizer}
 				\end{figure}
 	
 	
 				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{diagrams/uc-diag3-auction.png}
-					\caption{Use Case diagram - Auction}
-					\label{fig:uc_diag_3_auction}
-				\end{figure}
-			
-				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{diagrams/uc-diag4-activity.png}
-					\caption{Use Case diagram - Activity}
-					\label{fig:uc_diag_4_activity}
+					\includegraphics[width=\linewidth]{diagrams/NewUCD_Worker.png}
+					\caption{Use Case diagram - Worker}
+					\label{fig:uc_diag_3_worker}
 				\end{figure}
 			
 			\eject
 
 			\subsection{Sequence Diagrams}
 								
-				\textbf{Use Case 31 Manage Job Activities(Worker view)}
-				The Worker needs to organise the Job he's been assigned. He does this by creating, modifying and removing(= manipulating) Activities that compose individual Jobs.
-				This Use Case depicts the management of such a list of Activities that make up a Job. These Activities can then be added to the Timeline, where their time domain will be well defined and visible - this will enable an easy visualisation of the way the Job will be done and organised.
+				\textbf{Use Case 8 View the list of all the Specializations}
+				This Use Case depicts the Worker's ability to view, search, add, and bing Specializations to his profile. Specializations are skills and professsions that the Worker is proficient at. There is a global list of Specializations. The Worker can either pick from them, or add a new Specialization.
+				
+				Specializations that the Worker already possesses have a check mark next to them. Upon tapping on a Specialization it will become bound to him, if not already. The corresponding Toast will be displayed - alertign the Worker either of a successful adding, or that he already has that Specialization. 
 				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{diagrams/sd-diag0-jobact.png}
-					\caption{Job Activities Sequence Diagram}
-					\label{fig:sd0_job_activities}
+					\includegraphics[width=\linewidth]{diagrams/UC8 - View the list of all the Specializations.png}
+					\caption{Specializations Sequence Diagram}
+					\label{fig:sd_uc8_job_activities}
 				\end{figure}
+			
 				
-				\textbf{Use Case 26 Managing Festival Job Timeline}
-				It is necessary for the Festival Leader or Organiser to properly manage the Festival Jobs with regard to Time organisation.
-				This Use Case allows the Leader/Organiser to define the beginning and end times of certain Job Festivals, as well as modify their durations.
-				Timeline is a graphical flowchart - easy and intuitive Festival Job organisation. Concurrency and parallelisation can also be easily achieved.
+				\textbf{Use Case 13 View the List of own Festivals}
 				
-				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{diagrams/sd-diag1-fjt.png}
-					\caption{Festival Job Timeline Sequence Diagram}
-					\label{fig:sd1_festival_job_timeline}
-				\end{figure}
-				
-				\textbf{Use Case 36 Manage Job Activities Timeline(Worker view)}
-				Just as it is with Festival Leaders and Organiser and Festival Jobs Management so it is with Workers and Job Activities Management.
-				Lead Workers must manage their Jobs' Activities in much the same way. They have to take into consideration the start and end times of each Activity, as well as parallelise those Activities.
-				The purpose of the Timeline here is, too, to provide an easy, graphical, and intuitive way of doing this Job Activities manipulation and organisation.
-				
-				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{diagrams/sd-diag2-jat.png}
-					\caption{Job Activities Timeline Sequence Diagram}
-					\label{fig:sd2_job_activities_timeline}
-				\end{figure}
-				
-				\textbf{Use Case 21 View the List of own Festivals}
-				Leaders and Organisers must view the List of the Festivals that they're reponsible for so they can further view the details of those Festivals, and then work on those Festivals.
-				This Use Case is one of the pillars of the app, as it enables the management of the selected Festivals - Leaders and Organisers are in charge of those Festivals.
+				Leaders can create Festivals - and then view the list of the Festivals that they have created. They are split into 3 categories:
+				\begin{packed_enum}
+					\item Active - festivals that have an Organizer
+					\item Pending - festivals that yet require an Organizer
+					\item Completed - festivals that have concluded
+				\end{packed_enum}
+				Upon tapping on these Festivals they can see further details about them. Here it is possible to view this Festival's Events, add new Events, and approve Organizers to this Festival. This UC basically guarantees easy Festival management and overview.
 
 				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{diagrams/sd-diag3-festivalList.png}
+					\includegraphics[width=\linewidth]{diagrams/UC13 - View the list of own Festivals.png}
 					\caption{Organiser/Leader Festival List Sequence Diagram}
-					\label{fig:sd3_festival_list}
+					\label{fig:sd_uc13_festival_list}
 				\end{figure}
 				
 				\eject

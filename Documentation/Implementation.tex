@@ -1,15 +1,5 @@
 \chapter{Implementation and User Interface}
 		
-		
-		\section{Korištene tehnologije i alati}
-		
-			\textbf{\textit{dio 2. revizije}}
-			
-			 \textit{Detaljno navesti sve tehnologije i alate koji su primijenjeni pri izradi dokumentacije i aplikacije. Ukratko ih opisati, te navesti njihovo značenje i mjesto primjene. Za svaki navedeni alat i tehnologiju je potrebno \textbf{navesti internet poveznicu} gdje se mogu preuzeti ili više saznati o njima}.
-			
-			
-			\eject 
-		
 		\section{Used technologies and tools}
 		
 		We have developed a mobile application for the Android operating system. The IDE of choice was Android Studio\footnote{\url{https://developer.android.com/}}. We have chosen it because it was developed by Google who are considered to be a sort of authority on Android. On the back-end we used Python\footnote{\url{https://www.python.org/}} hosted on the cloud at the site Pythonanywhere\footnote{\url{https://www.pythonanywhere.com/user/kaogrupa/}}.
@@ -52,15 +42,6 @@
 		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
 			
 			\eject 
-		
-		
-		\section{Dijagram razmještaja}
-			
-			\textbf{\textit{dio 2. revizije}}
-			
-			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
-			
-			\eject 
 			
 		\section{UML Deployment Diagram}
 		
@@ -76,8 +57,13 @@
 			As far as hardware goes - basically 2 devices are required - the mobile phone and the cloud hosting computer. Network is also required as it is used to convey
 			information between these 2 endpoints. While there is only one server instance, it is expected that multiple concurrent mobile phones will be using the application. Therefore, in the instance deployment diagram more than one mobile phone could be present.
 		
-			\eject
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{diagrams/Deployment Diagram0.png}
+				\caption{Deployment Diagram}
+				\label{fig:deployment_diag}
+			\end{figure}
 		
+			\eject			
 		\section{Deployment instructions}
 		
 			\subsection{Setting up the server side}
