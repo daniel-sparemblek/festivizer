@@ -1,0 +1,151 @@
+5.2 Software solution testing
+
+
+(Test scenario 1) Leader register and festival creation test
+Input:
+1. Tap 'No account yet? Create one'.
+2. Input user data and chose 'Leader' from drop-down list, and Tap 'Create account'.
+3. Tap 'Already a member? Login'.
+4. Input admin user data, tap 'Login', and tap 'Accept' next to created leader, go back on login screen.
+5. Input created leader user data, tap 'Login', tap 'Create new festival', input festival data, tap 'Create'.
+
+Expected output:
+1. Opened register screen.
+2. Get message about successful account creation.
+3. Opened login screen.
+4. Get message about successfully accepted leader.
+5. Get message about successfully created festival. 
+
+Actual result:
+1. Opened register screen.
+2. Get message about successful account creation.
+3. Opened login screen.
+4. Get message about successfully accepted leader.
+5. Get message about successfully created festival.
+
+
+(Test scenario 2) Leader search test
+Input:
+1. Input organizer user data, tap 'Login'.
+2. Tap 'Search'.
+3. Leave empty field, tap 'Search'.
+4. Input 'leader007', tap 'Search'.
+
+Expected output:
+1. Login as organizer.
+2. Open search screen.
+3. List all users.
+4. List only user 'leader007'.
+
+Actual result:
+Expected output:
+1. Login as organizer.
+2. Open search screen.
+3. List all users.
+4. List only user 'leader007'.
+
+
+(Test scenario 3) Organizer job creation test
+Input:
+1. Input organizer user data, tap 'Login'.
+2. Tap 'My events', tap some active event, tap 'New Job'.
+3. Input required data, tap 'Create job'.
+
+Expected output:
+1. Login as organizer.
+2. Open job creation screen.
+3. Get message about successfully created job.
+
+Actual result:
+1. Login as organizer.
+2. Open job creation screen.
+3. Get message about successfully created job.
+
+
+(Test scenario 4) Organizer print pass test
+Input:
+1. Input organizer user data, tap 'Login'.
+2. Tap 'Print Pass'
+
+Expected output:
+1. Login as organizer.
+2. Create required PDF file with pass, get message about successfully created file.
+
+Actual result:
+1. Login as organizer.
+2. Loading in infinite loop. (BUG shown)
+
+
+(Test scenario 5) Organizer register and apply for festival test
+Input:
+1. Tap 'No account yet? Create one'.
+2. Input user data and chose 'Organizer' from drop-down list, and Tap 'Create account'.
+3. Tap 'Already a member? Login'.
+4. Input organizer user data, tap 'Login'.
+5. Tap 'Apply for a festival', tap on some festival or festivals.
+
+Expected output:
+1. Opened register screen.
+2. Get message about successful account creation.
+3. Opened login screen.
+4. Login as organizer.
+5. Get message about successfully applied for a festival, and see tick next to selected festivals.
+
+Actual result:
+1. Opened register screen.
+2. Get message about successful account creation.
+3. Opened login screen.
+4. Login as organizer.
+5. Get message about successfully applied for a festival, and see tick next to selected festivals.
+
+
+(Test scenario 6) Worker multiple tests
+Input:
+1. Input worker user data, tap 'Login'.
+2. Tap 'Add specialization'.
+3. Input new specialization and tap 'Add specialization'.
+4. Tap one specialization from list.
+5. Tap 'Apply for a job', tap one job from list, tap 'Apply', input data, tap 'Apply'.
+6. Tap back button, tap 'My applications', and tap one from list.
+7. Tap 'Search', input 'Marko', tap 'Search'.
+8. Tap 'Print Pass'.
+9. Tap 'Active jobs', tap 'My applications'
+10. Tap 'Log Out'.
+
+Expected output:
+1. Login as worker.
+2. Opened specialization screen.
+3. Added new specialization on a list.
+4. Get message about successfully added specialization, see tick next to chosen specialization.
+5. Get message about successfully applied for a job.
+6. See data about chosen application.
+7. See results from search for 'Marko'.
+8. Get message about successfully created PDF file with pass, and get file created in storage.
+9. See 'Active jobs' screen, see 'My application' screen.
+10. Log out, and see login screen.
+
+Actual result:
+1. Login as worker.
+2. Opened specialization screen.
+3. Added new specialization on a list.
+4. 'Randomly' chosen specialization and tick next to that randomly chosen specialization. (BUG shown)
+5. Get message about successfully applied for a job.
+6. See data about chosen application.
+7. See results from search for 'Marko'.
+8. Get message about successfully created PDF file with pass, and get file created in storage.
+9. See 'Active jobs' screen, see 'My application' screen.
+10. Log out, and see login screen.
+
+
+(Test scenario 7) Admin accept leader test
+Input:
+1. Input admin user data, tap 'Login'.
+2. Accept one leader from list of pending leaders.
+
+Expected output:
+1. Login as 'admin'.
+2. Get message about successfully accepted leader.
+
+Actual result:
+1. Login as 'admin'.
+2. Get message about successfully accepted leader.
