@@ -40,11 +40,21 @@ class MyFestivalsController {
             @Override
             public void onResponse(Call<Festival[]> call, Response<Festival[]> response) {
                 if (response.isSuccessful()) {
-                    myFestivalsActivity.fillInActivity(response.body());
+                    switch (type) {
+                        case "active":
+                            myFestivalsActivity.fillInActive(response.body());
+                            break;
+                        case "pending":
+                            myFestivalsActivity.fillInPending(response.body());
+                            break;
+                        case "complete":
+                            myFestivalsActivity.fillInCompleted(response.body());
+                            break;
+                    }
                 } else {
                     try {
                         JSONObject errorObject = new JSONObject(response.errorBody().string());
-                        Toast.makeText(myFestivalsActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(myFestivalsActivity, response.errorBody().string(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Toast.makeText(myFestivalsActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();

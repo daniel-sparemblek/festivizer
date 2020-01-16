@@ -3,6 +3,8 @@ package com.hfad.organizationofthefestival.leader;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -15,7 +17,9 @@ import android.widget.ListView;
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.festival.Festival;
 import com.hfad.organizationofthefestival.festival.creation.CreateFestivalActivity;
+import com.hfad.organizationofthefestival.leader.FragmentAdapters.FestivalsAdapter;
 import com.hfad.organizationofthefestival.login.LoginActivity;
+import com.hfad.organizationofthefestival.organizer.FragmentAdapters.JobsAdapter;
 import com.hfad.organizationofthefestival.search.LeaderSearchActivity;
 
 import java.util.Arrays;
@@ -43,11 +47,19 @@ public class MyFestivalsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.leader_screen_my_fests);
+        setContentView(R.layout.leader_screen_my_jobs);
 
         Toolbar toolbar = findViewById(R.id.leader_toolbar);
         toolbar.setTitle("My festivals");
         setSupportActionBar(toolbar);
+
+        FestivalsAdapter festivalsAdapter = new FestivalsAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(festivalsAdapter);
+        viewPager.setOffscreenPageLimit(3);
+
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
 
         Intent intent = getIntent();
         accessToken = intent.getStringExtra("accessToken");
@@ -61,8 +73,6 @@ public class MyFestivalsActivity extends AppCompatActivity {
         btnPending = findViewById(R.id.btnPending);
         btnCompleted = findViewById(R.id.btnCompleted);
 
-        lvFestivals = findViewById(R.id.festivalList);
-
         controller = new MyFestivalsController(this, accessToken, leaderId, refreshToken);
 
         dialog = new ProgressDialog(this);
@@ -71,7 +81,7 @@ public class MyFestivalsActivity extends AppCompatActivity {
         dialog.show();
 
         controller.getFestivals("active");
-        btnActive.setEnabled(false);
+        /* btnActive.setEnabled(false);
 
 
         btnPending.setOnClickListener(v -> {
@@ -93,19 +103,39 @@ public class MyFestivalsActivity extends AppCompatActivity {
             btnPending.setEnabled(true);
             btnActive.setEnabled(true);
             btnCompleted.setEnabled(false);
-        });
+        });*/
 
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    dialog = new ProgressDialog(MyFestivalsActivity.this);
+                    dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
 
-        lvFestivals.setOnItemClickListener(((parent, view, position, id) -> {
-            String name = (String) parent.getItemAtPosition(position);
+                    controller.getFestivals("active");
+                }
 
-            for (Festival festival : festivals) {
-                if (name.equals(festival.getName())) {
-                    switchActivity(LeaderFestivalActivity.class, festival.getFestivalId());
+                if (position == 1) {
+                    dialog = new ProgressDialog(MyFestivalsActivity.this);
+                    dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
+
+                    controller.getFestivals("pending");
+                }
+
+                if (position == 2) {
+                    dialog = new ProgressDialog(MyFestivalsActivity.this);
+                    dialog.setMessage(Html.fromHtml("<big>Loading...</big>"));
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
+
+                    controller.getFestivals("complete");
                 }
             }
-        }));
-
+        });
     }
 
     private void switchActivity(Class<?> destination, Long id) {
@@ -118,8 +148,19 @@ public class MyFestivalsActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void fillInActivity(Festival[] festivals) {
+    public void fillInActive(Festival[] festivals) {
         this.festivals = festivals;
+        lvFestivals = findViewById(R.id.orgActiveJobList);
+
+        lvFestivals.setOnItemClickListener(((parent, view, position, id) -> {
+            String name = (String) parent.getItemAtPosition(position);
+
+            for (Festival festival : festivals) {
+                if (name.equals(festival.getName())) {
+                    switchActivity(LeaderFestivalActivity.class, festival.getFestivalId());
+                }
+            }
+        }));
 
         List<Festival> festivalList = Arrays.asList(festivals);
         ArrayAdapter<String> specializationArrayAdapter =
@@ -128,6 +169,60 @@ public class MyFestivalsActivity extends AppCompatActivity {
                 festivalList.stream()
                         .map(Festival::getName)
                         .collect(Collectors.toList()));
+
+        lvFestivals.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
+    }
+
+    public void fillInPending(Festival[] festivals) {
+        this.festivals = festivals;
+        lvFestivals = findViewById(R.id.orgPendingJobList);
+
+        lvFestivals.setOnItemClickListener(((parent, view, position, id) -> {
+            String name = (String) parent.getItemAtPosition(position);
+
+            for (Festival festival : festivals) {
+                if (name.equals(festival.getName())) {
+                    switchActivity(LeaderFestivalActivity.class, festival.getFestivalId());
+                }
+            }
+        }));
+
+        List<Festival> festivalList = Arrays.asList(festivals);
+        ArrayAdapter<String> specializationArrayAdapter =
+                new ArrayAdapter<>(this,
+                        android.R.layout.simple_list_item_1,
+                        festivalList.stream()
+                                .map(Festival::getName)
+                                .collect(Collectors.toList()));
+
+        lvFestivals.setAdapter(specializationArrayAdapter);
+
+        dialog.dismiss();
+    }
+
+    public void fillInCompleted(Festival[] festivals) {
+        this.festivals = festivals;
+        lvFestivals = findViewById(R.id.orgCompletedJobList);
+
+        lvFestivals.setOnItemClickListener(((parent, view, position, id) -> {
+            String name = (String) parent.getItemAtPosition(position);
+
+            for (Festival festival : festivals) {
+                if (name.equals(festival.getName())) {
+                    switchActivity(LeaderFestivalActivity.class, festival.getFestivalId());
+                }
+            }
+        }));
+
+        List<Festival> festivalList = Arrays.asList(festivals);
+        ArrayAdapter<String> specializationArrayAdapter =
+                new ArrayAdapter<>(this,
+                        android.R.layout.simple_list_item_1,
+                        festivalList.stream()
+                                .map(Festival::getName)
+                                .collect(Collectors.toList()));
 
         lvFestivals.setAdapter(specializationArrayAdapter);
 

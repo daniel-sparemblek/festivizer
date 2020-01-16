@@ -3,6 +3,7 @@ package com.hfad.organizationofthefestival.worker;
 import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.utility.JobApply;
+import com.hfad.organizationofthefestival.utility.SimpleServerResponse;
 
 import org.json.JSONObject;
 
@@ -54,6 +55,32 @@ class JobProfileController {
 
             @Override
             public void onFailure(Call<JobApply> call, Throwable t) {
+                Toast.makeText(jobProfileActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void completeJob(int jobId){
+        Call<SimpleServerResponse> call = api.completeJob(String.valueOf(jobId), "Bearer " + accessToken);
+
+        call.enqueue(new Callback<SimpleServerResponse>() {
+            @Override
+            public void onResponse(Call<SimpleServerResponse> call, Response<SimpleServerResponse> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(jobProfileActivity, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        JSONObject errorObject = new JSONObject(response.errorBody().string());
+                        Toast.makeText(jobProfileActivity, errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(jobProfileActivity, "Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleServerResponse> call, Throwable t) {
                 Toast.makeText(jobProfileActivity, "Server-side or internet error on fetching user data", Toast.LENGTH_SHORT).show();
             }
         });

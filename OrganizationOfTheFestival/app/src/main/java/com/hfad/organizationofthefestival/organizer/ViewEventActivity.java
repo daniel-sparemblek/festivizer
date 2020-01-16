@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hfad.organizationofthefestival.R;
 import com.hfad.organizationofthefestival.adapters.OrderAdapter;
@@ -23,8 +24,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ViewEventActivity extends AppCompatActivity {
@@ -172,17 +175,24 @@ public class ViewEventActivity extends AppCompatActivity {
                 .map(t -> t.getText().toString())
                 .collect(Collectors.toList());
 
-
-        HashMap<String, String> body = new HashMap<>();
-
-        int i = 1;
-
-        for(String orderNumber : orderNumbers) {
-            body.put(String.valueOf(i), orderNumber);
-            i++;
+        Set<String> testSet = new HashSet<>();
+        for(String x : orderNumbers) {
+            testSet.add(x);
         }
 
-        viewEventController.updateJobOrders((int)eventId, body);
+        if(testSet.size() != orderNumbers.size())
+            Toast.makeText(this, "Order number cannot be the same!", Toast.LENGTH_SHORT).show();
+        else {
+            HashMap<String, String> body = new HashMap<>();
 
+            int i = 1;
+
+            for(String orderNumber : orderNumbers) {
+                body.put(String.valueOf(i), orderNumber);
+                i++;
+            }
+
+            viewEventController.updateJobOrders((int)eventId, body);
+        }
     }
 }

@@ -67,7 +67,7 @@ public class JobAuctionActivity extends AppCompatActivity {
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
         username = intent.getStringExtra("username");
-        jobId = intent.getIntExtra("jobId", 0);
+        jobId = intent.getIntExtra("job_id", 0);
     }
 
     public void fillInActivity(JobApply job) {
@@ -110,7 +110,6 @@ public class JobAuctionActivity extends AppCompatActivity {
     }
 
     public void setButton(OnAuctionResponse body) {
-        System.out.println("TUUUUUUUUU");
         boolean hasAuction = body.isOnAuction;
 
         if (hasAuction) {

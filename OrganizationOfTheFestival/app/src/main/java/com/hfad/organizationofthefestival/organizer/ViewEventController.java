@@ -104,7 +104,7 @@ public class ViewEventController {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
-                    Toast.makeText(viewEventActivity, "Successfully updated job order, restart to see!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(viewEventActivity, "Successfully updated job order!", Toast.LENGTH_SHORT).show();
                     getJobs(event_id);
                 }
             }
