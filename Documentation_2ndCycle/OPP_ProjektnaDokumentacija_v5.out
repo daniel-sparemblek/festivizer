@@ -1,0 +1,55 @@
+\BOOKMARK [0][-]{chapter.1}{Documentation Change Log}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Project Description}{}% 2
+\BOOKMARK [1][-]{section.2.1}{General Idea}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Position in the market - the competition}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.3}{In-Depth Description}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.3.1}{Account Data}{section.2.3}% 6
+\BOOKMARK [2][-]{subsection.2.3.2}{User roles}{section.2.3}% 7
+\BOOKMARK [2][-]{subsection.2.3.3}{Administrators}{section.2.3}% 8
+\BOOKMARK [2][-]{subsection.2.3.4}{Creators}{section.2.3}% 9
+\BOOKMARK [2][-]{subsection.2.3.5}{Organiser}{section.2.3}% 10
+\BOOKMARK [2][-]{subsection.2.3.6}{Worker}{section.2.3}% 11
+\BOOKMARK [2][-]{subsection.2.3.7}{Functions and happenings of the system}{section.2.3}% 12
+\BOOKMARK [2][-]{subsection.2.3.8}{Festival}{section.2.3}% 13
+\BOOKMARK [2][-]{subsection.2.3.9}{Auction}{section.2.3}% 14
+\BOOKMARK [2][-]{subsection.2.3.10}{Timelines}{section.2.3}% 15
+\BOOKMARK [2][-]{subsection.2.3.11}{Job}{section.2.3}% 16
+\BOOKMARK [2][-]{subsection.2.3.12}{Activity}{section.2.3}% 17
+\BOOKMARK [2][-]{subsection.2.3.13}{Cards}{section.2.3}% 18
+\BOOKMARK [2][-]{subsection.2.3.14}{Card Format}{section.2.3}% 19
+\BOOKMARK [2][-]{subsection.2.3.15}{System implementation targets}{section.2.3}% 20
+\BOOKMARK [2][-]{subsection.2.3.16}{Project Scope and Targeted Users}{section.2.3}% 21
+\BOOKMARK [2][-]{subsection.2.3.17}{Changes, upgrades, adaptability of the Application}{section.2.3}% 22
+\BOOKMARK [0][-]{chapter.3}{Software Specification}{}% 23
+\BOOKMARK [1][-]{section.3.1}{Functional Requirements}{chapter.3}% 24
+\BOOKMARK [2][-]{subsection.3.1.1}{Use Cases}{section.3.1}% 25
+\BOOKMARK [2][-]{subsection.3.1.2}{Sequence Diagrams}{section.3.1}% 26
+\BOOKMARK [1][-]{section.3.2}{Other requirements}{chapter.3}% 27
+\BOOKMARK [0][-]{chapter.4}{Architecture and System Design}{}% 28
+\BOOKMARK [1][-]{section.4.1}{Database}{chapter.4}% 29
+\BOOKMARK [2][-]{subsection.4.1.1}{Tables details}{section.4.1}% 30
+\BOOKMARK [2][-]{subsection.4.1.2}{Database diagrams}{section.4.1}% 31
+<<<<<<< HEAD:Documentation/OPP_ProjektnaDokumentacija_v5.out
+\BOOKMARK [1][-]{section.4.2}{Class Diagrams}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.3}{Dijagram stanja}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.4}{Dijagram aktivnosti}{chapter.4}% 34
+\BOOKMARK [1][-]{section.4.5}{Dijagram komponenti}{chapter.4}% 35
+=======
+\BOOKMARK [1][-]{section.4.2}{Class Diagram}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.3}{State diagram}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.4}{Activity diagram}{chapter.4}% 34
+\BOOKMARK [1][-]{section.4.5}{Component diagram}{chapter.4}% 35
+>>>>>>> devdoc:Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.out
+\BOOKMARK [0][-]{chapter.5}{Implementation and User Interface}{}% 36
+\BOOKMARK [1][-]{section.5.1}{Used technologies and tools}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.2}{Testing}{chapter.5}% 38
+\BOOKMARK [2][-]{subsection.5.2.1}{Component Testing - JUnit}{section.5.2}% 39
+\BOOKMARK [2][-]{subsection.5.2.2}{System Testing}{section.5.2}% 40
+\BOOKMARK [1][-]{section.5.3}{UML Deployment Diagram}{chapter.5}% 41
+\BOOKMARK [1][-]{section.5.4}{Deployment instructions}{chapter.5}% 42
+\BOOKMARK [2][-]{subsection.5.4.1}{Building the APK}{section.5.4}% 43
+\BOOKMARK [2][-]{subsection.5.4.2}{Setting up the server side}{section.5.4}% 44
+\BOOKMARK [0][-]{chapter.6}{Conclusion and Outline of Planned Future Work}{}% 45
+\BOOKMARK [0][-]{chapter*.4}{Popis literature}{}% 46
+\BOOKMARK [0][-]{chapter*.5}{Image and diagram index}{}% 47
+\BOOKMARK [0][-]{chapter*.6}{Appendix: Preview of group activity}{}% 48
