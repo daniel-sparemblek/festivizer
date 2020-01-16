@@ -10,15 +10,15 @@
         android:id="@+id/festivalName"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Default Festival"
+        android:layout_gravity="start"
+        android:text="@string/default_festival"
         android:textSize="14sp" />
 
     <Button
         android:id="@+id/btnApply"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Apply"
+        android:layout_gravity="end"
+        android:text="@string/apply"
         android:onClick="onClickApply"/>
 </LinearLayout>
