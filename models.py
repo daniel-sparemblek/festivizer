@@ -430,7 +430,7 @@ class Application(db.Model):
             auctions_to_update.sort(key=lambda x: x.auction_id, reverse=True)
 
             for auction in auctions_to_update:
-                apps = cls.query.filter_by(auction_id=auction.auction_id).all()
+                apps = cls.query.filter_by(auction_id=auction.auction_id, status=1).all()
                 apps.sort(key=lambda x: x.price, reverse=False)
                 job = JobModel.find_by_job_id(auction.job_id)
                 job.worker_id = apps[0].worker_id
@@ -438,15 +438,23 @@ class Application(db.Model):
 
     @classmethod
     def find_by_job_id_and_worker_id(cls, job_id, worker_id):
-        auction = db.session.query(cls).join(AuctionModel, AuctionModel.auction_id == cls.auction_id) \
+        auction = db.session.query(AuctionModel).join(cls, AuctionModel.auction_id == cls.auction_id) \
             .join(JobModel, JobModel.job_id == AuctionModel.job_id).filter(JobModel.job_id == job_id).first()
+
+        print("JOB ID:" + str(job_id), file=sys.stderr)
+        print("WORKER ID:" + str(worker_id), file=sys.stderr)
+        print("AUCTION ID:" + str(auction.auction_id), file=sys.stderr)
 
         return cls.query.filter_by(auction_id=auction.auction_id, worker_id=worker_id).all()
 
     @classmethod
     def find_by_job_id_unconfirmed(cls, job_id):
+        print("MOJ JOB ID:" + str(job_id), file = sys.stderr)
         auction = db.session.query(cls).join(AuctionModel, AuctionModel.auction_id == cls.auction_id) \
             .join(JobModel, JobModel.job_id == AuctionModel.job_id).filter(JobModel.job_id == job_id).first()
+
+        if auction is None:
+            return {}
 
         return cls.query.filter_by(auction_id=auction.auction_id, status=0).all()
 
@@ -454,6 +462,9 @@ class Application(db.Model):
     def find_by_job_id_confirmed(cls, job_id):
         auction = db.session.query(cls).join(AuctionModel, AuctionModel.auction_id == cls.auction_id) \
             .join(JobModel, JobModel.job_id == AuctionModel.job_id).filter(JobModel.job_id == job_id).first()
+
+        if auction is None:
+            return {}
 
         return cls.query.filter_by(auction_id=auction.auction_id, status=1).all()
 
@@ -481,6 +492,10 @@ class Application(db.Model):
         if app:
             return True
         return False
+
+    def update_status(self, status):
+        self.status = status
+        db.session.commit()
 
 
 class SpecializationModel(db.Model):
@@ -1005,6 +1020,11 @@ class OrganizerSchema(ma.Schema):
             organizers = []
             for organizer in value:
                 festivals = FestivalModel.find_by_approved_organizer_id(organizer_id=organizer.id)
+
+                new_fests = []
+                for fest in festivals:
+                    new_fests.append(OrdinaryFestival(fest))
+
                 with open(organizer.picture, "rb") as imageFile:
                     pic = base64.b64encode(imageFile.read())
                 new_organizer = Organizer(
@@ -1018,11 +1038,16 @@ class OrganizerSchema(ma.Schema):
                     email=organizer.email,
                     permission=organizer.permission,
                     is_pending=organizer.is_pending,
-                    festivals=festivals
+                    festivals=new_fests
                 )
                 organizers.append(new_organizer)
             return cls(many=True).dump(organizers)
         festivals = FestivalModel.find_by_approved_organizer_id(organizer_id=value.id)
+
+        new_fests = []
+        for fest in festivals:
+            new_fests.append(OrdinaryFestival(fest))
+
         with open(value.picture, "rb") as imageFile:
             pic = base64.b64encode(imageFile.read())
         organizer = Organizer(
@@ -1036,7 +1061,7 @@ class OrganizerSchema(ma.Schema):
             email=value.email,
             permission=value.permission,
             is_pending=value.is_pending,
-            festivals=festivals
+            festivals=new_fests
         )
         return cls().dump(organizer)
 
@@ -1123,6 +1148,7 @@ class JobApplySchema(ma.Schema):
             for job in value:
                 event = EventModel.find_by_event_id(event_id=job.event_id)
                 festival = FestivalModel.find_by_festival_id(event.festival_id)
+                festival = OrdinaryFestival(festival)
                 user = UserModel.find_by_id(event.organizer_id)
                 festivals = FestivalModel.find_by_organizer_id(user.id)
                 organizer = Organizer(user.id, user.username, user.password, user.first_name,
@@ -1166,6 +1192,7 @@ class JobApplySchema(ma.Schema):
             return cls(many=True).dump(job_list_unique)
         event = EventModel.find_by_event_id(event_id=value.event_id)
         festival = FestivalModel.find_by_festival_id(event.festival_id)
+        festival = OrdinaryFestival(festival)
         user = UserModel.find_by_id(event.organizer_id)
         festivals = FestivalModel.find_by_organizer_id(user.id)
         organizer = Organizer(user.id, user.username, user.password, user.first_name,

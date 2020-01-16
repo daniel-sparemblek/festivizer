@@ -1,6 +1,7 @@
 import base64
 import sys
 from datetime import datetime, timedelta
+from run import db
 
 from flask import request, redirect
 from flask_jwt_extended import (create_access_token, create_refresh_token,
@@ -389,8 +390,10 @@ class Festival(Resource):
         i = 1
         while True:
             picture_path = './festivizer/logos/' + str(i) + '.png'
+            print("jebemti indijance", file=sys.stderr)
             if not path.exists(picture_path):
                 break
+            i+=1
 
         f = open(picture_path, 'w+b')
         f.write(message_bytes)
@@ -560,6 +563,11 @@ class Event(Resource):
         if end_time < start_time:
             return {"msg": "End time can't be before start time."}
 
+        find_overlapping = db.session.query(EventModel).filter(EventModel.organizer_id == data['organizer_id'], EventModel.start_time <= end_time, EventModel.end_time >= start_time).all()
+
+        if find_overlapping:
+            return {'msg': 'Organizer already has event in that time range'}, 400
+
         new_event = EventModel(
             festival_id=data['festival_id'],
             organizer_id=data['organizer_id'],
@@ -677,6 +685,7 @@ class Job(Resource):
 
 
 class Jobs(Resource):
+    @jwt_required
     def get(self):
         Application.update_workers()
 
@@ -710,6 +719,21 @@ class Jobs(Resource):
         jobs = JobModel.get_all()
         return JobSchema.to_json(jobs)
 
+    @jwt_required
+    def put(self):
+        event_id = request.args.get('event_id')
+        jobs = JobModel.find_by_event_id(event_id)
+        jobs.sort(key=lambda x: x.order_number, reverse=False)
+
+        data = request.get_json()
+
+        for i in range (1, len(data)+1):
+            jobs[i-1].order_number = data[str(i)]
+
+        db.session.commit()
+        return {'msg': 'Success'}
+
+
 
 class OneJob(Resource):
     @jwt_required
@@ -719,6 +743,23 @@ class OneJob(Resource):
         comment = data['comment']
         JobModel.update_comment(job_id, comment)
         return {'msg': 'success'}
+
+class JobsForEvent(Resource):
+    @jwt_required
+    def get(self):
+        event_id = request.args.get('event_id')
+        jobs = JobModel.find_by_event_id(event_id)
+        jobs.sort(key=lambda x: x.order_number, reverse=False)
+        return JobSchema.to_json(jobs)
+
+    @jwt_required
+    def put(self):
+        job_id = request.args.get('job_id')
+        job = JobModel.find_by_job_id(job_id)
+        job.is_completed = 1
+        db.session.commit()
+        return {'msg': 'You have completed the job'}
+
 
 
 class JobsNotOnAuction(Resource):
@@ -865,13 +906,23 @@ class Applications(Resource):
 
     @jwt_required
     def get(self):
+        print("JOB ID NOBIIII1:", file=sys.stderr)
         application_id = request.args.get('application_id')
+        print("JOB ID NOBIIII2:", file=sys.stderr)
         username = request.args.get('username')
+        print("JOB ID NOBIIII3:", file=sys.stderr)
         leader_id = request.args.get('leader_id')
+        print("JOB ID NOBIIII4:", file=sys.stderr)
         leader_id_accept = request.args.get('leader_id_accept')
+        print("JOB ID NOBIIII5:", file=sys.stderr)
         job_id = request.args.get('job_id')
+        print("JOB ID NOBIIII6:", file=sys.stderr)
         job_id_confirmed = request.args.get('job_id_confirmed')
+        print("JOB ID NOBIIII7:", file=sys.stderr)
         job_id_unconfirmed = request.args.get('job_id_unconfirmed')
+        print("JOB ID NOBIIII8:", file=sys.stderr)
+
+
 
         if application_id:
             return ApplicationSchema.to_json(Application.find_by_application_id(application_id=application_id))
@@ -905,15 +956,18 @@ class Applications(Resource):
             return ApplicationWorkerSchema.to_json(worker_apps)
 
         if job_id:
+            print("JA SAM TU", file=sys.stderr)
             username = get_jwt_identity()
             user = UserModel.find_by_username(username)
+            print(username, file=sys.stderr)
+            print("ID"+str(user.id), file=sys.stderr)
             applications = Application.find_by_job_id_and_worker_id(job_id, user.id)
 
             worker_apps = []
             for app in applications:
                 worker_apps.append(ApplicationWorker(app))
 
-            return ApplicationWorkerSchema.to_json(worker_apps)
+            return ApplicationWorkerSchema.to_json(worker_apps[0])
 
         if job_id_unconfirmed:
             applications = Application.find_by_job_id_unconfirmed(job_id_unconfirmed)
@@ -934,6 +988,17 @@ class Applications(Resource):
             return ApplicationWorkerSchema.to_json(worker_apps)
 
         return ApplicationSchema().to_json(Application.find_all())
+
+    @jwt_required
+    def put(self):
+        data = request.get_json()
+        application_id = data['application_id']
+        status = data['status']
+
+        application = Application.find_by_application_id(application_id)
+
+        application.update_status(status)
+        return {'msg': 'success'}
 
 
 class UserLogoutRefresh(Resource):
