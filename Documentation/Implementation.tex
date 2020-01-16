@@ -22,23 +22,265 @@
 	
 			
 			\subsection{Component Testing - JUnit}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
+			
+			We have tested the utility and some core logic classes. One test is made to deliberately fail. The code and the test results follow:
 			
 			
 			
 			\subsection{System Testing}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
-			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
-			
+			 \textbf{Test Scenario 1: Leader register and festival creation test}
+			 Input:
+			 \begin{packed_enum}
+			 	\item Tap 'No account yet? Create one'.
+			 	\item Input user data and chose 'Leader' from drop-down list, and Tap 'Create account'.
+			 	\item Tap 'Already a member? Login'.
+			 	\item Input admin user data, tap 'Login', and tap 'Accept' next to created leader, go back on login screen.
+			 	\item Input created leader user data, tap 'Login', tap 'Create new festival', input festival data, tap 'Create'.
+			 \end{packed_enum}
+		 
+		 	Expected output:
+		 	\begin{packed_enum}
+		 		\item Opened register screen
+		 		\item Get message about successful account creation.
+		 		\item Opened login screen
+		 		\item Get message about successfully accepted leader.
+		 		\item Get message about successfully created festival.
+		 	\end{packed_enum}
+	 	
+	 		Actual result:
+	 		\begin{packed_enum}
+	 			\item Opened register screen.
+	 			\item Get message about successful account creation.
+	 			\item Opened login screen.
+	 			\item Get message about successfully accepted leader.
+	 			\item Get message about successfully created festival.
+	 		\end{packed_enum}
+	 		
+	 		\textbf{Test Scenario 2 - Leader search test}
+	 		Input:
+	 		\begin{packed-enum}
+	 			\item Input organizer user data, tap 'Login'
+	 			\item Tap 'Search'.
+	 			\item Leave empty field, tap 'Search'.
+	 			\item Input 'leader007', tap 'Search'.
+	 		\end{packed-enum}
+	 		
+	 		Expected output:
+	 		\begin{packed_enum}
+	 			\item Login as organizer.
+	 			\item Open search screen.
+	 			\item List all users.
+	 			\item List only user 'leader007'.
+	 		\end{packed_enum}
+	 		
+	 		Actual result:
+	 		\begin{packed_enum}
+	 			\item Login as organizer.
+	 			\item Open search screen.
+	 			\item List all users.
+	 			\item List only user 'leader007'.
+	 		\end{packed_enum}
+	 		
+	 		\begin{figure}[H]
+	 			\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_2-1.png}
+	 			\caption{Test scenario 2}
+	 			\label{fig:espresso_2_1}
+	 		\end{figure}
+	 		
+	 		\begin{figure}[H]
+	 			\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_2-2.png}
+	 			\caption{Test scenario 2}
+	 			\label{fig:espresso_2_2}
+	 		\end{figure}
+	 		
+	 		\begin{figure}[H]
+	 			\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_2-3.png}
+	 			\caption{Test scenario 2}
+	 			\label{fig:espresso_2_3}
+	 		\end{figure}
+	 		
+	 		\begin{figure}[H]
+	 			\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_2-4.png}
+	 			\caption{Test scenario 2}
+	 			\label{fig:espresso_2_4}
+	 		\end{figure}
+	 		
+	 		\textbf{Test Scenario 3 - Organizer job creation test}
+	 		Input:
+	 		\begin{packed-enum}
+	 			\item Input organizer user data, tap 'Login'.
+	 			\item Tap 'My events', tap some active event, tap 'New Job'.
+	 			\item Input required data, tap 'Create job'.
+	 		\end{packed-enum}
+ 		
+ 			Expected output:
+ 			\begin{packed_enum}
+ 				\item Login as organizer.
+ 				\item Open job creation screen.
+ 				\item Get message about successfully created job.
+ 			\end{packed_enum}
+	 		
+	 		Actual result:
+	 		\begin{packed_enum}
+	 			\item Login as organizer.
+	 			\item Open job creation screen.
+	 			\item Get message about successfully created job.
+	 		\end{packed_enum}
 			\eject 
 			
+			\textbf{Test Scenario 4 - Organizer print pass test}
+			Input:
+			\begin{packed-enum}
+				\item Input organizer user data, tap 'Login'.
+				\item Tap 'Search'.
+			\end{packed-enum}
+			
+			Expected output:
+			\begin{packed_enum}
+				\item Login as organizer.
+				\item Create required PDF file with pass, get message about successfully created file.
+			\end{packed_enum}
+			
+			Actual result:
+			\begin{packed_enum}
+				\item Login as organizer.
+				\item Loading in infinite loop. (BUG shown)
+			\end{packed_enum}
+		
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_4-1.png}
+				\caption{Test scenario 4}
+				\label{fig:espresso_4_1}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_4-2.png}
+				\caption{Test scenario 4}
+				\label{fig:espresso_4_2}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_4-3.png}
+				\caption{Test scenario 4}
+				\label{fig:espresso_4_3}
+			\end{figure}
+		
+			\textbf{Test Scenario 5 - Organizer print pass test}
+			Input:
+			\begin{packed-enum}
+				\item Tap 'No account yet? Create one'.
+				\item Input user data and chose 'Organizer' from drop-down list, and Tap 'Create account'.
+				\item Tap 'Already a member? Login'.
+				\item Input organizer user data, tap 'Login'.
+				\item Tap 'Apply for a festival', tap on some festival or festivals.
+			\end{packed-enum}
+			
+			Expected output:
+			\begin{packed_enum}
+				\item Opened register screen.
+				\item Get message about successful account creation.
+				\item Opened login screen.
+				\item Login as organizer.
+				\item Get message about successfully applied for a festival, and see tick next to selected festivals.
+			\end{packed_enum}
+			
+			Actual result:
+			\begin{packed_enum}
+				\item Opened register screen.
+				\item Get message about successful account creation.
+				\item Opened login screen.
+				\item Login as organizer.
+				\item Get message about successfully applied for a festival, and see tick next to selected festivals.
+			\end{packed_enum}
+			
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_5-1.png}
+				\caption{Test scenario 5}
+				\label{fig:espresso_5_1}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_5-2.png}
+				\caption{Test scenario 5}
+				\label{fig:espresso_5_2}
+			\end{figure}
+		
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_5-3.png}
+				\caption{Test scenario 5}
+				\label{fig:espresso_5_3}
+			\end{figure}
+	
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_5-4.png}
+				\caption{Test scenario 5}
+				\label{fig:espresso_5_4}
+			\end{figure}
+			
+			\textbf{Test scenario 6 - Worker multiple tests}
+			Input:
+			\begin{packed-enum}
+				\item Input worker user data, tap 'Login'.
+				\item Tap 'Add specialization'.
+				\item Input new specialization and tap 'Add specialization'.
+				\item Tap one specialization from list.
+				\item Tap 'Apply for a job', tap one job from list, tap 'Apply', input data, tap 'Apply'.
+				\item Tap back button, tap 'My applications', and tap one from list.
+				\item Tap 'Search', input 'Marko', tap 'Search'.
+				\item Tap 'Print Pass'.
+				\item Tap 'Active jobs', tap 'My applications'
+				\item Tap 'Log Out'.
+			\end{packed-enum}
+			
+			Expected output:
+			\begin{packed_enum}
+				\item Login as worker.
+				\item Opened specialization screen.
+				\item Added new specialization on a list.
+				\item Get message about successfully added specialization, see tick next to chosen specialization.
+				\item Get message about successfully applied for a job.
+				\item See data about chosen application.
+				\item See results from search for 'Marko'.
+				\item Get message about successfully created PDF file with pass, and get file created in storage.
+				\item See 'Active jobs' screen, see 'My application' screen.
+				\item Log out, and see login screen.
+			\end{packed_enum}
+			
+			Actual result:
+			\begin{packed_enum}
+				\item Login as worker.
+				\item Opened specialization screen.
+				\item Added new specialization on a list.
+				\item 'Randomly' chosen specialization and tick next to that randomly chosen specialization. (BUG shown)
+				\item Get message about successfully applied for a job.
+				\item See data about chosen application.
+				\item See results from search for 'Marko'.
+				\item Get message about successfully created PDF file with pass, and get file created in storage.
+				\item See 'Active jobs' screen, see 'My application' screen.
+				\item Log out, and see login screen.
+			\end{packed_enum}
+		
+			\textbf{Test Scenario 7 - Admin accept leader test}
+			Input:
+			\begin{packed-enum}
+				\item Input admin user data, tap 'Login'.
+				\item Accept one leader from list of pending leaders.
+			\end{packed-enum}
+			
+			Expected output:
+			\begin{packed_enum}
+				\item Login as 'admin'.
+				\item Get message about successfully accepted leader.
+			\end{packed_enum}
+			
+			Actual result:
+			\begin{packed_enum}
+				\item Login as 'admin'.
+				\item Get message about successfully accepted leader.
+			\end{packed_enum}
+		
+			\eject
 		\section{UML Deployment Diagram}
 		
 			Due to the application including a lot of users, we have opted for the specification deployment diagram.
