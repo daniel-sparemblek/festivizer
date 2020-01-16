@@ -403,36 +403,73 @@
 		
 		Finally, Fragments are used for tabbed views inside a single Activity -> something like a Sub-Activity, but with an easy and seamless transition.
 		
-			\begin{figure}[H]
+		\begin{figure}[H]
 			\includegraphics[width=\linewidth]{diagrams/Fragments Class Diagram.png}
 			\caption{Fragments Class Diagram}
 			\label{fig:fragments_class_diag}
 		\end{figure}
 		
-		\section{Dijagram stanja}
+		\section{State diagram}
 			
+			This diagram displays the abilities and functions of a Leader shown in a state-machine form. The Leader's functionalities and states revolve around Festivals.
 			
-			\textbf{ dio 2. revizije}\\
+			To begin with, Leaders can create Festivals. They need to fill out the corresponding form and info. Once a Festival is made, it is added to the list of Festivals.
 			
-			 Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. 
-			
-			
-			\eject 
+			The Leaders can then view this list of all the Festivals. They are divided into 3 categories:
+			\begin{packed_enum}
+				\item Active - festivals that have at least 1 Event
+				\item Pending - festivals that yet require an Event
+				\item Completed - festivals that have concluded
+			\end{packed_enum}
 		
-		\section{Dijagram aktivnosti}
+			Second pf a;;, on this Screen they can tap on a Festival to view its details. Here further Festival management is possible:
+			\begin{packed_enum}
+				\item Active - View the list of Events
+				\item Pending - Add new Event
+				\item Completed - Approve an Organizer to the selected Festival
+			\end{packed_enum}
+		
+			Furthermore, Leaders can view a list of Job Applications. There all the Job Applications and their details are displayed in a list.
 			
-			\textbf{ dio 2. revizije}\\
+			Finally, Leaders have also got the generic functionalities of logging out, printing a Festival Pass and searching Users.
 			
-			  Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.
-			
+			 \begin{figure}[H]
+			 	\includegraphics[width=\linewidth]{diagrams/Leader State Diag.png}
+			 	\caption{Leader State Diagram}
+			 	\label{fig:leader_state_diag}
+			 \end{figure}
 			\eject
-
 			  
 		\section{Activity diagram}
 		
 		Two activity diagrams follow. The first one depicts the registration process, while the second one depicts a more complex system interaction.
-		In the second diagram 
+
+		\begin{figure}[H]
+			\includegraphics[width=\linewidth]{diagrams/Activity Diagram - Register.png}
+			\caption{Register Activity Diagram}
+			\label{fig:register_activity_diag}
+		\end{figure}
+
+		In the second diagram we have a multiple-User interaction. In the beginning, the Organizer logs in and applies to one of the Festivals. Therefore he must select a Festival.
 		
+		Upon Festival selection he needs to be verified by that Festival's Organizer. When that is done, Organizer can select an Event from a Festival.
+		
+		The Leader then creates a Job and opens it up to Workers, and finally, one Worker applies to it.
+		
+		This diagram shows the interaction between logging in, Leaders, Organizers, and Workers. This interaction is shown in a relative time-domain.
+		
+		\begin{figure}[H]
+			\includegraphics[width=\linewidth]{diagrams/Interaction_Activity_Diag_1.png}
+			\caption{Interaction Activity Diagram 1}
+			\label{fig:interaction_activity_diag_1}
+		\end{figure}
+	
+		\begin{figure}[H]
+			\includegraphics[width=\linewidth]{diagrams/Interaction_Activity_Diag_2.png}
+			\caption{Interaction Activity Diagram 2}
+			\label{fig:register_activity_diag_2}
+		\end{figure}
+			  
 		\eject
 			  
 		\section{Component diagram}
@@ -446,6 +483,12 @@
 			Activities control and manifest the design - they provide dynamic view experience to the user. Design layouts are actually .xml files that were made in Android Studio. Finally, Models are made by controllers, and they resemble the back-end Python models. They are class manifestation of database tables - and are used for holding dynamic data. Data is fetched into them, as well as pulled from them when updating server info.
 			
 			The adapter class is used for holding multiple instances(lists) of some Models, and the utility class contains many subclasses that were hard to categorise into one of the other classes. Search is used for searching users --> found users are displayed using the defaultUser activity/view class.
+		
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{diagrams/Component Diagram0.png}
+				\caption{Component Diagram}
+				\label{fig:component_diag}
+			\end{figure}
 		
 			\eject
 				
