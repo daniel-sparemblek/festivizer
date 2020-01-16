@@ -23,9 +23,265 @@
 			
 			\subsection{Component Testing - JUnit}
 			
-			We have tested the utility and some core logic classes. One test is made to deliberately fail. The code and the test results follow:
+			We have tested the utility and some core logic classes. One test is made to deliberately fail. The code and the test results follow.
 			
+			First, the successful test:
+			\begin{lstlisting}
+package com.hfad.organizationofthefestival;
+
+import com.hfad.organizationofthefestival.festival.Event.CreateEventActivity;
+import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.leader.Leader;
+import com.hfad.organizationofthefestival.login.Login;
+import com.hfad.organizationofthefestival.worker.JobApplyActivity;
+import com.hfad.organizationofthefestival.worker.JobProfileActivity;
+import com.hfad.organizationofthefestival.worker.Specialization;
+
+import org.junit.Test;
+
+import java.lang.reflect.Array;
+import java.time.DateTimeException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+/**
+* Example local unit test, which will execute on the development machine (host).
+*
+* @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+*/
+public class SuccessfulTests {
+	
+	Login testLogin = new Login("marko22", "");
+	Login goodTestLogin = new Login("validMarko", "goodPass");
+	
+	@Test
+	public void correctLogin() {
+		
+		assertEquals("marko22", testLogin.getUsername());
+	}
+	
+	@Test
+	public void isValidTest() {
+		assertFalse(testLogin.isValid());
+		assertTrue(goodTestLogin.isValid());
+	}
+	
+	@Test
+	public void specializationsToStringsTest(){
+		List<Specialization> specializationsList = new ArrayList<>();
+		
+		Specialization toAdd1 = new Specialization("Writing JUnit tests");
+		Specialization toAdd2 = new Specialization("Debugging");
+		Specialization toAdd3 = new Specialization("Drinking alcoholic beverages");
+		
+		specializationsList.add(toAdd1);
+		specializationsList.add(toAdd2);
+		specializationsList.add(toAdd3);
+		
+		JobProfileActivity testJPA = new JobProfileActivity();
+		List<String> actualStringList = testJPA.specializationsToStrings(specializationsList);
+		
+		List<String> expectedStringList = new ArrayList<>();
+		expectedStringList.add("Writing JUnit tests");
+		expectedStringList.add("Debugging");
+		expectedStringList.add("Drinking alcoholic beverages");
+		
+		assertEquals(expectedStringList, actualStringList);
+		
+		// Let's test a mismatch
+		specializationsList.clear();
+		toAdd1 = new Specialization("Vacuuming");
+		toAdd2 = new Specialization("Floor cleaning");
+		toAdd3 = new Specialization("Desk cleaning");
+		Specialization toAdd4 = new Specialization("Stage lights management");
+		Specialization toAdd5 = new Specialization("Music");
+		
+		specializationsList.add(toAdd1);
+		specializationsList.add(toAdd2);
+		specializationsList.add(toAdd3);
+		specializationsList.add(toAdd4);
+		specializationsList.add(toAdd5);
+		
+		actualStringList = testJPA.specializationsToStrings(specializationsList);
+		assertNotEquals(expectedStringList, actualStringList);
+	}
+	
+	@Test
+	public void parseDateTimeTest(){
+		JobApplyActivity JAATest = new JobApplyActivity();
+		
+		String testDateTime = "2019.07.07 03:14:22";
+		int year = 2019;
+		int month = 7;
+		int day = 7;
+		int hour = 3;
+		int minute = 14;
+		int second = 22;
+		
+		ZonedDateTime actualZonedDateTime = ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+		ZonedDateTime expectedZonedDateTime = JAATest.parseDateTime(testDateTime);
+		assertEquals(expectedZonedDateTime, actualZonedDateTime);
+		
+		// Let's try something that wouldn't work
+		assertThrows(NumberFormatException.class, () -> {JAATest.parseDateTime("WRONG");});
+		
+		// Another good example
+		testDateTime = "1000.01.01 03:14:22";
+		year = 1000;
+		month = 1;
+		day = 1;
+		hour = 3;
+		minute = 14;
+		second = 22;
+		
+		actualZonedDateTime = ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+		expectedZonedDateTime = JAATest.parseDateTime(testDateTime);
+		assertEquals(expectedZonedDateTime, actualZonedDateTime);
+		
+		// 30.2 shouldn't exist
+		assertThrows(DateTimeException.class, () -> {JAATest.parseDateTime("2019.30.02 03:14:22");});
+		
+		// Mismatch dates
+		testDateTime = "1000.01.02 03:14:22";
+		year = 1000;
+		month = 1;
+		day = 1;
+		hour = 3;
+		minute = 14;
+		second = 22;
+		
+		actualZonedDateTime = ZonedDateTime.of(year, month, day, hour, minute, second, 0, ZoneId.systemDefault());
+		expectedZonedDateTime = JAATest.parseDateTime(testDateTime);
+		assertNotEquals(expectedZonedDateTime, actualZonedDateTime);
+	}
+	
+	@Test
+	public void convertTimeTest(){
+		int year = 2019;
+		int month = 7;
+		int day = 7;
+		int hour = 3;
+		int minute = 14;
+		int second = 22;
+		ZonedDateTime expectedZDT = ZonedDateTime.of(
+		year, month, day, hour, minute, second, 0, ZoneId.systemDefault()
+		);
+		// First a proper one
+		
+		CreateEventActivity CEATest = new CreateEventActivity();
+		
+		String expectedZDTString = "2019-07-07T03:14:00.000+0000";
+		String actualZDTString = CEATest.convertTime("03:14", "07.07.2019.");
+		assertEquals(expectedZDTString, actualZDTString);
+		
+		// Another example - a bit older but still checks out
+		expectedZDTString = "0768-01-01T00:00:00.000+0000";
+		actualZDTString = CEATest.convertTime("00:00", "01.01.0768.");
+		assertEquals(expectedZDTString, actualZDTString);
+		
+		// Now let's do a bad example - MARGINAL CASE
+		// 3 digit year?
+		assertThrows(DateTimeParseException.class, () -> {CEATest.convertTime("00:00", "01.01.768");});
+		
+		// What about normal years, but single-digit minutes?
+		assertThrows(DateTimeParseException.class, () -> {CEATest.convertTime("1:00", "01.01.2020");});
+		
+		// What about single-digit months or days?
+		assertThrows(DateTimeParseException.class, () -> {CEATest.convertTime("00:00", "1.01.2021");});
+	}
+	
+	@Test
+	public void getFestivalTest() {
+		Leader testLeader = new Leader(0, "testLeader",
+		"123", "Testo", "Testen"
+		, "SAMPLE-IMAGE", "09819819"
+		, "test@test.com", 1, 0);
+		
+		// Let's first test an empty list
+		List<Festival> festivalsList = new ArrayList<>();
+		testLeader.setFestivals(festivalsList);
+		
+		assertEquals(null, testLeader.getFestival("CoolFest"));
+		// Now let's add the CoolFest
+		Festival coolFest = new Festival("coolFest", "very cool"
+		, "SAMPLE-LOGO", "6 oclock", "never"
+		);
+		festivalsList.add(coolFest);
+		
+		assertEquals(null, testLeader.getFestival("wut"));
+		assertEquals(coolFest, testLeader.getFestival("coolFest"));
+		
+		// Now let's test getFestivalNames method
+		// Will need more festivals
+		Festival superFest = new Festival("superFest", "very cool"
+		, "SAMPLE-LOGO", "6 oclock", "never"
+		);
+		Festival marinFest = new Festival("marinFest", "very cool"
+		, "SAMPLE-LOGO", "6 oclock", "never"
+		);
+		Festival boatFest = new Festival("boatFest", "very cool"
+		, "SAMPLE-LOGO", "6 oclock", "never"
+		);
+		
+		festivalsList.add(superFest);
+		festivalsList.add(marinFest);
+		festivalsList.add(boatFest);
+		List<String> expectedFestNames = new ArrayList<>();
+		expectedFestNames.add("coolFest");
+		expectedFestNames.add("superFest");
+		expectedFestNames.add("marinFest");
+		expectedFestNames.add("boatFest");
+		assertEquals(expectedFestNames, testLeader.getFestivalNames());
+	}
+}
+			\end{lstlisting}
 			
+			And now the test that deliberately fails!
+			\begin{lstlisting}
+package com.hfad.organizationofthefestival;
+
+import com.hfad.organizationofthefestival.festival.Festival;
+import com.hfad.organizationofthefestival.worker.Specialization;
+
+import org.junit.Test;
+
+import static org.junit.Assert.assertThrows;
+
+public class FailingTest {
+
+@Test
+public void emptyTests(){
+	// Can we make a no-name specialization?
+		assertThrows(IllegalArgumentException.class, () -> {
+			Specialization emptySpec = new Specialization("");
+		});
+
+	// Can we make empty Festival?
+		assertThrows(IllegalArgumentException.class, () -> {
+			Festival boatFest = new Festival("", "very cool"
+				, "SAMPLE-LOGO", "6 oclock", "never");
+		});
+	}
+}
+			\end{lstlisting}
+			
+			Their results:
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/JUnit_1.png}
+				\caption{Successful tests}
+				\label{fig:junit_1}
+			\end{figure}
+		
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/JUnit_2.png}
+				\caption{Failing tests}
+				\label{fig:junit_2}
+			\end{figure}
 			
 			\subsection{System Testing}
 			
@@ -59,12 +315,12 @@
 	 		
 	 		\textbf{Test Scenario 2 - Leader search test}
 	 		Input:
-	 		\begin{packed-enum}
+	 		\begin{packed_enum}
 	 			\item Input organizer user data, tap 'Login'
 	 			\item Tap 'Search'.
 	 			\item Leave empty field, tap 'Search'.
 	 			\item Input 'leader007', tap 'Search'.
-	 		\end{packed-enum}
+	 		\end{packed_enum}
 	 		
 	 		Expected output:
 	 		\begin{packed_enum}
@@ -108,11 +364,11 @@
 	 		
 	 		\textbf{Test Scenario 3 - Organizer job creation test}
 	 		Input:
-	 		\begin{packed-enum}
+	 		\begin{packed_enum}
 	 			\item Input organizer user data, tap 'Login'.
 	 			\item Tap 'My events', tap some active event, tap 'New Job'.
 	 			\item Input required data, tap 'Create job'.
-	 		\end{packed-enum}
+	 		\end{packed_enum}
  		
  			Expected output:
  			\begin{packed_enum}
@@ -131,10 +387,10 @@
 			
 			\textbf{Test Scenario 4 - Organizer print pass test}
 			Input:
-			\begin{packed-enum}
+			\begin{packed_enum}
 				\item Input organizer user data, tap 'Login'.
 				\item Tap 'Search'.
-			\end{packed-enum}
+			\end{packed_enum}
 			
 			Expected output:
 			\begin{packed_enum}
@@ -168,13 +424,13 @@
 		
 			\textbf{Test Scenario 5 - Organizer print pass test}
 			Input:
-			\begin{packed-enum}
+			\begin{packed_enum}
 				\item Tap 'No account yet? Create one'.
 				\item Input user data and chose 'Organizer' from drop-down list, and Tap 'Create account'.
 				\item Tap 'Already a member? Login'.
 				\item Input organizer user data, tap 'Login'.
 				\item Tap 'Apply for a festival', tap on some festival or festivals.
-			\end{packed-enum}
+			\end{packed_enum}
 			
 			Expected output:
 			\begin{packed_enum}
@@ -220,7 +476,7 @@
 			
 			\textbf{Test scenario 6 - Worker multiple tests}
 			Input:
-			\begin{packed-enum}
+			\begin{packed_enum}
 				\item Input worker user data, tap 'Login'.
 				\item Tap 'Add specialization'.
 				\item Input new specialization and tap 'Add specialization'.
@@ -231,7 +487,7 @@
 				\item Tap 'Print Pass'.
 				\item Tap 'Active jobs', tap 'My applications'
 				\item Tap 'Log Out'.
-			\end{packed-enum}
+			\end{packed_enum}
 			
 			Expected output:
 			\begin{packed_enum}
@@ -263,10 +519,10 @@
 		
 			\textbf{Test Scenario 7 - Admin accept leader test}
 			Input:
-			\begin{packed-enum}
+			\begin{packed_enum}
 				\item Input admin user data, tap 'Login'.
 				\item Accept one leader from list of pending leaders.
-			\end{packed-enum}
+			\end{packed_enum}
 			
 			Expected output:
 			\begin{packed_enum}
@@ -307,7 +563,7 @@
 			\subsection{Building the APK}
 			
 			The APK can be built in the following way:
-			First, you need to git clone the application's repository: https://gitlab.com/barbil/organization_of_the_festival
+			First, you need to git clone the application's repository: \href{https://gitlab.com/barbil/organization_of_the_festival}{The git repository}
 			
 			\begin{figure}[H]
 				\includegraphics[width=\linewidth]{images/Deploy_M_1.png}
@@ -351,7 +607,7 @@
 			
 			\subsection{Setting up the server side}
 				
-				The files are already present on the git URI, branch python_backend: https://gitlab.com/barbil/organization_of_the_festival/tree/python_backend. First of all this git should be cloned down somewhere. The files inside will be put onto the server. For deployment we used pythonanywhere as a cloud site, since it allows easy and seamless deployment of Flask applications.
+				The files are already present on the git URI, branch server: \href{https://gitlab.com/barbil/organization_of_the_festival/tree/server}{The server branch}. First of all this git should be cloned down somewhere. The files inside will be put onto the server. For deployment we used pythonanywhere as a cloud site, since it allows easy and seamless deployment of Flask applications.
 				
 				Second of all, you should either register or log in into pythonanywhere site.
 				\begin{figure}[H]
@@ -374,25 +630,25 @@
 					\label{fig:deployment_3}
 				\end{figure}
 				
-				A wizard will appear on the right side, where you should select Flask. Python 3.6 is the minimum supported Python version. The default file flask_app.py will be generated. 
+				A wizard will appear on the right side, where you should select Flask. Python 3.6 is the minimum supported Python version. The default file flask\_app.py will be generated. 
 				
-				Now the project is set up. All that is needed is to upload the files. Flask_app.py entry point file --> you should put into it the app.py code from git. Also upload the other files to the server. You should now be set up --> all that is left to do is to change the hardcoded kaogrupa URL in the application to point to your server. Once that is done, you have got your own back-end set up, and can comfortably change and experiment on the application.
+				Now the project is set up. All that is needed is to upload the files. Flask\_app.py entry point file --> you should put into it the app.py code from git. Also upload the other files to the server. You should now be set up --> all that is left to do is to change the hardcoded kaogrupa URL in the application to point to your server. Once that is done, you have got your own back-end set up, and can comfortably change and experiment on the application.
 				
 				That is depicted on thee pictures below:
 				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{images/Android_1.png}
+					\includegraphics[width=\linewidth]{images/Android_1.jpg}
 					\caption{Adding a new Web App}
 					\label{fig:android_1}
 				\end{figure}
 			
 				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{images/Android_2.png}
+					\includegraphics[width=\linewidth]{images/Android_2.jpg}
 					\caption{Adding a new Web App}
 					\label{fig:android_2}
 				\end{figure}
 			
 				\begin{figure}[H]
-					\includegraphics[width=\linewidth]{images/Android_3.png}
+					\includegraphics[width=\linewidth]{images/Android_3.jpg}
 					\caption{Adding a new Web App}
 					\label{fig:android_3}
 				\end{figure}
