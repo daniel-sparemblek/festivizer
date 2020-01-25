@@ -15,8 +15,7 @@ Web Server is the one who responds to the HTTP requests that are sent by Android
 
 Programming language in which we have coded the Android application is Java, GUI components are written in the XML language and server-side code is written in Python. IDE (Integrated development environment) we are using is Android Studio for the client-side code and IDLE for the server-side code.
 
-Design pattern we are using is MVC(Model-View-Controller). It is a common architectural pattern which is used to design and create interfaces and the structure of an application. This pattern divides the application into three parts that are dependent and connected to each other. These designs are used to distinguish the presentation of data from the way the data is accepted from the user to the data that is being shown. 
-MVC design pattern consists of: 
+MVC is made up of:
 
 \begin{itemize}
 	\item 	 Model
@@ -24,16 +23,19 @@ MVC design pattern consists of:
 	\item 	 Controller		
 \end{itemize}
 
+Let's describe MVC pattern on simple Android example.
+
 \textbf{Model}
-The Model component corresponds to all the data-related logic that the user works with. This can represent either the data that is being transferred between the View and Controller components or any other business logic-related data. For example, a Customer object will retrieve the customer information from the database, manipulate it and update it data back to the database or use it to render data. 
-In Android application Model is usually represented as independent Java class that contains data about e.g. Customer. That data is the one that is kept in the data base and displayed in the View component. 
+
+The model is a component that is used for keeping data. E.g. if we have database that keeps all of the users in it then we can model Java class "User" that corresponds to the attributes that are kept in database e.g. "firstName", "lastName", "dateOfBirth"... That data will then be transferred between Controller and View components that I will describe next.
 
 \textbf{View}
-The View component is used for all the UI logic of the application. For example, the Customer view will include all the UI components such as text boxes, dropdowns, etc. that the final user interacts with. 
-In our application an example of View would be Activity for register, user interacts with the View, enters the necessary information that are then transferred to the Model and finally to the database via Controller.
+
+The View component is basically Activity in Android, View is the one that will dynamically display the data that is kept in Model. Let's say we have a simple profile page for User, on that page there are fields that display user's first name, last name, date of birth... Those components will be displayed dynamically meaning that any user can be fetched from Model class. View is also the one that displays static components such as immutable title "Profile" or some TextViews that we will not render from actual Model.
 
 \textbf{Controller}
-Controllers act as an interface between Model and View components to process all the business logic and incoming requests, manipulate data using the Model component and interact with the Views to render the final output. For example, the Customer controller will handle all the interactions and inputs from the Customer View and update the database using the Customer Model. The same controller will be used to view the Customer data.
+
+Controller is the one that connects Model and View, it is used for all business logic. In Android in example with external database the flow is following: View is the first one created, there exists a Controller for that View that fetches data from the external database that is kept on server. When data is fetched he fills in the model (let's say it fetches one user) generates the User object and sends it to the View component that displays data from that Model object. So Controller's task is connecting View and Model, connecting display of data and objects used for preserving data.
 \pagebreak
 
 

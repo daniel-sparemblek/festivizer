@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="510da0a7-e126-4225-9bed-6783faabd60c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/images/contribs_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/images/contribs_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/images/contribs_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/images/contribs_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/images/contribs_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/images/contribs_6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/images/contribs_7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/Appendix.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/Appendix.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/DocumentationChangeLog.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/DocumentationChangeLog.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/Implementation.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/Implementation.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.lof" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.lof" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.out" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentation_2ndCycle/OPP_ProjektnaDokumentacija_v5.toc" afterDir="false" />
-    </list>
+    <list default="true" id="510da0a7-e126-4225-9bed-6783faabd60c" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +12,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="5200b0bd5bee94eb" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -88,19 +69,34 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+    <option name="x" value="951" />
+    <option name="width" value="978" />
+    <option name="height" value="1039" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="OrganizationOfTheFestival" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OrganizationOfTheFestival" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OrganizationOfTheFestival" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OrganizationOfTheFestival" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -324,7 +320,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" weight="0.1590604" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.15862525" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -384,368 +380,56 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/worker/MyApplicationsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-301">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/worker/JobApplyActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="99" column="30" selection-start-line="99" selection-start-column="30" selection-end-line="99" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/LeaderPrintPassController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-658">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-244">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/ApplicationAuction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/ApplicationResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-448">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/EventApply.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-380">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/Job.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-431">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/JobApply.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-601">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/NewJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/OnAuctionResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/Role.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/SimpleServerResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/Specialization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-975">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/WorkingEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-482">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/adapters/ApplicationAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-244">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/adapters/AuctionAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-312">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/adapters/AdminAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/Admin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-788">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/AdminActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-788">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/AdminClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1094">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/defaultUser/DefaultUserApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/defaultUser/DefaultUserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1386">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/creation/CreateFestivalActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="320" column="13" lean-forward="true" selection-start-line="320" selection-start-column="13" selection-end-line="320" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/creation/CreateFestivalApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/creation/CreateFestivalResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/CreateEventActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="274" column="97" lean-forward="true" selection-start-line="274" selection-start-column="32" selection-end-line="274" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/CreateEventApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/CreateEventResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-669">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/EventCreationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-873">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/DefaultFestivalActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-907">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/DefaultFestivalController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Festival.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-584">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/FestivalClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Festivals.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/FestivalsResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/ApproveOrganizersActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-754">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/ApproveOrganizersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-839">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/JobApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/LeaderActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/AdminResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/creation/FestivalCreationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/defaultUser/DefaultUserActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1196">
-          <caret line="81" column="39" lean-forward="true" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/test/java/com/hfad/organizationofthefestival/FestivalsTestExample.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/Leader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="134" column="35" selection-start-line="134" selection-start-column="35" selection-end-line="134" selection-end-column="35" />
-          <folding>
-            <element signature="e#2468#2469#0" expanded="true" />
-            <element signature="e#2498#2499#0" expanded="true" />
-            <element signature="e#3136#3137#0" expanded="true" />
-            <element signature="e#3178#3179#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/test/java/com/hfad/organizationofthefestival/FailingTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" lean-forward="true" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/test/java/com/hfad/organizationofthefestival/SuccessfulTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="176" column="37" selection-start-line="176" selection-start-column="37" selection-end-line="176" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/worker/MyApplicationsController.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/worker/JobApplyActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/LeaderPrintPassController.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/Application.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/ApplicationAuction.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/ApplicationResponse.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/EventApply.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/Job.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/JobApply.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/NewJob.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/OnAuctionResponse.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/Role.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/SimpleServerResponse.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/Specialization.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/User.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/utility/WorkingEvent.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/adapters/ApplicationAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/adapters/AuctionAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/adapters/AdminAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/Admin.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/AdminActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/AdminClient.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/AdminController.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/defaultUser/DefaultUserApi.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/defaultUser/DefaultUserController.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/creation/CreateFestivalActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/creation/CreateFestivalApi.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/creation/CreateFestivalResponse.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/CreateEventActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/CreateEventApi.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/CreateEventResponse.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/Event.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Event/EventCreationController.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/DefaultFestivalActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/DefaultFestivalController.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Festival.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/FestivalClient.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/Festivals.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/FestivalsResponse.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/Application.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/ApproveOrganizersActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/ApproveOrganizersController.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/JobApplication.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/LeaderActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/admin/AdminResponse.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/festival/creation/FestivalCreationController.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/defaultUser/DefaultUserActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/test/java/com/hfad/organizationofthefestival/FestivalsTestExample.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hfad/organizationofthefestival/leader/Leader.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/test/java/com/hfad/organizationofthefestival/FailingTest.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/test/java/com/hfad/organizationofthefestival/SuccessfulTests.java" />
   </component>
 </project>

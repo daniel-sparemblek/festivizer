@@ -1,0 +1,41 @@
+			\begin{figure}[H]
+	 			\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_2-1.png}
+	 			\caption{Test scenario 2}
+	 			\label{fig:espresso_2_1}
+	 		\end{figure}
+ 		
+ 			\begin{figure}[H]
+ 				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_2-2.png}
+ 				\caption{Test scenario 2}
+ 				\label{fig:espresso_2_2}
+ 			\end{figure}
+ 		
+ 			\begin{figure}[H]
+ 				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_2-3.png}
+ 				\caption{Test scenario 2}
+ 				\label{fig:espresso_2_3}
+ 			\end{figure}
+ 		
+ 			\begin{figure}[H]
+ 				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_2-4.png}
+ 				\caption{Test scenario 2}
+ 				\label{fig:espresso_2_4}
+ 			\end{figure}
+			
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_4-1.png}
+				\caption{Test scenario 4}
+				\label{fig:espresso_4_1}
+			\end{figure}
+		
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_4-2.png}
+				\caption{Test scenario 4}
+				\label{fig:espresso_4_2}
+			\end{figure}
+		
+			\begin{figure}[H]
+				\includegraphics[width=\linewidth]{images/test_Screens/test_scenario_4-2.png}
+				\caption{Test scenario 4}
+				\label{fig:espresso_4_2}
+			\end{figure}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.3)  17 JAN 2020 00:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.3)  25 JAN 2020 22:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1467,22 +1467,22 @@ Chapter 4.
 
 
 ] [42] [43] [44]
-Overfull \hbox (1.13509pt too wide) in paragraph at lines 140--140
+Overfull \hbox (1.13509pt too wide) in paragraph at lines 142--142
 []\OT1/jkp/m/n/12 specialization[]id|  
  []
 
 
-Overfull \hbox (48.09103pt too wide) in paragraph at lines 156--156
+Overfull \hbox (48.09103pt too wide) in paragraph at lines 158--158
 []\OT1/jkp/m/n/12 worker[]specializations[]id|  
  []
 
 
-Overfull \hbox (1.13509pt too wide) in paragraph at lines 156--156
+Overfull \hbox (1.13509pt too wide) in paragraph at lines 158--158
 []\OT1/jkp/m/n/12 specialization[]id|  
  []
 
 [45]
-Overfull \hbox (1.13509pt too wide) in paragraph at lines 246--246
+Overfull \hbox (1.13509pt too wide) in paragraph at lines 248--248
 []\OT1/jkp/m/n/12 specialization[]id|  
  []
 
@@ -1490,74 +1490,74 @@ Overfull \hbox (1.13509pt too wide) in paragraph at lines 246--246
 <diagrams/db_er_diag.png, id=867, 3617.515pt x 2067.725pt>
 File: diagrams/db_er_diag.png Graphic file (type png)
 <use diagrams/db_er_diag.png>
-Package pdftex.def Info: diagrams/db_er_diag.png  used on input line 270.
+Package pdftex.def Info: diagrams/db_er_diag.png  used on input line 272.
 (pdftex.def)             Requested size: 435.6108pt x 248.96817pt.
 <diagrams/er_diagram.png, id=868, 772.8875pt x 748.7975pt>
 File: diagrams/er_diagram.png Graphic file (type png)
 <use diagrams/er_diagram.png>
-Package pdftex.def Info: diagrams/er_diagram.png  used on input line 277.
+Package pdftex.def Info: diagrams/er_diagram.png  used on input line 279.
 (pdftex.def)             Requested size: 435.6108pt x 422.03163pt.
  [48pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.282 
+l.284 
        <./diagrams/db_er_diag.png>] [49pdfTeX warning (ext4): destination with 
 the same identifier (name{figure.4.2}) has been already used, duplicate ignored
 
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.283 \eject
+l.285 \eject
              <./diagrams/er_diagram.png>]
 <diagrams/Controllers Class Diagram_part1.png, id=884, 1403.2425pt x 636.12656p
 t>
 File: diagrams/Controllers Class Diagram_part1.png Graphic file (type png)
 <use diagrams/Controllers Class Diagram_part1.png>
 Package pdftex.def Info: diagrams/Controllers Class Diagram_part1.png  used on 
-input line 301.
+input line 303.
 (pdftex.def)             Requested size: 435.6108pt x 197.46898pt.
 <diagrams/Controllers Class Diagram_part2.png, id=885, 1006.51031pt x 840.89156
 pt>
 File: diagrams/Controllers Class Diagram_part2.png Graphic file (type png)
 <use diagrams/Controllers Class Diagram_part2.png>
 Package pdftex.def Info: diagrams/Controllers Class Diagram_part2.png  used on 
-input line 307.
+input line 309.
 (pdftex.def)             Requested size: 435.6108pt x 363.92438pt.
  [50pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.311 
+l.313 
        <./diagrams/Controllers Class Diagram_part1.png>]
 <diagrams/Controllers Class Diagram_part3.png, id=898, 1078.0275pt x 487.22025p
 t>
 File: diagrams/Controllers Class Diagram_part3.png Graphic file (type png)
 <use diagrams/Controllers Class Diagram_part3.png>
 Package pdftex.def Info: diagrams/Controllers Class Diagram_part3.png  used on 
-input line 313.
+input line 315.
 (pdftex.def)             Requested size: 435.6108pt x 196.87706pt.
 <diagrams/Controllers Class Diagram_part4.png, id=899, 1138.2525pt x 512.51476p
 t>
 File: diagrams/Controllers Class Diagram_part4.png Graphic file (type png)
 <use diagrams/Controllers Class Diagram_part4.png>
 Package pdftex.def Info: diagrams/Controllers Class Diagram_part4.png  used on 
-input line 319.
+input line 321.
 (pdftex.def)             Requested size: 435.6108pt x 196.14182pt.
  [51pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.323 
+l.325 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.323 
+l.325 
        <./diagrams/Controllers Class Diagram_part2.png> <./diagrams/Controllers
  Class Diagram_part3.png>]
 <diagrams/Controllers Class Diagram_part5.png, id=907, 1102.1175pt x 484.81125p
@@ -1565,26 +1565,26 @@ t>
 File: diagrams/Controllers Class Diagram_part5.png Graphic file (type png)
 <use diagrams/Controllers Class Diagram_part5.png>
 Package pdftex.def Info: diagrams/Controllers Class Diagram_part5.png  used on 
-input line 325.
+input line 327.
 (pdftex.def)             Requested size: 435.6108pt x 191.62039pt.
 <diagrams/Controllers Class Diagram_part6.png, id=908, 592.614pt x 462.528pt>
 File: diagrams/Controllers Class Diagram_part6.png Graphic file (type png)
 <use diagrams/Controllers Class Diagram_part6.png>
 Package pdftex.def Info: diagrams/Controllers Class Diagram_part6.png  used on 
-input line 331.
+input line 333.
 (pdftex.def)             Requested size: 435.6108pt x 339.9928pt.
  [52pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.335 
+l.337 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.335 
+l.337 
        <./diagrams/Controllers Class Diagram_part4.png> <./diagrams/Controllers
  Class Diagram_part5.png>]
 <diagrams/Controllers Class Diagram_part7.png, id=916, 588.39825pt x 462.528pt>
@@ -1592,92 +1592,92 @@ l.335
 File: diagrams/Controllers Class Diagram_part7.png Graphic file (type png)
 <use diagrams/Controllers Class Diagram_part7.png>
 Package pdftex.def Info: diagrams/Controllers Class Diagram_part7.png  used on 
-input line 337.
+input line 339.
 (pdftex.def)             Requested size: 435.6108pt x 342.43474pt.
  [53pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.341 
+l.343 
        <./diagrams/Controllers Class Diagram_part6.png>]
 <diagrams/Models Class Diagram_1.png, id=923, 1099.7085pt x 465.53925pt>
 File: diagrams/Models Class Diagram_1.png Graphic file (type png)
 <use diagrams/Models Class Diagram_1.png>
 Package pdftex.def Info: diagrams/Models Class Diagram_1.png  used on input lin
-e 345.
+e 347.
 (pdftex.def)             Requested size: 435.6108pt x 184.4081pt.
  [54pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 9}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.349 
+l.351 
        <./diagrams/Controllers Class Diagram_part7.png>]
 <diagrams/Models Class Diagram_2.png, id=931, 1117.776pt x 476.982pt>
 File: diagrams/Models Class Diagram_2.png Graphic file (type png)
 <use diagrams/Models Class Diagram_2.png>
 Package pdftex.def Info: diagrams/Models Class Diagram_2.png  used on input lin
-e 351.
+e 353.
 (pdftex.def)             Requested size: 435.6108pt x 185.88394pt.
 <diagrams/Models Class Diagram_3.png, id=932, 1117.776pt x 480.5955pt>
 File: diagrams/Models Class Diagram_3.png Graphic file (type png)
 <use diagrams/Models Class Diagram_3.png>
 Package pdftex.def Info: diagrams/Models Class Diagram_3.png  used on input lin
-e 357.
+e 359.
 (pdftex.def)             Requested size: 435.6108pt x 187.29216pt.
  [55pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 10}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.361 
+l.363 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.11}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.361 
+l.363 
        <./diagrams/Models Class Diagram_1.png> <./diagrams/Models Class Diagram
 _2.png>]
 <diagrams/Models Class Diagram_4.png, id=940, 1126.2075pt x 480.5955pt>
 File: diagrams/Models Class Diagram_4.png Graphic file (type png)
 <use diagrams/Models Class Diagram_4.png>
 Package pdftex.def Info: diagrams/Models Class Diagram_4.png  used on input lin
-e 363.
+e 365.
 (pdftex.def)             Requested size: 435.6108pt x 185.8915pt.
 <diagrams/Models Class Diagram_5.png, id=941, 693.792pt x 390.258pt>
 File: diagrams/Models Class Diagram_5.png Graphic file (type png)
 <use diagrams/Models Class Diagram_5.png>
 Package pdftex.def Info: diagrams/Models Class Diagram_5.png  used on input lin
-e 369.
+e 371.
 (pdftex.def)             Requested size: 435.6108pt x 245.03015pt.
  [56pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 12}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.373 
+l.375 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.13}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.373 
+l.375 
        <./diagrams/Models Class Diagram_3.png> <./diagrams/Models Class Diagram
 _4.png>]
 <diagrams/Models Class Diagram_6.png, id=949, 228.25275pt x 406.51875pt>
 File: diagrams/Models Class Diagram_6.png Graphic file (type png)
 <use diagrams/Models Class Diagram_6.png>
 Package pdftex.def Info: diagrams/Models Class Diagram_6.png  used on input lin
-e 375.
+e 377.
 (pdftex.def)             Requested size: 435.6108pt x 775.83008pt.
  [57pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 14}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.379 
+l.381 
        <./diagrams/Models Class Diagram_5.png>]
 Overfull \vbox (146.60387pt too high) has occurred while \output is active []
 
@@ -1687,9 +1687,9 @@ Overfull \vbox (146.60387pt too high) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.379 
+l.381 
        <./diagrams/Models Class Diagram_6.png>]
-Overfull \hbox (65.30086pt too wide) in paragraph at lines 380--381
+Overfull \hbox (65.30086pt too wide) in paragraph at lines 382--383
 []\OT1/jkp/m/n/12 API Classes are used for defin-ing the mo-bile ap-pli-ca-tion
  - server(-> database)communication
  []
@@ -1698,60 +1698,60 @@ Overfull \hbox (65.30086pt too wide) in paragraph at lines 380--381
 File: diagrams/Activities Class Diagram_1.png Graphic file (type png)
 <use diagrams/Activities Class Diagram_1.png>
 Package pdftex.def Info: diagrams/Activities Class Diagram_1.png  used on input
- line 387.
+ line 389.
 (pdftex.def)             Requested size: 435.6108pt x 204.70161pt.
 File: diagrams/Activities Class Diagram_1.png Graphic file (type png)
 <use diagrams/Activities Class Diagram_1.png>
 Package pdftex.def Info: diagrams/Activities Class Diagram_1.png  used on input
- line 393.
+ line 395.
 (pdftex.def)             Requested size: 435.6108pt x 204.70161pt.
 File: diagrams/Activities Class Diagram_1.png Graphic file (type png)
 <use diagrams/Activities Class Diagram_1.png>
 Package pdftex.def Info: diagrams/Activities Class Diagram_1.png  used on input
- line 399.
+ line 401.
 (pdftex.def)             Requested size: 435.6108pt x 204.70161pt.
 [59pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.403 
+l.405 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.17}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.403 
+l.405 
        <./diagrams/Activities Class Diagram_1.png>]
 <diagrams/Adapters Class Diagram.png, id=970, 1303.87125pt x 499.8675pt>
 File: diagrams/Adapters Class Diagram.png Graphic file (type png)
 <use diagrams/Adapters Class Diagram.png>
 Package pdftex.def Info: diagrams/Adapters Class Diagram.png  used on input lin
-e 407.
+e 409.
 (pdftex.def)             Requested size: 435.6108pt x 167.00092pt.
 <diagrams/Fragments Class Diagram.png, id=971, 1590.69281pt x 450.18187pt>
 File: diagrams/Fragments Class Diagram.png Graphic file (type png)
 <use diagrams/Fragments Class Diagram.png>
 Package pdftex.def Info: diagrams/Fragments Class Diagram.png  used on input li
-ne 415.
+ne 417.
 (pdftex.def)             Requested size: 435.6108pt x 123.28177pt.
  [60pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 18}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.419 
+l.421 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.19}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.419 
+l.421 
        <./diagrams/Adapters Class Diagram.png>]
 <diagrams/Leader State Diag.png, id=981, 1223.32031pt x 969.6225pt>
 File: diagrams/Leader State Diag.png Graphic file (type png)
 <use diagrams/Leader State Diag.png>
-Package pdftex.def Info: diagrams/Leader State Diag.png  used on input line 445
+Package pdftex.def Info: diagrams/Leader State Diag.png  used on input line 447
 .
 (pdftex.def)             Requested size: 435.6108pt x 345.26146pt.
  [61pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
@@ -1759,57 +1759,57 @@ Package pdftex.def Info: diagrams/Leader State Diag.png  used on input line 445
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.449 \eject
+l.451 \eject
              <./diagrams/Fragments Class Diagram.png>] [62pdfTeX warning (ext4)
 : destination with the same identifier (name{figure.4.21}) has been already use
 d, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.449 \eject
+l.451 \eject
              <./diagrams/Leader State Diag.png>]
 <diagrams/Activity Diagram - Register.png, id=1003, 907.13907pt x 496.85625pt>
 File: diagrams/Activity Diagram - Register.png Graphic file (type png)
 <use diagrams/Activity Diagram - Register.png>
 Package pdftex.def Info: diagrams/Activity Diagram - Register.png  used on inpu
-t line 456.
+t line 458.
 (pdftex.def)             Requested size: 435.6108pt x 238.59442pt.
 <diagrams/Interaction_Activity_Diag_1.png, id=1004, 1376.14125pt x 671.50874pt>
 
 File: diagrams/Interaction_Activity_Diag_1.png Graphic file (type png)
 <use diagrams/Interaction_Activity_Diag_1.png>
 Package pdftex.def Info: diagrams/Interaction_Activity_Diag_1.png  used on inpu
-t line 470.
+t line 472.
 (pdftex.def)             Requested size: 435.6108pt x 212.56126pt.
  [63pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 22}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.474 
+l.476 
        <./diagrams/Activity Diagram - Register.png>]
 <diagrams/Interaction_Activity_Diag_2.png, id=1012, 1376.14125pt x 671.50874pt>
 
 File: diagrams/Interaction_Activity_Diag_2.png Graphic file (type png)
 <use diagrams/Interaction_Activity_Diag_2.png>
 Package pdftex.def Info: diagrams/Interaction_Activity_Diag_2.png  used on inpu
-t line 476.
+t line 478.
 (pdftex.def)             Requested size: 435.6108pt x 212.56126pt.
  [64pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 23}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.481 \eject
+l.483 \eject
             pdfTeX warning (ext4): destination with the same identifier (name{f
 igure.4.24}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.481 \eject
+l.483 \eject
              <./diagrams/Interaction_Activity_Diag_1.png> <./diagrams/Interacti
 on_Activity_Diag_2.png>]
-Overfull \hbox (6.67111pt too wide) in paragraph at lines 487--488
+Overfull \hbox (6.67111pt too wide) in paragraph at lines 489--490
 \OT1/jkp/m/n/12 Python com-po-nents. From there, other com-po-nents - 'Mod-els.
 py' and 'Re-sources.py'
  []
@@ -1818,14 +1818,14 @@ py' and 'Re-sources.py'
 File: diagrams/Component Diagram0.png Graphic file (type png)
 <use diagrams/Component Diagram0.png>
 Package pdftex.def Info: diagrams/Component Diagram0.png  used on input line 49
-6.
+8.
 (pdftex.def)             Requested size: 435.6108pt x 242.71265pt.
 [65] [66pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.4.25}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.501 \eject
+l.503 \eject
              <./diagrams/Component Diagram0.png>])
 \openout2 = `Implementation.aux'.
 
@@ -2532,7 +2532,7 @@ blic/kpfonts/jkpbn8a.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/kpfonts
 b><c:/texlive/2019/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb><c:/texlive
 /2019/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb><c:/texlive/2019/texmf-di
 st/fonts/type1/public/kpfonts/jkpttmn8a.pfb>
-Output written on OPP_ProjektnaDokumentacija_v5.pdf (119 pages, 5772812 bytes).
+Output written on OPP_ProjektnaDokumentacija_v5.pdf (119 pages, 5772558 bytes).
 
 PDF statistics:
  2122 PDF objects out of 2487 (max. 8388607)
